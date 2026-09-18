@@ -75,8 +75,8 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Roots pathways', deck: 'Continue the search through public collections and cultural institutions.', paragraphs: ['These institutions offer different entrances to history, archives, books, and culture. The Society is independent of them and does not replace their research services.'] },
   },
   privacy: {
-    zh: { title: '隐私', deck: '少收集，清楚说明，尊重家庭资料的边界。', paragraphs: ['学会是本网站的资料主体。网站公共页不收集 NRIC。未来谱坊功能若上线，家谱默认私密，仅供会员及获授权者使用；电话与地址不会出现在公共页面。联络资料只用于回复你的询问。'] },
-    en: { title: 'Privacy', deck: 'Collect less, explain clearly, and respect the boundary around family records.', paragraphs: ['The Society is the data controller for this website. Public pages do not collect NRIC. If the future members’ studio is launched, genealogy books will be private by default; phone numbers and addresses will never appear on public pages. Contact details are used only to respond to enquiries.'] },
+    zh: { title: '隐私', deck: '少收集，清楚说明，尊重家庭资料的边界。', paragraphs: ['学会是本网站的资料主体。网站公共页不收集 NRIC。未来谱坊功能若上线，家谱默认私密，仅供会员及获授权者使用；电话与地址不会出现在公共页面。联络资料只用于回复你的询问。本站遵守新加坡《个人资料保护法令》(PDPA)。'] },
+    en: { title: 'Privacy', deck: 'Collect less, explain clearly, and respect the boundary around family records.', paragraphs: ['The Society is the data controller for this website. Public pages do not collect NRIC. If the future members’ studio is launched, genealogy books will be private by default; phone numbers and addresses will never appear on public pages. Contact details are used only to respond to enquiries. This website complies with Singapore’s Personal Data Protection Act (PDPA).'] },
   },
   terms: {
     zh: { title: '使用条款', deck: '这里是学会的公共文化网站。', paragraphs: ['网站内容供一般文化与寻根参考。外部链接由各机构管理，学会不保证其内容持续可用。未经许可，不得复制、改编或冒充学会发布内容。入会与未来谱坊服务以学会另行说明为准。'] },
