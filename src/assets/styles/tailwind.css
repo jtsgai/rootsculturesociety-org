@@ -21,26 +21,24 @@ img { max-width: 100%; display: block; }
 .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); }
 .brand-mark { width: 48px; height: 48px; object-fit: cover; clip-path: circle(50%); background: var(--paper); }
 .brand-wordmark { display: grid; line-height: 1.15; }
-.brand-wordmark strong { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
-.brand-wordmark small { margin-top: 4px; color: var(--muted); font-size: .56rem; letter-spacing: .16em; }
-.site-nav { display: flex; align-items: center; gap: 24px; font-size: .84rem; }
-.site-nav a { padding: 8px 0; }
+.brand-wordmark strong { font-family: var(--serif); font-size: .94rem; font-weight: 600; white-space: nowrap; }
+.brand-wordmark small { margin-top: 4px; color: var(--muted); font-size: .56rem; letter-spacing: .16em; white-space: nowrap; }
+.site-nav { display: flex; align-items: center; gap: 18px; font-size: .78rem; white-space: nowrap; }
+.site-nav a { padding: 8px 0; white-space: nowrap; }
 .site-nav .language-link { color: var(--maroon); font-weight: 700; letter-spacing: .08em; }
 .menu-toggle { display: none; border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 7px 14px; font: inherit; }
 .home-hero, .home-section, .page-body, .page-intro, .home-band { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
-.home-hero { position: relative; isolation: isolate; overflow: hidden; min-height: 630px; padding-top: 120px; padding-bottom: 100px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; align-items: center; gap: 80px; }
+.home-hero { position: relative; isolation: isolate; overflow: hidden; min-height: 630px; padding-top: 120px; padding-bottom: 100px; display: grid; grid-template-columns: 1fr; align-items: center; }
 .home-hero-media { position: absolute; z-index: -1; inset: 0; pointer-events: none; background: var(--paper); }
 .home-hero-still { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .34; mix-blend-mode: multiply; }
 .hero-copy { max-width: 760px; }
-.hero-copy, .hero-aside { position: relative; z-index: 1; }
+.hero-copy { position: relative; z-index: 1; }
 .eyebrow { color: var(--maroon); font-size: .68rem; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em; }
 .hero-copy h1 { margin: 20px 0; font-size: clamp(3.5rem, 8vw, 7.8rem); line-height: .96; }
 .hero-copy h1 em { color: var(--maroon); font-style: normal; }
 .hero-copy > p { max-width: 650px; color: var(--muted); font-size: 1.14rem; }
-.hero-aside { display: flex; justify-content: center; }
-.home-seal-stage { position: relative; width: 260px; aspect-ratio: 1; display: grid; place-items: center; }
-.home-seal-static { width: 100%; height: 100%; object-fit: cover; clip-path: circle(50%); background: var(--paper); filter: saturate(.78); }
+.hero-title-line { display: inline-block; white-space: nowrap; }
 .hero-actions { margin-top: 40px; display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
 .button { display: inline-flex; align-items: center; justify-content: center; background: var(--maroon); color: #fff; padding: 13px 20px; border: 1px solid var(--maroon); border-radius: 999px; font-size: .86rem; }
 .button:hover { color: #fff; background: #6d1111; }
@@ -65,7 +63,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .publication-feature .section-heading { display: block; padding: 0; }
 .publication-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: end; }
 .publication-stack > div { border-top: 1px solid var(--ink); padding-top: 20px; }
-.home-cover { width: 100%; height: 260px; margin-bottom: 20px; object-fit: cover; object-position: top; }
+.home-cover { width: 100%; height: auto; margin-bottom: 20px; object-fit: contain; object-position: top; }
 .publication-stack h3 { margin: 64px 0 8px; font-size: 2.25rem; }
 .year { color: var(--maroon); font-size: .76rem; font-weight: 700; letter-spacing: .12em; }
 .pathways { background: var(--paper-deep); color: var(--ink); }
@@ -91,7 +89,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .method-card p { max-width: 420px; margin: 0; color: var(--muted); }
 .publication-list { max-width: 850px; margin: 75px 0 0 25%; }
 .publication-list article { display: grid; grid-template-columns: 100px 1fr; gap: 30px; padding: 28px 0; border-top: 1px solid var(--line); }
-.book-cover { width: 100px; height: 146px; object-fit: cover; object-position: top; }
+.book-cover { width: 100px; height: auto; object-fit: contain; object-position: top; }
 .publication-list h2 { margin: 0 0 8px; font-size: 2.2rem; }
 .publication-list p { margin: 0; color: var(--muted); }
 .resource-list { max-width: 850px; margin-left: 25%; border-top: 1px solid var(--line); }
@@ -116,6 +114,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 @media (max-width: 800px) {
   .header-inner { min-height: 72px; padding: 0 20px; }
   .brand-mark { width: 42px; height: 42px; }
+  .brand-wordmark strong { font-size: .82rem; }
+  .brand-wordmark small { font-size: .48rem; letter-spacing: .08em; }
   .site-nav { display: none; position: absolute; top: 72px; left: 0; right: 0; padding: 16px 20px 22px; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); }
   .site-nav.is-open { display: flex; }
   .site-nav a { border-bottom: 1px solid var(--line); }
@@ -124,7 +124,6 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
   .home-hero { min-height: 0; padding-top: 80px; padding-bottom: 74px; grid-template-columns: 1fr; gap: 52px; }
   .hero-copy h1 { font-size: clamp(3.4rem, 16vw, 5.8rem); }
   .hero-copy > p { font-size: 1rem; }
-  .hero-aside { justify-content: flex-start; }
   .home-section { padding-top: 76px; padding-bottom: 76px; }
   .section-heading, .publication-feature, .home-band { grid-template-columns: 1fr; gap: 28px; }
   .section-heading { padding-bottom: 32px; }
@@ -134,7 +133,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
   .home-band { padding-top: 62px; padding-bottom: 62px; }
   .home-band p { margin-top: 10px; }
   .publication-stack { grid-template-columns: 1fr; }
-  .home-cover { height: 340px; }
+  .home-cover { height: auto; }
   .publication-stack h3 { margin-top: 38px; }
   .page-intro { padding-top: 82px; padding-bottom: 58px; }
   .page-intro h1 { font-size: clamp(3.5rem, 16vw, 5.5rem); }
