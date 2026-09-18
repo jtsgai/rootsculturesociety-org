@@ -63,8 +63,8 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Family stories', deck: 'A family story begins with the sentence someone chooses to keep.', paragraphs: ['This section will gather stories of Singapore life, migration, dialect, food, and family memory. Public stories are published with consent; private material does not become public by default.'] },
   },
   events: {
-    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['活动资讯会在确认后发布。若你希望了解学会近期活动，请联系秘书长。'] },
-    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['Event information will be published when confirmed. Please contact the Secretary for the Society’s latest programme.'] },
+    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['活动资讯会在确认后发布。最新安排将在此页更新。'] },
+    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['Event information will be published when confirmed. The latest programme will be updated here.'] },
   },
   membership: {
     zh: { title: '入会', deck: '把一家的故事，认真保存下来。', paragraphs: ['年费 S$99，含一年谱坊账号一个。交费后由学会开通会员号（R1001 起）。网站不收款；年费不含印刷成书。'] },

@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from './PageIntro.astro';
-import { committee, methods, pageCopy, resources, type Lang, type PageKey, pathFor } from '../data/site';
+import { committee, methods, pageCopy, resources, type Lang, type PageKey } from '../data/site';
 interface Props { lang: Lang; pageKey: PageKey; }
 const { lang, pageKey } = Astro.props;
 const content = pageCopy[pageKey][lang];
@@ -27,6 +27,5 @@ const eyebrow = isZh ? '新加坡根缘文化学会' : 'Roots Culture Society of
 
     {pageKey === 'events' && <div class="quiet-note">{isZh ? '活动资讯将在确认后发布。' : 'Programme details will be published when confirmed.'}</div>}
 
-    {pageKey !== 'contact' && pageKey !== 'membership' && <div class="page-cta"><a href={pathFor(lang, 'contact')}>{isZh ? '联系秘书长' : 'Contact the Secretary'} <span>↗</span></a></div>}
   </div>
 </SiteLayout>

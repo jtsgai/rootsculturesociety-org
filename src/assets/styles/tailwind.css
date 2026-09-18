@@ -40,9 +40,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .hero-copy > p { max-width: 650px; color: var(--muted); font-size: 1.14rem; }
 .hero-aside { display: flex; justify-content: center; }
 .home-seal-stage { position: relative; width: 260px; aspect-ratio: 1; display: grid; place-items: center; }
-.home-seal-fallback, .home-seal-canvas { width: 100%; height: 100%; object-fit: cover; clip-path: circle(50%); background: var(--paper); filter: saturate(.78); }
-.home-seal-canvas { position: absolute; inset: 0; display: block; }
-.home-seal-canvas[hidden], .home-seal-fallback[hidden] { display: none; }
+.home-seal-static { width: 100%; height: 100%; object-fit: cover; clip-path: circle(50%); background: var(--paper); filter: saturate(.78); }
 .hero-actions { margin-top: 40px; display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
 .button { display: inline-flex; align-items: center; justify-content: center; background: var(--maroon); color: #fff; padding: 13px 20px; border: 1px solid var(--maroon); border-radius: 999px; font-size: .86rem; }
 .button:hover { color: #fff; background: #6d1111; }

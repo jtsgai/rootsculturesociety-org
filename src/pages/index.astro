@@ -1,6 +1,5 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import HomeSeal3D from '../components/HomeSeal3D.astro';
 import HomeHeroMedia from '../components/HomeHeroMedia.astro';
 
 const featurePoints = [
@@ -10,7 +9,7 @@ const featurePoints = [
 ];
 ---
 <SiteLayout lang="zh" title="首页" description="新加坡根缘文化学会">
-  <section class="home-hero"><HomeHeroMedia /><div class="hero-copy"><div class="eyebrow">以新加坡人，建修新加坡谱式。</div><h1>源在祖籍，<em>根在狮城。</em></h1><p>新加坡根缘文化学会推广通俗、易懂、易查的「相册家谱」，助家庭以南来落地的第一世为开族始点，记下自己的开族史。</p><div class="hero-actions"><a class="button" href="/membership">请 WhatsApp 秘书长办理入会</a><a class="text-link" href="/method">认识八大招 <span>↗</span></a></div></div><div class="hero-aside"><HomeSeal3D alt="新加坡根缘文化学会标志" /></div></section>
+  <section class="home-hero"><HomeHeroMedia /><div class="hero-copy"><div class="eyebrow">以新加坡人，建修新加坡谱式。</div><h1>源在祖籍，<em>根在狮城。</em></h1><p>新加坡根缘文化学会推广通俗、易懂、易查的「相册家谱」，助家庭以南来落地的第一世为开族始点，记下自己的开族史。</p><div class="hero-actions"><a class="button" href="/membership">了解入会方式</a><a class="text-link" href="/method">认识八大招 <span>↗</span></a></div></div><div class="hero-aside"><div class="home-seal-stage"><img class="home-seal-static" src="/brand/RCSSLogo-optimized.png" alt="新加坡根缘文化学会标志" /></div></div></section>
   <section class="home-section"><div class="section-heading"><span class="eyebrow">THREE STARTING POINTS</span><h2>一本活着的家谱，<br />从这里开始。</h2></div><div class="feature-grid">{featurePoints.map((point) => <article class="feature-card"><span class="method-number">{point.number}</span><h3>{point.title}</h3><p>{point.text}</p></article>)}</div></section>
   <section class="home-band"><div><span class="eyebrow">MEMBERSHIP / 会籍</span><h2>年费 S$99，<br />一年谱坊账号一个。</h2></div><div><p>交费后由学会开通会员号（R1001 起）。网站不收款。</p><a class="text-link" href="/membership">了解入会方式 <span>↗</span></a></div></section>
   <section class="home-section publication-feature"><div class="section-heading"><span class="eyebrow">PUBLICATIONS / 出版</span><h2>把记忆留下来，<br />也把路径交给后来人。</h2></div><div class="publication-stack"><div><img class="home-cover" src="/publications/chuan-deng-2025-optimized.jpg" alt="《传灯》书封" /><span class="year">2025</span><h3>《传灯》</h3><p>与新加坡海南会馆、琼州天后宫联合出版。</p></div><div><img class="home-cover" src="/publications/photo-genealogy-2026-optimized.jpg" alt="《相册家谱》书封" /><span class="year">2026</span><h3>《相册家谱》</h3><p>学会出版。</p></div></div></section>
