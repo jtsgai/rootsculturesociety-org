@@ -1,0 +1,25 @@
+site:
+  name: Roots Culture Society of Singapore
+  site: 'https://rootsculturesociety.org'
+  base: '/'
+  trailingSlash: false
+metadata:
+  title:
+    default: 新加坡根缘文化学会
+    template: '%s · Roots Culture Society of Singapore'
+  description: 'Roots Culture Society of Singapore — a public bilingual cultural society website.'
+  robots:
+    index: true
+    follow: true
+i18n:
+  language: zh-CN
+  textDirection: ltr
+apps:
+  blog:
+    isEnabled: false
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null
+ui:
+  theme: 'light:only'

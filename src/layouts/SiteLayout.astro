@@ -1,0 +1,24 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../assets/styles/tailwind.css';
+import type { Lang } from '../data/site';
+
+interface Props { lang: Lang; title: string; description?: string; }
+const { lang, title, description = 'Roots Culture Society of Singapore' } = Astro.props;
+---
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/brand/RCSSLogo.png" />
+    <title>{title} · {lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</title>
+  </head>
+  <body>
+    <SiteHeader lang={lang} />
+    <main><slot /></main>
+    <SiteFooter lang={lang} />
+  </body>
+</html>

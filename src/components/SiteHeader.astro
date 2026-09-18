@@ -1,0 +1,29 @@
+---
+import { nav, pathFor, type Lang } from '../data/site';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const home = lang === 'en' ? '/en/' : '/';
+const counterpart = lang === 'en' ? '/' : '/en/';
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href={home} aria-label={lang === 'zh' ? '返回首页' : 'Back to home'}>
+      <img src="/brand/RCSSLogo.png" alt="" class="brand-mark" />
+      <span class="brand-wordmark"><strong>{lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</strong></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">{lang === 'zh' ? '菜单' : 'Menu'}</button>
+    <nav id="site-nav" class="site-nav" aria-label={lang === 'zh' ? '主要导航' : 'Main navigation'}>
+      {nav.map((item) => <a href={pathFor(lang, item.key as any)}>{lang === 'zh' ? item.zh : item.en}</a>)}
+      <a class="language-link" href={counterpart}>{lang === 'zh' ? 'EN' : '中文'}</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const button = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#site-nav');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('is-open', !open);
+  });
+</script>

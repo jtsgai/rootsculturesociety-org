@@ -1,0 +1,13 @@
+---
+import { pathFor, type Lang } from '../data/site';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><p class="footer-kicker">{lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</p><p class="footer-name">{lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</p><p class="footer-address">UEN T17SS0170F<br />95 Jalan Lokam, Singapore 537915</p></div>
+    <div class="footer-links"><a href={pathFor(lang, 'links')}>{lang === 'zh' ? '寻根路径' : 'Roots pathways'}</a><a href={pathFor(lang, 'contact')}>{lang === 'zh' ? '联络' : 'Contact'}</a><a href={pathFor(lang, 'privacy')}>{lang === 'zh' ? '隐私' : 'Privacy'}</a><a href={pathFor(lang, 'terms')}>{lang === 'zh' ? '条款' : 'Terms'}</a></div>
+    <div><p class="footer-kicker">PUBLIC CONTACT</p><a href="https://wa.me/6592728933">WhatsApp 9272 8933</a><a href="mailto:ianchungcy@gmail.com">ianchungcy@gmail.com</a></div>
+  </div>
+  <div class="footer-bottom"><span>© {new Date().getFullYear()} {lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</span><span>{lang === 'zh' ? '注册于 2017' : 'Registered in 2017'}</span></div>
+</footer>

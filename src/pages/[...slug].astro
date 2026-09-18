@@ -1,0 +1,11 @@
+---
+import PublicPage from '../components/PublicPage.astro';
+import { pageCopy, type PageKey, type Lang } from '../data/site';
+
+export function getStaticPaths() {
+  const pageKeys = Object.keys(pageCopy) as PageKey[];
+  return ['zh', 'en'].flatMap((lang) => pageKeys.map((key) => ({ params: { slug: `${lang === 'en' ? 'en/' : ''}${key}` }, props: { lang, pageKey: key } })));
+}
+const { lang, pageKey } = Astro.props as { lang: Lang; pageKey: PageKey };
+---
+<PublicPage lang={lang} pageKey={pageKey} />

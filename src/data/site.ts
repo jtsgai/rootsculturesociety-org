@@ -1,0 +1,99 @@
+export type Lang = 'zh' | 'en';
+export type PageKey =
+  | 'about'
+  | 'committee'
+  | 'method'
+  | 'publications'
+  | 'stories'
+  | 'events'
+  | 'membership'
+  | 'links'
+  | 'privacy'
+  | 'terms'
+  | 'contact';
+
+export const nav = [
+  { key: 'about', zh: '学会', en: 'The Society' },
+  { key: 'method', zh: '相册家谱', en: 'Photo Genealogy' },
+  { key: 'publications', zh: '出版', en: 'Publications' },
+  { key: 'stories', zh: '故事', en: 'Stories' },
+  { key: 'events', zh: '活动', en: 'Events' },
+  { key: 'membership', zh: '入会', en: 'Membership' },
+];
+
+export const committee = [
+  { zh: '陈业雄', en: 'Chen Yexiong', roleZh: '会长', roleEn: 'President' },
+  { zh: '锺瑞忠', en: 'Zhong Ruizhong', roleZh: '副会长', roleEn: 'Vice-President' },
+  { zh: '陈泽南', en: 'Chen Zenan', roleZh: '财务长', roleEn: 'Treasurer' },
+  { zh: '锺骏源', en: 'Ian Chung', roleZh: '秘书长', roleEn: 'Secretary' },
+  { zh: '拓劲涛', en: 'Tuo Jintao', roleZh: '助理秘书长', roleEn: 'Assistant Secretary' },
+  { zh: '蔡仑宗', en: 'Cai Lun Zong', roleZh: '委员', roleEn: 'Committee Member' },
+];
+
+export const methods = [
+  { number: '01', zh: '封面', en: 'Cover', zhText: '先为一本家谱定下名字、开族始祖与献词。', enText: 'Name the book, identify the founding ancestor, and add a short dedication.' },
+  { number: '02', zh: '姓氏渊源', en: 'Surname origin', zhText: '从姓氏与祖籍出发，留下家族知道的线索。', enText: 'Begin with the surname and ancestral place, keeping the clues your family knows.' },
+  { number: '03', zh: '祖辈迁徙', en: 'Migration', zhText: '把南来、落地、生根的地点和年代排成一条线。', enText: 'Arrange the places and years of coming south, settling, and taking root.' },
+  { number: '04', zh: '籍贯文化', en: 'Ancestral culture', zhText: '记录方言、堂号、祖屋、庙宇与宗乡会馆。', enText: 'Record dialect, hall name, ancestral homes, temples, and clan associations.' },
+  { number: '05', zh: '世系', en: 'Lineage', zhText: '以人物卡和关系，慢慢搭起自己的世系。', enText: 'Build the lineage patiently, person by person and relationship by relationship.' },
+  { number: '06', zh: '童年', en: 'Childhood', zhText: '把在新加坡长大的地点、年代和故事留下来。', enText: 'Keep the places, years, and stories of growing up in Singapore.' },
+  { number: '07', zh: '家肴', en: 'Family dishes', zhText: '一道菜也是一条路：记录名字、材料、做法与照片。', enText: 'A dish is also a pathway: record its name, ingredients, method, and photograph.' },
+  { number: '08', zh: '族人资料', en: 'Family register', zhText: '补上家人资料；私密内容只留给家族与资料拥有者。', enText: 'Complete the family register; private details stay with the family and its owner.' },
+];
+
+export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
+  about: {
+    zh: { title: '学会', deck: '学会的使命是：', paragraphs: ['激励族人确立“新加坡华裔”身份认同；以新加坡人建修新加坡谱式。', '协助会馆敦宗睦族，传承根文化，凝聚团结族人以纾解社会分化的现象；协助家庭凝聚团结，整合家族与姓族，发挥同舟共济，守望相助的精神；共同面对“全球化”新社会生活的严峻挑战。', '并推广现代通俗、易懂、易查的“新加坡模式”相册家谱谱法，让族谱真正发挥“存史、教化与资治”的功效。'] },
+    en: { title: 'The Society', deck: "The Society's mission is:", paragraphs: ['To encourage members of the Chinese community to establish an identity as Singaporean Chinese, and to build and revise a Singapore genealogy as Singaporeans.', 'To help clan associations honour ancestors and strengthen kinship, carry forward root culture, and unite members to ease social division; to help families unite, integrate families and surname groups, uphold the spirit of mutual support and mutual watchfulness, and face together the severe challenges of a new social life under globalisation.', 'And to promote a modern, plain, easy-to-understand, and easy-to-search “Singapore model” method of photo genealogy, so that genealogies can truly serve the purposes of preserving history, educating, and informing governance.'] },
+  },
+  committee: {
+    zh: { title: '执委会', deck: '一群把文化工作做得踏实的人。', paragraphs: ['学会以公开、清楚、可持续的方式推进会务。个人电话与住址不在网站公开；联络请统一通过秘书长。'] },
+    en: { title: 'Committee', deck: 'A practical team for cultural work.', paragraphs: ['The Society works in a public, clear, and sustainable way. Personal phone numbers and home addresses are not published; please contact the Secretary for enquiries.'] },
+  },
+  method: {
+    zh: { title: '新加坡相册家谱', deck: '八大招，把一个家庭的根与路排成可读的书。', paragraphs: ['相册家谱不是把资料堆在一起，而是从第一代在新加坡落地生根的人开始，按本地生活的时间与地点重新组织。'] },
+    en: { title: 'Singapore Photo Genealogy', deck: 'Eight Methods for making a family’s roots and routes readable.', paragraphs: ['A Photo Genealogy is not a pile of records. It begins with the first generation to settle in Singapore and arranges a family’s life through local time and place.'] },
+  },
+  publications: {
+    zh: { title: '出版', deck: '把口述、文献与家庭记忆，留成可以翻阅的东西。', paragraphs: ['学会的出版工作以文化记录为先。书名与出版资料以正式版本为准。'] },
+    en: { title: 'Publications', deck: 'Making oral history, documents, and family memory available to turn through.', paragraphs: ['The Society publishes with cultural record-keeping in mind. Titles and publication details are presented as official editions become available.'] },
+  },
+  stories: {
+    zh: { title: '家族故事', deck: '一家的故事，从愿意留下的那一句开始。', paragraphs: ['这里将收录与新加坡生活、迁徙、方言、食物和家族记忆有关的故事。公开故事会在得到同意后刊出；私人资料不会自动成为公共内容。'] },
+    en: { title: 'Family stories', deck: 'A family story begins with the sentence someone chooses to keep.', paragraphs: ['This section will gather stories of Singapore life, migration, dialect, food, and family memory. Public stories are published with consent; private material does not become public by default.'] },
+  },
+  events: {
+    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['活动资讯会在确认后发布。若你希望了解学会近期活动，请联系秘书长。'] },
+    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['Event information will be published when confirmed. Please contact the Secretary for the Society’s latest programme.'] },
+  },
+  membership: {
+    zh: { title: '入会', deck: '把一家的故事，认真保存下来。', paragraphs: ['年费 S$99，含一年谱坊账号一个。交费后由学会开通会员号（R1001 起）。网站不收款；年费不含印刷成书。'] },
+    en: { title: 'Membership', deck: 'Give a family story a place to be kept with care.', paragraphs: ['S$99 a year includes one studio account for one family book. After payment the Society issues a member ID from R1001. No payment is taken on this website; printing is not included.'] },
+  },
+  links: {
+    zh: { title: '寻根路径', deck: '从公共资料与文化机构，继续往根里走。', paragraphs: ['这些机构提供不同的历史、档案、图书与文化入口。学会不代表这些机构，也不代替其资料检索服务。'] },
+    en: { title: 'Roots pathways', deck: 'Continue the search through public collections and cultural institutions.', paragraphs: ['These institutions offer different entrances to history, archives, books, and culture. The Society is independent of them and does not replace their research services.'] },
+  },
+  privacy: {
+    zh: { title: '隐私', deck: '少收集，清楚说明，尊重家庭资料的边界。', paragraphs: ['学会是本网站的资料主体。网站公共页不收集 NRIC。未来谱坊功能若上线，家谱默认私密，仅供会员及获授权者使用；电话与地址不会出现在公共页面。联络资料只用于回复你的询问。'] },
+    en: { title: 'Privacy', deck: 'Collect less, explain clearly, and respect the boundary around family records.', paragraphs: ['The Society is the data controller for this website. Public pages do not collect NRIC. If the future members’ studio is launched, genealogy books will be private by default; phone numbers and addresses will never appear on public pages. Contact details are used only to respond to enquiries.'] },
+  },
+  terms: {
+    zh: { title: '使用条款', deck: '这里是学会的公共文化网站。', paragraphs: ['网站内容供一般文化与寻根参考。外部链接由各机构管理，学会不保证其内容持续可用。未经许可，不得复制、改编或冒充学会发布内容。入会与未来谱坊服务以学会另行说明为准。'] },
+    en: { title: 'Terms', deck: 'This is the Society’s public cultural website.', paragraphs: ['The website is provided for general cultural and family-history reference. External links are managed by their respective institutions and may change. Do not copy, adapt, or present Society material as your own without permission. Membership and any future studio service are subject to separate Society information.'] },
+  },
+  contact: {
+    zh: { title: '联络', deck: '想入会、分享故事，或了解学会工作，欢迎写信。', paragraphs: ['公开联络只有秘书长。入会请先通过 WhatsApp 联系；学会收到线下付款后才会开通会员号。'] },
+    en: { title: 'Contact', deck: 'For membership, stories, or questions about the Society, write to us.', paragraphs: ['The Secretary is the Society’s public contact. Please use WhatsApp for membership enquiries; a member ID is issued only after offline payment is received by the Society.'] },
+  },
+};
+
+export const resources = [
+  { label: 'NHB Roots', zh: '国家文物局 Roots', href: 'https://www.roots.gov.sg/' },
+  { label: 'National Archives of Singapore', zh: '国家档案馆', href: 'https://www.nas.gov.sg/' },
+  { label: 'National Library Board', zh: '国家图书馆', href: 'https://www.nlb.gov.sg/' },
+  { label: 'Singapore Chinese Cultural Centre', zh: '华族文化中心', href: 'https://www.singaporeccc.org.sg/' },
+  { label: 'SFCCA', zh: '宗乡总会', href: 'https://sfcca.sg/' },
+];
+
+export const pathFor = (lang: Lang, key: PageKey) => `${lang === 'en' ? '/en' : ''}/${key}`;
