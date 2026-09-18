@@ -7,7 +7,7 @@ const { alt } = Astro.props;
 ---
 
 <div class="home-seal-stage" data-home-seal-3d>
-  <img class="home-seal-fallback" src="/brand/RCSSLogo.png" alt={alt} />
+  <img class="home-seal-fallback" src="/brand/RCSSLogo-optimized.png" alt={alt} />
   <canvas class="home-seal-canvas" aria-hidden="true" hidden></canvas>
 </div>
 
@@ -15,10 +15,9 @@ const { alt } = Astro.props;
   const stage = document.querySelector<HTMLElement>('[data-home-seal-3d]');
   const canvas = stage?.querySelector<HTMLCanvasElement>('.home-seal-canvas');
   const fallback = stage?.querySelector<HTMLImageElement>('.home-seal-fallback');
-  const isMobile = window.matchMedia('(max-width: 767px)').matches;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (stage && canvas && fallback && !isMobile && !prefersReducedMotion) {
+  if (stage && canvas && fallback && !prefersReducedMotion) {
     const gl = canvas.getContext('webgl', { alpha: true, antialias: true, powerPreference: 'low-power' });
 
     if (gl) {
@@ -130,7 +129,7 @@ const { alt } = Astro.props;
           window.requestAnimationFrame(render);
         };
         image.onerror = () => { canvas.hidden = true; };
-        image.src = '/brand/RCSSLogo.png';
+        image.src = '/brand/RCSSLogo-optimized.png';
       } catch {
         canvas.hidden = true;
       }
