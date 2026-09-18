@@ -4,8 +4,13 @@ import SiteFooter from '../components/SiteFooter.astro';
 import '../assets/styles/tailwind.css';
 import type { Lang } from '../data/site';
 
-interface Props { lang: Lang; title: string; description?: string; }
-const { lang, title, description = 'Roots Culture Society of Singapore' } = Astro.props;
+interface Props { lang: Lang; title: string; description?: string; robots?: string; alternate?: boolean; }
+const { lang, title, description = 'Roots Culture Society of Singapore', robots, alternate = true } = Astro.props;
+const site = 'https://rootsculturesociety.org';
+const canonical = new URL(Astro.url.pathname, site).href;
+const counterpart = lang === 'en' ? (Astro.url.pathname.replace(/^\/en(?=\/|$)/, '') || '/') : `/en${Astro.url.pathname === '/' ? '/' : Astro.url.pathname}`;
+const counterpartLang = lang === 'en' ? 'zh-CN' : 'en';
+const shareImage = new URL('/generated/roots-hero-03.jpg', site).href;
 ---
 <!doctype html>
 <html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
@@ -13,7 +18,22 @@ const { lang, title, description = 'Roots Culture Society of Singapore' } = Astr
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="icon" href="/brand/RCSSLogo.png" />
+    <link rel="canonical" href={canonical} />
+    {alternate && <><link rel="alternate" hreflang={lang === 'zh' ? 'zh-CN' : 'en'} href={canonical} />
+    <link rel="alternate" hreflang={counterpartLang} href={new URL(counterpart, site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} /></>}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_SG' : 'en_SG'} />
+    <meta property="og:title" content={`${title} · ${lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} · ${lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
     <title>{title} · {lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</title>
   </head>
   <body>

@@ -1,19 +1,20 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from './PageIntro.astro';
-import { committee, methods, pageCopy, resources, type Lang, type PageKey } from '../data/site';
+import { activityMoments, committee, methods, pageCopy, resources, type Lang, type PageKey } from '../data/site';
 interface Props { lang: Lang; pageKey: PageKey; }
 const { lang, pageKey } = Astro.props;
 const content = pageCopy[pageKey][lang];
 const isZh = lang === 'zh';
 const eyebrow = isZh ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore';
+const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 ---
 <SiteLayout lang={lang} title={content.title} description={content.deck}>
   <PageIntro eyebrow={eyebrow} title={content.title} deck={content.deck} />
   <div class="page-body">
     <div class="prose-column">{content.paragraphs.map((p: string) => <p>{p}</p>)}</div>
 
-    {pageKey === 'committee' && <section class="committee-grid">{committee.map((person) => <article class="person"><span class="person-role">{isZh ? person.roleZh : person.roleEn}</span><h2>{isZh ? person.zh : person.en}</h2></article>)}</section>}
+    {pageKey === 'committee' && <section class="committee-grid">{committee.map((person) => <article class="person"><img class="committee-photo" src={person.image} alt={isZh ? person.altZh : person.altEn} loading="lazy" /><span class="person-role">{isZh ? person.roleZh : person.roleEn}</span><h2>{isZh ? person.zh : person.en}</h2></article>)}</section>}
 
     {pageKey === 'method' && <section class="method-grid">{methods.map((method) => <article class="method-card"><span class="method-number">{method.number}</span><h2>{isZh ? method.zh : method.en}</h2><p>{isZh ? method.zhText : method.enText}</p></article>)}</section>}
 
@@ -21,11 +22,11 @@ const eyebrow = isZh ? '新加坡根缘文化学会' : 'Roots Culture Society of
 
     {pageKey === 'links' && <section class="resource-list">{resources.map((resource) => <a href={resource.href} target="_blank" rel="noreferrer"><span>{isZh ? resource.zh : resource.label}</span><span aria-hidden="true">↗</span></a>)}</section>}
 
-    {pageKey === 'membership' && <section class="contact-card"><div><span class="eyebrow">{isZh ? 'MEMBERSHIP / 会员' : 'MEMBERSHIP'}</span><h2>{isZh ? '请 WhatsApp 秘书长办理入会' : 'Please WhatsApp the Secretary to join'}</h2><p>{isZh ? 'WhatsApp 秘书长：9272 8933' : 'WhatsApp the Secretary: 9272 8933'}</p></div><a class="button" href="https://wa.me/6592728933">WhatsApp 9272 8933 ↗</a></section>}
+    {pageKey === 'membership' && <><section class="contact-card"><div><span class="eyebrow">{isZh ? 'MEMBERSHIP / 会员' : 'MEMBERSHIP'}</span><h2>{isZh ? '请 WhatsApp 秘书长办理入会' : 'Please WhatsApp the Secretary to join'}</h2><p>{isZh ? 'WhatsApp 秘书长：9272 8933' : 'WhatsApp the Secretary: 9272 8933'}</p></div><a class="button" href="https://wa.me/6592728933">WhatsApp 9272 8933 ↗</a></section>{studioEnabled && <p class="member-studio-link"><a href="/studio/login">{isZh ? '已有会员号？进入你的私密相册家谱 ↗' : 'Already a member? Enter your private Photo Genealogy ↗'}</a></p>}</>}
 
     {pageKey === 'contact' && <section class="contact-card"><div><span class="eyebrow">{isZh ? 'SECRETARY / 秘书长' : 'SECRETARY'}</span><h2>{isZh ? '锺骏源' : 'Ian Chung'}</h2><p>WhatsApp 9272 8933<br /><a href="mailto:ianchungcy@gmail.com">ianchungcy@gmail.com</a><br />95 Jalan Lokam, Singapore 537915</p></div><a class="button" href="mailto:ianchungcy@gmail.com">{isZh ? '写信给秘书长' : 'Email the Secretary'} ↗</a></section>}
 
-    {pageKey === 'events' && <div class="quiet-note">{isZh ? '活动资讯将在确认后发布。' : 'Programme details will be published when confirmed.'}</div>}
+    {pageKey === 'events' && <><section class="activity-gallery">{activityMoments.map((moment) => <figure><img src={moment.image} alt={isZh ? moment.zh : moment.en} loading="lazy" /><figcaption>{isZh ? moment.zh : moment.en}</figcaption></figure>)}</section><div class="quiet-note">{isZh ? '活动资讯将在确认后发布。' : 'Programme details will be published when confirmed.'}</div></>}
 
   </div>
 </SiteLayout>

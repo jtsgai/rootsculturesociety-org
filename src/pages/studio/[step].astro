@@ -1,0 +1,22 @@
+---
+import StudioFrame from '../../components/StudioFrame.astro';
+import { studioSteps, type StudioStep } from '../../data/studio';
+
+export function getStaticPaths() {
+  return studioSteps.map((step) => ({ params: { step: step.slug }, props: { step } }));
+}
+const { step } = Astro.props as { step: StudioStep };
+---
+<StudioFrame title={`${step.method}. ${step.title}`}>
+  <section class="studio-card studio-step" data-studio-step={step.method} data-step-type={step.type}>
+    <div class="studio-step-intro"><a class="text-link" href="/studio">← 我的相册家谱</a><span class="eyebrow">{step.english}</span><p>{step.guidance}</p></div>
+    {step.type === 'cover' && <form data-section-form><div class="studio-fields"><label>相册家谱书名 <small>必填</small><input name="title" required placeholder="例如：黄氏相册家谱" /></label><label>第一代开族始祖 <small>必填</small><input name="ancestor" required placeholder="最早在新加坡落地生根的祖先" /></label><label>方言群 <input name="dialect" placeholder="例如：海南、福建、潮州" /></label><label>祖籍地 <input name="ancestralPlace" placeholder="例如：中国海南文昌" /></label></div><label>献词或引言 <textarea name="dedication" rows="5" placeholder="写给谁、为什么要留下这本书？"></textarea></label><label class="studio-consent"><input name="consent" type="checkbox" required /> 我确认已取得填写亲属资料所需的同意。</label><button class="button" type="submit">保存封面</button></form>}
+    {step.type === 'notes' && <form data-section-form><label>这一章的内容 <textarea name="notes" rows="13" placeholder="想到什么就先写下来；之后随时可以补充或修改。"></textarea></label><label>图片说明（可选）<textarea name="imageNotes" rows="4" placeholder="先写照片内容与来处；接入图片库后可上传对应原图。"></textarea></label><label class="studio-consent"><input name="complete" type="checkbox" /> 这一章暂时完成</label><button class="button" type="submit">保存这一章</button></form>}
+    {step.type === 'people' && <div data-people-section><form class="studio-person-form" data-person-form><div class="studio-fields"><label>姓名 <small>必填</small><input name="name" required /></label><label>世代 <small>必填</small><input name="generation" type="number" min="1" required /></label><label>性别 <select name="sex"><option value="unspecified">不注明</option><option value="female">女</option><option value="male">男</option></select></label><label>状态 <select name="lifeStatus"><option value="unspecified">不注明</option><option value="living">在世</option><option value="deceased">已故</option></select></label><label>出生年份 <input name="birthYear" type="number" min="1800" max="2200" /></label></div><label>人物小记 <textarea name="note" rows="4" placeholder="可写一件记得的事、称呼或照片线索。"></textarea></label><button class="button" type="submit">加入世系</button></form><div class="studio-person-list" data-person-list></div></div>}
+    {step.type === 'register' && <div data-register-section><p class="studio-note">这里补充的是第 5 章已加入的人。电话和地址不会出现在公共网站。</p><div class="studio-person-list" data-register-list></div></div>}
+    <p class="studio-status" aria-live="polite" data-studio-status></p>
+  </section>
+</StudioFrame>
+<script>
+  import '../../scripts/studio-step';
+</script>

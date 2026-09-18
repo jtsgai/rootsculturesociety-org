@@ -22,12 +22,17 @@ export const nav = [
 ];
 
 export const committee = [
-  { zh: '陈业雄', en: 'Chen Yexiong', roleZh: '会长', roleEn: 'President' },
-  { zh: '锺瑞忠', en: 'Zhong Ruizhong', roleZh: '副会长', roleEn: 'Vice-President' },
-  { zh: '陈泽南', en: 'Chen Zenan', roleZh: '财务长', roleEn: 'Treasurer' },
-  { zh: '锺骏源', en: 'Ian Chung', roleZh: '秘书长', roleEn: 'Secretary' },
-  { zh: '拓劲涛', en: 'Tuo Jintao', roleZh: '助理秘书长', roleEn: 'Assistant Secretary' },
-  { zh: '蔡仑宗', en: 'Cai Lun Zong', roleZh: '委员', roleEn: 'Committee Member' },
+  { zh: '陈业雄', en: 'Chen Yexiong', roleZh: '会长', roleEn: 'President', image: '/committee/chen-yexiong.jpg', altZh: '陈业雄', altEn: 'Chen Yexiong' },
+  { zh: '锺瑞忠', en: 'Zhong Ruizhong', roleZh: '副会长', roleEn: 'Vice-President', image: '/committee/zhong-ruizhong.jpg', altZh: '锺瑞忠', altEn: 'Zhong Ruizhong' },
+  { zh: '陈泽南', en: 'Chen Zenan', roleZh: '财务长', roleEn: 'Treasurer', image: '/committee/chen-zenan.jpg', altZh: '陈泽南', altEn: 'Chen Zenan' },
+  { zh: '锺骏源', en: 'Ian Chung', roleZh: '秘书长', roleEn: 'Secretary', image: '/committee/ian-chung.jpg', altZh: '锺骏源', altEn: 'Ian Chung' },
+  { zh: '拓劲涛', en: 'Tuo Jintao', roleZh: '助理秘书长', roleEn: 'Assistant Secretary', image: '/committee/tuo-jintao.jpg', altZh: '拓劲涛', altEn: 'Tuo Jintao' },
+  { zh: '蔡仑宗', en: 'Cai Lun Zong', roleZh: '委员', roleEn: 'Committee Member', image: '/committee/cai-lunzong.jpg', altZh: '蔡仑宗', altEn: 'Cai Lun Zong' },
+];
+
+export const activityMoments = [
+  { image: '/events/cultural-gathering-01.jpg', zh: '学会文化活动现场', en: 'A Society cultural gathering' },
+  { image: '/events/cultural-gathering-02.jpg', zh: '活动交流合影', en: 'Conversation at a Society activity' },
 ];
 
 export const methods = [

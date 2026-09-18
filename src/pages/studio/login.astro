@@ -1,0 +1,19 @@
+---
+import StudioFrame from '../../components/StudioFrame.astro';
+---
+<StudioFrame title="登录会员谱坊" description="以会员号进入你的私密相册家谱。">
+  <section class="studio-card studio-login" data-studio-login>
+    <p>用学会发出的会员号和初始密码登录。第一次进入后，请先改密码。</p>
+    <p class="studio-note">Member Studio — sign in with your Society-issued member ID and password.</p>
+    <form data-studio-login-form>
+      <label>会员号 <small>Member ID</small><input name="memberId" autocomplete="username" placeholder="R1001" required /></label>
+      <label>密码 <small>Password</small><input name="password" type="password" autocomplete="current-password" required /></label>
+      <button class="button" type="submit">进入我的相册家谱</button>
+    </form>
+    <p class="studio-status" aria-live="polite" data-studio-status></p>
+    <p class="studio-help">忘记密码或账户尚未开通，请用 WhatsApp 9272 8933 联络学会。</p>
+  </section>
+</StudioFrame>
+<script>
+  import '../../scripts/studio-login';
+</script>
