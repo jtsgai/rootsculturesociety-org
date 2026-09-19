@@ -131,6 +131,8 @@ html[lang='en'] .deck, html[lang='en'] .prose-column p { text-wrap: pretty; word
 .book-cover { width: 190px; height: auto; object-fit: contain; object-position: top; }
 .publication-list h2 { margin: 0 0 8px; font-size: 2.2rem; }
 .publication-list p { margin: 0; color: var(--muted); }
+.inline-download { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 22px; color: var(--maroon); border-bottom: 1px solid currentColor; padding-bottom: 3px; font-size: .88rem; }
+.inline-download span { font-size: .9em; }
 .article-downloads { max-width: 850px; margin: 100px 0 0 25%; padding-top: 38px; border-top: 1px solid var(--line); }
 .section-kicker h2 { margin: 18px 0 10px; font-size: 2.6rem; line-height: 1.05; }
 .section-kicker p { max-width: 620px; margin: 0; color: var(--muted); }
@@ -154,6 +156,19 @@ html[lang='en'] .deck, html[lang='en'] .prose-column p { text-wrap: pretty; word
 .activity-gallery figure { margin: 0; }
 .activity-gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; filter: saturate(.86); }
 .activity-gallery figcaption { margin-top: 12px; color: var(--muted); font-size: .92rem; }
+.story-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; max-width: 1060px; margin: 76px 0 0 25%; }
+.story-card { border-top: 1px solid var(--ink); }
+.story-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; margin-top: 18px; filter: saturate(.86); }
+.story-card-body { padding-top: 22px; }
+.story-card-body h2 { margin: 14px 0 12px; font-size: 1.75rem; line-height: 1.12; }
+.story-card-body p { margin: 0; color: var(--muted); }
+.activity-records { max-width: 850px; margin: 100px 0 0 25%; padding-top: 38px; border-top: 1px solid var(--line); }
+.activity-records .section-kicker h2 { max-width: 680px; }
+.activity-record-list { margin-top: 38px; border-top: 1px solid var(--line); }
+.activity-record-list article { display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.activity-record-year { color: var(--maroon); font-family: var(--serif); font-size: 1.2rem; }
+.activity-record-list h2 { margin: 0 0 9px; font-size: 1.45rem; }
+.activity-record-list p { margin: 0; color: var(--muted); }
 .page-cta { margin: 100px 0 0 25%; padding-top: 25px; border-top: 1px solid var(--line); }
 .page-cta a { color: var(--maroon); font-family: var(--serif); font-size: 1.5rem; }
 .page-cta span { margin-left: 12px; }
@@ -265,7 +280,11 @@ html[lang='en'] .deck, html[lang='en'] .prose-column p { text-wrap: pretty; word
   .prose-column, .publication-list, .resource-list, .contact-card, .quiet-note, .page-cta, .member-studio-link, .article-downloads { margin-left: 0; }
   .publication-list article { grid-template-columns: 1fr; gap: 16px; }
   .book-cover { width: min(58vw, 260px); }
-  .activity-gallery { grid-template-columns: 1fr; margin: 54px 0 0; gap: 32px; }
+  .activity-gallery, .story-grid, .activity-records { margin-left: 0; }
+  .activity-gallery { grid-template-columns: 1fr; margin-top: 54px; gap: 32px; }
+  .story-grid { grid-template-columns: 1fr; margin-top: 54px; gap: 42px; }
+  .activity-records { margin-top: 72px; }
+  .activity-record-list article { grid-template-columns: 1fr; gap: 10px; }
   .article-downloads { margin-top: 72px; }
   .article-list a { align-items: start; gap: 14px; }
   .article-list strong { font-size: 1.08rem; }

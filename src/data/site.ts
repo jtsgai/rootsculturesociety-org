@@ -34,6 +34,109 @@ export const activityMoments = [
   { image: '/events/cultural-gathering-02.jpg', zh: '活动交流合影', en: 'Conversation at a Society activity' },
 ];
 
+export const publications = [
+  {
+    year: '2025',
+    titleZh: '《传灯》',
+    titleEn: 'Chuan Deng',
+    image: '/publications/chuan-deng-2025-book.jpg',
+    altZh: '《传灯》2025 书本展示',
+    altEn: 'Chuan Deng 2025 book display',
+    descriptionZh: '与新加坡海南会馆、琼州天后宫联合出版。',
+    descriptionEn: 'Published with Singapore Hainan Hwee Kuan and Kheng Chiu Tin Hou Kong.',
+    relatedFile: 'roots-culture-passing-the-torch-chen-jiancun.pdf',
+    relatedZh: '下载相关文章：根缘文化薪火相传',
+    relatedEn: 'Download related article: Roots Culture: Passing the Torch',
+  },
+  {
+    year: '2026',
+    titleZh: '《相册家谱》',
+    titleEn: 'Photo Genealogy',
+    image: '/publications/photo-genealogy-2026-book.jpg',
+    altZh: '《相册家谱》2026 书本展示',
+    altEn: 'Photo Genealogy 2026 book display',
+    descriptionZh: '学会出版，把家族记忆整理成可阅读、可传承的相册家谱。',
+    descriptionEn: 'A Society publication that turns family memory into a readable record to carry forward.',
+    relatedFile: 'eight-methods-singapore-photo-genealogy-sample.pdf',
+    relatedZh: '下载相关样本：建修新加坡相册家谱的八大招',
+    relatedEn: 'Download related sample: Eight Methods for a Singapore Photo Genealogy',
+  },
+];
+
+export const activityRecords = [
+  {
+    year: '2010',
+    zh: '新加坡族谱学会成立与推广',
+    en: 'Formation and outreach of the Singapore Genealogy Society',
+    zhText: '资料记载，几位志趣相投的朋友组织成立新加坡族谱学会，并开展联系会馆、谱法讲座与展览等推广工作。',
+    enText: 'The source account records the formation of the Singapore Genealogy Society by a group of friends, followed by outreach to clan associations, genealogy talks and exhibitions.',
+    sourceFile: 'roots-culture-passing-the-torch-chen-jiancun.pdf',
+  },
+  {
+    year: '2015—2022',
+    zh: '黄氏相册家谱的持续修订',
+    en: 'The Huang family Photo Genealogy in revision',
+    zhText: '黄良南的文章记录，黄氏家族于 2015 年发布首版相册家谱，并在 2022 年发布第八版。',
+    enText: 'Huang Liangnan records that the Huang family published its first Photo Genealogy in 2015 and its eighth edition in 2022.',
+    sourceFile: 'roots-culture-huang-liangnan.pdf',
+  },
+  {
+    year: '2024',
+    zh: '海南寻根与宗亲交流',
+    en: 'A Hainan roots journey and clan exchange',
+    zhText: '资料记录，黄氏家族组织老少成员到海南文昌、公坡镇寻根，并与文昌黄氏大宗祠交流。',
+    enText: 'The source account records a Huang family roots journey to Wenchang and Gongpo in Hainan, including an exchange with the Wenchang Huang Clan Ancestral Hall.',
+    sourceFile: 'roots-culture-huang-liangnan.pdf',
+  },
+  {
+    year: '2025—2026',
+    zh: '相册家谱出版资料',
+    en: 'Photo Genealogy publication materials',
+    zhText: '现有资料包括《传灯》与《相册家谱》书封，以及相册家谱方法样本。正式活动日期与地点待确认后再发布。',
+    enText: 'The current materials include the covers of Chuan Deng and Photo Genealogy, together with a Photo Genealogy methods sample. Formal event dates and venues will be published when confirmed.',
+    sourceFile: 'eight-methods-singapore-photo-genealogy-sample.pdf',
+  },
+];
+
+export const stories = [
+  {
+    image: '/publications/photo-genealogy-2026-book.jpg',
+    altZh: '《相册家谱》书本展示',
+    altEn: 'Photo Genealogy book display',
+    titleZh: '从“我是谁”追问到家族记忆',
+    titleEn: 'From “Who am I?” to family memory',
+    bylineZh: '黄良南｜根缘文化',
+    bylineEn: 'Huang Liangnan | Roots Culture',
+    textZh: '黄良南写下从寻找自我定位，到整理黄氏家族记录的过程；首版相册家谱于 2015 年完成，之后持续补充与修订。',
+    textEn: 'Huang Liangnan writes about moving from a question of personal identity to the work of recording the Huang family. The first Photo Genealogy was completed in 2015 and continued through later revisions.',
+    sourceFile: 'roots-culture-huang-liangnan.pdf',
+  },
+  {
+    image: '/publications/chuan-deng-2025-book.jpg',
+    altZh: '《传灯》书本展示',
+    altEn: 'Chuan Deng book display',
+    titleZh: '根缘文化薪火相传',
+    titleEn: 'Roots Culture: Passing the Torch',
+    bylineZh: '陈建存｜2024 年文章',
+    bylineEn: 'Chen Jiancun | 2024 article',
+    textZh: '文章回顾本地族谱推广、相册家谱的实践，以及以现代、易懂的方式让更多家庭参与建谱修史的想法。',
+    textEn: 'This account looks back at genealogy outreach in Singapore, the practice of Photo Genealogy, and the idea of making family history accessible to more households.',
+    sourceFile: 'roots-culture-passing-the-torch-chen-jiancun.pdf',
+  },
+  {
+    image: '/events/cultural-gathering-02.jpg',
+    altZh: '文化活动中的交流合影',
+    altEn: 'Conversation at a cultural gathering',
+    titleZh: '迁徙留下的路',
+    titleEn: 'The routes migration leaves behind',
+    bylineZh: '迁徙观点资料',
+    bylineEn: 'Migration perspectives',
+    textZh: '从闯关东、填四川、下南洋到走西口，迁徙不仅改变地点，也留下方言、食物、关系与记忆。',
+    textEn: 'From Chuang Guandong and Tian Sichuan to going south across the seas and Zou Xikou, migration changes more than place; it leaves dialects, food, relationships and memory.',
+    sourceFile: 'migration-views-chuang-guandong-zou-xikou.pdf',
+  },
+];
+
 export const articles = [
   { file: 'what-is-a-genealogy.pdf', zh: '什么是族谱', en: 'What Is a Genealogy?', zhDescription: '从族谱的基本概念与作用开始阅读。', enDescription: 'An introduction to the meaning and purpose of a genealogy.' },
   { file: 'roots-culture-passing-the-torch-chen-jiancun.pdf', zh: '根缘文化薪火相传', en: 'Roots Culture: Passing the Torch', zhDescription: '陈建存谈新加坡族谱推广与相册家谱。', enDescription: 'Chen Jiancun on genealogy work in Singapore and Photo Genealogy.' },
@@ -72,16 +175,16 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Singapore Photo Genealogy', deck: 'Eight Methods for making a family’s roots and routes readable.', paragraphs: ['A Photo Genealogy is not a pile of records. It begins with the first generation to settle in Singapore and arranges a family’s life through local time and place.'] },
   },
   publications: {
-    zh: { title: '出版', deck: '把口述、文献与家庭记忆，留成可以翻阅的东西。', paragraphs: ['学会的出版工作以文化记录为先。书名与出版资料以正式版本为准。'] },
-    en: { title: 'Publications', deck: 'Making oral history, documents, and family memory available to turn through.', paragraphs: ['The Society publishes with cultural record-keeping in mind. Titles and publication details are presented as official editions become available.'] },
+    zh: { title: '出版', deck: '把口述、文献与家庭记忆，留成可以翻阅的东西。', paragraphs: ['学会的出版工作以文化记录为先。书名与出版资料以现有正式版本为准。', '页面同时整理相关文章与相册家谱样本，供读者下载阅读；资料的作者、来源与性质会在页面中说明。'] },
+    en: { title: 'Publications', deck: 'Making oral history, documents, and family memory available to turn through.', paragraphs: ['The Society publishes with cultural record-keeping in mind. Titles and publication details follow the formal editions currently available.', 'This page also gathers related articles and Photo Genealogy samples for download; each item identifies its author, source or character where known.'] },
   },
   stories: {
-    zh: { title: '家族故事', deck: '一家的故事，从愿意留下的那一句开始。', paragraphs: ['这里将收录与新加坡生活、迁徙、方言、食物和家族记忆有关的故事。公开故事会在得到同意后刊出；私人资料不会自动成为公共内容。'] },
-    en: { title: 'Family stories', deck: 'A family story begins with the sentence someone chooses to keep.', paragraphs: ['This section will gather stories of Singapore life, migration, dialect, food, and family memory. Public stories are published with consent; private material does not become public by default.'] },
+    zh: { title: '家族故事', deck: '一家的故事，从愿意留下的那一句开始。', paragraphs: ['这里收录与新加坡生活、迁徙、方言、食物和家族记忆有关的资料故事。公开故事会在得到同意后刊出；私人资料不会自动成为公共内容。', '以下内容先以已提供的文章与照片为基础，读者可从每个故事继续阅读原始资料。'] },
+    en: { title: 'Family stories', deck: 'A family story begins with the sentence someone chooses to keep.', paragraphs: ['This section gathers source-based stories of Singapore life, migration, dialect, food, and family memory. Public stories are published with consent; private material does not become public by default.', 'The first entries are based on the articles and photographs provided to the Society; each story links back to its source material.'] },
   },
   events: {
-    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['活动资讯会在确认后发布。最新安排将在此页更新。'] },
-    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['Event information will be published when confirmed. The latest programme will be updated here.'] },
+    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['以下先整理现有资料中的历史记录、出版资料与现场照片。正式活动日期、地点和报名安排，会在确认后发布。'] },
+    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['This page first gathers historical records, publication materials and available event photographs. Confirmed dates, venues and registration details will be published when available.'] },
   },
   membership: {
     zh: { title: '入会', deck: '把一家的故事，认真保存下来。', paragraphs: ['年费 S$99，含一年谱坊账号一个。交费后由学会开通会员号（R1001 起）。网站不收款；年费不含印刷成书。'] },
