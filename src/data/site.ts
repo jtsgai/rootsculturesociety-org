@@ -139,6 +139,7 @@ export const stories = [
 
 export const articles = [
   { file: 'what-is-a-genealogy.pdf', zh: '什么是族谱', en: 'What Is a Genealogy?', zhDescription: '从族谱的基本概念与作用开始阅读。', enDescription: 'An introduction to the meaning and purpose of a genealogy.' },
+  { file: 'sg61-manuscript-chen-yexiong.pdf', zh: 'SG61 手稿：当代华裔华社建设开拓', en: 'SG61 Manuscript: Building the Chinese Community', zhDescription: '陈业雄手稿扫描本，讨论 SG61、族谱文化与当代华社建设。', enDescription: 'A scanned manuscript by Chen Yexiong on SG61, genealogy culture and contemporary Chinese community building.' },
   { file: 'roots-culture-passing-the-torch-chen-jiancun.pdf', zh: '根缘文化薪火相传', en: 'Roots Culture: Passing the Torch', zhDescription: '陈建存谈新加坡族谱推广与相册家谱。', enDescription: 'Chen Jiancun on genealogy work in Singapore and Photo Genealogy.' },
   { file: 'chinese-clan-genealogy-culture-sg60-chen-yexiong.pdf', zh: '华族传统族谱文化 SG60', en: 'Chinese Clan Genealogy Culture SG60', zhDescription: '陈业雄著手稿扫描本。', enDescription: 'A scanned manuscript by Chen Yexiong.' },
   { file: 'genealogy-main-contents.pdf', zh: '家谱的主要内容', en: 'The Main Contents of a Genealogy', zhDescription: '认识姓氏起源、世系表、家训等家谱内容。', enDescription: 'An overview of surname origin, lineage tables, family instructions, and related contents.' },
