@@ -30,7 +30,11 @@ img { max-width: 100%; display: block; }
 .home-hero, .home-section, .page-body, .page-intro, .home-band { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
 .home-hero { position: relative; isolation: isolate; overflow: hidden; min-height: 630px; padding-top: 120px; padding-bottom: 100px; display: grid; grid-template-columns: 1fr; align-items: center; }
 .home-hero-media { position: absolute; z-index: -1; inset: 0; pointer-events: none; background: var(--paper); }
-.home-hero-still { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .34; mix-blend-mode: multiply; }
+.home-hero-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0; mix-blend-mode: multiply; transition: opacity 1.4s ease; }
+.home-hero-still.is-active { opacity: .34; }
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-still { transition: none; }
+}
 .hero-copy { max-width: 760px; }
 .hero-copy { position: relative; z-index: 1; }
 .eyebrow { color: var(--maroon); font-size: .68rem; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }

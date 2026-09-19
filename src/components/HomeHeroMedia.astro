@@ -1,7 +1,26 @@
 ---
-const poster = '/generated/roots-hero-03.jpg';
+const posters = [
+  '/generated/roots-hero-03.jpg',
+  '/generated/roots-hero-01.jpg',
+  '/generated/roots-hero-02.jpg',
+];
 ---
 
-<div class="home-hero-media" aria-hidden="true">
-  <img src={poster} alt="" class="home-hero-still" />
+<div class="home-hero-media" data-hero-gallery aria-hidden="true">
+  {posters.map((poster, index) => <img src={poster} alt="" class:list={['home-hero-still', { 'is-active': index === 0 }]} data-hero-slide={index} />)}
 </div>
+
+<script>
+  const gallery = document.querySelector('[data-hero-gallery]');
+  const slides = gallery?.querySelectorAll('[data-hero-slide]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (gallery && slides && slides.length > 1 && !reducedMotion) {
+    let current = 0;
+    window.setInterval(() => {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+    }, 8000);
+  }
+</script>
