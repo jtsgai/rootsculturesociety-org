@@ -76,13 +76,20 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .page-body { padding-top: 64px; padding-bottom: 104px; }
 .prose-column { max-width: 720px; margin-left: 25%; }
 .prose-column p { margin: 0 0 24px; font-size: 1.12rem; }
-.committee-grid, .method-grid, .resource-list { margin-top: 86px; }
-.committee-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
-.person { border-bottom: 1px solid var(--line); padding: 28px 22px 34px 0; }
-.person:nth-child(3n+2), .person:nth-child(3n+3) { padding-left: 22px; border-left: 1px solid var(--line); }
+.committee-orgchart, .method-grid, .resource-list { margin-top: 86px; }
+.committee-orgchart { display: flex; flex-direction: column; align-items: center; }
+.committee-level { position: relative; display: flex; justify-content: center; }
+.committee-level + .committee-level { margin-top: 56px; }
+.committee-level + .committee-level::before { content: ''; position: absolute; top: -56px; left: 50%; height: 56px; border-left: 1px solid var(--line); }
+.committee-members { width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; padding-top: 30px; }
+.committee-members::before { top: 0; left: 12.5%; right: 12.5%; width: auto; height: 0; border-left: 0; border-top: 1px solid var(--line); }
+.committee-members::after { content: ''; position: absolute; top: 0; left: 50%; height: 30px; border-left: 1px solid var(--line); }
+.committee-node { width: 190px; text-align: center; }
+.committee-members .committee-node { width: auto; position: relative; }
 .person-role { color: var(--maroon); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
-.person h2 { margin: 44px 0 0; font-size: 2.1rem; }
-.committee-photo { width: 100%; aspect-ratio: 4 / 3; margin-bottom: 25px; object-fit: cover; object-position: center; filter: saturate(.86) contrast(.96); }
+.committee-node h2 { margin: 16px 0 0; font-size: 1.28rem; }
+.committee-photo { width: 100%; height: 180px; margin-bottom: 18px; object-fit: contain; object-position: center; filter: saturate(.86) contrast(.96); }
+.committee-members .committee-photo { height: 150px; }
 .method-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
 .method-card { min-height: 235px; padding: 25px 30px 24px 0; border-bottom: 1px solid var(--line); }
 .method-card:nth-child(even) { padding-left: 30px; border-left: 1px solid var(--line); }
@@ -93,6 +100,15 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .book-cover { width: 190px; height: auto; object-fit: contain; object-position: top; }
 .publication-list h2 { margin: 0 0 8px; font-size: 2.2rem; }
 .publication-list p { margin: 0; color: var(--muted); }
+.article-downloads { max-width: 850px; margin: 100px 0 0 25%; padding-top: 38px; border-top: 1px solid var(--line); }
+.section-kicker h2 { margin: 18px 0 10px; font-size: 2.6rem; line-height: 1.05; }
+.section-kicker p { max-width: 620px; margin: 0; color: var(--muted); }
+.article-list { margin-top: 38px; border-top: 1px solid var(--line); }
+.article-list a { display: flex; justify-content: space-between; gap: 28px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.article-list a > span { display: grid; gap: 3px; }
+.article-list strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; }
+.article-list small { color: var(--muted); font-size: .86rem; }
+.article-list em { flex: 0 0 auto; align-self: center; color: var(--maroon); font-size: .74rem; font-style: normal; letter-spacing: .08em; }
 .resource-list { max-width: 850px; margin-left: 25%; border-top: 1px solid var(--line); }
 .resource-list a { display: flex; justify-content: space-between; padding: 22px 0; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 1.55rem; }
 .resource-list a span:last-child { color: var(--maroon); font-family: var(--sans); }
@@ -192,7 +208,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
   .home-section { padding-top: 76px; padding-bottom: 76px; }
   .section-heading, .publication-feature, .home-band { grid-template-columns: 1fr; gap: 28px; }
   .section-heading { padding-bottom: 32px; }
-  .feature-grid, .committee-grid, .method-grid { grid-template-columns: 1fr; }
+  .feature-grid, .method-grid { grid-template-columns: 1fr; }
   .feature-card, .feature-card + .feature-card, .method-card, .method-card:nth-child(even) { min-height: 0; padding: 24px 0; border-right: 0; border-left: 0; }
   .feature-card h3 { margin-top: 30px; }
   .home-band { padding-top: 62px; padding-bottom: 62px; }
@@ -203,11 +219,20 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
   .page-intro { padding-top: 82px; padding-bottom: 58px; }
   .page-intro h1 { font-size: clamp(3.5rem, 16vw, 5.5rem); }
   .page-body { padding-top: 50px; padding-bottom: 80px; }
-  .prose-column, .publication-list, .resource-list, .contact-card, .quiet-note, .page-cta, .member-studio-link { margin-left: 0; }
+  .prose-column, .publication-list, .resource-list, .contact-card, .quiet-note, .page-cta, .member-studio-link, .article-downloads { margin-left: 0; }
   .publication-list article { grid-template-columns: 1fr; gap: 16px; }
   .book-cover { width: min(58vw, 260px); }
   .activity-gallery { grid-template-columns: 1fr; margin: 54px 0 0; gap: 32px; }
-  .committee-grid, .method-grid, .resource-list { margin-top: 54px; }
+  .article-downloads { margin-top: 72px; }
+  .article-list a { align-items: start; gap: 14px; }
+  .article-list strong { font-size: 1.08rem; }
+  .committee-orgchart, .method-grid, .resource-list { margin-top: 54px; }
+  .committee-members { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; padding-top: 26px; }
+  .committee-members::before { left: 25%; right: 25%; }
+  .committee-members::after { height: 26px; }
+  .committee-node { width: 170px; }
+  .committee-members .committee-node { width: auto; }
+  .committee-photo, .committee-members .committee-photo { height: 150px; }
   .contact-card { align-items: flex-start; flex-direction: column; padding: 26px; }
   .contact-card h2 { font-size: 2.2rem; }
   .site-footer { padding: 55px 20px 20px; }

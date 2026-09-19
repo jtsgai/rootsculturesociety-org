@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from './PageIntro.astro';
-import { activityMoments, committee, methods, pageCopy, resources, type Lang, type PageKey } from '../data/site';
+import { activityMoments, articles, committee, methods, pageCopy, resources, type Lang, type PageKey } from '../data/site';
 interface Props { lang: Lang; pageKey: PageKey; }
 const { lang, pageKey } = Astro.props;
 const content = pageCopy[pageKey][lang];
@@ -14,11 +14,12 @@ const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta
   <div class="page-body">
     <div class="prose-column">{content.paragraphs.map((p: string) => <p>{p}</p>)}</div>
 
-    {pageKey === 'committee' && <section class="committee-grid">{committee.map((person) => <article class="person"><img class="committee-photo" src={person.image} alt={isZh ? person.altZh : person.altEn} loading="lazy" /><span class="person-role">{isZh ? person.roleZh : person.roleEn}</span><h2>{isZh ? person.zh : person.en}</h2></article>)}</section>}
+    {pageKey === 'committee' && <section class="committee-orgchart" aria-label={isZh ? '执委会组织结构' : 'Committee structure'}><div class="committee-level committee-lead"><article class="committee-node"><img class="committee-photo" src={committee[0].image} alt={isZh ? committee[0].altZh : committee[0].altEn} loading="lazy" /><span class="person-role">{isZh ? committee[0].roleZh : committee[0].roleEn}</span><h2>{isZh ? committee[0].zh : committee[0].en}</h2></article></div><div class="committee-level committee-deputy"><article class="committee-node"><img class="committee-photo" src={committee[1].image} alt={isZh ? committee[1].altZh : committee[1].altEn} loading="lazy" /><span class="person-role">{isZh ? committee[1].roleZh : committee[1].roleEn}</span><h2>{isZh ? committee[1].zh : committee[1].en}</h2></article></div><div class="committee-level committee-members">{committee.slice(2).map((person) => <article class="committee-node"><img class="committee-photo" src={person.image} alt={isZh ? person.altZh : person.altEn} loading="lazy" /><span class="person-role">{isZh ? person.roleZh : person.roleEn}</span><h2>{isZh ? person.zh : person.en}</h2></article>)}</div></section>}
 
     {pageKey === 'method' && <section class="method-grid">{methods.map((method) => <article class="method-card"><span class="method-number">{method.number}</span><h2>{isZh ? method.zh : method.en}</h2><p>{isZh ? method.zhText : method.enText}</p></article>)}</section>}
 
     {pageKey === 'publications' && <section class="publication-list"><article><img class="book-cover" src="/publications/chuan-deng-2025.jpeg" alt={isZh ? '《传灯》2025 书封' : 'Chuan Deng 2025 book cover'} /><div><span class="year">2025</span><h2>《传灯》</h2><p>{isZh ? '与新加坡海南会馆、琼州天后宫联合出版。' : 'Published with Singapore Hainan Hwee Kuan and Kheng Chiu Tin Hou Kong.'}</p></div></article><article><img class="book-cover" src="/publications/photo-genealogy-2026.jpeg" alt={isZh ? '《相册家谱》2026 书封' : 'Photo Genealogy 2026 book cover'} /><div><span class="year">2026</span><h2>《相册家谱》</h2><p>{isZh ? '学会出版。' : 'Published by the Society.'}</p></div></article></section>}
+    {pageKey === 'publications' && <section class="article-downloads"><div class="section-kicker"><span class="eyebrow">ARTICLES / 文章</span><h2>{isZh ? '把资料留在手边。' : 'Keep the source material close.'}</h2><p>{isZh ? '以下文章与样本由学会资料提供，点击即可下载原 PDF。' : 'These articles and samples come from Society materials. Select a title to download the original PDF.'}</p></div><div class="article-list">{articles.map((article) => <a href={`/articles/${article.file}`} download><span><strong>{isZh ? article.zh : article.en}</strong><small>{isZh ? article.zhDescription : article.enDescription}</small></span><em>PDF ↗</em></a>)}</div></section>}
 
     {pageKey === 'links' && <section class="resource-list">{resources.map((resource) => <a href={resource.href} target="_blank" rel="noreferrer"><span>{isZh ? resource.zh : resource.label}</span><span aria-hidden="true">↗</span></a>)}</section>}
 

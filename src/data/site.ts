@@ -35,6 +35,19 @@ export const activityMoments = [
   { image: '/events/cultural-gathering-02.jpg', zh: '活动交流合影', en: 'Conversation at a Society activity' },
 ];
 
+export const articles = [
+  { file: 'what-is-a-genealogy.pdf', zh: '什么是族谱', en: 'What Is a Genealogy?', zhDescription: '从族谱的基本概念与作用开始阅读。', enDescription: 'An introduction to the meaning and purpose of a genealogy.' },
+  { file: 'roots-culture-passing-the-torch-chen-jiancun.pdf', zh: '根缘文化薪火相传', en: 'Roots Culture: Passing the Torch', zhDescription: '陈建存谈新加坡族谱推广与相册家谱。', enDescription: 'Chen Jiancun on genealogy work in Singapore and Photo Genealogy.' },
+  { file: 'chinese-clan-genealogy-culture-sg60-chen-yexiong.pdf', zh: '华族传统族谱文化 SG60', en: 'Chinese Clan Genealogy Culture SG60', zhDescription: '陈业雄著手稿扫描本。', enDescription: 'A scanned manuscript by Chen Yexiong.' },
+  { file: 'genealogy-main-contents.pdf', zh: '家谱的主要内容', en: 'The Main Contents of a Genealogy', zhDescription: '认识姓氏起源、世系表、家训等家谱内容。', enDescription: 'An overview of surname origin, lineage tables, family instructions, and related contents.' },
+  { file: 'fulfilling-a-contemporary-mission-chen-yexiong.pdf', zh: '履行当代使命：建修族谱宝典', en: 'Fulfilling a Contemporary Mission', zhDescription: '陈业雄关于当代建修族谱的文章。', enDescription: 'Chen Yexiong on building and preserving genealogies today.' },
+  { file: 'eight-methods-singapore-photo-genealogy-sample.pdf', zh: '建修新加坡相册家谱的八大招', en: 'Eight Methods for a Singapore Photo Genealogy', zhDescription: '锺开增样本，展示谱首与谱实的编排。', enDescription: 'A Zhong Kaizeng sample showing the front matter and family record sections.' },
+  { file: 'roots-culture-huang-liangnan.pdf', zh: '根缘文化', en: 'Roots Culture', zhDescription: '黄良南分享制作相册家谱与寻根的经历。', enDescription: 'Huang Liangnan on making a Photo Genealogy and tracing family roots.' },
+  { file: 'zhong-surname-origin.pdf', zh: '百家姓：钟姓来源', en: '百家姓: The Origin of the Zhong Surname', zhDescription: '钟姓来源资料扫描本。', enDescription: 'A scanned reference on the origin of the Zhong surname.' },
+  { file: 'photo-genealogy-format-sample.pdf', zh: '相册家谱格式', en: 'Photo Genealogy Format', zhDescription: '新加坡根缘文化学会倡导的相册家谱格式样本。', enDescription: 'A sample of the Photo Genealogy format promoted by the Society.' },
+  { file: 'migration-views-chuang-guandong-zou-xikou.pdf', zh: '闯关东、走西口：迁徙观点', en: 'Migration Views: Chuang Guandong and Zou Xikou', zhDescription: '关于华人迁徙历史与路径的文章。', enDescription: 'An article on historical Chinese migration and its routes.' },
+];
+
 export const methods = [
   { number: '01', zh: '封面', en: 'Cover', zhText: '先为一本家谱定下名字、开族始祖与献词。', enText: 'Name the book, identify the founding ancestor, and add a short dedication.' },
   { number: '02', zh: '姓氏渊源', en: 'Surname origin', zhText: '从姓氏与祖籍出发，留下家族知道的线索。', enText: 'Begin with the surname and ancestral place, keeping the clues your family knows.' },
