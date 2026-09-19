@@ -1,26 +1,48 @@
 ---
-const posters = [
-  '/generated/roots-hero-03.jpg',
-  '/generated/roots-hero-01.jpg',
-  '/generated/roots-hero-02.jpg',
-];
+const baseImage = '/generated/roots-hero-03.jpg';
+const revealImage = '/generated/roots-hero-01.jpg';
 ---
 
 <div class="home-hero-media" data-hero-gallery aria-hidden="true">
-  {posters.map((poster, index) => <img src={poster} alt="" class:list={['home-hero-still', { 'is-active': index === 0 }]} data-hero-slide={index} />)}
+  <img src={baseImage} alt="" class="home-hero-still home-hero-base" />
+  <img alt="" class="home-hero-still home-hero-reveal" data-src={revealImage} />
 </div>
 
 <script>
-  const gallery = document.querySelector('[data-hero-gallery]');
-  const slides = gallery?.querySelectorAll('[data-hero-slide]');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector<HTMLElement>('.home-hero');
+  const gallery = hero?.querySelector('[data-hero-gallery]');
+  const reveal = gallery?.querySelector('.home-hero-reveal');
+  const pointerMedia = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const motionMedia = window.matchMedia('(prefers-reduced-motion: no-preference)');
 
-  if (gallery && slides && slides.length > 1 && !reducedMotion) {
-    let current = 0;
-    window.setInterval(() => {
-      slides[current].classList.remove('is-active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('is-active');
-    }, 8000);
+  if (hero && reveal && pointerMedia.matches && motionMedia.matches) {
+    const source = reveal.getAttribute('data-src');
+    if (source) reveal.setAttribute('src', source);
+
+    let currentX = 50;
+    let currentY = 50;
+    let targetX = 50;
+    let targetY = 50;
+    let currentOpacity = 0;
+    let targetOpacity = 0;
+
+    const render = () => {
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
+      currentOpacity += (targetOpacity - currentOpacity) * 0.22;
+      hero.style.setProperty('--hero-spot-x', `${currentX}%`);
+      hero.style.setProperty('--hero-spot-y', `${currentY}%`);
+      hero.style.setProperty('--hero-reveal-opacity', String(currentOpacity));
+      window.requestAnimationFrame(render);
+    };
+
+    hero.addEventListener('pointermove', (event: PointerEvent) => {
+      const rect = hero.getBoundingClientRect();
+      targetX = ((event.clientX - rect.left) / rect.width) * 100;
+      targetY = ((event.clientY - rect.top) / rect.height) * 100;
+      targetOpacity = 1;
+    });
+    hero.addEventListener('pointerleave', () => { targetOpacity = 0; });
+    render();
   }
 </script>
