@@ -112,6 +112,7 @@ export const resources = [
   { label: 'National Library Board', zh: '国家图书馆', href: 'https://www.nlb.gov.sg/' },
   { label: 'Singapore Chinese Cultural Centre', zh: '华族文化中心', href: 'https://www.singaporeccc.org.sg/' },
   { label: 'SFCCA', zh: '宗乡总会', href: 'https://sfcca.sg/' },
+  { label: 'National Heritage Board', zh: '国家文物局', href: 'https://www.nhb.gov.sg/' },
 ];
 
 export const pathFor = (lang: Lang, key: PageKey) => `${lang === 'en' ? '/en' : ''}/${key}`;
