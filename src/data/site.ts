@@ -7,7 +7,6 @@ export type PageKey =
   | 'stories'
   | 'events'
   | 'membership'
-  | 'links'
   | 'privacy'
   | 'terms'
   | 'contact';
@@ -87,10 +86,6 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
   membership: {
     zh: { title: '入会', deck: '把一家的故事，认真保存下来。', paragraphs: ['年费 S$99，含一年谱坊账号一个。交费后由学会开通会员号（R1001 起）。网站不收款；年费不含印刷成书。'] },
     en: { title: 'Membership', deck: 'Give a family story a place to be kept with care.', paragraphs: ['S$99 a year includes one studio account for one family book. After payment the Society issues a member ID from R1001. No payment is taken on this website; printing is not included.'] },
-  },
-  links: {
-    zh: { title: '寻根路径', deck: '从公共资料与文化机构，继续往根里走。', paragraphs: ['这些机构提供不同的历史、档案、图书与文化入口。学会不代表这些机构，也不代替其资料检索服务。'] },
-    en: { title: 'Roots pathways', deck: 'Continue the search through public collections and cultural institutions.', paragraphs: ['These institutions offer different entrances to history, archives, books, and culture. The Society is independent of them and does not replace their research services.'] },
   },
   privacy: {
     zh: { title: '隐私', deck: '少收集，清楚说明，尊重家庭资料的边界。', paragraphs: ['学会是本网站的资料主体。网站公共页不收集 NRIC；你通过电邮或 WhatsApp 主动提供的姓名、电话号码与电邮，只用于回复询问、处理入会沟通及提供学会服务。', '学会不会把联络资料出售、出租或提供给无关第三方。若资料需要交由服务供应商处理，学会会要求其只按指定目的使用，并采取合理的保密与安全措施。', '未来谱坊功能若上线，家谱与上传文件默认私密，仅供会员及获授权者使用；电话与地址不会出现在公共页面。你可以通过公开联络方式要求查阅、更正或询问个人资料的使用情况。', '本站遵守新加坡《个人资料保护法令》(PDPA)。'] },

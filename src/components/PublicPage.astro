@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from './PageIntro.astro';
-import { activityMoments, articles, committee, methods, pageCopy, resources, type Lang, type PageKey } from '../data/site';
+import { activityMoments, articles, committee, methods, pageCopy, type Lang, type PageKey } from '../data/site';
 interface Props { lang: Lang; pageKey: PageKey; }
 const { lang, pageKey } = Astro.props;
 const content = pageCopy[pageKey][lang];
@@ -20,8 +20,6 @@ const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta
 
     {pageKey === 'publications' && <section class="publication-list"><article><img class="book-cover" src="/publications/chuan-deng-2025-book.jpg" alt={isZh ? '《传灯》2025 书本展示' : 'Chuan Deng 2025 book display'} /><div><span class="year">2025</span><h2>《传灯》</h2><p>{isZh ? '与新加坡海南会馆、琼州天后宫联合出版。' : 'Published with Singapore Hainan Hwee Kuan and Kheng Chiu Tin Hou Kong.'}</p></div></article><article><img class="book-cover" src="/publications/photo-genealogy-2026-book.jpg" alt={isZh ? '《相册家谱》2026 书本展示' : 'Photo Genealogy 2026 book display'} /><div><span class="year">2026</span><h2>《相册家谱》</h2><p>{isZh ? '学会出版。' : 'Published by the Society.'}</p></div></article></section>}
     {pageKey === 'publications' && <section class="article-downloads"><div class="section-kicker"><span class="eyebrow">ARTICLES / 文章</span><h2>{isZh ? '把资料留在手边。' : 'Keep the source material close.'}</h2><p>{isZh ? '以下文章与样本由学会资料提供，点击即可下载原 PDF。' : 'These articles and samples come from Society materials. Select a title to download the original PDF.'}</p></div><div class="article-list">{articles.map((article) => <a href={`/articles/${article.file}`} download><span><strong>{isZh ? article.zh : article.en}</strong><small>{isZh ? article.zhDescription : article.enDescription}</small></span><em>PDF ↗</em></a>)}</div></section>}
-
-    {pageKey === 'links' && <section class="resource-list">{resources.map((resource) => <article><a class="resource-link" href={resource.href} target="_blank" rel="noreferrer"><span>{isZh ? resource.zh : resource.label}</span><span aria-hidden="true">↗</span></a><p>{isZh ? resource.zhDescription : resource.enDescription}</p></article>)}</section>}
 
     {pageKey === 'membership' && <><section class="contact-card"><div><span class="eyebrow">{isZh ? 'MEMBERSHIP / 会员' : 'MEMBERSHIP'}</span><h2>{isZh ? '请 WhatsApp 秘书长办理入会' : 'Please WhatsApp the Secretary to join'}</h2><p>{isZh ? 'WhatsApp 秘书长：9272 8933' : 'WhatsApp the Secretary: 9272 8933'}</p></div><a class="button" href="https://wa.me/6592728933">WhatsApp 9272 8933 ↗</a></section>{studioEnabled && <p class="member-studio-link"><a href="/studio/login">{isZh ? '已有会员号？进入你的私密相册家谱 ↗' : 'Already a member? Enter your private Photo Genealogy ↗'}</a></p>}</>}
 
