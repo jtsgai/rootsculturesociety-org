@@ -93,12 +93,12 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Roots pathways', deck: 'Continue the search through public collections and cultural institutions.', paragraphs: ['These institutions offer different entrances to history, archives, books, and culture. The Society is independent of them and does not replace their research services.'] },
   },
   privacy: {
-    zh: { title: '隐私', deck: '少收集，清楚说明，尊重家庭资料的边界。', paragraphs: ['学会是本网站的资料主体。网站公共页不收集 NRIC。未来谱坊功能若上线，家谱默认私密，仅供会员及获授权者使用；电话与地址不会出现在公共页面。联络资料只用于回复你的询问。本站遵守新加坡《个人资料保护法令》(PDPA)。'] },
-    en: { title: 'Privacy', deck: 'Collect less, explain clearly, and respect the boundary around family records.', paragraphs: ['The Society is the data controller for this website. Public pages do not collect NRIC. If the future members’ studio is launched, genealogy books will be private by default; phone numbers and addresses will never appear on public pages. Contact details are used only to respond to enquiries. This website complies with Singapore’s Personal Data Protection Act (PDPA).'] },
+    zh: { title: '隐私', deck: '少收集，清楚说明，尊重家庭资料的边界。', paragraphs: ['学会是本网站的资料主体。网站公共页不收集 NRIC；你通过电邮或 WhatsApp 主动提供的姓名、电话号码与电邮，只用于回复询问、处理入会沟通及提供学会服务。', '学会不会把联络资料出售、出租或提供给无关第三方。若资料需要交由服务供应商处理，学会会要求其只按指定目的使用，并采取合理的保密与安全措施。', '未来谱坊功能若上线，家谱与上传文件默认私密，仅供会员及获授权者使用；电话与地址不会出现在公共页面。你可以通过公开联络方式要求查阅、更正或询问个人资料的使用情况。', '本站遵守新加坡《个人资料保护法令》(PDPA)。'] },
+    en: { title: 'Privacy', deck: 'Collect less, explain clearly, and respect the boundary around family records.', paragraphs: ['The Society is the data controller for this website. Public pages do not collect NRIC. Names, phone numbers and email addresses that you voluntarily send by email or WhatsApp are used only to answer enquiries, handle membership communications and provide Society services.', 'The Society does not sell, rent or provide contact details to unrelated third parties. Where a service provider processes information, the Society requires it to use the information only for the stated purpose and to apply reasonable confidentiality and security measures.', 'If the future members’ studio is launched, genealogy books and uploaded files will be private by default and available only to members and authorised people. Phone numbers and addresses will not appear on public pages. You may ask to access or correct your personal information through the public contact channel.', 'This website complies with Singapore’s Personal Data Protection Act (PDPA).'] },
   },
   terms: {
-    zh: { title: '使用条款', deck: '这里是学会的公共文化网站。', paragraphs: ['网站内容供一般文化与寻根参考。外部链接由各机构管理，学会不保证其内容持续可用。未经许可，不得复制、改编或冒充学会发布内容。入会与未来谱坊服务以学会另行说明为准。'] },
-    en: { title: 'Terms', deck: 'This is the Society’s public cultural website.', paragraphs: ['The website is provided for general cultural and family-history reference. External links are managed by their respective institutions and may change. Do not copy, adapt, or present Society material as your own without permission. Membership and any future studio service are subject to separate Society information.'] },
+    zh: { title: '使用条款', deck: '这里是学会的公共文化网站。', paragraphs: ['本网站提供一般文化、出版与寻根参考。学会会尽力保持资料准确，但不保证每一项内容、外部链接或活动安排持续不变。', '外部网站由各自机构管理，学会不代表这些机构，也不代替其资料检索、申请、预约或研究服务。访问外部网站时，请遵守对方的使用条款与隐私政策。', '网站文字、图像、书目资料与学会标识属于学会或相应权利人。未经许可，不得复制、改编、商业使用或冒充学会发布内容；合理引用时应注明来源。', '入会、会员号、年费与未来谱坊服务以学会另行说明为准。本网站不收款，任何付款安排应通过学会公开联络方式确认。', '如对网站内容、资料使用或版权有疑问，请通过公开联络方式联系学会。'] },
+    en: { title: 'Terms', deck: 'This is the Society’s public cultural website.', paragraphs: ['This website provides general cultural, publication and family-history reference. The Society takes care to keep information accurate, but does not guarantee that every item, external link or event arrangement will remain unchanged.', 'External websites are managed by their respective institutions. The Society does not represent them or replace their research, application, booking or reference services. When visiting an external website, follow its terms of use and privacy policy.', 'Website text, images, publication information and Society marks belong to the Society or the relevant rights holders. Do not copy, adapt, use commercially or present Society material as your own without permission; reasonable quotation should acknowledge the source.', 'Membership, member IDs, fees and any future studio service are subject to separate Society information. This website does not take payments; confirm any payment arrangement through the Society’s public contact channel.', 'For questions about website content, use of information or copyright, contact the Society through the public contact channel.'] },
   },
   contact: {
     zh: { title: '联络', deck: '想入会、分享故事，或了解学会工作，欢迎写信。', paragraphs: ['公开联络只有秘书长。入会请先通过 WhatsApp 联系；学会收到线下付款后才会开通会员号。'] },
@@ -107,12 +107,12 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
 };
 
 export const resources = [
-  { label: 'Roots.sg heritage portal', zh: '新加坡文化遗产资料库', href: 'https://www.roots.gov.sg/' },
-  { label: 'National Archives of Singapore', zh: '国家档案馆', href: 'https://www.nas.gov.sg/' },
-  { label: 'National Library Board', zh: '国家图书馆', href: 'https://www.nlb.gov.sg/' },
-  { label: 'Singapore Chinese Cultural Centre', zh: '华族文化中心', href: 'https://www.singaporeccc.org.sg/' },
-  { label: 'SFCCA', zh: '宗乡总会', href: 'https://sfcca.sg/' },
-  { label: 'National Heritage Board', zh: '国家文物局', href: 'https://www.nhb.gov.sg/' },
+  { label: 'Roots.sg heritage portal', zh: '新加坡文化遗产资料库', zhDescription: '查阅新加坡国家收藏、历史地点、文化故事与遗产资源。', enDescription: 'Explore Singapore’s national collection, historic places, stories and heritage resources.', href: 'https://www.roots.gov.sg/' },
+  { label: 'National Archives of Singapore', zh: '国家档案馆', zhDescription: '寻找政府档案、历史文件、照片与视听资料。', enDescription: 'Search government records, historical documents, photographs and audiovisual materials.', href: 'https://www.nas.gov.sg/' },
+  { label: 'National Library Board', zh: '国家图书馆', zhDescription: '从书籍、报刊与数码馆藏继续查找家族线索。', enDescription: 'Continue the search through books, newspapers and digital collections.', href: 'https://www.nlb.gov.sg/' },
+  { label: 'Singapore Chinese Cultural Centre', zh: '华族文化中心', zhDescription: '认识新加坡华族文化、社群记忆与公共活动。', enDescription: 'Encounter Singapore Chinese culture, community memory and public programmes.', href: 'https://www.singaporeccc.org.sg/' },
+  { label: 'SFCCA', zh: '宗乡总会', zhDescription: '了解宗乡会馆网络与新加坡华社的公共联系。', enDescription: 'Learn about the clan association network and Singapore Chinese community links.', href: 'https://sfcca.sg/' },
+  { label: 'National Heritage Board', zh: '国家文物局', zhDescription: '了解新加坡国家遗产政策、博物馆与文化机构。', enDescription: 'Learn about Singapore’s heritage policy, museums and cultural institutions.', href: 'https://www.nhb.gov.sg/' },
 ];
 
 export const pathFor = (lang: Lang, key: PageKey) => `${lang === 'en' ? '/en' : ''}/${key}`;

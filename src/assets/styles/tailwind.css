@@ -135,8 +135,11 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .article-list small { color: var(--muted); font-size: .86rem; }
 .article-list em { flex: 0 0 auto; align-self: center; color: var(--maroon); font-size: .74rem; font-style: normal; letter-spacing: .08em; }
 .resource-list { max-width: 850px; margin-left: 25%; border-top: 1px solid var(--line); }
-.resource-list a { display: flex; justify-content: space-between; padding: 22px 0; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 1.55rem; }
-.resource-list a span:last-child { color: var(--maroon); font-family: var(--sans); }
+.resource-list article { padding: 24px 0; border-bottom: 1px solid var(--line); }
+.resource-list article:first-child { border-top: 1px solid var(--line); }
+.resource-link { display: flex; justify-content: space-between; gap: 22px; font-family: var(--serif); font-size: 1.55rem; }
+.resource-link span:last-child { color: var(--maroon); font-family: var(--sans); }
+.resource-list article p { max-width: 650px; margin: 8px 0 0; color: var(--muted); }
 .contact-card { margin: 82px 0 0 25%; padding: 38px; background: var(--paper-deep); display: flex; align-items: end; justify-content: space-between; gap: 30px; }
 .contact-card h2 { margin: 18px 0 6px; font-size: 2.8rem; }
 .contact-card p { margin: 0; }
@@ -157,6 +160,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em
 .footer-name { margin: 0; font-family: var(--serif); font-size: 1.45rem; }
 .footer-address { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 16px 0 0; color: var(--muted); font-size: .86rem; }
 .footer-links, .footer-contact { display: flex; flex-direction: column; gap: 8px; }
+.footer-legal { white-space: nowrap; }
 .footer-links a:first-child, .footer-contact a:first-of-type { margin-top: 2px; }
 .footer-contact a { width: fit-content; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
