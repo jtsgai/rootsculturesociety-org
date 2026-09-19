@@ -98,6 +98,51 @@ export const activityRecords = [
   },
 ];
 
+export const memberMeetingRecords = [
+  {
+    year: '2011',
+    zh: '建谱研习班开始留下活动记录',
+    en: 'The genealogy workshops begin',
+    zhText: '报告记录 2011 年 7 月 7 日举行第二场建谱研习班，由陈业雄主讲。',
+    enText: 'The report records the second genealogy workshop on 7 July 2011, led by Chen Yexiong.',
+  },
+  {
+    year: '2014',
+    zh: '建谱研习班与公开讲座',
+    en: 'Genealogy workshops and public talks',
+    zhText: '2014 年的记录包括第三至第六场建谱研习班，以及在国家图书馆举行的华族谱系讲座；主题涉及修谱经验、族谱格式、姓氏故事与什么是族谱。',
+    enText: 'The 2014 records include the third to sixth genealogy workshops and a Chinese genealogy talk at the National Library. Topics covered genealogy practice, formats, surname stories and the meaning of a genealogy.',
+  },
+  {
+    year: '2015—2016',
+    zh: '开族传世宗谱与根缘文化学会发起',
+    en: 'Founding genealogies and the Society’s launch',
+    zhText: '记录包括“开族传世宗谱”、家谱与家庭文化讲座，以及 2016 年 7 月 26 日陈业雄老师发起成立根缘文化学会的资料。',
+    enText: 'The records include talks on founding genealogies, family culture and the launch of Roots Culture Society on 26 July 2016 by Chen Yexiong.',
+  },
+  {
+    year: '2017',
+    zh: '注册资料与建修家谱讲座',
+    en: 'Registration records and genealogy talks',
+    zhText: '报告记载学会于 2017 年 5 月 17 日正式注册，9 月 11 日获批成立，并在南洋理工大学举行“建修家谱，人人有责”讲座。',
+    enText: 'The report records formal registration on 17 May 2017 and approval on 11 September, followed by a “Genealogy is everyone’s responsibility” talk at Nanyang Technological University.',
+  },
+  {
+    year: '2018',
+    zh: '讲座、就职仪式与社群交流',
+    en: 'Talks, an inauguration and community exchange',
+    zhText: '2018 年的记录包括相册家谱、家庭文化、通用软件建谱等讲座，新执委就职仪式，新年聚餐，以及受邀参与文化场馆开幕和海南学会会庆。',
+    enText: 'The 2018 records include talks on Photo Genealogy, family culture and using common software to build a genealogy, a new committee inauguration, a New Year gathering, and invitations to cultural and community events.',
+  },
+  {
+    year: '2019',
+    zh: '对外交流与会员大会活动报告',
+    en: 'External exchanges and the members’ meeting report',
+    zhText: '报告记录 2019 年初与教育部母语司、宗乡总会的交流，以及 2019 年 2 月 22 日在琼崖黄氏公会举行的会员大会活动报告。',
+    enText: 'The report records exchanges with the Ministry of Education’s Mother Tongue Languages Division and the Singapore Federation of Chinese Clan Associations, followed by the members’ meeting activity report held on 22 February 2019.',
+  },
+];
+
 export const stories = [
   {
     image: '/publications/photo-genealogy-2026-book.jpg',
