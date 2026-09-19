@@ -107,7 +107,7 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
 };
 
 export const resources = [
-  { label: 'NHB Roots', zh: '国家文物局 Roots', href: 'https://www.roots.gov.sg/' },
+  { label: 'Roots.sg heritage portal', zh: 'Roots.sg 文化资源门户', href: 'https://www.roots.gov.sg/' },
   { label: 'National Archives of Singapore', zh: '国家档案馆', href: 'https://www.nas.gov.sg/' },
   { label: 'National Library Board', zh: '国家图书馆', href: 'https://www.nlb.gov.sg/' },
   { label: 'Singapore Chinese Cultural Centre', zh: '华族文化中心', href: 'https://www.singaporeccc.org.sg/' },
