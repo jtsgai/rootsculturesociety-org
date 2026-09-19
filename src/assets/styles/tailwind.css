@@ -113,7 +113,7 @@ html[lang='en'] .deck, html[lang='en'] .prose-column p { text-wrap: pretty; word
 .committee-deputy::before { content: ''; position: absolute; z-index: 1; top: -56px; left: 50%; height: 56px; border-left: 2px solid rgba(26,20,18,.3); }
 .committee-members { width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 30px 11px 0; }
 .committee-members::before { content: ''; position: absolute; z-index: 1; top: 0; left: 12.5%; right: 12.5%; width: auto; height: 0; border-left: 0; border-top: 2px solid rgba(26,20,18,.3); pointer-events: none; }
-.committee-members::after { content: ''; position: absolute; z-index: 1; top: 0; left: 50%; height: 30px; border-left: 2px solid rgba(26,20,18,.3); }
+.committee-members::after { content: ''; position: absolute; z-index: 1; top: -56px; left: 50%; height: 56px; border-left: 2px solid rgba(26,20,18,.3); }
 .committee-node { width: 190px; text-align: center; }
 .committee-members .committee-node { width: auto; position: relative; padding-inline: 11px; }
 .committee-members .committee-node::before { content: ''; position: absolute; z-index: 1; top: -30px; left: 50%; height: 30px; border-left: 2px solid rgba(26,20,18,.3); }
