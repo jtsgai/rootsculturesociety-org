@@ -28,4 +28,18 @@ const counterpart = lang === 'en' ? '/' : '/en/';
     button.setAttribute('aria-expanded', String(!open));
     nav?.classList.toggle('is-open', !open);
   });
+  const dropdowns = document.querySelectorAll<HTMLDetailsElement>('.nav-dropdown');
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    dropdowns.forEach((dropdown) => {
+      if (dropdown.open && !dropdown.contains(target)) dropdown.open = false;
+    });
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    dropdowns.forEach((dropdown) => {
+      if (dropdown.open) dropdown.open = false;
+    });
+  });
 </script>
