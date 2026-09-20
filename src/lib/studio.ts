@@ -29,6 +29,25 @@ export async function signIn(memberId: string, password: string) {
   if (error) throw new Error('会员号或密码不正确，或账户暂未开通。');
 }
 
+export async function signInAdmin(email: string, password: string) {
+  const { error } = await requireClient().auth.signInWithPassword({
+    email: email.trim(),
+    password,
+  });
+  if (error) throw new Error('管理员电邮或密码不正确。');
+  const profile = await currentProfile();
+  if (!profile || profile.role !== 'admin') {
+    await requireClient().auth.signOut();
+    throw new Error('这个账户没有管理员权限。');
+  }
+}
+
+export async function setCurrentPassword(password: string) {
+  if (password.length < 12) throw new Error('新密码至少需要 12 个字符。');
+  const { error } = await requireClient().auth.updateUser({ password });
+  if (error) throw new Error('无法设置密码，请重新打开邀请链接。');
+}
+
 export async function signOut() {
   await requireClient().auth.signOut();
 }

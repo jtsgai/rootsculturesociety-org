@@ -10,7 +10,7 @@ let client: SupabaseClient | undefined;
 export function getSupabase() {
   if (!isStudioConfigured || !url || !publishableKey) return undefined;
   client ??= createClient(url, publishableKey, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
   });
   return client;
 }
