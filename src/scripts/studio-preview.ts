@@ -1,10 +1,9 @@
-import { allSections, currentBook, currentMember, listMedia, listPeople, memberPdfDownloadEnabled, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
+import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
 
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const readiness = document.querySelector<HTMLElement>('[data-preview-readiness]');
-const pdfDownload = document.querySelector<HTMLButtonElement>('[data-preview-pdf-download]');
 const labels: Record<string, string> = {
   surname: '姓氏或家族线索', ancestralPlace: '祖籍地', story: '家中流传的故事', sources: '资料来源或待查线索',
   dialect: '方言群', hallName: '堂号', places: '祖屋、祖庙或会馆', notes: '补充说明',
@@ -95,8 +94,8 @@ function renderReadiness(book: Awaited<ReturnType<typeof currentBook>>, sections
   heading.textContent = missing.length ? '这是当前草稿' : '八个章节已准备好预览';
   const detail = document.createElement('p');
   detail.textContent = missing.length
-    ? `已标记完成 ${complete.length} / 8 章。还缺：${missing.map((step) => step.title).join('、')}。你仍可打印当前草稿，补完后再打印最终版本。`
-    : '八个章节都已标记完成。打印前仍建议逐页检查文字、图片与隐私内容。';
+    ? `已标记完成 ${complete.length} / 8 章。还缺：${missing.map((step) => step.title).join('、')}。你仍可继续检查当前草稿，补完后再整理最终版本。`
+    : '八个章节都已标记完成。仍建议逐页检查文字、图片与隐私内容。';
   readiness.append(heading, detail);
 }
 
@@ -165,8 +164,6 @@ document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventList
   window.location.assign('/studio/login');
 });
 
-pdfDownload?.addEventListener('click', () => window.print());
-
 void (async () => {
   try {
     const [member, book] = await Promise.all([currentMember(), currentBook()]);
@@ -174,11 +171,6 @@ void (async () => {
     if (member.status !== 'active') return report('此会员账户目前未启用；请联系学会确认会籍状态。');
     const signout = document.querySelector<HTMLButtonElement>('[data-studio-signout]');
     if (signout) signout.hidden = false;
-    try {
-      if (pdfDownload) pdfDownload.hidden = !(await memberPdfDownloadEnabled());
-    } catch {
-      if (pdfDownload) pdfDownload.hidden = true;
-    }
     await renderPreview(book.id);
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());

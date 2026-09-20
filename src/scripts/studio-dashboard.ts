@@ -5,7 +5,6 @@ import {
   currentBook,
   currentMember,
   isStudioConfigured,
-  memberPdfDownloadEnabled,
   signOut,
   studioUnavailableMessage,
 } from '../lib/studio';
@@ -19,7 +18,6 @@ const progressSummary = document.querySelector<HTMLElement>('[data-studio-progre
 const tools = document.querySelector<HTMLElement>('[data-studio-tools]');
 const aiBalance = document.querySelector<HTMLElement>('[data-ai-balance]');
 const aiStatus = document.querySelector<HTMLElement>('[data-ai-status]');
-const pdfLink = document.querySelector<HTMLAnchorElement>('[data-studio-pdf-link]');
 
 function report(message: string) {
   if (status) status.textContent = message;
@@ -38,11 +36,6 @@ async function loadTools() {
     if (aiBalance) aiBalance.textContent = String(quota.balance);
   } catch {
     if (aiStatus) aiStatus.textContent = '额度接口尚未启用。';
-  }
-  try {
-    if (pdfLink) pdfLink.hidden = !(await memberPdfDownloadEnabled());
-  } catch {
-    if (pdfLink) pdfLink.hidden = true;
   }
 }
 
