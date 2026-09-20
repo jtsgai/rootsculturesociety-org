@@ -9,11 +9,13 @@ interface Props {
 
 const { title, description = '会员专属的私密相册家谱。', area = 'member' } = Astro.props;
 const isAdmin = area === 'admin';
+const backHref = isAdmin ? '/' : '/studio';
+const backLabel = isAdmin ? '← 返回网站首页' : '← 我的相册家谱';
 ---
 <SiteLayout lang="zh" title={title} description={description} robots="noindex, nofollow" alternate={false}>
   <section class:list={['studio-shell', { 'studio-shell-admin': isAdmin }]}>
     <div class="studio-topline">
-      <a href={isAdmin ? '/' : '/membership'}>{isAdmin ? '← 返回网站首页' : '← 回到入会说明'}</a>
+      <a class="studio-back-link" href={backHref}>{backLabel}</a>
       <button class="studio-signout" type="button" data-studio-signout hidden>{isAdmin ? '退出管理员页面' : '退出谱坊'}</button>
     </div>
     <div class="studio-heading">

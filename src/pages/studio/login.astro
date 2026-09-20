@@ -10,6 +10,7 @@ import StudioFrame from '../../components/StudioFrame.astro';
     <form data-studio-login-form>
       <label>会员号 <small>Member ID</small><input name="memberId" autocomplete="username" placeholder="R1001" required /></label>
       <label>密码 <small>Password</small><input name="password" type="password" autocomplete="current-password" required /></label>
+      <label class="studio-remember"><input name="remember" type="checkbox" data-remember-session checked /> 在本设备保持登录</label>
       <button class="button" type="submit">进入我的相册家谱</button>
     </form>
     <p class="studio-status" aria-live="polite" data-studio-status></p>

@@ -1020,6 +1020,35 @@ html[lang='en'] .prose-column p {
   font: inherit;
   cursor: pointer;
 }
+.studio-back-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px !important;
+  border: 1px solid var(--maroon) !important;
+  color: var(--maroon) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+.studio-back-link:hover {
+  color: #fffaf3 !important;
+  background: var(--maroon);
+}
+.studio-remember {
+  display: flex !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 9px !important;
+  width: fit-content;
+  color: var(--muted) !important;
+  font-size: 0.84rem !important;
+}
+.studio-remember input {
+  width: 17px !important;
+  margin: 0;
+}
 .studio-heading {
   margin: 70px 0 38px;
 }
