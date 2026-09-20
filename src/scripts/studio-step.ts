@@ -89,16 +89,27 @@ function renderLineage(people: StudioPerson[]) {
     target.innerHTML = '<p class="studio-empty">加入族人后，这里会显示关系图。</p>';
     return;
   }
-  const sorted = [...people].sort((a, b) => a.generation_number - b.generation_number || a.name.localeCompare(b.name));
-  target.innerHTML = sorted.map((person) => {
-    const parents = [{ id: person.father_id, label: '父亲' }, { id: person.mother_id, label: '母亲' }].map((relation) => ({ ...relation, person: people.find((item) => item.id === relation.id) })).filter((relation) => relation.person) as { id: string; label: string; person: StudioPerson }[];
-    const spouse = people.find((item) => item.id === person.spouse_id);
-    const children = people.filter((item) => item.father_id === person.id || item.mother_id === person.id);
-    const parentLine = parents.length ? `<div class="lineage-parent-line"><span class="lineage-rule" aria-hidden="true"></span><span>${parents.map((parent) => `${parent.label}：${escapeHtml(parent.person.name)}`).join(' · ')}</span></div>` : '';
-    const spouseLine = spouse ? `<span class="lineage-spouse"><span class="lineage-rule" aria-hidden="true"></span>配偶：${escapeHtml(spouse.name)}</span>` : '';
-    const childrenLine = children.length ? `<div class="lineage-children-line"><span class="lineage-rule" aria-hidden="true"></span><span>子女：${children.map((child) => escapeHtml(child.name)).join('、')}</span></div>` : '';
-    return `<article class="lineage-family"><div class="lineage-generation-label">第 ${person.generation_number} 代</div>${parentLine}<div class="lineage-node-card"><strong>${escapeHtml(person.name)}</strong><small>${lifeStatus(person.life_status)}${person.birth_year ? ` · ${person.birth_year}` : ''}</small><div class="lineage-node-relations">${spouseLine || '<span class="lineage-unlinked">尚未填写配偶关系</span>'}</div></div>${childrenLine || '<div class="lineage-no-children">尚未填写子女关系</div>'}</article>`;
-  }).join('');
+  const generations = [...new Set(people.map((person) => person.generation_number))].sort((a, b) => a - b);
+  target.innerHTML = `<div class="lineage-architecture" aria-label="按世代和家庭支系排列的家谱关系图">${generations.map((generation, generationIndex) => {
+    const members = people.filter((person) => person.generation_number === generation).sort((a, b) => a.name.localeCompare(b.name));
+    const branches = new Map<string, StudioPerson[]>();
+    members.forEach((person) => {
+      const spouse = people.find((item) => item.id === person.spouse_id);
+      const branchId = spouse ? [person.id, spouse.id].sort().join(':') : person.id;
+      const branch = branches.get(branchId) ?? [];
+      if (!branch.some((item) => item.id === person.id)) branch.push(person);
+      if (spouse && !branch.some((item) => item.id === spouse.id)) branch.push(spouse);
+      branches.set(branchId, branch);
+    });
+    const branchCards = [...branches.values()].map((branch) => {
+      const parents = [...new Map(branch.flatMap((person) => [person.father_id, person.mother_id]).filter((id): id is string => Boolean(id)).map((id) => [id, people.find((person) => person.id === id)]).filter((entry): entry is [string, StudioPerson] => Boolean(entry[1]))).values()];
+      const children = people.filter((person) => branch.some((parent) => person.father_id === parent.id || person.mother_id === parent.id));
+      const parentLine = parents.length ? `<div class="lineage-branch-parents"><span>上一代</span>${parents.map((parent) => escapeHtml(parent.name)).join('、')}</div>` : '';
+      const childLine = children.length ? `<div class="lineage-branch-children"><span>下一代</span>${children.map((child) => escapeHtml(child.name)).join('、')}</div>` : '<div class="lineage-branch-children lineage-unlinked">下一代尚未填写</div>';
+      return `<article class="lineage-branch"><div class="lineage-family-pair">${branch.map((person) => `<div class="lineage-node-card"><strong>${escapeHtml(person.name)}</strong><small>${lifeStatus(person.life_status)}${person.birth_year ? ` · ${person.birth_year}` : ''}</small></div>`).join('')}</div>${parentLine}${childLine}</article>`;
+    }).join('');
+    return `<section class="lineage-generation" data-generation="${generation}"><div class="lineage-generation-heading"><span>第 ${generation} 代</span><small>${members.length} 位族人 · ${branches.size} 个家庭支系</small></div><div class="lineage-generation-grid">${branchCards}</div>${generationIndex < generations.length - 1 ? '<div class="lineage-generation-connector" aria-hidden="true"></div>' : ''}</section>`;
+  }).join('')}</div>`;
 }
 
 function escapeHtml(value: string) {

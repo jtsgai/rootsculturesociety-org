@@ -2020,10 +2020,91 @@ html[lang='en'] .prose-column p {
   scrollbar-color: var(--maroon) var(--paper-deep);
 }
 .studio-lineage-canvas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
+  display: block;
   min-width: min(100%, 680px);
+}
+.lineage-architecture {
+  display: grid;
+  gap: 22px;
+  min-width: 760px;
+}
+.lineage-generation {
+  position: relative;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
+}
+.lineage-generation-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--maroon);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+}
+.lineage-generation-heading small {
+  color: var(--muted);
+  font-size: 0.74rem;
+  letter-spacing: 0;
+}
+.lineage-generation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(210px, 1fr));
+  gap: 14px;
+  padding-top: 16px;
+}
+.lineage-branch {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  min-height: 150px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.lineage-family-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  position: relative;
+}
+.lineage-family-pair:only-child {
+  grid-template-columns: 1fr;
+}
+.lineage-branch .lineage-node-card {
+  margin: 0;
+  padding: 10px 11px;
+}
+.lineage-branch .lineage-node-card::before,
+.lineage-branch .lineage-node-card::after {
+  display: none;
+}
+.lineage-branch-parents,
+.lineage-branch-children {
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+.lineage-branch-parents span,
+.lineage-branch-children span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--maroon);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+.lineage-generation-connector {
+  position: absolute;
+  bottom: -23px;
+  left: 50%;
+  width: 1px;
+  height: 22px;
+  background: var(--maroon);
 }
 .lineage-family {
   position: relative;
