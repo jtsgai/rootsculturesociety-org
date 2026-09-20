@@ -1,12 +1,48 @@
 ---
 import StudioFrame from '../../components/StudioFrame.astro';
 ---
+
 <StudioFrame title="会员管理">
   <section class="studio-card" data-admin-members>
     <p>仅供学会资料管理员使用。系统会产生一次性的 8 位初始密码；请用 WhatsApp 或纸本交给会员，不要以共享邮箱寄送。</p>
-    <form class="studio-admin-form" data-admin-create-form><div class="studio-fields"><label>会员号 <input name="memberId" placeholder="R1001" required /></label><label>会员姓名 <input name="displayName" required /></label><label>联络电邮（可选）<input name="contactEmail" type="email" /></label><label>开始日期 <input name="startsOn" type="date" required /></label><label>结束日期 <input name="endsOn" type="date" required /></label></div><button class="button" type="submit">开通会员与初始密码</button></form>
-    <form class="studio-reset-form" data-admin-reset-form><label>会员号 <input name="memberId" placeholder="R1001" required /></label><button class="text-link" type="submit">重设初始密码</button></form>
-    <div class="studio-password-once" data-admin-password hidden><strong>只显示一次</strong><p><span data-admin-member-id></span> 的初始密码：<code data-admin-initial-password></code></p></div>
+    <form class="studio-admin-form" data-admin-create-form>
+      <div class="studio-fields">
+        <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label
+          >会员姓名 <input name="displayName" required /></label
+        ><label>联络电邮（可选）<input name="contactEmail" type="email" /></label><label
+          >开始日期 <input name="startsOn" type="date" required /></label
+        ><label>结束日期 <input name="endsOn" type="date" required /></label>
+      </div><button class="button" type="submit">开通会员与初始密码</button>
+    </form>
+    <form class="studio-reset-form" data-admin-reset-form>
+      <label>会员号 <input name="memberId" placeholder="R1001" required /></label><button
+        class="text-link"
+        type="submit">重设初始密码</button>
+    </form>
+    <div class="studio-password-once" data-admin-password hidden>
+      <strong>只显示一次</strong><p>
+        <span data-admin-member-id></span> 的初始密码：<code data-admin-initial-password></code>
+      </p>
+    </div>
+    <div class="studio-admin-credits">
+      <span class="eyebrow">AI CREDITS / AI 额度</span>
+      <h2>会费确认后发放额度</h2>
+      <p>这里只记录额度，不连接收款，也不会启用 AI 供应商。以后可按会员号发放、补回或调整额度。</p>
+      <form data-admin-credit-form>
+        <div class="studio-fields">
+          <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label
+            >额度 <input name="amount" type="number" min="1" step="1" required /></label
+          ><label
+            >记录类型 <select name="kind"
+              ><option value="grant">发放</option><option value="purchase">购买</option><option value="refund"
+                >补回</option
+              ><option value="adjustment">调整</option></select
+            ></label
+          ><label>备注（可选）<input name="note" placeholder="例如：2026 年会员额度" /></label>
+        </div>
+        <button class="button" type="submit">记录额度</button>
+      </form>
+    </div>
     <p class="studio-status" aria-live="polite" data-studio-status></p>
   </section>
 </StudioFrame>

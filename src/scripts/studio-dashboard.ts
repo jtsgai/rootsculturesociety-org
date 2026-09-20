@@ -1,12 +1,62 @@
-import { allSections, changeInitialPassword, currentBook, currentMember, signOut, studioUnavailableMessage } from '../lib/studio';
+import { getAiQuota } from '../lib/ai';
+import { listBookExports, requestBookExport, type BookExport } from '../lib/member-publication';
+import {
+  allSections,
+  changeInitialPassword,
+  currentBook,
+  currentMember,
+  isStudioConfigured,
+  signOut,
+  studioUnavailableMessage,
+} from '../lib/studio';
 
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const signout = document.querySelector<HTMLButtonElement>('[data-studio-signout]');
 const title = document.querySelector<HTMLElement>('[data-studio-book-title]');
 const memberName = document.querySelector<HTMLElement>('[data-studio-member-name]');
+const tools = document.querySelector<HTMLElement>('[data-studio-tools]');
+const aiBalance = document.querySelector<HTMLElement>('[data-ai-balance]');
+const aiStatus = document.querySelector<HTMLElement>('[data-ai-status]');
+const exportList = document.querySelector<HTMLElement>('[data-export-list]');
 
 function report(message: string) {
   if (status) status.textContent = message;
+}
+
+function exportLabel(exportItem: BookExport) {
+  const format = exportItem.format === 'pdf' ? 'PDF' : '网页预览';
+  const state = { queued: '排队中', running: '生成中', ready: '已完成', failed: '失败' }[exportItem.status];
+  return `${format} · ${state}`;
+}
+
+function renderExports(items: BookExport[]) {
+  if (!exportList) return;
+  exportList.replaceChildren();
+  if (!items.length) {
+    exportList.textContent = '尚未请求导出。';
+    return;
+  }
+  items.slice(0, 4).forEach((item) => {
+    const row = document.createElement('p');
+    row.textContent = exportLabel(item);
+    exportList.append(row);
+  });
+}
+
+async function loadTools(bookId: string) {
+  if (!isStudioConfigured || !tools) return;
+  tools.hidden = false;
+  try {
+    const quota = await getAiQuota();
+    if (aiBalance) aiBalance.textContent = String(quota.balance);
+  } catch {
+    if (aiStatus) aiStatus.textContent = '额度接口尚未启用。';
+  }
+  try {
+    renderExports(await listBookExports(bookId));
+  } catch {
+    if (exportList) exportList.textContent = '导出接口尚未启用。';
+  }
 }
 
 async function boot() {
@@ -25,12 +75,32 @@ async function boot() {
       if (label) label.textContent = done.has(method) ? '已保存' : '未开始';
       item.classList.toggle('is-complete', done.has(method));
     });
+    await loadTools(book.id);
     const passwordPanel = document.querySelector<HTMLElement>('[data-password-change]');
     if (passwordPanel) passwordPanel.hidden = !member.must_change_password;
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());
   }
 }
+
+document.querySelectorAll<HTMLButtonElement>('[data-export-format]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const book = await currentBook();
+    const format = button.dataset.exportFormat;
+    if (!book || (format !== 'web' && format !== 'pdf')) return;
+    button.disabled = true;
+    report('正在提交导出请求…');
+    try {
+      await requestBookExport(book.id, format);
+      renderExports(await listBookExports(book.id));
+      report('导出请求已记录；完成后会显示状态。');
+    } catch (error) {
+      report(error instanceof Error ? error.message : '无法提交导出请求。');
+    } finally {
+      button.disabled = false;
+    }
+  });
+});
 
 signout?.addEventListener('click', async () => {
   await signOut();

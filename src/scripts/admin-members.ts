@@ -1,3 +1,4 @@
+import { grantAiCreditsByMemberId, type AiCreditKind } from '../lib/admin';
 import { getSupabase, isStudioConfigured } from '../lib/supabase';
 import { currentProfile, studioUnavailableMessage } from '../lib/studio';
 
@@ -33,7 +34,9 @@ document.querySelector<HTMLFormElement>('[data-admin-create-form]')?.addEventLis
     const result = await callAdmin('create', values);
     showPassword(result);
     report('会员已经开通。请在离开本页前安全交付这组一次性密码。');
-  } catch (error) { report(error instanceof Error ? error.message : '无法开通会员。'); }
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法开通会员。');
+  }
 });
 
 document.querySelector<HTMLFormElement>('[data-admin-reset-form]')?.addEventListener('submit', async (event) => {
@@ -44,12 +47,34 @@ document.querySelector<HTMLFormElement>('[data-admin-reset-form]')?.addEventList
     const result = await callAdmin('reset-password', values);
     showPassword(result);
     report('密码已重设。请安全交付这组一次性密码。');
-  } catch (error) { report(error instanceof Error ? error.message : '无法重设密码。'); }
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法重设密码。');
+  }
+});
+
+document.querySelector<HTMLFormElement>('[data-admin-credit-form]')?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget as HTMLFormElement;
+  const values = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+  try {
+    const balance = await grantAiCreditsByMemberId(
+      values.memberId,
+      Number(values.amount),
+      values.kind as AiCreditKind,
+      values.note
+    );
+    report(`额度已记录。该会员当前余额：${balance}。`);
+    form.reset();
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法记录额度。');
+  }
 });
 
 void (async () => {
   try {
     const profile = await currentProfile();
     if (!profile || profile.role !== 'admin') report('此页面仅供学会资料管理员使用。');
-  } catch (error) { report(error instanceof Error ? error.message : studioUnavailableMessage()); }
+  } catch (error) {
+    report(error instanceof Error ? error.message : studioUnavailableMessage());
+  }
 })();
