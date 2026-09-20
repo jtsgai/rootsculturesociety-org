@@ -173,6 +173,83 @@ export async function uploadImage(bookId: string, file: File, folder = 'images')
   return path;
 }
 
+type DecodedImage = { source: CanvasImageSource; width: number; height: number; close?: () => void };
+type NormalizedImage = { original: File; display: File; thumb: File };
+
+async function decodeImage(file: File): Promise<DecodedImage> {
+  try {
+    const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    return { source: bitmap, width: bitmap.width, height: bitmap.height, close: () => bitmap.close() };
+  } catch {
+    const url = URL.createObjectURL(file);
+    try {
+      const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const element = new Image();
+        element.onload = () => resolve(element);
+        element.onerror = () => reject(new Error('无法读取这张图片。'));
+        element.src = url;
+      });
+      return { source: image, width: image.naturalWidth, height: image.naturalHeight };
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+}
+
+function encodeJpeg(source: DecodedImage, maxEdge: number, initialQuality: number, targetBytes: number, fileName: string) {
+  const scale = Math.min(1, maxEdge / Math.max(source.width, source.height));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(1, Math.round(source.width * scale));
+  canvas.height = Math.max(1, Math.round(source.height * scale));
+  const context = canvas.getContext('2d');
+  if (!context) throw new Error('当前浏览器无法处理图片。');
+  context.fillStyle = '#fffaf3';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(source.source, 0, 0, canvas.width, canvas.height);
+
+  return new Promise<File>((resolve, reject) => {
+    let quality = initialQuality;
+    const render = () => canvas.toBlob((blob) => {
+      if (!blob) return reject(new Error('无法生成图片预览。'));
+      if (blob.size > targetBytes && quality > 0.52) {
+        quality -= 0.08;
+        render();
+        return;
+      }
+      resolve(new File([blob], fileName, { type: 'image/jpeg', lastModified: Date.now() }));
+    }, 'image/jpeg', quality);
+    render();
+  });
+}
+
+async function normalizeImage(file: File): Promise<NormalizedImage> {
+  const source = await decodeImage(file);
+  try {
+    const [display, thumb] = await Promise.all([
+      encodeJpeg(source, 2400, 0.84, 2 * 1024 * 1024, 'display.jpg'),
+      encodeJpeg(source, 720, 0.78, 450 * 1024, 'thumb.jpg'),
+    ]);
+    return { original: file, display, thumb };
+  } finally {
+    source.close?.();
+  }
+}
+
+function originalExtension(file: File) {
+  return file.type === 'image/png' ? 'png' : file.type === 'image/webp' ? 'webp' : 'jpg';
+}
+
+function variantPath(originalPath: string, variant: 'display.jpg' | 'thumb.jpg') {
+  const marker = originalPath.lastIndexOf('/original.');
+  return marker === -1 ? null : `${originalPath.slice(0, marker)}/${variant}`;
+}
+
+async function uploadStorageFile(path: string, file: File) {
+  const client = requireClient();
+  const { error } = await client.storage.from('genealogy-media').upload(path, file, { contentType: file.type, upsert: false });
+  if (error) throw error;
+}
+
 export async function listMedia(bookId: string, method: number): Promise<StudioMedia[]> {
   const { data, error } = await requireClient()
     .from('studio_media')
@@ -184,7 +261,7 @@ export async function listMedia(bookId: string, method: number): Promise<StudioM
   const media = (data ?? []) as StudioMedia[];
   return Promise.all(media.map(async (item) => ({
     ...item,
-    signed_url: await signedMediaUrl(item.storage_path),
+    signed_url: await signedPreviewUrl(item.storage_path),
   })));
 }
 
@@ -194,21 +271,46 @@ export async function signedMediaUrl(path: string) {
   return data.signedUrl;
 }
 
+async function signedPreviewUrl(originalPath: string) {
+  const displayPath = variantPath(originalPath, 'display.jpg');
+  if (!displayPath) return signedMediaUrl(originalPath);
+  try {
+    return await signedMediaUrl(displayPath);
+  } catch {
+    // Rows created before normalization continue to use their original path.
+    return signedMediaUrl(originalPath);
+  }
+}
+
 export async function uploadMedia(bookId: string, method: number, file: File, caption: string | null = null) {
   const client = requireClient();
   const { data: { user } } = await client.auth.getUser();
   if (!user) throw new Error('请先登录。');
-  const path = await uploadImage(bookId, file, `method-${method}`);
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('请上传 JPG、PNG 或 WebP 图片。');
+  if (file.size > 10 * 1024 * 1024) throw new Error('原始图片不能超过 10MB。');
+  const normalized = await normalizeImage(file);
+  const base = `${user.id}/${bookId}/method-${method}/${crypto.randomUUID()}`;
+  const originalPath = `${base}/original.${originalExtension(file)}`;
+  const displayPath = `${base}/display.jpg`;
+  const thumbPath = `${base}/thumb.jpg`;
+  const uploadedPaths: string[] = [];
   const { data, error } = await client
     .from('studio_media')
-    .insert({ book_id: bookId, member_id: user.id, method, storage_path: path, caption })
+    .insert({ book_id: bookId, member_id: user.id, method, storage_path: originalPath, caption })
     .select('id, book_id, member_id, method, storage_path, caption, kind, created_at, updated_at')
     .single();
-  if (error) {
-    await client.storage.from('genealogy-media').remove([path]);
-    throw error;
+  if (error) throw error;
+  try {
+    for (const [path, image] of [[originalPath, normalized.original], [displayPath, normalized.display], [thumbPath, normalized.thumb]] as const) {
+      await uploadStorageFile(path, image);
+      uploadedPaths.push(path);
+    }
+    return { ...(data as StudioMedia), signed_url: await signedMediaUrl(displayPath) };
+  } catch (uploadError) {
+    await client.from('studio_media').delete().eq('id', data.id);
+    if (uploadedPaths.length) await client.storage.from('genealogy-media').remove(uploadedPaths);
+    throw uploadError;
   }
-  return { ...(data as StudioMedia), signed_url: await signedMediaUrl(path) };
 }
 
 export async function updateMediaCaption(id: string, caption: string | null) {
@@ -220,7 +322,8 @@ export async function removeMedia(media: StudioMedia) {
   const client = requireClient();
   const { error } = await client.from('studio_media').delete().eq('id', media.id);
   if (error) throw error;
-  const { error: storageError } = await client.storage.from('genealogy-media').remove([media.storage_path]);
+  const paths = [media.storage_path, variantPath(media.storage_path, 'display.jpg'), variantPath(media.storage_path, 'thumb.jpg')].filter((path): path is string => Boolean(path));
+  const { error: storageError } = await client.storage.from('genealogy-media').remove(paths);
   if (storageError) throw storageError;
 }
 

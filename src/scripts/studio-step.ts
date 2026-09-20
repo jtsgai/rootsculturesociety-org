@@ -349,12 +349,12 @@ document.querySelector<HTMLInputElement>('[data-media-input]')?.addEventListener
   try {
     input.disabled = true;
     for (const file of Array.from(input.files)) {
-      if (mediaStatus) mediaStatus.textContent = `正在保存 ${file.name}…`;
+      if (mediaStatus) mediaStatus.textContent = `正在校正方向并压缩 ${file.name}…`;
       await uploadMedia(bookId, method, file);
     }
     input.value = '';
     await loadMedia();
-    if (mediaStatus) mediaStatus.textContent = '图片已保存，默认只对你和学会资料管理员可见。';
+    if (mediaStatus) mediaStatus.textContent = '图片已标准化保存：原件、展示版和缩略版均只对你和学会资料管理员可见。';
   } catch (error) {
     if (mediaStatus) mediaStatus.textContent = error instanceof Error ? error.message : '无法保存图片。';
   } finally {
