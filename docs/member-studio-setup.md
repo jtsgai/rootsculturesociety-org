@@ -45,9 +45,11 @@ This adds the private interfaces needed for the next member phase:
 - web/PDF export records, so the finished book can later have both a private web preview and a PDF export;
 - a private `genealogy-ai` storage bucket for intermediate and generated files.
 
-The member-side helpers in `src/lib/member-publication.ts` provide the future UI with three stable actions: request a web/PDF export, read export status, and submit one selected chapter for publication. They only create database records; no export worker or public review action is implied by these helpers.
+The member-side helpers in `src/lib/member-publication.ts` provide three stable actions: request a web/PDF export, read export status, and submit one selected chapter for publication. The current UI exposes chapter requests at `/studio/publish`, administrator review at `/admin/stories`, and renders only rows with `status = 'published'` on the public Stories page. The member submits a separate public title and summary; the private chapter is not copied into the public story record.
 
-The database interface is prepared, but no AI provider, payment provider, export worker, or public-story review workflow is enabled yet. The Edge Function `supabase/functions/ai-assist` returns “AI assistance is not enabled yet” while its adapter list is empty, and therefore does not reserve or consume credits.
+The current public-story workflow does not publish private uploaded media. The request form deliberately sends no private media paths, so approving a story cannot make a private image visible by accident. A later release may add explicit media selection and a separate public copy after the Society approves its retention and deletion rules.
+
+The database interface is prepared, but no AI provider, payment provider, or server-side export worker is enabled yet. The Edge Function `supabase/functions/ai-assist` returns “AI assistance is not enabled yet” while its adapter list is empty, and therefore does not reserve or consume credits. Members can currently use the private browser preview and choose “Print → Save as PDF”; this is a local browser export, not a server-generated file.
 
 When the Society later chooses a provider, put `AI_PROVIDER` and the provider's API key only in Supabase Edge Function secrets. Never put provider keys in browser code, GitHub Pages, `.env`, or a Git commit. The current interface cost defaults are cover 3 credits, restoration 2, prompt 1, and research 1; these are implementation defaults, not prices.
 
@@ -67,7 +69,7 @@ The deployment workflow injects them only while building. After the next success
 - One member has one private book.
 - Generation 1 is the first ancestor who settled in Singapore.
 - Phone and address are kept in Method 8 and are not public.
-- No NRIC field, public self-registration, payment integration, active PDF/web export worker, active AI provider, or multi-editor account exists in this phase. The data tables and client/Edge Function interfaces for later export, chapter publication, and metered AI are prepared but disabled.
+- No NRIC field, public self-registration, payment integration, active server-side PDF/web export worker, active AI provider, or multi-editor account exists in this phase. The data tables and client/Edge Function interfaces for later export and metered AI are prepared; the chapter publication review flow is enabled but intentionally text-only until public media handling is approved.
 - Membership must be active and within its dates to write books or upload images.
 - Initial and reset passwords are eight characters, shown once by the administrator function, and not logged or emailed.
 
