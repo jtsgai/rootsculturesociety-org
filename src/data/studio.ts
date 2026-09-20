@@ -17,7 +17,7 @@ export const studioSteps: StudioStep[] = [
   { method: 5, slug: '5-lineage', title: '世系', english: 'Lineage', guidance: '先加最确定的人。第一代是最早在新加坡落地生根的祖先；不限代数，可继续加入族人，并按父母、母亲或配偶关系连接；电话与地址不在此页记录。', type: 'people' },
   { method: 6, slug: '6-childhood', title: '童年', english: 'Childhood', guidance: '记下在新加坡成长的年代、地点和一两件真实的小事。', type: 'notes' },
   { method: 7, slug: '7-dishes', title: '家肴', english: 'Family dishes', guidance: '一道菜也能带出一段家族记忆：写下名字、材料、做法或是谁教会你的。', type: 'notes' },
-  { method: 8, slug: '8-register', title: '族人资料', english: 'Family register', guidance: '在世系基础上补充职业、教育；电话与地址仅你本人和学会资料管理员可见。', type: 'register' },
+  { method: 8, slug: '8-register', title: '族人资料', english: 'Family register', guidance: '在世系基础上补充职业、教育；联络资料只用于整理家谱。', type: 'register' },
 ];
 
 export const studioStepBySlug = new Map(studioSteps.map((step) => [step.slug, step]));

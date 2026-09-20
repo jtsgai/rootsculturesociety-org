@@ -191,7 +191,7 @@ function renderMedia(items: StudioMedia[]) {
     } else {
       const unavailable = document.createElement('p');
       unavailable.className = 'studio-media-unavailable';
-      unavailable.textContent = '这张旧图片尚未生成展示版。为保护原件，会员端暂不显示；请重新上传，或请管理员处理。';
+      unavailable.textContent = '这张旧图片尚未生成展示版，请重新上传一次即可继续使用。';
       card.append(unavailable);
     }
     const controls = document.createElement('div');
@@ -405,7 +405,7 @@ document.querySelector<HTMLInputElement>('[data-media-input]')?.addEventListener
     }
     input.value = '';
     await loadMedia();
-    if (mediaStatus) mediaStatus.textContent = '图片已标准化保存：原件、展示版和缩略版均只对你和学会资料管理员可见。';
+    if (mediaStatus) mediaStatus.textContent = '图片已标准化保存：展示图已自动校正方向并压缩。';
   } catch (error) {
     if (mediaStatus) mediaStatus.textContent = error instanceof Error ? error.message : '无法保存图片。';
   } finally {
