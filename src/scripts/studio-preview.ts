@@ -3,6 +3,8 @@ import { studioSteps } from '../data/studio';
 
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
+const readiness = document.querySelector<HTMLElement>('[data-preview-readiness]');
+const printButton = document.querySelector<HTMLButtonElement>('[data-print-preview]');
 const labels: Record<string, string> = {
   surname: '姓氏或家族线索', ancestralPlace: '祖籍地', story: '家中流传的故事', sources: '资料来源或待查线索',
   dialect: '方言群', hallName: '堂号', places: '祖屋、祖庙或会馆', notes: '补充说明',
@@ -72,10 +74,37 @@ function renderPeople(parent: HTMLElement, people: StudioPerson[]) {
   });
 }
 
+function completeMethods(book: Awaited<ReturnType<typeof currentBook>>, sections: Awaited<ReturnType<typeof allSections>>, people: StudioPerson[]) {
+  const sectionMap = new Map(sections.map((section) => [section.method, section]));
+  return studioSteps.filter((step) => {
+    if (step.method === 1) return Boolean(book?.title && book.generation_one_ancestor && book.consent_at && sectionMap.get(1)?.is_complete);
+    if (step.method === 5) return people.length > 0;
+    if (step.method === 8) return people.length > 0 && Boolean(sectionMap.get(8)?.is_complete);
+    return Boolean(sectionMap.get(step.method)?.is_complete);
+  });
+}
+
+function renderReadiness(book: Awaited<ReturnType<typeof currentBook>>, sections: Awaited<ReturnType<typeof allSections>>, people: StudioPerson[]) {
+  if (!readiness) return;
+  const complete = completeMethods(book, sections, people);
+  const missing = studioSteps.filter((step) => !complete.some((item) => item.method === step.method));
+  readiness.replaceChildren();
+  readiness.classList.toggle('is-ready', missing.length === 0);
+  const heading = document.createElement('strong');
+  heading.textContent = missing.length ? '这是当前草稿' : '八个章节已准备好预览';
+  const detail = document.createElement('p');
+  detail.textContent = missing.length
+    ? `已标记完成 ${complete.length} / 8 章。还缺：${missing.map((step) => step.title).join('、')}。你仍可打印当前草稿，补完后再打印最终版本。`
+    : '八个章节都已标记完成。打印前仍建议逐页检查文字、图片与隐私内容。';
+  readiness.append(heading, detail);
+  if (printButton) printButton.textContent = missing.length ? '打印当前草稿 / PDF' : '打印 / 保存 PDF';
+}
+
 async function renderPreview(bookId: string) {
   if (!target) return;
   const [book, sections, people] = await Promise.all([currentBook(), allSections(bookId), listPeople(bookId, { includeSensitive: true })]);
   if (!book) throw new Error('找不到你的相册家谱。');
+  renderReadiness(book, sections, people);
   target.replaceChildren();
   const cover = document.createElement('header');
   cover.className = 'preview-cover page-break-after';

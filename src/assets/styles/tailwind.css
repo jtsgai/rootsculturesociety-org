@@ -1390,6 +1390,25 @@ html[lang='en'] .prose-column p {
   display: grid;
   gap: 8px;
 }
+.studio-preview-readiness {
+  margin: 0 0 24px;
+  padding: 18px 22px;
+  border-left: 3px solid var(--maroon);
+  background: var(--paper-deep);
+}
+.studio-preview-readiness.is-ready {
+  border-left-color: #38623e;
+}
+.studio-preview-readiness strong {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.studio-preview-readiness p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
 .studio-preview-book {
   overflow: hidden;
   background: #fffaf3;
