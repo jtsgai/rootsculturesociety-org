@@ -12,6 +12,22 @@ function report(message: string) {
   if (status) status.textContent = message;
 }
 
+function setSaveState(form: HTMLFormElement, complete: boolean, label: string) {
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  if (!button) return;
+  button.textContent = label;
+  button.classList.toggle('is-complete', complete);
+}
+
+function watchForEdits(form: HTMLFormElement, defaultLabel: string) {
+  form.addEventListener('input', () => {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!button?.classList.contains('is-complete')) return;
+    button.textContent = defaultLabel === '保存封面' ? '保存修改' : '保存这一章';
+    button.classList.remove('is-complete');
+  });
+}
+
 function stringOrNull(value: FormDataEntryValue | null) {
   const string = String(value ?? '').trim();
   return string || null;
@@ -214,6 +230,8 @@ async function fillSavedContent() {
     Object.entries(fields).forEach(([name, value]) => { const field = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null; if (field) field.value = value ?? ''; });
     const consent = form.elements.namedItem('consent') as HTMLInputElement | null;
     if (consent) consent.checked = Boolean(book?.consent_at);
+    setSaveState(form, Boolean(book?.consent_at), book?.consent_at ? '已完成' : '保存封面');
+    watchForEdits(form, '保存封面');
   }
   if (type === 'notes' && form) {
     renderStructuredFields(method, content);
@@ -223,6 +241,8 @@ async function fillSavedContent() {
     if (notes) notes.value = String(content.notes ?? '');
     if (imageNotes) imageNotes.value = String(content.imageNotes ?? '');
     if (complete) complete.checked = Boolean(section?.is_complete);
+    setSaveState(form, Boolean(section?.is_complete), section?.is_complete ? '已完成' : '保存这一章');
+    watchForEdits(form, '保存这一章');
   }
 }
 
@@ -257,9 +277,12 @@ document.querySelector<HTMLFormElement>('[data-section-form]')?.addEventListener
       if (!title || !ancestor || !data.get('consent')) throw new Error('请填写书名、开族始祖，并确认已取得资料授权。');
       await saveBook(bookId, { title, generation_one_ancestor: ancestor, dialect_group: stringOrNull(data.get('dialect')), ancestral_place: stringOrNull(data.get('ancestralPlace')), dedication: stringOrNull(data.get('dedication')), consent_at: new Date().toISOString() });
       await saveSection(bookId, method, { dialect: stringOrNull(data.get('dialect')) ?? '', ancestralPlace: stringOrNull(data.get('ancestralPlace')) ?? '', dedication: stringOrNull(data.get('dedication')) ?? '' }, true);
+      setSaveState(form, true, '已完成');
     } else {
       const content = structuredContent(form);
-      await saveSection(bookId, method, content, Boolean(data.get('complete')));
+      const complete = Boolean(data.get('complete'));
+      await saveSection(bookId, method, content, complete);
+      setSaveState(form, complete, complete ? '已完成' : '保存这一章');
     }
     report('已保存。你可以继续补充，资料不会公开显示。');
   } catch (error) {
@@ -314,6 +337,12 @@ document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('sub
     if (previousSpouseId && previousSpouseId !== spouseId) await updatePerson(previousSpouseId, { spouse_id: null });
     if (spouseId && spouseId !== previousSpouseId) await updatePerson(spouseId, { spouse_id: person.id });
     renderPeople(await listPeople(bookId));
+    const savedForm = document.querySelector<HTMLFormElement>(`[data-person-edit="${person.id}"]`);
+    const saveButton = savedForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (saveButton) {
+      saveButton.textContent = '已完成';
+      saveButton.classList.add('is-complete');
+    }
     report('人物与关系已保存。');
   } catch (error) {
     report(error instanceof Error ? error.message : '无法保存人物与关系。');
@@ -343,6 +372,11 @@ document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('s
     const values = new FormData(form);
     await updatePerson(form.dataset.registerPerson, { occupation: stringOrNull(values.get('occupation')), education: stringOrNull(values.get('education')), phone: stringOrNull(values.get('phone')), address: stringOrNull(values.get('address')) });
     await saveSection(bookId, method, {}, true);
+    const saveButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (saveButton) {
+      saveButton.textContent = '已完成';
+      saveButton.classList.add('is-complete');
+    }
     report('族人资料已保存。');
   } catch (error) {
     report(error instanceof Error ? error.message : '无法保存。');
@@ -407,7 +441,15 @@ void (async () => {
     if (!(await ensureMember())) return;
     await fillSavedContent();
     if (type === 'people') renderPeople(await listPeople(bookId));
-    if (type === 'register') renderPeople(await listPeople(bookId, { includeSensitive: true }), true);
+    if (type === 'register') {
+      renderPeople(await listPeople(bookId, { includeSensitive: true }), true);
+      if ((await getSection(bookId, method))?.is_complete) {
+        document.querySelectorAll<HTMLButtonElement>('[data-register-list] button[type="submit"]').forEach((button) => {
+          button.textContent = '已完成';
+          button.classList.add('is-complete');
+        });
+      }
+    }
     await loadMedia();
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());

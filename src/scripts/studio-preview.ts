@@ -123,6 +123,7 @@ async function renderPreview(bookId: string) {
     if (step.method === 1 || (!section && step.method !== 5) || (step.method === 5 && !people.length)) continue;
     const article = document.createElement('article');
     article.className = 'preview-chapter page-break-before';
+    article.id = `chapter-${step.method}`;
     const kicker = document.createElement('span');
     kicker.className = 'eyebrow';
     kicker.textContent = `${String(step.method).padStart(2, '0')} / ${step.english}`;
@@ -156,6 +157,9 @@ async function renderPreview(bookId: string) {
       // A missing private media table or expired signed URL must not block text preview.
     }
     target.append(article);
+  }
+  if (window.location.hash) {
+    document.querySelector(window.location.hash)?.scrollIntoView({ block: 'start' });
   }
 }
 
