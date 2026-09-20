@@ -2,31 +2,48 @@
 import StudioFrame from '../../components/StudioFrame.astro';
 ---
 
-<StudioFrame title="会员管理">
-  <section class="studio-card" data-admin-members>
-    <p>仅供学会资料管理员使用。系统会产生一次性的 8 位初始密码；请用 WhatsApp 或纸本交给会员，不要以共享邮箱寄送。</p>
-    <form class="studio-admin-form" data-admin-create-form>
+<StudioFrame title="会员管理" description="开通会籍及管理会员私密联络资料。" area="admin">
+  <section class="studio-card admin-console" data-admin-members>
+    <div class="admin-console-intro">
+      <div>
+        <span class="admin-section-label">会籍资料</span>
+        <h2>开通一位会员的相册家谱</h2>
+      </div>
+      <p>一位会员对应一本私密相册家谱。电邮及手机号码为必填资料，仅用于学会会务联络，绝不出现在公开网站。</p>
+    </div>
+    <section class="admin-panel admin-provision" aria-labelledby="admin-create-title">
+      <h3 id="admin-create-title">新会员</h3>
+      <p>系统会产生一次性的 8 位初始密码；请用 WhatsApp 或纸本交给会员，不要以电邮发送密码。</p>
+      <form class="studio-admin-form" data-admin-create-form>
       <div class="studio-fields">
         <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label
           >会员姓名 <input name="displayName" required /></label
-        ><label>联络电邮（可选）<input name="contactEmail" type="email" /></label><label
+        ><label>联络电邮 <input name="contactEmail" type="email" autocomplete="email" required /></label><label
+          >手机号码 <input name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="例如：9272 8933" required /></label><label
           >开始日期 <input name="startsOn" type="date" required /></label
         ><label>结束日期 <input name="endsOn" type="date" required /></label>
       </div><button class="button" type="submit">开通会员与初始密码</button>
-    </form>
-    <form class="studio-reset-form" data-admin-reset-form>
-      <label>会员号 <input name="memberId" placeholder="R1001" required /></label><button
-        class="text-link"
-        type="submit">重设初始密码</button>
-    </form>
+      </form>
+    </section>
     <div class="studio-password-once" data-admin-password hidden>
       <strong>只显示一次</strong><p>
         <span data-admin-member-id></span> 的初始密码：<code data-admin-initial-password></code>
       </p>
     </div>
-    <div class="studio-admin-credits">
-      <span class="eyebrow">AI CREDITS / AI 额度</span>
-      <h2>会费确认后发放额度</h2>
+    <div class="admin-management-grid">
+      <section class="admin-panel admin-reset-panel">
+        <span class="admin-section-label">账户安全</span>
+        <h3>重设会员初始密码</h3>
+        <p>重设后，旧密码立即失效；新密码只会在这里显示一次。</p>
+        <form class="studio-reset-form" data-admin-reset-form>
+          <label>会员号 <input name="memberId" placeholder="R1001" required /></label><button
+            class="text-link"
+            type="submit">重设初始密码</button>
+        </form>
+      </section>
+      <section class="admin-panel admin-credit-panel">
+        <span class="admin-section-label">AI CREDITS / AI 额度</span>
+        <h3>会费确认后发放额度</h3>
       <p>这里只记录额度，不连接收款，也不会启用 AI 供应商。以后可按会员号发放、补回或调整额度。</p>
       <form data-admin-credit-form>
         <div class="studio-fields">
@@ -42,7 +59,20 @@ import StudioFrame from '../../components/StudioFrame.astro';
         </div>
         <button class="button" type="submit">记录额度</button>
       </form>
+      </section>
     </div>
+    <section class="admin-roster" aria-labelledby="admin-roster-title">
+      <div class="admin-roster-heading">
+        <div><span class="admin-section-label">私密名册</span><h3 id="admin-roster-title">现有会员</h3></div>
+        <button class="text-link" type="button" data-admin-refresh>刷新名册</button>
+      </div>
+      <div class="admin-roster-wrap">
+        <table>
+          <thead><tr><th>会员</th><th>联络资料</th><th>会籍有效期</th><th>状态</th></tr></thead>
+          <tbody data-admin-member-list><tr><td colspan="4">正在读取会员资料…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
     <p class="studio-status" aria-live="polite" data-studio-status></p>
   </section>
 </StudioFrame>

@@ -42,6 +42,15 @@ export async function signInAdmin(email: string, password: string) {
   }
 }
 
+export async function requestAdminPasswordReset(email: string) {
+  const administratorEmail = email.trim();
+  if (!administratorEmail) throw new Error('请先填写管理员电邮。');
+  const { error } = await requireClient().auth.resetPasswordForEmail(administratorEmail, {
+    redirectTo: `${window.location.origin}/admin/login`,
+  });
+  if (error) throw new Error('无法寄出设置密码邮件，请稍后重试。');
+}
+
 export async function setCurrentPassword(password: string) {
   if (password.length < 12) throw new Error('新密码至少需要 12 个字符。');
   const { error } = await requireClient().auth.updateUser({ password });

@@ -1,9 +1,13 @@
 import { getSupabase, isStudioConfigured } from '../lib/supabase';
-import { currentProfile, setCurrentPassword, signInAdmin, studioUnavailableMessage } from '../lib/studio';
+import { currentProfile, requestAdminPasswordReset, setCurrentPassword, signInAdmin, studioUnavailableMessage } from '../lib/studio';
 
 const signInForm = document.querySelector<HTMLFormElement>('[data-admin-signin-form]');
 const passwordForm = document.querySelector<HTMLFormElement>('[data-admin-password-form]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
+// Capture this before Supabase creates its client: the client consumes and clears
+// the recovery hash while establishing the session.
+const authLinkType = new URLSearchParams(window.location.hash.slice(1)).get('type');
+const isPasswordSetupLink = authLinkType === 'invite' || authLinkType === 'recovery';
 
 function report(message: string) {
   if (status) status.textContent = message;
@@ -25,7 +29,6 @@ async function inspectInviteSession() {
     await client.auth.signOut();
     return;
   }
-  const isPasswordSetupLink = window.location.hash.includes('type=invite') || window.location.hash.includes('type=recovery');
   if (isPasswordSetupLink) {
     showPasswordSetup();
     report('链接已确认，请设置管理员密码。');
@@ -42,6 +45,18 @@ signInForm?.addEventListener('submit', async (event) => {
     report('正在验证管理员账户…');
     await signInAdmin(values.email, values.password);
     window.location.assign('/admin/members');
+  } catch (error) {
+    report(error instanceof Error ? error.message : studioUnavailableMessage());
+  }
+});
+
+document.querySelector<HTMLButtonElement>('[data-admin-password-reset]')?.addEventListener('click', async () => {
+  const email = signInForm?.elements.namedItem('email');
+  const administratorEmail = email instanceof HTMLInputElement ? email.value : '';
+  try {
+    report('正在寄出设置密码邮件…');
+    await requestAdminPasswordReset(administratorEmail);
+    report('已寄出。请打开最新的一封「Reset your password」邮件，并由该链接设置新密码。');
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());
   }

@@ -2,16 +2,19 @@
 import StudioFrame from '../../components/StudioFrame.astro';
 ---
 
-<StudioFrame title="管理员入口" description="学会资料管理员专用入口。">
-  <section class="studio-card studio-login" data-admin-login>
-    <p class="studio-note">这里是学会资料管理员入口，不是会员谱坊。</p>
+<StudioFrame title="管理员登录" description="学会资料管理员专用入口。" area="admin">
+  <section class="studio-card studio-login admin-login-card" data-admin-login>
+    <span class="admin-section-label">受限入口</span>
+    <p class="studio-note">这里是学会资料管理员入口，不是会员谱坊。管理员可开通会员、查看会籍联络资料及记录 AI 额度。</p>
     <form data-admin-signin-form>
       <label>管理员电邮 <input name="email" type="email" autocomplete="email" required value="rocktt2013@gmail.com" /></label>
       <label>密码 <input name="password" type="password" autocomplete="current-password" required /></label>
       <button class="button" type="submit">进入管理员页面</button>
+      <button class="admin-recovery-link" type="button" data-admin-password-reset>忘记密码？重新发送设置密码邮件</button>
     </form>
     <form data-admin-password-form hidden>
-      <p class="studio-note">邀请已确认。请先设置一个至少 12 个字符的新密码。</p>
+      <span class="admin-section-label">设置密码</span>
+      <p class="studio-note">链接已确认。请设置一个至少 12 个字符的新密码；保存后才会进入会员管理。</p>
       <label>新密码 <input name="password" type="password" minlength="12" autocomplete="new-password" required /></label>
       <label>再次输入新密码 <input name="passwordAgain" type="password" minlength="12" autocomplete="new-password" required /></label>
       <button class="button" type="submit">保存密码并进入</button>

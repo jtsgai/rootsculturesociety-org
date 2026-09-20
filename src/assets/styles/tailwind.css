@@ -1278,6 +1278,167 @@ html[lang='en'] .prose-column p {
 .studio-admin-form {
   max-width: 760px;
 }
+.studio-shell-admin {
+  max-width: 1180px;
+}
+.admin-login-card {
+  position: relative;
+  padding-top: 42px;
+}
+.admin-recovery-link {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 0;
+  color: var(--maroon);
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  font: inherit;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+.admin-section-label {
+  display: block;
+  color: var(--maroon);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.admin-console {
+  padding-top: 0;
+}
+.admin-console-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  gap: 48px;
+  align-items: end;
+  padding: 32px 0 40px;
+  border-bottom: 1px solid var(--line);
+}
+.admin-console-intro h2,
+.admin-panel h3,
+.admin-roster h3 {
+  margin: 10px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(1.85rem, 3vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+.admin-console-intro > p,
+.admin-panel > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.91rem;
+}
+.admin-panel {
+  min-width: 0;
+  padding: 28px;
+  background: color-mix(in srgb, #fffaf3 72%, var(--paper));
+  border: 1px solid var(--line);
+}
+.admin-panel > p {
+  margin-top: 12px;
+}
+.admin-provision {
+  margin-top: 28px;
+  padding: 34px;
+  border-top: 2px solid var(--maroon);
+}
+.admin-provision h3 {
+  font-size: 2rem;
+}
+.admin-provision form {
+  max-width: none;
+}
+.admin-management-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.admin-management-grid .admin-panel {
+  display: flex;
+  flex-direction: column;
+}
+.admin-management-grid h3 {
+  font-size: 1.62rem;
+}
+.admin-credit-panel .studio-fields {
+  grid-template-columns: 1fr 0.72fr;
+}
+.admin-credit-panel .studio-fields label:nth-child(3),
+.admin-credit-panel .studio-fields label:nth-child(4) {
+  grid-column: span 1;
+}
+.admin-reset-form {
+  margin-top: auto !important;
+  padding-top: 24px;
+}
+.admin-roster {
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ink);
+}
+.admin-roster-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+.admin-roster-heading h3 {
+  font-size: 2rem;
+}
+.admin-roster-heading .text-link {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.admin-roster-wrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+}
+.admin-roster table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  text-align: left;
+}
+.admin-roster th {
+  padding: 13px 14px;
+  color: var(--muted);
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.admin-roster td {
+  padding: 16px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  vertical-align: top;
+}
+.admin-roster td strong,
+.admin-roster td span {
+  display: block;
+}
+.admin-roster td strong {
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  font-weight: 500;
+}
+.admin-roster td small,
+.admin-roster td span + span {
+  color: var(--muted);
+}
+.admin-status {
+  color: var(--maroon);
+  font-weight: 700;
+}
+.admin-status.is-active {
+  color: #38623e;
+}
 .studio-admin-credits {
   max-width: 760px;
   margin-top: 52px;
@@ -1601,6 +1762,27 @@ html[lang='en'] .prose-column p {
   .studio-welcome {
     display: grid;
     align-items: start;
+  }
+  .admin-console-intro,
+  .admin-management-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .admin-console-intro {
+    align-items: start;
+    padding: 26px 0 30px;
+  }
+  .admin-provision,
+  .admin-panel {
+    padding: 22px;
+  }
+  .admin-credit-panel .studio-fields label:nth-child(3),
+  .admin-credit-panel .studio-fields label:nth-child(4) {
+    grid-column: auto;
+  }
+  .admin-roster-heading {
+    align-items: start;
+    flex-direction: column;
   }
   .studio-password form {
     display: grid;

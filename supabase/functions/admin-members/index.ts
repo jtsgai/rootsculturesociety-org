@@ -40,14 +40,31 @@ serve(async (request) => {
     const body = await request.json();
     const action = body.action;
     const memberId = String(body.memberId ?? '').trim().toUpperCase();
+
+    if (action === 'list') {
+      const { data: members, error } = await admin
+        .from('members')
+        .select('member_id, display_name, contact_email, contact_phone, starts_on, ends_on, status')
+        .order('member_id');
+      if (error) return json({ error: 'Could not read member records.' }, 400);
+      return json({ members });
+    }
+
     if (!/^R[1-9][0-9]*$/.test(memberId)) return json({ error: 'Member ID must look like R1001.' }, 400);
 
     if (action === 'create') {
       const displayName = String(body.displayName ?? '').trim();
       const startsOn = String(body.startsOn ?? '');
       const endsOn = String(body.endsOn ?? '');
-      const contactEmail = String(body.contactEmail ?? '').trim() || null;
-      if (!displayName || !startsOn || !endsOn) return json({ error: 'Name and membership dates are required.' }, 400);
+      const contactEmail = String(body.contactEmail ?? '').trim().toLowerCase();
+      const contactPhone = String(body.contactPhone ?? '').trim();
+      const phoneDigits = contactPhone.replace(/\D/g, '');
+      if (!displayName || !startsOn || !endsOn || !contactEmail || !contactPhone) {
+        return json({ error: 'Name, email, phone number and membership dates are required.' }, 400);
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)) return json({ error: 'Enter a valid contact email address.' }, 400);
+      if (phoneDigits.length < 8 || phoneDigits.length > 15) return json({ error: 'Enter a valid contact phone number.' }, 400);
+      if (endsOn < startsOn) return json({ error: 'The membership end date cannot be before the start date.' }, 400);
       const password = initialPassword();
       const { data: created, error: createError } = await admin.auth.admin.createUser({
         email: membershipEmail(memberId), password, email_confirm: true,
@@ -56,7 +73,7 @@ serve(async (request) => {
       const userId = created.user.id;
       const { error: profileError } = await admin.from('profiles').insert({ id: userId, role: 'member' });
       const { error: memberError } = await admin.from('members').insert({
-        id: userId, member_id: memberId, display_name: displayName, contact_email: contactEmail,
+        id: userId, member_id: memberId, display_name: displayName, contact_email: contactEmail, contact_phone: contactPhone,
         starts_on: startsOn, ends_on: endsOn, created_by: operator.id,
       });
       const { error: bookError } = await admin.from('genealogy_books').insert({ member_id: userId });
