@@ -21,7 +21,7 @@ const nextStep = stepIndex >= 0 && stepIndex < studioSteps.length - 1 ? studioSt
     {step.type === 'register' && <div data-register-section><MediaPicker method={step.method} label="族人资料图片" hint="先上传人物照片、资料卡、旧信件或相关文档。" /><p class="studio-note">这里补充的是第 5 章已加入的人。电话和地址不会出现在公共网站。</p><div class="studio-person-list" data-register-list></div></div>}
     <nav class="studio-chapter-nav" aria-label="章节导航">
       {previousStep ? <a class="studio-chapter-nav-link" href={`/studio/${previousStep.slug}`}>← 上一章：{previousStep.title}</a> : <a class="studio-chapter-nav-link" href="/studio">← 章节总览</a>}
-      <a class="studio-chapter-preview" href={`/studio/preview#chapter-${step.method}`}>预览本章 ↗</a>
+      <a class="studio-chapter-preview" href={`/studio/preview?chapter=${step.method}`}>预览本章 ↗</a>
       {nextStep ? <a class="studio-chapter-nav-link studio-chapter-nav-next" href={`/studio/${nextStep.slug}`}>下一章：{nextStep.title} →</a> : <a class="studio-chapter-nav-link studio-chapter-nav-next" href="/studio/preview">查看整本预览 →</a>}
     </nav>
     <p class="studio-status" aria-live="polite" data-studio-status></p>

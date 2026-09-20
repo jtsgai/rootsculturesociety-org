@@ -4,6 +4,9 @@ import { getStudioMediaProfile, studioSteps } from '../data/studio';
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const readiness = document.querySelector<HTMLElement>('[data-preview-readiness]');
+const requestedChapter = Number(new URLSearchParams(window.location.search).get('chapter'));
+const selectedStep = studioSteps.find((step) => step.method === requestedChapter);
+const chapterMode = Boolean(selectedStep);
 const labels: Record<string, string> = {
   surname: '姓氏或家族线索', ancestralPlace: '祖籍地', story: '家中流传的故事', sources: '资料来源或待查线索',
   dialect: '方言群', hallName: '堂号', places: '祖屋、祖庙或会馆', notes: '补充说明',
@@ -22,6 +25,30 @@ const photoFallbacks: Record<number, string> = {
 
 function report(message: string) {
   if (status) status.textContent = message;
+}
+
+function setPreviewMode() {
+  const pageTitle = document.querySelector<HTMLElement>('[data-studio-page-title]');
+  const kicker = document.querySelector<HTMLElement>('[data-preview-kicker]');
+  const memberNote = document.querySelector<HTMLElement>('[data-preview-member-note]');
+  const privacyNote = document.querySelector<HTMLElement>('[data-preview-privacy-note]');
+  const returnLink = document.querySelector<HTMLAnchorElement>('[data-preview-return]');
+
+  if (!selectedStep) {
+    if (readiness) readiness.hidden = false;
+    return;
+  }
+
+  document.title = `第 ${selectedStep.method} 章 · ${selectedStep.title}｜新加坡根缘文化学会`;
+  if (pageTitle) pageTitle.textContent = `第 ${selectedStep.method} 章 · ${selectedStep.title}`;
+  if (kicker) kicker.textContent = `${String(selectedStep.method).padStart(2, '0')} / 本章预览`;
+  if (memberNote) memberNote.textContent = '只显示本章节的图片、文字与顺序';
+  if (privacyNote) privacyNote.textContent = '本章预览只对当前会员登录有效；图片会按印刷比例呈现，方便检查图文是否贴合。';
+  if (returnLink) {
+    returnLink.href = '/studio/preview';
+    returnLink.textContent = '← 返回相册家谱总览';
+  }
+  if (readiness) readiness.hidden = true;
 }
 
 function labelFor(key: string) {
@@ -228,33 +255,38 @@ async function renderPreview(bookId: string) {
   if (!target) return;
   const [book, sections, people] = await Promise.all([currentBook(), allSections(bookId), listPeople(bookId, { includeSensitive: true })]);
   if (!book) throw new Error('找不到你的相册家谱。');
-  renderReadiness(book, sections, people);
+  if (!chapterMode) renderReadiness(book, sections, people);
   target.replaceChildren();
-  const cover = document.createElement('header');
-  cover.className = 'preview-cover page-break-after';
-  const coverKicker = document.createElement('span');
-  coverKicker.className = 'eyebrow';
-  coverKicker.textContent = 'PHOTO GENEALOGY / 相册家谱';
-  const title = document.createElement('h2');
-  title.textContent = book.title || '尚未命名的相册家谱';
-  const ancestor = document.createElement('p');
-  ancestor.textContent = book.generation_one_ancestor ? `第一代开族始祖：${book.generation_one_ancestor}` : '尚未填写第一代开族始祖。';
-  const coverCopy = document.createElement('div');
-  coverCopy.className = 'preview-cover-copy';
-  coverCopy.append(coverKicker, title, ancestor);
-  cover.append(coverCopy);
-  try {
-    const coverPhoto = createCoverPhoto(await listMedia(bookId, 1));
-    if (coverPhoto) cover.append(coverPhoto);
-  } catch {
-    // A missing private media table or expired signed URL must not block text preview.
-  }
-  target.append(cover);
+  const appendCover = async () => {
+    const cover = document.createElement('header');
+    cover.className = 'preview-cover page-break-after';
+    const coverKicker = document.createElement('span');
+    coverKicker.className = 'eyebrow';
+    coverKicker.textContent = 'PHOTO GENEALOGY / 相册家谱';
+    const title = document.createElement('h2');
+    title.textContent = book.title || '尚未命名的相册家谱';
+    const ancestor = document.createElement('p');
+    ancestor.textContent = book.generation_one_ancestor ? `第一代开族始祖：${book.generation_one_ancestor}` : '尚未填写第一代开族始祖。';
+    const coverCopy = document.createElement('div');
+    coverCopy.className = 'preview-cover-copy';
+    coverCopy.append(coverKicker, title, ancestor);
+    cover.append(coverCopy);
+    try {
+      const coverPhoto = createCoverPhoto(await listMedia(bookId, 1));
+      if (coverPhoto) cover.append(coverPhoto);
+    } catch {
+      // A missing private media table or expired signed URL must not block text preview.
+    }
+    target.append(cover);
+  };
+
+  if (!chapterMode || selectedStep?.method === 1) await appendCover();
 
   const sectionMap = new Map(sections.map((section) => [section.method, section]));
-  for (const step of studioSteps) {
+  const stepsToRender = selectedStep?.method === 1 ? [] : selectedStep ? [selectedStep] : studioSteps;
+  for (const step of stepsToRender) {
     const section = sectionMap.get(step.method);
-    if (step.method === 1 || (!section && step.method !== 5) || (step.method === 5 && !people.length)) continue;
+    if (!chapterMode && (step.method === 1 || (!section && step.method !== 5) || (step.method === 5 && !people.length))) continue;
     const article = document.createElement('article');
     article.className = 'preview-chapter page-break-before';
     article.id = `chapter-${step.method}`;
@@ -276,10 +308,16 @@ async function renderPreview(bookId: string) {
     if (step.method === 5) renderLineage(body, people);
     else if (step.method === 8) renderRegister(body, people);
     else if (section) Object.entries(section.content).forEach(([key, value]) => addDefinition(body, key, value));
+    if (!body.childElementCount) {
+      const empty = document.createElement('p');
+      empty.className = 'studio-empty';
+      empty.textContent = '本章尚未填写内容。返回本章继续补充后，再查看预览。';
+      body.append(empty);
+    }
     article.append(body);
     target.append(article);
   }
-  if (window.location.hash) {
+  if (!chapterMode && window.location.hash) {
     document.querySelector(window.location.hash)?.scrollIntoView({ block: 'start' });
   }
 }
@@ -291,6 +329,7 @@ document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventList
 
 void (async () => {
   try {
+    setPreviewMode();
     const [member, book] = await Promise.all([currentMember(), currentBook()]);
     if (!member || !book) return window.location.assign('/studio/login');
     if (member.status !== 'active') return report('此会员账户目前未启用；请联系学会确认会籍状态。');

@@ -21,7 +21,7 @@ const backLabel = isAdmin ? '← 返回网站首页' : '← 我的相册家谱';
     </div>
     <div class="studio-heading">
       <span class="eyebrow">{isAdmin ? 'ROOTS CULTURE SOCIETY / 管理员后台' : 'MEMBER STUDIO / 会员谱坊'}</span>
-      <h1>{title}</h1>
+      <h1 data-studio-page-title>{title}</h1>
     </div>
     <slot />
   </section>
