@@ -12,12 +12,12 @@ export type PageKey =
   | 'contact';
 
 export const nav = [
-  { key: 'about', zh: '学会', en: 'The Society' },
+  { key: 'about', zh: '学会使命', en: 'The Society' },
   { key: 'method', zh: '相册家谱', en: 'Photo Genealogy' },
-  { key: 'publications', zh: '出版', en: 'Publications' },
-  { key: 'stories', zh: '故事', en: 'Stories' },
-  { key: 'events', zh: '活动', en: 'Events' },
-  { key: 'membership', zh: '入会', en: 'Membership' },
+  { key: 'publications', zh: '出版书籍', en: 'Publications' },
+  { key: 'stories', zh: '参考资料', en: 'Stories' },
+  { key: 'events', zh: '活动花絮', en: 'Events' },
+  { key: 'membership', zh: '加入学会', en: 'Membership' },
 ];
 
 export const committee = [
