@@ -18,6 +18,7 @@ export type StudioMedia = {
   created_at: string;
   updated_at: string;
   signed_url?: string;
+  needs_normalization?: boolean;
 };
 
 export function studioUnavailableMessage() {
@@ -269,10 +270,10 @@ export async function listMedia(bookId: string, method: number): Promise<StudioM
     .order('created_at');
   if (error) throw error;
   const media = (data ?? []) as StudioMedia[];
-  return Promise.all(media.map(async (item) => ({
-    ...item,
-    signed_url: await signedPreviewUrl(item.storage_path),
-  })));
+  return Promise.all(media.map(async (item) => {
+    const signedUrl = await signedPreviewUrl(item.storage_path);
+    return { ...item, signed_url: signedUrl, needs_normalization: !signedUrl };
+  }));
 }
 
 export async function signedMediaUrl(path: string) {
@@ -283,13 +284,10 @@ export async function signedMediaUrl(path: string) {
 
 async function signedPreviewUrl(originalPath: string) {
   const displayPath = variantPath(originalPath, 'display.jpg');
-  if (!displayPath) return signedMediaUrl(originalPath);
-  try {
-    return await signedMediaUrl(displayPath);
-  } catch {
-    // Rows created before normalization continue to use their original path.
-    return signedMediaUrl(originalPath);
-  }
+  // Legacy records may point directly at the original file. Never fall back to
+  // that path for a member preview; originals are administrator-only.
+  if (!displayPath) return undefined;
+  try { return await signedMediaUrl(displayPath); } catch { return undefined; }
 }
 
 export async function uploadMedia(bookId: string, method: number, file: File, caption: string | null = null) {

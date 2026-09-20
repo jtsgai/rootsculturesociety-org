@@ -157,10 +157,18 @@ function renderMedia(items: StudioMedia[]) {
     const card = document.createElement('figure');
     card.className = 'studio-media-item';
     card.dataset.mediaId = item.id;
-    const image = document.createElement('img');
-    image.src = item.signed_url ?? '';
-    image.alt = item.caption || '会员私密图片';
-    image.loading = 'lazy';
+    if (item.signed_url) {
+      const image = document.createElement('img');
+      image.src = item.signed_url;
+      image.alt = item.caption || '会员私密图片';
+      image.loading = 'lazy';
+      card.append(image);
+    } else {
+      const unavailable = document.createElement('p');
+      unavailable.className = 'studio-media-unavailable';
+      unavailable.textContent = '这张旧图片尚未生成展示版。为保护原件，会员端暂不显示；请重新上传，或请管理员处理。';
+      card.append(unavailable);
+    }
     const controls = document.createElement('div');
     controls.className = 'studio-media-controls';
     const caption = document.createElement('input');
@@ -178,7 +186,7 @@ function renderMedia(items: StudioMedia[]) {
     remove.dataset.mediaRemove = '';
     remove.textContent = '删除图片';
     controls.append(caption, save, remove);
-    card.append(image, controls);
+    card.append(controls);
     list.append(card);
   });
 }
@@ -191,7 +199,7 @@ async function loadMedia() {
     renderMedia(mediaItems);
   } catch {
     const mediaStatus = picker.querySelector<HTMLElement>('[data-media-status]');
-    if (mediaStatus) mediaStatus.textContent = '图片功能正在启用，文字资料仍可正常保存。';
+    if (mediaStatus) mediaStatus.textContent = '图片功能正在启用，文字资料仍可正常保存；旧图片若未生成展示版，会提示重新上传。';
   }
 }
 
