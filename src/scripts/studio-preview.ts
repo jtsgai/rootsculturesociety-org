@@ -1,9 +1,10 @@
-import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
+import { allSections, currentBook, currentMember, listMedia, listPeople, memberPdfDownloadEnabled, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
 import { studioSteps } from '../data/studio';
 
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const readiness = document.querySelector<HTMLElement>('[data-preview-readiness]');
+const pdfDownload = document.querySelector<HTMLButtonElement>('[data-preview-pdf-download]');
 const labels: Record<string, string> = {
   surname: '姓氏或家族线索', ancestralPlace: '祖籍地', story: '家中流传的故事', sources: '资料来源或待查线索',
   dialect: '方言群', hallName: '堂号', places: '祖屋、祖庙或会馆', notes: '补充说明',
@@ -163,6 +164,8 @@ document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventList
   window.location.assign('/studio/login');
 });
 
+pdfDownload?.addEventListener('click', () => window.print());
+
 void (async () => {
   try {
     const [member, book] = await Promise.all([currentMember(), currentBook()]);
@@ -170,6 +173,11 @@ void (async () => {
     if (member.status !== 'active') return report('此会员账户目前未启用；请联系学会确认会籍状态。');
     const signout = document.querySelector<HTMLButtonElement>('[data-studio-signout]');
     if (signout) signout.hidden = false;
+    try {
+      if (pdfDownload) pdfDownload.hidden = !(await memberPdfDownloadEnabled());
+    } catch {
+      if (pdfDownload) pdfDownload.hidden = true;
+    }
     await renderPreview(book.id);
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());

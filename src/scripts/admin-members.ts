@@ -37,7 +37,7 @@ function showCreateSuccess(memberId: string) {
   if (createSuccess) createSuccess.hidden = false;
 }
 
-async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'update-membership' | 'prepare-download', values: Record<string, string> = {}) {
+async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'update-membership' | 'prepare-download' | 'get-settings' | 'update-settings', values: Record<string, string> = {}) {
   if (!isStudioConfigured) throw new Error(studioUnavailableMessage());
   const client = getSupabase();
   const { data, error } = await client!.functions.invoke('admin-members', { body: { action, ...values } });
@@ -45,6 +45,35 @@ async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'upda
   if (data?.error) throw new Error(data.error);
   return data as T;
 }
+
+const pdfDownloadSetting = document.querySelector<HTMLInputElement>('[data-admin-pdf-download-setting]');
+const pdfDownloadSettingStatus = document.querySelector<HTMLElement>('[data-admin-pdf-download-setting-status]');
+
+async function loadPdfDownloadSetting() {
+  try {
+    const result = await callAdmin<{ memberPdfDownloadEnabled: boolean }>('get-settings');
+    if (pdfDownloadSetting) pdfDownloadSetting.checked = result.memberPdfDownloadEnabled;
+  } catch (error) {
+    if (pdfDownloadSettingStatus) pdfDownloadSettingStatus.textContent = error instanceof Error ? error.message : '无法读取 PDF 下载开关。';
+  }
+}
+
+pdfDownloadSetting?.addEventListener('change', async () => {
+  if (!pdfDownloadSetting) return;
+  pdfDownloadSetting.disabled = true;
+  try {
+    const result = await callAdmin<{ memberPdfDownloadEnabled: boolean }>('update-settings', { memberPdfDownloadEnabled: String(pdfDownloadSetting.checked) });
+    pdfDownloadSetting.checked = result.memberPdfDownloadEnabled;
+    if (pdfDownloadSettingStatus) pdfDownloadSettingStatus.textContent = result.memberPdfDownloadEnabled ? '已开启：有效会员可在私密预览下载 PDF。' : '已关闭：会员端不显示 PDF 下载入口。';
+  } catch (error) {
+    pdfDownloadSetting.checked = !pdfDownloadSetting.checked;
+    if (pdfDownloadSettingStatus) pdfDownloadSettingStatus.textContent = error instanceof Error ? error.message : '无法保存 PDF 下载开关。';
+  } finally {
+    pdfDownloadSetting.disabled = false;
+  }
+});
+
+void loadPdfDownloadSetting();
 
 document.querySelector<HTMLFormElement>('[data-admin-export-form]')?.addEventListener('submit', async (event) => {
   event.preventDefault();

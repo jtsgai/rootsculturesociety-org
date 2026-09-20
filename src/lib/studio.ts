@@ -92,6 +92,16 @@ export async function currentProfile() {
   return data ?? undefined;
 }
 
+export async function memberPdfDownloadEnabled() {
+  const { data, error } = await requireClient()
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'member_pdf_download_enabled')
+    .maybeSingle();
+  if (error) throw error;
+  return data?.value === true;
+}
+
 export async function currentBook(): Promise<StudioBook | undefined> {
   const client = requireClient();
   const { data: { user } } = await client.auth.getUser();

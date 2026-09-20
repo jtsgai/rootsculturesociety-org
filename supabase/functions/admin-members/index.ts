@@ -56,6 +56,20 @@ serve(async (request) => {
     const action = body.action;
     const memberId = String(body.memberId ?? '').trim().toUpperCase();
 
+    if (action === 'get-settings') {
+      const { data: setting, error } = await admin.from('site_settings').select('value').eq('key', 'member_pdf_download_enabled').maybeSingle();
+      if (error) return json({ error: 'Could not read member download settings.' }, 400);
+      return json({ memberPdfDownloadEnabled: setting?.value === true });
+    }
+
+    if (action === 'update-settings') {
+      const enabled = body.memberPdfDownloadEnabled === true || body.memberPdfDownloadEnabled === 'true';
+      const { error } = await admin.from('site_settings').upsert({ key: 'member_pdf_download_enabled', value: enabled, updated_at: new Date().toISOString() });
+      if (error) return json({ error: 'Could not save member download settings.' }, 400);
+      await admin.from('member_audit_log').insert({ actor_id: operator.id, action: 'member_pdf_download_setting_updated', metadata: { enabled } });
+      return json({ memberPdfDownloadEnabled: enabled });
+    }
+
     if (action === 'list') {
       const today = new Date().toISOString().slice(0, 10);
       await admin.from('members').update({ status: 'expired', closed_at: new Date().toISOString(), purge_after: new Date(Date.now() + 90 * 86400000).toISOString() }).eq('status', 'active').lt('ends_on', today);
