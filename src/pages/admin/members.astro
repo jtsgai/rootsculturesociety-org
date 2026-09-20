@@ -71,10 +71,15 @@ import StudioFrame from '../../components/StudioFrame.astro';
         <div><span class="admin-section-label">私密名册</span><h3 id="admin-roster-title">现有会员</h3></div>
         <button class="text-link" type="button" data-admin-refresh>刷新名册</button>
       </div>
+      <div class="admin-roster-filters" aria-label="筛选会员名册">
+        <label>查找会员<input type="search" data-admin-search placeholder="会员号或姓名" /></label>
+        <label>状态<select data-admin-status-filter><option value="all">全部状态</option><option value="active">有效</option><option value="suspended">暂停</option><option value="expired">届满</option></select></label>
+        <label class="admin-expiring-filter"><input type="checkbox" data-admin-expiring /> 只看 30 日内到期</label>
+      </div>
       <div class="admin-roster-wrap">
         <table>
-          <thead><tr><th>会员</th><th>联络资料</th><th>会籍有效期</th><th>状态</th></tr></thead>
-          <tbody data-admin-member-list><tr><td colspan="4">正在读取会员资料…</td></tr></tbody>
+          <thead><tr><th>会员</th><th>联络资料</th><th>会籍有效期</th><th>状态</th><th>管理</th></tr></thead>
+          <tbody data-admin-member-list><tr><td colspan="5">正在读取会员资料…</td></tr></tbody>
         </table>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { getSupabase, isStudioConfigured } from './supabase';
 
 export type StudioBook = { id: string; title: string | null; generation_one_ancestor: string | null; consent_at: string | null };
-export type StudioSection = { method: number; content: Record<string, unknown>; is_complete: boolean };
+export type StudioSection = { method: number; content: Record<string, unknown>; is_complete: boolean; updated_at?: string };
 export type StudioPerson = {
   id: string; name: string; generation_number: number; sex: string | null; life_status: string | null;
   father_id: string | null; mother_id: string | null; spouse_id: string | null;
@@ -102,7 +102,7 @@ export async function currentBook(): Promise<StudioBook | undefined> {
 }
 
 export async function allSections(bookId: string): Promise<StudioSection[]> {
-  const { data, error } = await requireClient().from('studio_sections').select('method, content, is_complete').eq('book_id', bookId).order('method');
+  const { data, error } = await requireClient().from('studio_sections').select('method, content, is_complete, updated_at').eq('book_id', bookId).order('method');
   if (error) throw error;
   return data ?? [];
 }

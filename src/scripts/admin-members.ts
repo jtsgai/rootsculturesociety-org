@@ -35,7 +35,7 @@ function showCreateSuccess(memberId: string) {
   if (createSuccess) createSuccess.hidden = false;
 }
 
-async function callAdmin<T>(action: 'create' | 'reset-password' | 'list', values: Record<string, string> = {}) {
+async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'update-membership', values: Record<string, string> = {}) {
   if (!isStudioConfigured) throw new Error(studioUnavailableMessage());
   const client = getSupabase();
   const { data, error } = await client!.functions.invoke('admin-members', { body: { action, ...values } });
@@ -67,18 +67,41 @@ function cell(value: string, className?: string) {
   return item;
 }
 
+function escapeAttribute(value: string) {
+  return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character] ?? character));
+}
+
+function withinThirtyDays(date: string) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const end = new Date(`${date}T00:00:00`);
+  const days = Math.ceil((end.getTime() - today.getTime()) / 86400000);
+  return days >= 0 && days <= 30;
+}
+
+let memberRecords: MemberRecord[] = [];
+
 function renderRoster(members: MemberRecord[]) {
   if (!roster) return;
   roster.replaceChildren();
-  if (!members.length) {
+  const query = document.querySelector<HTMLInputElement>('[data-admin-search]')?.value.trim().toLowerCase() ?? '';
+  const statusFilter = document.querySelector<HTMLSelectElement>('[data-admin-status-filter]')?.value ?? 'all';
+  const expiringOnly = document.querySelector<HTMLInputElement>('[data-admin-expiring]')?.checked ?? false;
+  const filtered = members.filter((member) => {
+    const matchesQuery = !query || `${member.member_id} ${member.display_name}`.toLowerCase().includes(query);
+    const matchesStatus = statusFilter === 'all' || member.status === statusFilter;
+    const matchesExpiry = !expiringOnly || withinThirtyDays(member.ends_on);
+    return matchesQuery && matchesStatus && matchesExpiry;
+  });
+  if (!filtered.length) {
     const row = document.createElement('tr');
-    const item = cell('尚未开通会员。');
-    item.colSpan = 4;
+    const item = cell(members.length ? '没有符合筛选条件的会员。' : '尚未开通会员。');
+    item.colSpan = 5;
     row.append(item);
     roster.append(row);
     return;
   }
-  members.forEach((member) => {
+  filtered.forEach((member) => {
     const row = document.createElement('tr');
     const person = document.createElement('td');
     const name = document.createElement('strong');
@@ -94,16 +117,49 @@ function renderRoster(members: MemberRecord[]) {
     contact.append(email, phone);
     const dates = cell(`${member.starts_on} 至 ${member.ends_on}`);
     const memberStatus = cell(statusLabel(member.status), `admin-status is-${member.status}`);
-    row.append(person, contact, dates, memberStatus);
+    const management = document.createElement('td');
+    management.innerHTML = `<form class="admin-member-update" data-admin-update="${escapeAttribute(member.member_id)}"><select name="status" aria-label="${escapeAttribute(member.member_id)} 状态"><option value="active"${member.status === 'active' ? ' selected' : ''}>有效</option><option value="suspended"${member.status === 'suspended' ? ' selected' : ''}>暂停</option><option value="expired"${member.status === 'expired' ? ' selected' : ''}>届满</option></select><label>结束日<input name="endsOn" type="date" value="${escapeAttribute(member.ends_on)}" required /></label><button class="text-link" type="submit">保存</button></form>`;
+    row.append(person, contact, dates, memberStatus, management);
     roster.append(row);
   });
 }
 
 async function loadRoster(shouldReport = false) {
   const result = await callAdmin<{ members: MemberRecord[] }>('list');
-  renderRoster(result.members ?? []);
+  memberRecords = result.members ?? [];
+  renderRoster(memberRecords);
   if (shouldReport) report('会员名册已更新。');
 }
+
+document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-admin-search], [data-admin-status-filter], [data-admin-expiring]').forEach((control) => {
+  control.addEventListener('input', () => renderRoster(memberRecords));
+  control.addEventListener('change', () => renderRoster(memberRecords));
+});
+
+roster?.addEventListener('submit', async (event) => {
+  const form = event.target;
+  if (!(form instanceof HTMLFormElement) || !form.dataset.adminUpdate) return;
+  event.preventDefault();
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const values = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+  values.memberId = form.dataset.adminUpdate;
+  try {
+    if (button) {
+      button.disabled = true;
+      button.textContent = '保存中…';
+    }
+    await callAdmin('update-membership', values);
+    await loadRoster();
+    report(`${values.memberId} 的会籍资料已更新。`);
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法更新会籍资料。');
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = '保存';
+    }
+  }
+});
 
 document.querySelector<HTMLFormElement>('[data-admin-create-form]')?.addEventListener('submit', async (event) => {
   event.preventDefault();

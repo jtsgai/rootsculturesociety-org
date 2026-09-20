@@ -1140,6 +1140,11 @@ html[lang='en'] .prose-column p {
   padding: 0;
   border-top: 1px solid var(--line);
 }
+.studio-progress-summary {
+  margin: 34px 0 -34px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
 .studio-progress li {
   border-bottom: 1px solid var(--line);
 }
@@ -1166,6 +1171,9 @@ html[lang='en'] .prose-column p {
 }
 .studio-progress li.is-complete em {
   color: #38623e;
+}
+.studio-progress li.is-started em {
+  color: var(--maroon);
 }
 .studio-tools {
   margin-top: 72px;
@@ -1747,6 +1755,44 @@ html[lang='en'] .prose-column p {
   background: transparent;
   cursor: pointer;
 }
+.admin-roster-filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.4fr) minmax(160px, 0.7fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+.admin-roster-filters label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+.admin-roster-filters input,
+.admin-roster-filters select,
+.admin-member-update input,
+.admin-member-update select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #fffaf3;
+  color: var(--ink);
+  padding: 9px 10px;
+  font: inherit;
+}
+.admin-expiring-filter {
+  display: flex !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px !important;
+  padding-bottom: 10px;
+  white-space: nowrap;
+}
+.admin-expiring-filter input {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+}
 .admin-roster-wrap {
   overflow-x: auto;
   border-top: 1px solid var(--line);
@@ -1790,6 +1836,27 @@ html[lang='en'] .prose-column p {
 }
 .admin-status.is-active {
   color: #38623e;
+}
+.admin-member-update {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  min-width: 190px;
+  margin: 0 !important;
+}
+.admin-member-update label {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+.admin-member-update button {
+  justify-self: start;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.78rem;
 }
 .studio-admin-credits {
   max-width: 760px;
@@ -2144,6 +2211,13 @@ html[lang='en'] .prose-column p {
   .admin-roster-heading {
     align-items: start;
     flex-direction: column;
+  }
+  .admin-roster-filters {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+  .admin-expiring-filter {
+    padding-bottom: 0;
   }
   .studio-password form {
     display: grid;

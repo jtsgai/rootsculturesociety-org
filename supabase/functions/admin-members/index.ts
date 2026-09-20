@@ -65,6 +65,22 @@ serve(async (request) => {
       return json({ members });
     }
 
+    if (action === 'update-membership') {
+      const status = String(body.status ?? '');
+      const startsOn = String(body.startsOn ?? '').trim();
+      const endsOn = String(body.endsOn ?? '').trim();
+      if (!['active', 'suspended', 'expired'].includes(status)) return json({ error: 'Invalid membership status.' }, 400);
+      if (!endsOn || (startsOn && endsOn < startsOn)) return json({ error: 'The membership dates are invalid.' }, 400);
+      const { data: member } = await admin.from('members').select('id, starts_on').eq('member_id', memberId).maybeSingle();
+      if (!member) return json({ error: 'Member not found.' }, 404);
+      const updates: Record<string, string> = { status, ends_on: endsOn };
+      if (startsOn) updates.starts_on = startsOn;
+      const { error } = await admin.from('members').update(updates).eq('id', member.id);
+      if (error) return json({ error: 'Could not update this membership.' }, 400);
+      await admin.from('member_audit_log').insert({ actor_id: operator.id, member_id: member.id, action: 'membership_updated', metadata: { member_id: memberId, status, starts_on: startsOn || member.starts_on, ends_on: endsOn } });
+      return json({ memberId, status, startsOn: startsOn || member.starts_on, endsOn: endsOn });
+    }
+
     if (!/^R[1-9][0-9]*$/.test(memberId)) return json({ error: 'Member ID must look like R1001.' }, 400);
 
     if (action === 'create') {
