@@ -70,3 +70,5 @@ The deployment workflow injects them only while building. After the next success
 - No NRIC field, public self-registration, payment integration, active PDF/web export worker, active AI provider, or multi-editor account exists in this phase. The data tables and client/Edge Function interfaces for later export, chapter publication, and metered AI are prepared but disabled.
 - Membership must be active and within its dates to write books or upload images.
 - Initial and reset passwords are eight characters, shown once by the administrator function, and not logged or emailed.
+
+Before each release, use `docs/member-studio-acceptance-checklist.md` with disposable test accounts. Never copy real member data or credentials into the repository.

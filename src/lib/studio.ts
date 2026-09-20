@@ -6,6 +6,18 @@ export type StudioPerson = {
   id: string; name: string; generation_number: number; sex: string | null; life_status: string | null;
   birth_year: number | null; occupation: string | null; education: string | null; phone: string | null; address: string | null; note: string | null;
 };
+export type StudioMedia = {
+  id: string;
+  book_id: string;
+  member_id: string;
+  method: number;
+  storage_path: string;
+  caption: string | null;
+  kind: 'image';
+  created_at: string;
+  updated_at: string;
+  signed_url?: string;
+};
 
 export function studioUnavailableMessage() {
   return '会员谱坊正在由学会启用。若你已获发会员号，请向学会确认开通时间。';
@@ -157,6 +169,57 @@ export async function uploadImage(bookId: string, file: File, folder = 'images')
   const { error } = await client.storage.from('genealogy-media').upload(path, file, { contentType: file.type, upsert: false });
   if (error) throw error;
   return path;
+}
+
+export async function listMedia(bookId: string, method: number): Promise<StudioMedia[]> {
+  const { data, error } = await requireClient()
+    .from('studio_media')
+    .select('id, book_id, member_id, method, storage_path, caption, kind, created_at, updated_at')
+    .eq('book_id', bookId)
+    .eq('method', method)
+    .order('created_at');
+  if (error) throw error;
+  const media = (data ?? []) as StudioMedia[];
+  return Promise.all(media.map(async (item) => ({
+    ...item,
+    signed_url: await signedMediaUrl(item.storage_path),
+  })));
+}
+
+export async function signedMediaUrl(path: string) {
+  const { data, error } = await requireClient().storage.from('genealogy-media').createSignedUrl(path, 60 * 60);
+  if (error || !data?.signedUrl) throw error ?? new Error('无法读取图片。');
+  return data.signedUrl;
+}
+
+export async function uploadMedia(bookId: string, method: number, file: File, caption: string | null = null) {
+  const client = requireClient();
+  const { data: { user } } = await client.auth.getUser();
+  if (!user) throw new Error('请先登录。');
+  const path = await uploadImage(bookId, file, `method-${method}`);
+  const { data, error } = await client
+    .from('studio_media')
+    .insert({ book_id: bookId, member_id: user.id, method, storage_path: path, caption })
+    .select('id, book_id, member_id, method, storage_path, caption, kind, created_at, updated_at')
+    .single();
+  if (error) {
+    await client.storage.from('genealogy-media').remove([path]);
+    throw error;
+  }
+  return { ...(data as StudioMedia), signed_url: await signedMediaUrl(path) };
+}
+
+export async function updateMediaCaption(id: string, caption: string | null) {
+  const { error } = await requireClient().from('studio_media').update({ caption }).eq('id', id);
+  if (error) throw error;
+}
+
+export async function removeMedia(media: StudioMedia) {
+  const client = requireClient();
+  const { error } = await client.from('studio_media').delete().eq('id', media.id);
+  if (error) throw error;
+  const { error: storageError } = await client.storage.from('genealogy-media').remove([media.storage_path]);
+  if (storageError) throw storageError;
 }
 
 export { isStudioConfigured };

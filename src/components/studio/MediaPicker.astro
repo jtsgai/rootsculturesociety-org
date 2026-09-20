@@ -1,0 +1,26 @@
+---
+interface Props {
+  method: number;
+  label?: string;
+  hint?: string;
+  multiple?: boolean;
+}
+const { method, label = '图片资料', hint = '图片默认只对你和学会资料管理员可见。', multiple = true } = Astro.props;
+---
+<section class="studio-media-picker" data-media-picker data-media-method={method}>
+  <div class="studio-media-heading">
+    <div>
+      <span class="eyebrow">PRIVATE IMAGES / 私密图片</span>
+      <h3>{label}</h3>
+      <p>{hint}</p>
+    </div>
+    <label class="media-upload-button">
+      <span>选择图片</span>
+      <input data-media-input type="file" accept="image/jpeg,image/png,image/webp" multiple={multiple} />
+    </label>
+  </div>
+  <p class="studio-media-status" data-media-status aria-live="polite"></p>
+  <div class="studio-media-list" data-media-list>
+    <p class="studio-empty">尚未上传图片。</p>
+  </div>
+</section>
