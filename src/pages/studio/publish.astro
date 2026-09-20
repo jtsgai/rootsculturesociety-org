@@ -1,0 +1,29 @@
+---
+import StudioFrame from '../../components/StudioFrame.astro';
+---
+
+<StudioFrame title="公开故事申请">
+  <section class="studio-card studio-publication" data-studio-publication>
+    <div class="studio-step-intro">
+      <a class="text-link" href="/studio">← 我的相册家谱</a>
+      <span class="eyebrow">PUBLIC STORY / 公开故事</span>
+      <h2>只公开你愿意分享的一章</h2>
+      <p>请选择已经完成的章节，写一段可以公开阅读的文字。提交后先由学会审核；原始家谱、电话、地址和私密图片不会自动公开。</p>
+    </div>
+    <form class="studio-publication-form" data-publication-form>
+      <label>选择章节 <select name="method" data-publication-method required><option value="">正在读取已完成章节…</option></select></label>
+      <label>公开标题 <input name="title" required maxlength="180" placeholder="例如：我们家从海南来到新加坡" /></label>
+      <label>公开稿件 <textarea name="summary" rows="10" required placeholder="只写你同意公开的内容。可以是一段迁徙记忆、一种家肴，或一个在新加坡成长的片段。"></textarea></label>
+      <label class="studio-consent"><input name="consent" type="checkbox" required /> 我确认这段文字可以公开发布，并已取得相关家人的同意。</label>
+      <button class="button" type="submit">提交审核</button>
+    </form>
+    <section class="studio-publication-list" aria-labelledby="publication-request-title">
+      <div class="studio-lineage-heading"><div><span class="eyebrow">REQUESTS / 申请记录</span><h3 id="publication-request-title">我的公开申请</h3></div><p>审核前可以撤回；发布后如需修改，请重新联系学会。</p></div>
+      <div data-publication-list><p class="studio-empty">正在读取申请记录…</p></div>
+    </section>
+    <p class="studio-status" aria-live="polite" data-studio-status></p>
+  </section>
+</StudioFrame>
+<script>
+  import '../../scripts/studio-publish';
+</script>

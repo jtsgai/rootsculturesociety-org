@@ -1,0 +1,21 @@
+---
+import StudioFrame from '../../components/StudioFrame.astro';
+---
+
+<StudioFrame title="公开故事审核" description="审核会员主动提交的公开故事稿件。" area="admin">
+  <section class="studio-card admin-console" data-admin-stories>
+    <div class="admin-console-intro">
+      <div><span class="admin-section-label">PUBLIC STORY / 公开故事</span><h2>审核会员公开申请</h2></div>
+      <p>这里只显示会员主动提交的公开标题与文字，不读取电话、地址或私密家谱原文。批准后才会出现在故事页。</p>
+    </div>
+    <section class="admin-panel admin-story-guidance"><strong>审核边界</strong><p>确认文字已取得相关家人的同意，没有包含不应公开的联络资料；如需修改，请写清楚退回原因。</p></section>
+    <section class="admin-roster" aria-labelledby="admin-story-queue-title">
+      <div class="admin-roster-heading"><div><span class="admin-section-label">REVIEW QUEUE / 审核队列</span><h3 id="admin-story-queue-title">待处理申请</h3></div><button class="text-link" type="button" data-admin-story-refresh>刷新队列</button></div>
+      <div class="admin-story-queue" data-admin-story-queue><p class="studio-empty">正在读取申请…</p></div>
+    </section>
+    <p class="studio-status" aria-live="polite" data-studio-status></p>
+  </section>
+</StudioFrame>
+<script>
+  import '../../scripts/admin-stories';
+</script>

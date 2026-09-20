@@ -22,6 +22,23 @@ export type PublicChapterRequest = {
   mediaPaths?: string[];
 };
 
+export type PublicStoryRequest = {
+  id: string;
+  book_id: string;
+  member_id: string;
+  method: number;
+  slug: string;
+  title: string;
+  content: Record<string, unknown>;
+  media_paths: string[];
+  status: 'draft' | 'pending' | 'published' | 'withdrawn';
+  consent_at: string | null;
+  reviewed_at: string | null;
+  review_note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 function requireClient() {
   const client = getSupabase();
   if (!client || !isStudioConfigured) throw new Error('会员系统尚未启用。');
@@ -82,4 +99,36 @@ export async function requestChapterPublication(request: PublicChapterRequest) {
     .single();
   if (error) throw error;
   return data;
+}
+
+const publicStoryFields = 'id, book_id, member_id, method, slug, title, content, media_paths, status, consent_at, reviewed_at, review_note, created_at, updated_at';
+
+export async function listOwnPublicationRequests(bookId: string): Promise<PublicStoryRequest[]> {
+  const { data, error } = await requireClient().from('public_story_sections').select(publicStoryFields).eq('book_id', bookId).order('updated_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as PublicStoryRequest[];
+}
+
+export async function listPublicationQueue(): Promise<PublicStoryRequest[]> {
+  const { data, error } = await requireClient().from('public_story_sections').select(publicStoryFields).in('status', ['pending', 'withdrawn']).order('updated_at', { ascending: true });
+  if (error) throw error;
+  return (data ?? []) as PublicStoryRequest[];
+}
+
+export async function reviewPublicationRequest(id: string, status: 'published' | 'draft' | 'withdrawn', reviewNote: string | null = null) {
+  const { data, error } = await requireClient().from('public_story_sections').update({ status, review_note: reviewNote, reviewed_at: new Date().toISOString() }).eq('id', id).select(publicStoryFields).single();
+  if (error) throw error;
+  return data as PublicStoryRequest;
+}
+
+export async function withdrawPublicationRequest(id: string) {
+  const { data, error } = await requireClient().from('public_story_sections').update({ status: 'withdrawn' }).eq('id', id).eq('status', 'pending').select(publicStoryFields).single();
+  if (error) throw error;
+  return data as PublicStoryRequest;
+}
+
+export async function listPublishedStories(): Promise<PublicStoryRequest[]> {
+  const { data, error } = await requireClient().from('public_story_sections').select('id, method, slug, title, content, media_paths, status, created_at, updated_at').eq('status', 'published').order('created_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as PublicStoryRequest[];
 }

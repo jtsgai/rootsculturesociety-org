@@ -23,6 +23,7 @@ const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta
     {pageKey === 'publications' && <section class="article-downloads"><div class="section-kicker"><span class="eyebrow">ARTICLES / 文章</span><h2>{isZh ? '把资料留在手边。' : 'Keep the source material close.'}</h2><p>{isZh ? '以下文章与样本由学会资料提供，点击即可下载原 PDF。' : 'These articles and samples come from Society materials. Select a title to download the original PDF.'}</p></div><div class="article-list">{articles.map((article) => <a href={`/articles/${article.file}`} download><span><strong>{isZh ? article.zh : article.en}</strong><small>{isZh ? article.zhDescription : article.enDescription}</small></span><em>PDF ↗</em></a>)}</div></section>}
 
     {pageKey === 'stories' && <section class="story-grid">{stories.map((story) => <article class="story-card"><img src={story.image} alt={isZh ? story.altZh : story.altEn} loading="lazy" /><div class="story-card-body"><span class="eyebrow">{isZh ? story.bylineZh : story.bylineEn}</span><h2>{isZh ? story.titleZh : story.titleEn}</h2><p>{isZh ? story.textZh : story.textEn}</p><a class="inline-download" href={`/articles/${story.sourceFile}`} download>{isZh ? '阅读原始资料' : 'Read the source material'} <span>↗</span></a></div></article>)}</section>}
+    {pageKey === 'stories' && <section class="published-story-section" data-published-stories data-lang={lang} hidden aria-labelledby="published-story-title"><div class="section-kicker"><span class="eyebrow">MEMBER STORIES / 会员故事</span><h2 id="published-story-title">{isZh ? '会员愿意分享的故事。' : 'Stories members have chosen to share.'}</h2><p>{isZh ? '以下内容经过会员同意并由学会审核后发布。' : 'These stories are published with member consent and Society review.'}</p></div><div class="published-story-grid" data-published-story-list></div></section>}
 
     {pageKey === 'membership' && <><section class="contact-card"><div><span class="eyebrow">{isZh ? 'MEMBERSHIP / 会员' : 'MEMBERSHIP'}</span><h2>{isZh ? '请 WhatsApp 秘书长办理入会' : 'Please WhatsApp the Secretary to join'}</h2><p>{isZh ? 'WhatsApp 秘书长：9272 8933' : 'WhatsApp the Secretary: 9272 8933'}</p></div><a class="button" href="https://wa.me/6592728933">WhatsApp 9272 8933 ↗</a></section>{studioEnabled && <section class="member-login-card"><div><span class="eyebrow">{isZh ? 'MEMBER ACCESS / 会员入口' : 'MEMBER ACCESS'}</span><h2>{isZh ? '进入我的相册家谱' : 'Enter my Photo Genealogy'}</h2><p>{isZh ? '请使用学会发出的会员号和初始密码登录。首次进入后，系统会提示你设置自己的密码。' : 'Sign in with the member ID and initial password issued by the Society. On your first visit, you will be asked to set your own password.'}</p></div><a class="button" href="/studio/login">{isZh ? '会员登录' : 'Member login'} <span>→</span></a></section>}</>}
 
@@ -32,3 +33,6 @@ const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta
 
   </div>
 </SiteLayout>
+{pageKey === 'stories' && <script>
+  import '../scripts/published-stories';
+</script>}
