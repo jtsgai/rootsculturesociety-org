@@ -25,9 +25,10 @@ async function inspectInviteSession() {
     await client.auth.signOut();
     return;
   }
-  if (window.location.hash.includes('type=invite')) {
+  const isPasswordSetupLink = window.location.hash.includes('type=invite') || window.location.hash.includes('type=recovery');
+  if (isPasswordSetupLink) {
     showPasswordSetup();
-    report('邀请已确认，请设置管理员密码。');
+    report('链接已确认，请设置管理员密码。');
   } else {
     window.location.assign('/admin/members');
   }
