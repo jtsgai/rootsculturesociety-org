@@ -8,6 +8,7 @@ const pdfDownload = document.querySelector<HTMLButtonElement>('[data-preview-pdf
 const labels: Record<string, string> = {
   surname: '姓氏或家族线索', ancestralPlace: '祖籍地', story: '家中流传的故事', sources: '资料来源或待查线索',
   dialect: '方言群', hallName: '堂号', places: '祖屋、祖庙或会馆', notes: '补充说明',
+  migrationRows: '迁徙记录', childhoodRows: '童年记忆', dishRows: '家肴记录',
   year: '年份', place: '地点', note: '记忆或说明', dish: '菜名', ingredients: '材料', method: '做法', taughtBy: '传授者',
 };
 
