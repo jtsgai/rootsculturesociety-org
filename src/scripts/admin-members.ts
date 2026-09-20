@@ -18,6 +18,8 @@ type MemberRecord = {
   starts_on: string;
   ends_on: string;
   status: 'active' | 'suspended' | 'expired';
+  closed_at?: string | null;
+  purge_after?: string | null;
 };
 
 function report(message: string) {
@@ -35,7 +37,7 @@ function showCreateSuccess(memberId: string) {
   if (createSuccess) createSuccess.hidden = false;
 }
 
-async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'update-membership', values: Record<string, string> = {}) {
+async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'update-membership' | 'prepare-download', values: Record<string, string> = {}) {
   if (!isStudioConfigured) throw new Error(studioUnavailableMessage());
   const client = getSupabase();
   const { data, error } = await client!.functions.invoke('admin-members', { body: { action, ...values } });
@@ -43,6 +45,42 @@ async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'upda
   if (data?.error) throw new Error(data.error);
   return data as T;
 }
+
+document.querySelector<HTMLFormElement>('[data-admin-export-form]')?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget as HTMLFormElement;
+  const resultBox = document.querySelector<HTMLElement>('[data-admin-export-results]');
+  const values = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+  try {
+    if (resultBox) resultBox.textContent = '正在生成 5 分钟有效的私有链接…';
+    const result = await callAdmin<{ member: { memberId: string; displayName: string }; book: { title: string | null }; files: Array<{ method: number; caption: string | null; signedUrl: string }>; expiresInSeconds: number }>('prepare-download', values);
+    if (!resultBox) return;
+    resultBox.replaceChildren();
+    const heading = document.createElement('strong');
+    heading.textContent = `${result.member.memberId} · ${result.book.title || '未命名相册家谱'}`;
+    resultBox.append(heading);
+    if (!result.files.length) {
+      resultBox.append(document.createTextNode('目前没有已上传的照片原件。'));
+      return;
+    }
+    const list = document.createElement('ul');
+    result.files.forEach((file, index) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = file.signedUrl;
+      link.target = '_blank';
+      link.rel = 'noreferrer';
+      link.textContent = `第 ${file.method} 章照片 ${index + 1}${file.caption ? ` · ${file.caption}` : ''} ↗`;
+      item.append(link);
+      list.append(item);
+    });
+    resultBox.append(list, document.createTextNode(`链接将在 ${Math.round(result.expiresInSeconds / 60)} 分钟后失效。`));
+    report('临时下载链接已生成；请只用于这次印书工作。');
+  } catch (error) {
+    if (resultBox) resultBox.textContent = '';
+    report(error instanceof Error ? error.message : '无法生成下载链接。');
+  }
+});
 
 function setDefaultDates() {
   const startsOn = document.querySelector<HTMLInputElement>('input[name="startsOn"]');

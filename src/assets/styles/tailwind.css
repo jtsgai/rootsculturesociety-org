@@ -1390,6 +1390,10 @@ html[lang='en'] .prose-column p {
   display: grid;
   gap: 8px;
 }
+.studio-preview-admin-only {
+  color: var(--maroon);
+  font-size: 0.82rem;
+}
 .studio-preview-readiness {
   margin: 0 0 24px;
   padding: 18px 22px;
@@ -1997,6 +2001,21 @@ html[lang='en'] .prose-column p {
 .admin-credit-panel .studio-fields label:nth-child(3),
 .admin-credit-panel .studio-fields label:nth-child(4) {
   grid-column: span 1;
+}
+.admin-export-panel {
+  margin-top: 24px;
+}
+.admin-export-results {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.admin-export-results ul {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+.admin-export-results a {
+  color: var(--maroon);
 }
 .admin-reset-form {
   margin-top: auto !important;

@@ -4,7 +4,6 @@ import { studioSteps } from '../data/studio';
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const readiness = document.querySelector<HTMLElement>('[data-preview-readiness]');
-const printButton = document.querySelector<HTMLButtonElement>('[data-print-preview]');
 const labels: Record<string, string> = {
   surname: '姓氏或家族线索', ancestralPlace: '祖籍地', story: '家中流传的故事', sources: '资料来源或待查线索',
   dialect: '方言群', hallName: '堂号', places: '祖屋、祖庙或会馆', notes: '补充说明',
@@ -97,7 +96,6 @@ function renderReadiness(book: Awaited<ReturnType<typeof currentBook>>, sections
     ? `已标记完成 ${complete.length} / 8 章。还缺：${missing.map((step) => step.title).join('、')}。你仍可打印当前草稿，补完后再打印最终版本。`
     : '八个章节都已标记完成。打印前仍建议逐页检查文字、图片与隐私内容。';
   readiness.append(heading, detail);
-  if (printButton) printButton.textContent = missing.length ? '打印当前草稿 / PDF' : '打印 / 保存 PDF';
 }
 
 async function renderPreview(bookId: string) {
@@ -160,7 +158,6 @@ async function renderPreview(bookId: string) {
   }
 }
 
-document.querySelector<HTMLButtonElement>('[data-print-preview]')?.addEventListener('click', () => window.print());
 document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventListener('click', async () => {
   await signOut();
   window.location.assign('/studio/login');

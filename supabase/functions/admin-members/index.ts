@@ -57,9 +57,11 @@ serve(async (request) => {
     const memberId = String(body.memberId ?? '').trim().toUpperCase();
 
     if (action === 'list') {
+      const today = new Date().toISOString().slice(0, 10);
+      await admin.from('members').update({ status: 'expired', closed_at: new Date().toISOString(), purge_after: new Date(Date.now() + 90 * 86400000).toISOString() }).eq('status', 'active').lt('ends_on', today);
       const { data: members, error } = await admin
         .from('members')
-        .select('member_id, display_name, contact_email, contact_phone, starts_on, ends_on, status')
+        .select('member_id, display_name, contact_email, contact_phone, starts_on, ends_on, status, closed_at, purge_after')
         .order('member_id');
       if (error) return json({ error: 'Could not read member records.' }, 400);
       return json({ members });
@@ -74,11 +76,37 @@ serve(async (request) => {
       const { data: member } = await admin.from('members').select('id, starts_on').eq('member_id', memberId).maybeSingle();
       if (!member) return json({ error: 'Member not found.' }, 404);
       const updates: Record<string, string> = { status, ends_on: endsOn };
+      if (status === 'active') {
+        updates.closed_at = null as unknown as string;
+        updates.purge_after = null as unknown as string;
+      } else if (status === 'expired') {
+        updates.closed_at = new Date().toISOString();
+        updates.purge_after = new Date(Date.now() + 90 * 86400000).toISOString();
+      }
       if (startsOn) updates.starts_on = startsOn;
       const { error } = await admin.from('members').update(updates).eq('id', member.id);
       if (error) return json({ error: 'Could not update this membership.' }, 400);
       await admin.from('member_audit_log').insert({ actor_id: operator.id, member_id: member.id, action: 'membership_updated', metadata: { member_id: memberId, status, starts_on: startsOn || member.starts_on, ends_on: endsOn } });
       return json({ memberId, status, startsOn: startsOn || member.starts_on, endsOn: endsOn });
+    }
+
+    if (action === 'prepare-download') {
+      const purpose = String(body.purpose ?? '').trim();
+      if (purpose.length < 4 || purpose.length > 200) return json({ error: 'Please provide a short download purpose.' }, 400);
+      const { data: member } = await admin.from('members').select('id, member_id, display_name').eq('member_id', memberId).maybeSingle();
+      if (!member) return json({ error: 'Member not found.' }, 404);
+      const { data: books, error: booksError } = await admin.from('genealogy_books').select('id, title').eq('member_id', member.id).limit(1);
+      if (booksError || !books?.[0]) return json({ error: 'This member has no family book.' }, 404);
+      const book = books[0];
+      const { data: media, error: mediaError } = await admin.from('studio_media').select('storage_path, method, caption').eq('book_id', book.id).order('created_at');
+      if (mediaError) return json({ error: 'Could not read private media records.' }, 400);
+      const files = [];
+      for (const item of media ?? []) {
+        const { data: signed, error: signedError } = await admin.storage.from('genealogy-media').createSignedUrl(item.storage_path, 300);
+        if (!signedError && signed?.signedUrl) files.push({ method: item.method, caption: item.caption, path: item.storage_path, signedUrl: signed.signedUrl });
+      }
+      await admin.from('member_audit_log').insert({ actor_id: operator.id, member_id: member.id, action: 'private_media_download_prepared', metadata: { member_id: memberId, book_id: book.id, purpose, file_count: files.length } });
+      return json({ member: { memberId: member.member_id, displayName: member.display_name }, book: { id: book.id, title: book.title }, files, expiresInSeconds: 300 });
     }
 
     if (!/^R[1-9][0-9]*$/.test(memberId)) return json({ error: 'Member ID must look like R1001.' }, 400);

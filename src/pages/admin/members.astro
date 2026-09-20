@@ -66,6 +66,15 @@ import StudioFrame from '../../components/StudioFrame.astro';
       </form>
       </section>
     </div>
+    <section class="admin-panel admin-export-panel" aria-labelledby="admin-export-title">
+      <span class="admin-section-label">PRINT MATERIALS / 印书资料</span>
+      <h3 id="admin-export-title">管理员临时下载照片原件</h3>
+      <p>只在确定印书用途时生成 5 分钟有效的私有链接。每次生成都会记录管理员、会员号和用途。</p>
+      <form class="studio-reset-form" data-admin-export-form>
+        <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label>用途 <input name="purpose" value="印制相册家谱" required /></label><button class="text-link" type="submit">生成临时下载链接</button>
+      </form>
+      <div class="admin-export-results" data-admin-export-results aria-live="polite"></div>
+    </section>
     <section class="admin-roster" aria-labelledby="admin-roster-title">
       <div class="admin-roster-heading">
         <div><span class="admin-section-label">私密名册</span><h3 id="admin-roster-title">现有会员</h3></div>
