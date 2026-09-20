@@ -1,4 +1,6 @@
 ---
+import { getStudioMediaProfile } from '../../data/studio';
+
 interface Props {
   method: number;
   label?: string;
@@ -6,13 +8,14 @@ interface Props {
   multiple?: boolean;
 }
 const { method, label = '图片资料', hint = '图片默认只对你和学会资料管理员可见。', multiple = true } = Astro.props;
+const profile = getStudioMediaProfile(method);
 ---
-<section class="studio-media-picker" data-media-picker data-media-method={method}>
+<section class="studio-media-picker" data-media-picker data-media-method={method} data-media-profile={profile.key}>
   <div class="studio-media-heading">
     <div>
       <span class="eyebrow">PRIVATE IMAGES / 私密图片</span>
       <h3>{label}</h3>
-      <p>{hint} 横版、竖版和方形照片都会保留完整画面；原件私密保存，展示图会自动校正方向并压缩。</p>
+      <p>{hint} {profile.guidance} 原件私密保存，展示图会自动校正方向并压缩。</p>
     </div>
     <label class="media-upload-button">
       <span>选择图片</span>

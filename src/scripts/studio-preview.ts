@@ -1,5 +1,5 @@
 import { allSections, currentBook, currentMember, listMedia, listPeople, memberPdfDownloadEnabled, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
-import { studioSteps } from '../data/studio';
+import { getStudioMediaProfile, studioSteps } from '../data/studio';
 
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
@@ -138,7 +138,7 @@ async function renderPreview(bookId: string) {
       const media = await listMedia(bookId, step.method);
       if (media.length) {
         const gallery = document.createElement('div');
-        gallery.className = 'preview-media-grid';
+        gallery.className = `preview-media-grid media-frame-${getStudioMediaProfile(step.method).frame}`;
         media.forEach((item) => {
           if (!item.signed_url) return;
           const figure = document.createElement('figure');

@@ -1535,7 +1535,7 @@ html[lang='en'] .prose-column p {
 .preview-media-grid img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  object-fit: contain;
   background: var(--paper-deep);
 }
 .preview-media-grid figcaption {
@@ -1649,6 +1649,31 @@ html[lang='en'] .prose-column p {
   aspect-ratio: 4 / 3;
   object-fit: contain;
   background: #fffaf3;
+}
+.studio-media-picker[data-media-profile="cover"] .studio-media-item img,
+.preview-media-grid.media-frame-portrait img {
+  aspect-ratio: 3 / 4;
+}
+.studio-media-picker[data-media-profile="migration"] .studio-media-item img,
+.studio-media-picker[data-media-profile="lineage"] .studio-media-item img,
+.studio-media-picker[data-media-profile="childhood"] .studio-media-item img,
+.studio-media-picker[data-media-profile="dish"] .studio-media-item img,
+.preview-media-grid.media-frame-landscape img {
+  aspect-ratio: 16 / 10;
+}
+.studio-media-picker[data-media-profile="register"] .studio-media-item img,
+.preview-media-grid.media-frame-document img {
+  aspect-ratio: 3 / 4;
+}
+.studio-media-unavailable {
+  display: grid;
+  min-height: 150px;
+  place-items: center;
+  padding: 18px;
+  color: var(--muted);
+  background: #fffaf3;
+  font-size: 0.82rem;
+  text-align: center;
 }
 .studio-media-controls {
   display: grid;

@@ -1,4 +1,5 @@
 import { getSupabase, isStudioConfigured } from './supabase';
+import { getStudioMediaProfile, type StudioMediaProfile } from '../data/studio';
 
 export type StudioBook = { id: string; title: string | null; generation_one_ancestor: string | null; consent_at: string | null };
 export type StudioSection = { method: number; content: Record<string, unknown>; is_complete: boolean; updated_at?: string };
@@ -233,12 +234,12 @@ function encodeJpeg(source: DecodedImage, maxEdge: number, initialQuality: numbe
   });
 }
 
-async function normalizeImage(file: File): Promise<NormalizedImage> {
+async function normalizeImage(file: File, profile: StudioMediaProfile): Promise<NormalizedImage> {
   const source = await decodeImage(file);
   try {
     const [display, thumb] = await Promise.all([
-      encodeJpeg(source, 2400, 0.84, 2 * 1024 * 1024, 'display.jpg'),
-      encodeJpeg(source, 720, 0.78, 450 * 1024, 'thumb.jpg'),
+      encodeJpeg(source, profile.displayMaxEdge, 0.84, profile.displayTargetBytes, 'display.jpg'),
+      encodeJpeg(source, profile.thumbMaxEdge, 0.78, profile.thumbTargetBytes, 'thumb.jpg'),
     ]);
     return { original: file, display, thumb };
   } finally {
@@ -296,7 +297,7 @@ export async function uploadMedia(bookId: string, method: number, file: File, ca
   if (!user) throw new Error('请先登录。');
   if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('请上传 JPG、PNG 或 WebP 图片。');
   if (file.size > 10 * 1024 * 1024) throw new Error('原始图片不能超过 10MB。');
-  const normalized = await normalizeImage(file);
+  const normalized = await normalizeImage(file, getStudioMediaProfile(method));
   const base = `${user.id}/${bookId}/method-${method}/${crypto.randomUUID()}`;
   const originalPath = `${base}/original.${originalExtension(file)}`;
   const displayPath = `${base}/display.jpg`;

@@ -1,4 +1,13 @@
 export type StudioStep = { method: number; slug: string; title: string; english: string; guidance: string; type: 'cover' | 'notes' | 'people' | 'register' };
+export type StudioMediaProfile = {
+  key: 'cover' | 'context' | 'migration' | 'lineage' | 'childhood' | 'dish' | 'register';
+  frame: 'portrait' | 'landscape' | 'document' | 'free';
+  displayMaxEdge: number;
+  thumbMaxEdge: number;
+  displayTargetBytes: number;
+  thumbTargetBytes: number;
+  guidance: string;
+};
 
 export const studioSteps: StudioStep[] = [
   { method: 1, slug: '1-cover', title: '封面', english: 'Cover', guidance: '先定下这本相册家谱的名字与开族始祖。两项完成后，再继续写其他章节。', type: 'cover' },
@@ -12,3 +21,18 @@ export const studioSteps: StudioStep[] = [
 ];
 
 export const studioStepBySlug = new Map(studioSteps.map((step) => [step.slug, step]));
+
+const studioMediaProfiles: Record<number, StudioMediaProfile> = {
+  1: { key: 'cover', frame: 'portrait', displayMaxEdge: 2000, thumbMaxEdge: 720, displayTargetBytes: 1.8 * 1024 * 1024, thumbTargetBytes: 420 * 1024, guidance: '封面优先保留完整画面；可用家庭合照、地点或物件，不会强行裁切。' },
+  2: { key: 'context', frame: 'landscape', displayMaxEdge: 2000, thumbMaxEdge: 720, displayTargetBytes: 1.8 * 1024 * 1024, thumbTargetBytes: 420 * 1024, guidance: '祖籍、姓氏和旧谱资料可横可竖，边缘与文字完整保留。' },
+  3: { key: 'migration', frame: 'landscape', displayMaxEdge: 2200, thumbMaxEdge: 760, displayTargetBytes: 2 * 1024 * 1024, thumbTargetBytes: 450 * 1024, guidance: '迁徙地图、旧居和路线适合横向阅读，系统不会裁掉两侧内容。' },
+  4: { key: 'context', frame: 'landscape', displayMaxEdge: 2000, thumbMaxEdge: 720, displayTargetBytes: 1.8 * 1024 * 1024, thumbTargetBytes: 420 * 1024, guidance: '会馆、庙宇、祖屋和文化物件按完整画面保存。' },
+  5: { key: 'lineage', frame: 'landscape', displayMaxEdge: 2400, thumbMaxEdge: 900, displayTargetBytes: 2.4 * 1024 * 1024, thumbTargetBytes: 520 * 1024, guidance: '世系图和家族合照保留较高分辨率，方便阅读人物与关系。' },
+  6: { key: 'childhood', frame: 'landscape', displayMaxEdge: 2000, thumbMaxEdge: 720, displayTargetBytes: 1.8 * 1024 * 1024, thumbTargetBytes: 420 * 1024, guidance: '童年照片保持原有比例，不裁掉人物、日期或相片边缘。' },
+  7: { key: 'dish', frame: 'landscape', displayMaxEdge: 1800, thumbMaxEdge: 680, displayTargetBytes: 1.6 * 1024 * 1024, thumbTargetBytes: 380 * 1024, guidance: '家肴照片和手稿可横可竖，完整保留菜品与文字说明。' },
+  8: { key: 'register', frame: 'document', displayMaxEdge: 2400, thumbMaxEdge: 900, displayTargetBytes: 2.4 * 1024 * 1024, thumbTargetBytes: 520 * 1024, guidance: '族人资料和文档按可读性保存，尽量保留整页，不裁切证件或文字。' },
+};
+
+export function getStudioMediaProfile(method: number): StudioMediaProfile {
+  return studioMediaProfiles[method] ?? studioMediaProfiles[2];
+}
