@@ -90,9 +90,7 @@ function renderLineage(people: StudioPerson[]) {
     return;
   }
   const generations = [...new Set(people.map((person) => person.generation_number))].sort((a, b) => a - b);
-  target.innerHTML = `<div class="lineage-tree" aria-label="按代次、家庭支系和父母子女关系排列的世系关系图">
-    <div class="lineage-tree-head"><div><strong>拓氏相册家谱</strong><span>按第一代落地新加坡为起点，逐代记录家庭支系</span></div><p><b>横线</b>表示配偶或同一家庭，<b>竖线</b>表示父母与子女。</p></div>
-    <div class="lineage-tree-grid">${generations.map((generation) => {
+  const generationRecords = generations.map((generation) => {
     const members = people.filter((person) => person.generation_number === generation).sort((a, b) => a.name.localeCompare(b.name));
     const branches = new Map<string, StudioPerson[]>();
     members.forEach((person) => {
@@ -103,14 +101,36 @@ function renderLineage(people: StudioPerson[]) {
       if (spouse && !branch.some((item) => item.id === spouse.id)) branch.push(spouse);
       branches.set(branchId, branch);
     });
-    const branchCards = [...branches.values()].map((branch, branchIndex) => {
-      const parents = [...new Map(branch.flatMap((person) => [person.father_id, person.mother_id]).filter((id): id is string => Boolean(id)).map((id) => [id, people.find((person) => person.id === id)]).filter((entry): entry is [string, StudioPerson] => Boolean(entry[1]))).values()];
-      const children = people.filter((person) => branch.some((parent) => person.father_id === parent.id || person.mother_id === parent.id));
+    return {
+      generation,
+      members,
+      branches: [...branches.values()].map((branch) => {
+        const parents = [...new Map(branch.flatMap((person) => [person.father_id, person.mother_id]).filter((id): id is string => Boolean(id)).map((id) => [id, people.find((person) => person.id === id)]).filter((entry): entry is [string, StudioPerson] => Boolean(entry[1]))).values()];
+        const children = people.filter((person) => branch.some((parent) => person.father_id === parent.id || person.mother_id === parent.id));
+        return { branch, parents, children };
+      }),
+    };
+  });
+  generationRecords.forEach((record, index) => {
+    if (index === 0) return;
+    const previous = generationRecords[index - 1].branches;
+    record.branches.sort((a, b) => {
+      const aParentIndex = previous.findIndex((parentBranch) => a.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)));
+      const bParentIndex = previous.findIndex((parentBranch) => b.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)));
+      return (aParentIndex < 0 ? Number.MAX_SAFE_INTEGER : aParentIndex) - (bParentIndex < 0 ? Number.MAX_SAFE_INTEGER : bParentIndex);
+    });
+  });
+  target.innerHTML = `<div class="lineage-tree" aria-label="按代次、家庭支系和父母子女关系排列的世系关系图">
+    <div class="lineage-tree-head"><div><strong>拓氏相册家谱</strong><span>按第一代落地新加坡为起点，逐代记录家庭支系</span></div><p><b>横线</b>表示配偶或同一家庭，<b>竖线</b>表示父母与子女。</p></div>
+    <div class="lineage-tree-grid">${generationRecords.map((record) => {
+    const branchCards = record.branches.map(({ branch, parents, children }, branchIndex) => {
       const parentLine = parents.length ? `<div class="lineage-branch-parents"><span>上承</span>${parents.map((parent) => escapeHtml(parent.name)).join('、')}</div>` : '';
       const childLine = children.length ? `<div class="lineage-branch-children"><span>子女</span><div class="lineage-child-list">${children.map((child) => `<span class="lineage-child-node">${escapeHtml(child.name)}</span>`).join('')}</div></div>` : '<div class="lineage-branch-children lineage-unlinked"><span>子女</span><div class="lineage-child-list"><span class="lineage-child-node">待补充</span></div></div>';
-      return `<article class="lineage-branch"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair">${branch.map((person) => `<div class="lineage-node-card"><span class="lineage-sex-marker" aria-hidden="true">${person.sex === 'female' ? '女' : '男'}</span><strong>${escapeHtml(person.name)}</strong><small>${lifeStatus(person.life_status)}${person.birth_year ? ` · ${person.birth_year}` : ''}</small></div>`).join('')}</div>${childLine}</article>`;
+      const familyText = branch.map((person) => `${escapeHtml(person.name)}（${lifeStatus(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`).join(' × ');
+      const familyType = branch.length > 1 ? '夫妻家庭' : '个人支系';
+      return `<article class="lineage-branch"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><strong>${familyText}</strong></div></div>${childLine}</article>`;
     }).join('');
-    return `<section class="lineage-generation-row" data-generation="${generation}"><div class="lineage-generation-axis"><span>第 ${generation} 代</span><small>${members.length} 位族人<br>${branches.size} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
+    return `<section class="lineage-generation-row" data-generation="${record.generation}"><div class="lineage-generation-axis"><span>第 ${record.generation} 代</span><small>${record.members.length} 位族人<br>${record.branches.length} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
   }).join('')}</div>
     <div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
   </div>`;

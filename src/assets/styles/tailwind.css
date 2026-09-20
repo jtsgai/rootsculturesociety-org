@@ -2166,24 +2166,44 @@ html[lang='en'] .prose-column p {
 }
 .lineage-family-pair {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  display: block;
 }
 .lineage-family-pair::before {
-  position: absolute;
-  top: 50%;
-  left: 28%;
-  right: 28%;
-  height: 1px;
-  background: var(--maroon);
-  content: '';
+  display: none;
 }
 .lineage-family-pair:has(.lineage-node-card:only-child) {
-  grid-template-columns: 1fr;
+  display: block;
 }
 .lineage-family-pair:has(.lineage-node-card:only-child)::before {
   display: none;
+}
+.lineage-couple {
+  position: relative;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.lineage-couple::after {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  width: 1px;
+  height: 11px;
+  background: var(--maroon);
+  content: '';
+}
+.lineage-couple span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--maroon);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+}
+.lineage-couple strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.55;
 }
 .lineage-branch .lineage-node-card {
   position: relative;
