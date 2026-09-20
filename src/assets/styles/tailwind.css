@@ -2023,88 +2023,233 @@ html[lang='en'] .prose-column p {
   display: block;
   min-width: min(100%, 680px);
 }
-.lineage-architecture {
-  display: grid;
-  gap: 22px;
-  min-width: 760px;
-}
-.lineage-generation {
-  position: relative;
-  padding: 18px;
+.lineage-tree {
+  min-width: 920px;
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
 }
-.lineage-generation-heading {
+.lineage-tree-head {
   display: flex;
-  align-items: baseline;
+  align-items: end;
   justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 12px;
+  gap: 24px;
+  padding: 18px 20px;
   border-bottom: 1px solid var(--line);
+}
+.lineage-tree-head strong,
+.lineage-tree-head span {
+  display: block;
+}
+.lineage-tree-head strong {
   color: var(--maroon);
-  font-size: 0.84rem;
+  font-size: 0.95rem;
   letter-spacing: 0.08em;
 }
-.lineage-generation-heading small {
+.lineage-tree-head span,
+.lineage-tree-head p,
+.lineage-tree-note {
   color: var(--muted);
-  font-size: 0.74rem;
-  letter-spacing: 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
 }
-.lineage-generation-grid {
+.lineage-tree-head span {
+  margin-top: 5px;
+}
+.lineage-tree-head p {
+  margin: 0;
+  text-align: right;
+}
+.lineage-tree-head b {
+  color: var(--maroon);
+  font-weight: 600;
+}
+.lineage-tree-grid {
+  position: relative;
+  padding: 4px 20px 8px;
+}
+.lineage-tree-grid::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 128px;
+  width: 1px;
+  background: color-mix(in srgb, var(--maroon) 46%, var(--line));
+  content: '';
+}
+.lineage-generation-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  min-height: 176px;
+}
+.lineage-generation-row:not(:last-child)::after {
+  position: absolute;
+  bottom: 0;
+  left: 108px;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+  content: '';
+}
+.lineage-generation-axis {
+  position: relative;
+  z-index: 1;
+  padding: 26px 16px 22px 0;
+  color: var(--maroon);
+  text-align: right;
+}
+.lineage-generation-axis::after {
+  position: absolute;
+  top: 31px;
+  right: -5px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--maroon);
+  border-radius: 50%;
+  background: var(--paper-deep);
+  content: '';
+}
+.lineage-generation-axis span {
+  display: block;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+}
+.lineage-generation-axis small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+.lineage-generation-branches {
   display: grid;
   grid-template-columns: repeat(3, minmax(210px, 1fr));
-  gap: 14px;
-  padding-top: 16px;
+  gap: 16px;
+  padding: 24px 0 28px 28px;
 }
 .lineage-branch {
   position: relative;
   display: grid;
+  align-content: start;
   gap: 10px;
-  min-height: 150px;
+  min-height: 122px;
   padding: 12px;
   border: 1px solid var(--line);
   background: var(--paper);
 }
+.lineage-branch::before,
+.lineage-branch::after {
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  background: var(--maroon);
+  content: '';
+}
+.lineage-branch::before {
+  top: -25px;
+  height: 24px;
+}
+.lineage-branch::after {
+  bottom: -29px;
+  height: 28px;
+}
+.lineage-generation-row:first-child .lineage-branch::before {
+  display: none;
+}
+.lineage-generation-row:last-child .lineage-branch::after {
+  display: none;
+}
+.lineage-branch-label {
+  color: var(--maroon);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
 .lineage-family-pair {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  position: relative;
 }
-.lineage-family-pair:only-child {
+.lineage-family-pair::before {
+  position: absolute;
+  top: 50%;
+  left: 28%;
+  right: 28%;
+  height: 1px;
+  background: var(--maroon);
+  content: '';
+}
+.lineage-family-pair:has(.lineage-node-card:only-child) {
   grid-template-columns: 1fr;
 }
+.lineage-family-pair:has(.lineage-node-card:only-child)::before {
+  display: none;
+}
 .lineage-branch .lineage-node-card {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  padding: 10px 11px;
+  padding: 9px 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
 }
 .lineage-branch .lineage-node-card::before,
 .lineage-branch .lineage-node-card::after {
   display: none;
 }
+.lineage-sex-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  border: 1px solid var(--maroon);
+  border-radius: 50%;
+  color: var(--maroon);
+  font-size: 0.62rem;
+}
+.lineage-branch .lineage-node-card strong {
+  font-size: 0.9rem;
+}
+.lineage-branch .lineage-node-card small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
 .lineage-branch-parents,
 .lineage-branch-children {
-  padding-top: 9px;
+  padding-top: 8px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   line-height: 1.5;
 }
 .lineage-branch-parents span,
-.lineage-branch-children span {
+.lineage-branch-children > span {
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   color: var(--maroon);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   letter-spacing: 0.06em;
 }
-.lineage-generation-connector {
-  position: absolute;
-  bottom: -23px;
-  left: 50%;
-  width: 1px;
-  height: 22px;
-  background: var(--maroon);
+.lineage-child-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.lineage-child-node {
+  position: relative;
+  display: inline-block;
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+.lineage-tree-note {
+  padding: 12px 20px 16px 148px;
+  border-top: 1px solid var(--line);
 }
 .lineage-family {
   position: relative;
