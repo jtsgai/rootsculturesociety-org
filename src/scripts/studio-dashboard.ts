@@ -1,5 +1,4 @@
 import { getAiQuota } from '../lib/ai';
-import { listBookExports, requestBookExport, type BookExport } from '../lib/member-publication';
 import {
   allSections,
   changeInitialPassword,
@@ -19,30 +18,9 @@ const progressSummary = document.querySelector<HTMLElement>('[data-studio-progre
 const tools = document.querySelector<HTMLElement>('[data-studio-tools]');
 const aiBalance = document.querySelector<HTMLElement>('[data-ai-balance]');
 const aiStatus = document.querySelector<HTMLElement>('[data-ai-status]');
-const exportList = document.querySelector<HTMLElement>('[data-export-list]');
 
 function report(message: string) {
   if (status) status.textContent = message;
-}
-
-function exportLabel(exportItem: BookExport) {
-  const format = exportItem.format === 'pdf' ? 'PDF' : '网页预览';
-  const state = { queued: '排队中', running: '生成中', ready: '已完成', failed: '失败' }[exportItem.status];
-  return `${format} · ${state}`;
-}
-
-function renderExports(items: BookExport[]) {
-  if (!exportList) return;
-  exportList.replaceChildren();
-  if (!items.length) {
-    exportList.textContent = '尚未请求导出。';
-    return;
-  }
-  items.slice(0, 4).forEach((item) => {
-    const row = document.createElement('p');
-    row.textContent = exportLabel(item);
-    exportList.append(row);
-  });
 }
 
 function formatSavedAt(value: string | undefined) {
@@ -50,7 +28,7 @@ function formatSavedAt(value: string | undefined) {
   return new Intl.DateTimeFormat('zh-SG', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(value));
 }
 
-async function loadTools(bookId: string) {
+async function loadTools() {
   if (!isStudioConfigured || !tools) return;
   tools.hidden = false;
   try {
@@ -58,11 +36,6 @@ async function loadTools(bookId: string) {
     if (aiBalance) aiBalance.textContent = String(quota.balance);
   } catch {
     if (aiStatus) aiStatus.textContent = '额度接口尚未启用。';
-  }
-  try {
-    renderExports(await listBookExports(bookId));
-  } catch {
-    if (exportList) exportList.textContent = '导出接口尚未启用。';
   }
 }
 
@@ -100,32 +73,13 @@ async function boot() {
       item.classList.toggle('is-complete', Boolean(section?.is_complete));
       item.classList.toggle('is-started', Boolean(section && !section.is_complete));
     });
-    await loadTools(book.id);
+    await loadTools();
     const passwordPanel = document.querySelector<HTMLElement>('[data-password-change]');
     if (passwordPanel) passwordPanel.hidden = !member.must_change_password;
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());
   }
 }
-
-document.querySelectorAll<HTMLButtonElement>('[data-export-format]').forEach((button) => {
-  button.addEventListener('click', async () => {
-    const book = await currentBook();
-    const format = button.dataset.exportFormat;
-    if (!book || (format !== 'web' && format !== 'pdf')) return;
-    button.disabled = true;
-    report('正在提交导出请求…');
-    try {
-      await requestBookExport(book.id, format);
-      renderExports(await listBookExports(book.id));
-      report('导出请求已记录；完成后会显示状态。');
-    } catch (error) {
-      report(error instanceof Error ? error.message : '无法提交导出请求。');
-    } finally {
-      button.disabled = false;
-    }
-  });
-});
 
 signout?.addEventListener('click', async () => {
   await signOut();

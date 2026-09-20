@@ -53,14 +53,13 @@ import { studioSteps } from '../../data/studio';
         <article class="studio-tool-card">
           <span class="eyebrow">EXPORT / 导出</span>
           <strong>网页预览与 PDF</strong>
-          <p>提交后会进入队列；生成状态会显示在这里。</p>
+          <p>先在私密预览中检查八个章节，再用浏览器保存为 PDF。</p>
           <div class="studio-tool-actions">
-            <button class="button" type="button" data-export-format="web">请求网页预览</button><button
-              class="text-link"
-              type="button"
-              data-export-format="pdf">请求 PDF</button>
+            <a class="button" href="/studio/preview">打开私密预览</a><a class="text-link" href="/studio/preview"
+              >打印 / 保存 PDF ↗</a
+            >
           </div>
-          <div class="studio-export-list" data-export-list></div>
+          <p class="studio-tool-note">在打印窗口选择「存储为 PDF」；私密图片不会变成公开文件。</p>
         </article>
         <article class="studio-tool-card">
           <span class="eyebrow">PUBLIC STORY / 公开故事</span>
