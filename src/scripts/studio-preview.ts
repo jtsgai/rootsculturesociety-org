@@ -10,6 +10,15 @@ const labels: Record<string, string> = {
   migrationRows: '迁徙记录', childhoodRows: '童年记忆', dishRows: '家肴记录',
   year: '年份', place: '地点', note: '记忆或说明', dish: '菜名', ingredients: '材料', method: '做法', taughtBy: '传授者',
 };
+const photoFallbacks: Record<number, string> = {
+  2: '从旧相片、木箱与手稿开始，辨认家中代代相传的姓氏线索。',
+  3: '家书、船票与店屋地址，让一段迁徙路程有了可以追溯的物证。',
+  4: '茶桌、器物与日常习惯，是籍贯文化留在家里的细小痕迹。',
+  5: '把三代人的资料放在同一张世系图里，看见名字之间的来处与去处。',
+  6: '旧巷口、书包与雨后的路面，收住一个家庭共同记得的童年场景。',
+  7: '一桌家常菜，把代代相传的手艺和一家人的相聚留在画面里。',
+  8: '资料卡、照片与记录，让每位家人的人生线索可以继续补充。',
+};
 
 function report(message: string) {
   if (status) status.textContent = message;
@@ -74,13 +83,16 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
   tree.className = 'preview-lineage-tree';
   const generations = [...new Set(people.map((person) => person.generation_number))].sort((a, b) => a - b);
   generations.forEach((generation) => {
-    const column = document.createElement('section');
-    column.className = 'preview-lineage-generation';
+    const level = document.createElement('section');
+    level.className = 'preview-lineage-generation';
     const label = document.createElement('span');
     label.className = 'preview-generation-label';
     label.textContent = `第 ${generation} 代`;
-    column.append(label);
-    people.filter((person) => person.generation_number === generation).forEach((person) => {
+    const nodes = document.createElement('div');
+    nodes.className = 'preview-lineage-nodes';
+    const peopleInGeneration = people.filter((person) => person.generation_number === generation);
+    if (peopleInGeneration.length > 1) nodes.classList.add('has-branches');
+    peopleInGeneration.forEach((person) => {
       const card = document.createElement('article');
       card.className = 'preview-lineage-person';
       const name = document.createElement('strong');
@@ -90,27 +102,16 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
       const relation = document.createElement('span');
       relation.textContent = relationText(person, people);
       card.append(name, meta, relation);
-      column.append(card);
+      nodes.append(card);
     });
-    tree.append(column);
+    level.append(label, nodes);
+    tree.append(level);
   });
   parent.append(tree);
   const note = document.createElement('p');
   note.className = 'preview-lineage-note';
   note.textContent = '关系按会员填写的父亲、母亲与配偶字段连接；未注明的关系不会由系统推测。';
   parent.append(note);
-}
-
-function registerField(parent: HTMLElement, label: string, value: string | number | null | undefined) {
-  if (value === null || value === undefined || value === '') return;
-  const row = document.createElement('div');
-  row.className = 'preview-register-field';
-  const term = document.createElement('dt');
-  term.textContent = label;
-  const detail = document.createElement('dd');
-  detail.textContent = String(value);
-  row.append(term, detail);
-  parent.append(row);
 }
 
 function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
@@ -122,26 +123,35 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
   heading.className = 'preview-subheading';
   heading.textContent = '族人资料表';
   parent.append(heading);
-  const table = document.createElement('div');
-  table.className = 'preview-register-list';
-  [...people].sort((a, b) => a.generation_number - b.generation_number || a.name.localeCompare(b.name)).forEach((person) => {
-    const card = document.createElement('article');
-    card.className = 'preview-register-card';
-    const heading = document.createElement('h4');
-    heading.textContent = person.name;
-    const meta = document.createElement('p');
-    meta.textContent = personMeta(person);
-    const fields = document.createElement('dl');
-    registerField(fields, '关系', relationText(person, people));
-    registerField(fields, '性别', person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '未注明');
-    registerField(fields, '教育', person.education);
-    registerField(fields, '职业', person.occupation);
-    registerField(fields, '电话', person.phone);
-    registerField(fields, '地址', person.address);
-    registerField(fields, '人物小记', person.note);
-    card.append(heading, meta, fields);
-    table.append(card);
+  const table = document.createElement('table');
+  table.className = 'preview-register-table';
+  const head = document.createElement('thead');
+  const headRow = document.createElement('tr');
+  ['世代与姓名', '关系与生卒', '教育与职业', '联络资料', '人物小记'].forEach((label) => {
+    const cell = document.createElement('th');
+    cell.scope = 'col';
+    cell.textContent = label;
+    headRow.append(cell);
   });
+  head.append(headRow);
+  const body = document.createElement('tbody');
+  [...people].sort((a, b) => a.generation_number - b.generation_number || a.name.localeCompare(b.name)).forEach((person) => {
+    const row = document.createElement('tr');
+    const cells = [
+      `第 ${person.generation_number} 代\n${person.name}`,
+      `${relationText(person, people)}\n${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'} · ${personMeta(person)}`,
+      [person.education, person.occupation].filter(Boolean).join('\n') || '待补充',
+      [person.phone, person.address].filter(Boolean).join('\n') || '私密资料未填写',
+      person.note || '待补充',
+    ];
+    cells.forEach((text) => {
+      const cell = document.createElement('td');
+      cell.textContent = text;
+      row.append(cell);
+    });
+    body.append(row);
+  });
+  table.append(head, body);
   parent.append(table);
 }
 
@@ -170,23 +180,48 @@ function renderReadiness(book: Awaited<ReturnType<typeof currentBook>>, sections
   readiness.append(heading, detail);
 }
 
-function createMediaGallery(media: Awaited<ReturnType<typeof listMedia>>, method: number) {
+function createMediaSpreads(media: Awaited<ReturnType<typeof listMedia>>, method: number) {
   const visible = media.filter((item) => item.signed_url);
   if (!visible.length) return null;
-  const gallery = document.createElement('div');
-  gallery.className = `preview-media-grid media-frame-${getStudioMediaProfile(method).frame}`;
-  visible.forEach((item) => {
+  const spreads = document.createElement('div');
+  spreads.className = `preview-photo-spreads media-frame-${getStudioMediaProfile(method).frame}`;
+  visible.forEach((item, index) => {
     const figure = document.createElement('figure');
+    figure.className = 'preview-photo-spread';
+    if (index % 2) figure.classList.add('is-reversed');
+    const visual = document.createElement('div');
+    visual.className = 'preview-photo-visual';
     const image = document.createElement('img');
     image.src = item.signed_url!;
-    image.alt = item.caption || '相册家谱图片';
+    const captionText = item.caption || photoFallbacks[method] || '请为这张照片补充一段记忆说明。';
+    image.alt = captionText;
     image.loading = 'lazy';
     const caption = document.createElement('figcaption');
-    caption.textContent = item.caption || '';
-    figure.append(image, caption);
-    gallery.append(figure);
+    const number = document.createElement('span');
+    number.textContent = `图 ${String(index + 1).padStart(2, '0')}`;
+    const description = document.createElement('p');
+    description.textContent = captionText;
+    const context = document.createElement('small');
+    context.textContent = '一张照片，一段可以被后人读懂的家族记忆。';
+    visual.append(image);
+    caption.append(number, description, context);
+    figure.append(visual, caption);
+    spreads.append(figure);
   });
-  return gallery;
+  return spreads;
+}
+
+function createCoverPhoto(media: Awaited<ReturnType<typeof listMedia>>) {
+  const item = media.find((entry) => entry.signed_url);
+  if (!item) return null;
+  const visual = document.createElement('figure');
+  visual.className = 'preview-cover-photo';
+  const image = document.createElement('img');
+  image.src = item.signed_url!;
+  image.alt = item.caption || '相册家谱封面';
+  image.loading = 'eager';
+  visual.append(image);
+  return visual;
 }
 
 async function renderPreview(bookId: string) {
@@ -204,10 +239,13 @@ async function renderPreview(bookId: string) {
   title.textContent = book.title || '尚未命名的相册家谱';
   const ancestor = document.createElement('p');
   ancestor.textContent = book.generation_one_ancestor ? `第一代开族始祖：${book.generation_one_ancestor}` : '尚未填写第一代开族始祖。';
-  cover.append(coverKicker, title, ancestor);
+  const coverCopy = document.createElement('div');
+  coverCopy.className = 'preview-cover-copy';
+  coverCopy.append(coverKicker, title, ancestor);
+  cover.append(coverCopy);
   try {
-    const coverGallery = createMediaGallery(await listMedia(bookId, 1), 1);
-    if (coverGallery) cover.append(coverGallery);
+    const coverPhoto = createCoverPhoto(await listMedia(bookId, 1));
+    if (coverPhoto) cover.append(coverPhoto);
   } catch {
     // A missing private media table or expired signed URL must not block text preview.
   }
@@ -228,8 +266,8 @@ async function renderPreview(bookId: string) {
     article.append(kicker, heading);
     try {
       const media = await listMedia(bookId, step.method);
-      const gallery = createMediaGallery(media, step.method);
-      if (gallery) article.append(gallery);
+      const spreads = createMediaSpreads(media, step.method);
+      if (spreads) article.append(spreads);
     } catch {
       // A missing private media table or expired signed URL must not block text preview.
     }

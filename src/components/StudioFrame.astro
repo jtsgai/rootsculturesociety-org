@@ -5,15 +5,16 @@ interface Props {
   title: string;
   description?: string;
   area?: 'member' | 'admin';
+  wide?: boolean;
 }
 
-const { title, description = '会员专属的私密相册家谱。', area = 'member' } = Astro.props;
+const { title, description = '会员专属的私密相册家谱。', area = 'member', wide = false } = Astro.props;
 const isAdmin = area === 'admin';
 const backHref = isAdmin ? '/' : '/studio';
 const backLabel = isAdmin ? '← 返回网站首页' : '← 我的相册家谱';
 ---
 <SiteLayout lang="zh" title={title} description={description} robots="noindex, nofollow" alternate={false}>
-  <section class:list={['studio-shell', { 'studio-shell-admin': isAdmin }]}>
+  <section class:list={['studio-shell', { 'studio-shell-admin': isAdmin, 'studio-shell-wide': wide }]}>
     <div class="studio-topline">
       <a class="studio-back-link" href={backHref}>{backLabel}</a>
       <button class="studio-signout" type="button" data-studio-signout hidden>{isAdmin ? '退出管理员页面' : '退出谱坊'}</button>
