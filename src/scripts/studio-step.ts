@@ -1,4 +1,4 @@
-import { addPerson, currentBook, currentMember, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, updatePerson } from '../lib/studio';
+import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
@@ -6,6 +6,7 @@ const method = Number(container?.dataset.studioStep ?? 0);
 const type = container?.dataset.stepType;
 let bookId = '';
 let mediaItems: StudioMedia[] = [];
+let peopleItems: StudioPerson[] = [];
 
 function report(message: string) {
   if (status) status.textContent = message;
@@ -32,16 +33,47 @@ async function ensureMember() {
   return true;
 }
 
-function renderPeople(people: Awaited<ReturnType<typeof listPeople>>, register = false) {
+function personOptions(people: StudioPerson[], currentId: string, selectedId: string | null, emptyLabel: string) {
+  const options = people.filter((person) => person.id !== currentId).map((person) => `<option value="${person.id}"${person.id === selectedId ? ' selected' : ''}>第 ${person.generation_number} 代 · ${escapeHtml(person.name)}</option>`).join('');
+  return `<option value="">${emptyLabel}</option>${options}`;
+}
+
+function renderPersonEditor(person: StudioPerson, people: StudioPerson[]) {
+  return `<form class="studio-person-row studio-person-edit" data-person-edit="${person.id}"><div class="studio-person-identity"><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${lifeStatus(person.life_status)}</small><p>${escapeHtml(person.note || '尚未填写人物小记。')}</p></div><div class="studio-person-edit-fields"><div class="studio-fields"><label>姓名<input name="name" value="${escapeAttribute(person.name)}" required /></label><label>世代<input name="generation" type="number" min="1" value="${person.generation_number}" required /></label><label>性别<select name="sex"><option value="unspecified"${person.sex === 'unspecified' ? ' selected' : ''}>不注明</option><option value="female"${person.sex === 'female' ? ' selected' : ''}>女</option><option value="male"${person.sex === 'male' ? ' selected' : ''}>男</option></select></label><label>状态<select name="lifeStatus"><option value="unspecified"${person.life_status === 'unspecified' ? ' selected' : ''}>不注明</option><option value="living"${person.life_status === 'living' ? ' selected' : ''}>在世</option><option value="deceased"${person.life_status === 'deceased' ? ' selected' : ''}>已故</option></select></label><label>出生年份<input name="birthYear" type="number" min="1800" max="2200" value="${person.birth_year ?? ''}" /></label></div><div class="studio-fields"><label>父亲<select name="fatherId">${personOptions(people, person.id, person.father_id, '未选择')}</select></label><label>母亲<select name="motherId">${personOptions(people, person.id, person.mother_id, '未选择')}</select></label><label>配偶<select name="spouseId">${personOptions(people, person.id, person.spouse_id, '未选择')}</select></label></div><label>人物小记<textarea name="note" rows="3">${escapeHtml(person.note || '')}</textarea></label><div class="studio-person-actions"><button class="text-link" type="submit">保存人物与关系</button><button class="text-link media-remove" type="button" data-delete-person>删除人物</button></div></div></form>`;
+}
+
+function renderPeople(people: StudioPerson[], register = false) {
+  peopleItems = people;
   const target = document.querySelector<HTMLElement>(register ? '[data-register-list]' : '[data-person-list]');
   if (!target) return;
   if (!people.length) {
     target.innerHTML = '<p class="studio-empty">还没有资料。先从最确定的一位家人开始。</p>';
+    if (!register) renderLineage([]);
     return;
   }
   target.innerHTML = people.map((person) => register
     ? `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}"></label><label>电话（仅本人及管理员）<input name="phone" value="${escapeAttribute(person.phone)}"></label><label>地址（仅本人及管理员）<input name="address" value="${escapeAttribute(person.address)}"></label><button class="text-link" type="submit">保存</button></form>`
-    : `<article class="studio-person-row"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${lifeStatus(person.life_status)}</small></div><p>${escapeHtml(person.note || '尚未填写人物小记。')}</p></article>`).join('');
+    : renderPersonEditor(person, people)).join('');
+  if (!register) renderLineage(people);
+}
+
+function renderLineage(people: StudioPerson[]) {
+  const target = document.querySelector<HTMLElement>('[data-lineage-canvas]');
+  if (!target) return;
+  if (!people.length) {
+    target.innerHTML = '<p class="studio-empty">加入族人后，这里会显示关系图。</p>';
+    return;
+  }
+  const sorted = [...people].sort((a, b) => a.generation_number - b.generation_number || a.name.localeCompare(b.name));
+  target.innerHTML = sorted.map((person) => {
+    const parents = [{ id: person.father_id, label: '父亲' }, { id: person.mother_id, label: '母亲' }].map((relation) => ({ ...relation, person: people.find((item) => item.id === relation.id) })).filter((relation) => relation.person) as { id: string; label: string; person: StudioPerson }[];
+    const spouse = people.find((item) => item.id === person.spouse_id);
+    const children = people.filter((item) => item.father_id === person.id || item.mother_id === person.id);
+    const parentLine = parents.length ? `<div class="lineage-parent-line"><span class="lineage-rule" aria-hidden="true"></span><span>${parents.map((parent) => `${parent.label}：${escapeHtml(parent.person.name)}`).join(' · ')}</span></div>` : '';
+    const spouseLine = spouse ? `<span class="lineage-spouse"><span class="lineage-rule" aria-hidden="true"></span>配偶：${escapeHtml(spouse.name)}</span>` : '';
+    const childrenLine = children.length ? `<div class="lineage-children-line"><span class="lineage-rule" aria-hidden="true"></span><span>子女：${children.map((child) => escapeHtml(child.name)).join('、')}</span></div>` : '';
+    return `<article class="lineage-family"><div class="lineage-generation-label">第 ${person.generation_number} 代</div>${parentLine}<div class="lineage-node-card"><strong>${escapeHtml(person.name)}</strong><small>${lifeStatus(person.life_status)}${person.birth_year ? ` · ${person.birth_year}` : ''}</small><div class="lineage-node-relations">${spouseLine || '<span class="lineage-unlinked">尚未填写配偶关系</span>'}</div></div>${childrenLine || '<div class="lineage-no-children">尚未填写子女关系</div>'}</article>`;
+  }).join('');
 }
 
 function escapeHtml(value: string) {
@@ -237,13 +269,61 @@ document.querySelector<HTMLFormElement>('[data-person-form]')?.addEventListener(
     const generation = Number(data.get('generation'));
     if (!name || !Number.isInteger(generation) || generation < 1) throw new Error('请填写姓名与正确的世代。');
     const birthYear = Number(data.get('birthYear')) || null;
-    await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: String(data.get('lifeStatus') || 'unspecified'), birth_year: birthYear, occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
+    await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: String(data.get('lifeStatus') || 'unspecified'), father_id: null, mother_id: null, spouse_id: null, birth_year: birthYear, occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
     await saveSection(bookId, method, {}, true);
     form.reset();
     renderPeople(await listPeople(bookId));
     report('已加入世系。');
   } catch (error) {
     report(error instanceof Error ? error.message : '无法保存人物。');
+  }
+});
+
+document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('submit', async (event) => {
+  const form = event.target;
+  if (!(form instanceof HTMLFormElement) || !form.dataset.personEdit) return;
+  event.preventDefault();
+  try {
+    const values = new FormData(form);
+    const person = peopleItems.find((item) => item.id === form.dataset.personEdit);
+    if (!person) throw new Error('找不到这位族人，请刷新后重试。');
+    const name = stringOrNull(values.get('name'));
+    const generation = Number(values.get('generation'));
+    if (!name || !Number.isInteger(generation) || generation < 1) throw new Error('请填写姓名与正确的世代。');
+    const previousSpouseId = person.spouse_id;
+    const spouseId = stringOrNull(values.get('spouseId'));
+    await updatePerson(person.id, {
+      name,
+      generation_number: generation,
+      sex: String(values.get('sex') || 'unspecified'),
+      life_status: String(values.get('lifeStatus') || 'unspecified'),
+      father_id: stringOrNull(values.get('fatherId')),
+      mother_id: stringOrNull(values.get('motherId')),
+      spouse_id: spouseId,
+      birth_year: Number(values.get('birthYear')) || null,
+      note: stringOrNull(values.get('note')),
+    });
+    if (previousSpouseId && previousSpouseId !== spouseId) await updatePerson(previousSpouseId, { spouse_id: null });
+    if (spouseId && spouseId !== previousSpouseId) await updatePerson(spouseId, { spouse_id: person.id });
+    renderPeople(await listPeople(bookId));
+    report('人物与关系已保存。');
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法保存人物与关系。');
+  }
+});
+
+document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('click', async (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement) || !target.closest('[data-delete-person]')) return;
+  const form = target.closest<HTMLFormElement>('[data-person-edit]');
+  const id = form?.dataset.personEdit;
+  if (!id || !window.confirm('确定删除这位族人吗？已有关系会自动断开，其他资料不会删除。')) return;
+  try {
+    await deletePerson(id);
+    renderPeople(await listPeople(bookId));
+    report('人物已删除，相关关系已断开。');
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法删除人物。');
   }
 });
 
@@ -319,7 +399,7 @@ void (async () => {
     if (!(await ensureMember())) return;
     await fillSavedContent();
     if (type === 'people') renderPeople(await listPeople(bookId));
-    if (type === 'register') renderPeople(await listPeople(bookId), true);
+    if (type === 'register') renderPeople(await listPeople(bookId, { includeSensitive: true }), true);
     await loadMedia();
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());

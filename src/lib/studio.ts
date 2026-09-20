@@ -4,6 +4,7 @@ export type StudioBook = { id: string; title: string | null; generation_one_ance
 export type StudioSection = { method: number; content: Record<string, unknown>; is_complete: boolean };
 export type StudioPerson = {
   id: string; name: string; generation_number: number; sex: string | null; life_status: string | null;
+  father_id: string | null; mother_id: string | null; spouse_id: string | null;
   birth_year: number | null; occupation: string | null; education: string | null; phone: string | null; address: string | null; note: string | null;
 };
 export type StudioMedia = {
@@ -122,10 +123,11 @@ export async function saveBook(bookId: string, fields: Record<string, string | n
   if (error) throw error;
 }
 
-export async function listPeople(bookId: string): Promise<StudioPerson[]> {
-  const { data, error } = await requireClient().from('people').select('id, name, generation_number, sex, life_status, birth_year, occupation, education, phone, address, note').eq('book_id', bookId).order('generation_number').order('name');
+export async function listPeople(bookId: string, options: { includeSensitive?: boolean } = {}): Promise<StudioPerson[]> {
+  const sensitiveFields = options.includeSensitive ? ', occupation, education, phone, address' : '';
+  const { data, error } = await requireClient().from('people').select(`id, name, generation_number, sex, life_status, father_id, mother_id, spouse_id, birth_year${sensitiveFields}, note`).eq('book_id', bookId).order('generation_number').order('name');
   if (error) throw error;
-  return data ?? [];
+  return (data ?? []) as unknown as StudioPerson[];
 }
 
 export async function addPerson(bookId: string, person: Omit<StudioPerson, 'id'>) {

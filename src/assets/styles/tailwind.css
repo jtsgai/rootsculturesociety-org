@@ -1388,6 +1388,171 @@ html[lang='en'] .prose-column p {
   padding: 20px 0;
   border-bottom: 1px solid var(--line);
 }
+.studio-person-edit {
+  grid-template-columns: minmax(170px, 0.75fr) minmax(0, 1.5fr);
+  align-items: start;
+}
+.studio-person-identity p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.studio-person-edit-fields {
+  display: grid;
+  gap: 4px;
+}
+.studio-person-edit-fields .studio-fields {
+  margin-bottom: 0;
+}
+.studio-person-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.studio-person-actions .text-link {
+  font-size: 0.82rem;
+}
+.studio-lineage {
+  margin-top: 46px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+.studio-lineage-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+.studio-lineage-heading h3 {
+  margin: 12px 0 0;
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 500;
+}
+.studio-lineage-heading p {
+  max-width: 480px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+.studio-lineage-scroll {
+  overflow-x: auto;
+  padding: 8px 4px 18px;
+  scrollbar-color: var(--maroon) var(--paper-deep);
+}
+.studio-lineage-canvas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  min-width: min(100%, 680px);
+}
+.lineage-family {
+  position: relative;
+  display: grid;
+  gap: 0;
+  min-height: 190px;
+  padding: 22px 18px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+.lineage-generation-label {
+  color: var(--maroon);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+}
+.lineage-node-card {
+  position: relative;
+  margin: 12px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+.lineage-node-card::before,
+.lineage-node-card::after,
+.lineage-parent-line::after,
+.lineage-children-line::before {
+  content: '';
+  position: absolute;
+  background: var(--maroon);
+}
+.lineage-node-card::before {
+  top: -13px;
+  left: 50%;
+  width: 1px;
+  height: 12px;
+}
+.lineage-node-card::after {
+  bottom: -13px;
+  left: 50%;
+  width: 1px;
+  height: 12px;
+}
+.lineage-node-card strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.lineage-node-card small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+}
+.lineage-node-relations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.lineage-spouse {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.lineage-rule {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--maroon);
+  vertical-align: middle;
+}
+.lineage-parent-line,
+.lineage-children-line {
+  position: relative;
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.lineage-parent-line {
+  padding-top: 0;
+}
+.lineage-parent-line .lineage-rule {
+  margin-right: 8px;
+}
+.lineage-parent-line::after {
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 12px;
+}
+.lineage-children-line {
+  padding-top: 18px;
+}
+.lineage-children-line .lineage-rule {
+  width: 1px;
+  height: 12px;
+  margin: 0 8px 0 50%;
+}
+.lineage-no-children,
+.lineage-unlinked {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
 .studio-person-row strong {
   display: block;
   font-family: var(--serif);
@@ -2004,6 +2169,10 @@ html[lang='en'] .prose-column p {
     grid-column: auto;
   }
   .studio-media-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .studio-lineage-heading {
     align-items: start;
     flex-direction: column;
   }
