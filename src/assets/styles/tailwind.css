@@ -1376,6 +1376,21 @@ html[lang='en'] .prose-column p {
   margin-top: 12px !important;
   font-size: 0.76rem !important;
 }
+.studio-ai-presets {
+  display: grid;
+  gap: 7px;
+  margin: 14px 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.studio-ai-presets select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+}
 .studio-preview {
   max-width: 980px;
 }

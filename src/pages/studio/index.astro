@@ -1,6 +1,7 @@
 ---
 import StudioFrame from '../../components/StudioFrame.astro';
 import { studioSteps } from '../../data/studio';
+import { aiPromptPresets } from '../../data/ai-prompts';
 ---
 
 <StudioFrame title="我的相册家谱">
@@ -48,6 +49,7 @@ import { studioSteps } from '../../data/studio';
           <span class="eyebrow">AI ASSIST / AI 辅助</span>
           <strong><span data-ai-balance>—</span> 额度</strong>
           <p data-ai-status>供应商尚未启用，现阶段不会消耗额度。</p>
+          <label class="studio-ai-presets">可选择的辅助方式<select disabled data-ai-preset><option>AI 接口启用后可选择</option>{aiPromptPresets.map((preset) => <option value={preset.id}>{preset.label} · {preset.creditCost} 额度</option>)}</select></label>
           <button class="text-link" type="button" disabled>AI 辅助尚未启用</button>
         </article>
         <article class="studio-tool-card">

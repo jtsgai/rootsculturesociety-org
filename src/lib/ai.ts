@@ -1,4 +1,8 @@
 import { getSupabase, isStudioConfigured } from './supabase';
+import { aiPromptPresets, type AiPromptPreset } from '../data/ai-prompts';
+
+export { aiPromptPresets } from '../data/ai-prompts';
+export type { AiPromptPreset } from '../data/ai-prompts';
 
 export type AiFeature = 'cover' | 'restore' | 'prompt' | 'research';
 
@@ -29,6 +33,10 @@ export const aiFeatureLabels: Record<AiFeature, string> = {
   prompt: '提示词助手',
   research: '资料搜索助手',
 };
+
+export function getAiPromptPreset(id: string): AiPromptPreset | undefined {
+  return aiPromptPresets.find((preset) => preset.id === id);
+}
 
 function requireClient() {
   const client = getSupabase();
