@@ -68,9 +68,18 @@ function renderPeople(people: StudioPerson[], register = false) {
     return;
   }
   target.innerHTML = people.map((person) => register
-    ? `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}"></label><label>电话（仅本人及管理员）<input name="phone" value="${escapeAttribute(person.phone)}"></label><label>地址（仅本人及管理员）<input name="address" value="${escapeAttribute(person.address)}"></label><button class="text-link" type="submit">保存</button></form>`
+    ? `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}"></label><label>电话（仅本人及管理员）<input name="phone" value="${escapeAttribute(person.phone)}"></label><label>地址（仅本人及管理员）<input name="address" value="${escapeAttribute(person.address)}"></label><button class="text-link" type="submit">保存</button></form>`
     : renderPersonEditor(person, people)).join('');
   if (!register) renderLineage(people);
+}
+
+function relationSummary(person: StudioPerson, people: StudioPerson[]) {
+  const relations = [
+    person.father_id ? `父：${people.find((item) => item.id === person.father_id)?.name ?? '未注明'}` : '',
+    person.mother_id ? `母：${people.find((item) => item.id === person.mother_id)?.name ?? '未注明'}` : '',
+    person.spouse_id ? `配偶：${people.find((item) => item.id === person.spouse_id)?.name ?? '未注明'}` : '',
+  ].filter(Boolean);
+  return relations.length ? relations.join(' · ') : '关系待补充';
 }
 
 function renderLineage(people: StudioPerson[]) {

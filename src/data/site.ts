@@ -27,6 +27,7 @@ export const committee = [
   { zh: '锺骏源', en: 'Ian Chung', roleZh: '秘书长', roleEn: 'Secretary', image: '/committee/ian-chung.jpg', altZh: '锺骏源', altEn: 'Ian Chung' },
   { zh: '拓劲涛', en: 'Tuo Jintao', roleZh: '助理秘书长', roleEn: 'Assistant Secretary', image: '/committee/tuo-jintao.jpg', altZh: '拓劲涛', altEn: 'Tuo Jintao' },
   { zh: '蔡仑宗', en: 'Cai Lun Zong', roleZh: '委员', roleEn: 'Committee Member', image: '/committee/cai-lunzong.jpg', altZh: '蔡仑宗', altEn: 'Cai Lun Zong' },
+  { zh: '黄良南', en: 'Wong Liang Nam', roleZh: '委员', roleEn: 'Committee Member', image: '/committee/wong-liang-nam.jpg', altZh: '黄良南', altEn: 'Wong Liang Nam' },
 ];
 
 export const activityMoments = [
