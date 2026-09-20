@@ -11,6 +11,10 @@ import StudioFrame from '../../components/StudioFrame.astro';
       </div>
       <p>一位会员对应一本私密相册家谱。电邮及手机号码为必填资料，仅用于学会会务联络，绝不出现在公开网站。</p>
     </div>
+    <section class="admin-password-help" aria-labelledby="admin-password-help-title">
+      <div><span class="admin-section-label">管理员密码</span><h3 id="admin-password-help-title">首次使用或忘记密码？</h3><p>点击后会把一封新的设置密码邮件寄到你的管理员电邮。请只使用最新一封邮件中的链接。</p></div>
+      <button class="text-link" type="button" data-admin-password-reset>寄送设置密码邮件</button>
+    </section>
     <section class="admin-panel admin-provision" aria-labelledby="admin-create-title">
       <h3 id="admin-create-title">新会员</h3>
       <p>系统会产生一次性的 8 位初始密码；请用 WhatsApp 或纸本交给会员，不要以电邮发送密码。</p>
@@ -25,6 +29,7 @@ import StudioFrame from '../../components/StudioFrame.astro';
       </div><button class="button" type="submit">开通会员与初始密码</button>
       </form>
     </section>
+    <div class="admin-create-success" data-admin-create-success hidden role="status"><strong>会员已成功开通</strong><span data-admin-created-member></span> 已建立一份私密相册家谱；请在下方安全交付一次性密码。</div>
     <div class="studio-password-once" data-admin-password hidden>
       <strong>只显示一次</strong><p>
         <span data-admin-member-id></span> 的初始密码：<code data-admin-initial-password></code>

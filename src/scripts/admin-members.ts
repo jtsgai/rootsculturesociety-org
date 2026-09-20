@@ -1,12 +1,14 @@
 import { grantAiCreditsByMemberId, type AiCreditKind } from '../lib/admin';
 import { getSupabase, isStudioConfigured } from '../lib/supabase';
-import { currentProfile, signOut, studioUnavailableMessage } from '../lib/studio';
+import { currentProfile, requestAdminPasswordReset, signOut, studioUnavailableMessage } from '../lib/studio';
 
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const once = document.querySelector<HTMLElement>('[data-admin-password]');
 const memberOutput = document.querySelector<HTMLElement>('[data-admin-member-id]');
 const passwordOutput = document.querySelector<HTMLElement>('[data-admin-initial-password]');
 const roster = document.querySelector<HTMLTableSectionElement>('[data-admin-member-list]');
+const createSuccess = document.querySelector<HTMLElement>('[data-admin-create-success]');
+const createdMember = document.querySelector<HTMLElement>('[data-admin-created-member]');
 
 type MemberRecord = {
   member_id: string;
@@ -26,6 +28,11 @@ function showPassword(result: { memberId: string; initialPassword: string }) {
   if (memberOutput) memberOutput.textContent = result.memberId;
   if (passwordOutput) passwordOutput.textContent = result.initialPassword;
   if (once) once.hidden = false;
+}
+
+function showCreateSuccess(memberId: string) {
+  if (createdMember) createdMember.textContent = memberId;
+  if (createSuccess) createSuccess.hidden = false;
 }
 
 async function callAdmin<T>(action: 'create' | 'reset-password' | 'list', values: Record<string, string> = {}) {
@@ -101,16 +108,39 @@ async function loadRoster(shouldReport = false) {
 document.querySelector<HTMLFormElement>('[data-admin-create-form]')?.addEventListener('submit', async (event) => {
   event.preventDefault();
   const form = event.currentTarget as HTMLFormElement;
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
   const values = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
   try {
+    if (button) {
+      button.disabled = true;
+      button.textContent = '正在开通会员…';
+    }
     const result = await callAdmin<{ memberId: string; initialPassword: string }>('create', values);
     showPassword(result);
+    showCreateSuccess(result.memberId);
     await loadRoster();
     form.reset();
     setDefaultDates();
+    if (button) button.textContent = '已成功开通 ✓';
     report('会员已经开通。请在离开本页前安全交付这组一次性密码。');
   } catch (error) {
+    if (button) button.textContent = '开通会员与初始密码';
     report(error instanceof Error ? error.message : '无法开通会员。');
+  } finally {
+    if (button) button.disabled = false;
+  }
+});
+
+document.querySelector<HTMLButtonElement>('[data-admin-password-reset]')?.addEventListener('click', async () => {
+  try {
+    const client = getSupabase();
+    const { data: { user } } = await client!.auth.getUser();
+    if (!user?.email) throw new Error('找不到管理员电邮，请先重新登录。');
+    report('正在寄出设置密码邮件…');
+    await requestAdminPasswordReset(user.email);
+    report('已寄出。请打开最新一封「Reset your password」邮件，链接会先显示设置管理员密码页面。');
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法寄出设置密码邮件。');
   }
 });
 

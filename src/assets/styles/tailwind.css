@@ -1331,6 +1331,33 @@ html[lang='en'] .prose-column p {
   color: var(--muted);
   font-size: 0.91rem;
 }
+.admin-password-help {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 28px;
+  margin-top: 18px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.admin-password-help h3 {
+  margin: 8px 0 4px;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.admin-password-help p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.admin-password-help .text-link {
+  flex: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
 .admin-panel {
   min-width: 0;
   padding: 28px;
@@ -1347,6 +1374,23 @@ html[lang='en'] .prose-column p {
 }
 .admin-provision h3 {
   font-size: 2rem;
+}
+.admin-create-success {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border-left: 3px solid #38623e;
+  background: #e7eee1;
+  color: #294d30;
+  font-size: 0.9rem;
+}
+.admin-create-success strong {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 500;
 }
 .admin-provision form {
   max-width: none;
@@ -1771,6 +1815,10 @@ html[lang='en'] .prose-column p {
   .admin-console-intro {
     align-items: start;
     padding: 26px 0 30px;
+  }
+  .admin-password-help {
+    align-items: start;
+    flex-direction: column;
   }
   .admin-provision,
   .admin-panel {
