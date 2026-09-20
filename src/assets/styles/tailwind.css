@@ -101,6 +101,18 @@ img {
   font-weight: 700;
   letter-spacing: 0.08em;
 }
+.site-nav .member-login-nav {
+  margin-left: 2px;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--maroon) 72%, transparent);
+  color: var(--maroon);
+  font-weight: 700;
+  line-height: 1;
+}
+.site-nav .member-login-nav:hover {
+  background: var(--maroon);
+  color: var(--paper);
+}
 html[lang='en'] .site-nav {
   gap: 14px;
   font-size: 0.72rem;
@@ -900,13 +912,32 @@ html[lang='en'] .prose-column p {
 .page-cta span {
   margin-left: 12px;
 }
-.member-studio-link {
+.member-login-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  max-width: 850px;
   margin: 28px 0 0 25%;
+  padding: 28px 0 2px;
+  border-top: 1px solid var(--ink);
 }
-.member-studio-link a {
-  color: var(--maroon);
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 3px;
+.member-login-card h2 {
+  margin: 14px 0 8px;
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.12;
+}
+.member-login-card p {
+  max-width: 590px;
+  margin: 0;
+  color: var(--muted);
+}
+.member-login-card .button {
+  white-space: nowrap;
+}
+.member-login-card .button span {
+  margin-left: 8px;
 }
 .site-footer {
   padding: 56px 32px 22px;
@@ -1038,6 +1069,13 @@ html[lang='en'] .prose-column p {
 }
 .studio-login {
   max-width: 590px;
+}
+.studio-login h2 {
+  max-width: 500px;
+  margin: 13px 0 12px;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.08;
 }
 .studio-login form {
   display: grid;
@@ -1693,9 +1731,14 @@ html[lang='en'] .prose-column p {
   .contact-card,
   .quiet-note,
   .page-cta,
-  .member-studio-link,
+  .member-login-card,
   .article-downloads {
     margin-left: 0;
+  }
+  .member-login-card {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 22px;
   }
   .publication-list article {
     grid-template-columns: 1fr;

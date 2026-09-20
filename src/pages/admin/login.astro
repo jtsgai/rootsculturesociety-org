@@ -14,9 +14,9 @@ import StudioFrame from '../../components/StudioFrame.astro';
     </form>
     <form data-admin-password-form hidden>
       <span class="admin-section-label">设置密码</span>
-      <p class="studio-note">链接已确认。请设置一个至少 12 个字符的新密码；保存后才会进入会员管理。</p>
-      <label>新密码 <input name="password" type="password" minlength="12" autocomplete="new-password" required /></label>
-      <label>再次输入新密码 <input name="passwordAgain" type="password" minlength="12" autocomplete="new-password" required /></label>
+      <p class="studio-note">链接已确认。请设置至少 8 位、同时含字母和数字的新密码；字母大小写均可。保存后才会进入会员管理。</p>
+      <label>新密码 <input name="password" type="password" minlength="8" autocomplete="new-password" required /></label>
+      <label>再次输入新密码 <input name="passwordAgain" type="password" minlength="8" autocomplete="new-password" required /></label>
       <button class="button" type="submit">保存密码并进入</button>
     </form>
     <p class="studio-status" aria-live="polite" data-studio-status></p>

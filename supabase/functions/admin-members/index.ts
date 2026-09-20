@@ -5,7 +5,9 @@ const url = Deno.env.get('SUPABASE_URL')!;
 const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const allowedOrigin = Deno.env.get('APP_ORIGIN') ?? 'https://rootsculturesociety.org';
 const admin = createClient(url, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } });
-const passwordAlphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+const passwordLetters = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+const passwordDigits = '23456789';
+const passwordAlphabet = `${passwordLetters}${passwordDigits}`;
 const cors = {
   'Access-Control-Allow-Origin': allowedOrigin,
   'Access-Control-Allow-Headers': 'apikey, authorization, content-type, x-client-info',
@@ -18,7 +20,16 @@ function json(body: unknown, status = 200) {
 
 function initialPassword() {
   const bytes = crypto.getRandomValues(new Uint8Array(8));
-  return Array.from(bytes, (byte) => passwordAlphabet[byte % passwordAlphabet.length]).join('');
+  const characters = [
+    passwordLetters[bytes[0] % passwordLetters.length],
+    passwordDigits[bytes[1] % passwordDigits.length],
+    ...Array.from(bytes.slice(2), (byte) => passwordAlphabet[byte % passwordAlphabet.length]),
+  ];
+  for (let index = characters.length - 1; index > 0; index -= 1) {
+    const swapIndex = bytes[index] % (index + 1);
+    [characters[index], characters[swapIndex]] = [characters[swapIndex], characters[index]];
+  }
+  return characters.join('');
 }
 
 function membershipEmail(memberId: string) {

@@ -52,7 +52,7 @@ export async function requestAdminPasswordReset(email: string) {
 }
 
 export async function setCurrentPassword(password: string) {
-  if (password.length < 12) throw new Error('新密码至少需要 12 个字符。');
+  assertPasswordPolicy(password);
   const { error } = await requireClient().auth.updateUser({ password });
   if (error) throw new Error('无法设置密码，请重新打开邀请链接。');
 }
@@ -132,12 +132,18 @@ export async function deletePerson(id: string) {
 }
 
 export async function changeInitialPassword(password: string) {
-  if (password.length < 12) throw new Error('新密码至少需要 12 个字符。');
+  assertPasswordPolicy(password);
   const client = requireClient();
   const { error } = await client.auth.updateUser({ password });
   if (error) throw new Error('无法更新密码，请稍后重试。');
   const { error: completionError } = await client.rpc('complete_initial_password_change');
   if (completionError) throw completionError;
+}
+
+function assertPasswordPolicy(password: string) {
+  if (password.length < 8 || !/[a-z]/i.test(password) || !/\d/.test(password)) {
+    throw new Error('密码至少 8 位，并须同时包含字母和数字；字母大小写均可。');
+  }
 }
 
 export async function uploadImage(bookId: string, file: File, folder = 'images') {
