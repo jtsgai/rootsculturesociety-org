@@ -1686,6 +1686,9 @@ html[lang='en'] .prose-column p {
   overflow-wrap: anywhere;
   vertical-align: top;
 }
+.text-punctuation {
+  white-space: nowrap;
+}
 .preview-repeat-group {
   margin-top: 18px;
   padding-top: 14px;

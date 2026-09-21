@@ -65,9 +65,20 @@ function punctuationText(value: string) {
     if (!chunk) return;
     const span = document.createElement('span');
     span.className = 'text-chunk';
-    // Keep Chinese punctuation attached to the preceding phrase when a long
-    // caption has to wrap in the screen preview or the printed page.
-    span.textContent = chunk.replace(/([，。；！？：])/gu, '\u2060$1');
+    // Keep the final character and punctuation together so a full stop or
+    // comma can never be stranded on its own line in print.
+    const punctuation = chunk.match(/([，。；！？：]+)$/u);
+    if (punctuation && punctuation.index && punctuation.index > 0) {
+      const stem = chunk.slice(0, punctuation.index);
+      const tailStart = Math.max(0, stem.length - 1);
+      span.append(document.createTextNode(stem.slice(0, tailStart)));
+      const punctuationGroup = document.createElement('span');
+      punctuationGroup.className = 'text-punctuation';
+      punctuationGroup.textContent = stem.slice(tailStart) + punctuation[1];
+      span.append(punctuationGroup);
+    } else {
+      span.textContent = chunk;
+    }
     fragment.append(span);
     if (index < chunks.length - 1) fragment.append(document.createTextNode(' '));
   });
