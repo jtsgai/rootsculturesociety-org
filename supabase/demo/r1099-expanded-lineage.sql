@@ -3,14 +3,15 @@
 
 begin;
 
-create temp table r1099_demo_people (
-  name text, generation_number integer, sex text, life_status text,
-  birth_date date, death_date date, residence_code text, genealogy_markers text[],
-  occupation text, education text, phone text, address text, note text,
-  father_name text, mother_name text, spouse_name text
-) on commit drop;
-
-insert into r1099_demo_people values
+with target as (
+  select g.id as book_id from public.genealogy_books g
+  join public.members m on m.id = g.member_id where m.member_id = 'R1099'
+), demo (
+  name, generation_number, sex, life_status,
+  birth_date, death_date, residence_code, genealogy_markers,
+  occupation, education, phone, address, note,
+  father_name, mother_name, spouse_name
+) as (values
 ('拓文福',1,'male','living','1946-05-18',null,'S',array[]::text[],'社区餐饮与会馆志愿服务','新加坡职业教育课程','+65 8004 1099','大巴窑家庭住址','1965 年来新加坡工作，后来在大巴窑定居；晚年负责讲述第一代兄弟南来的经历。',null,null,'陈月华'),
 ('陈月华',1,'female','living','1949-08-02',null,'S',array[]::text[],'家庭相片与纪念册整理','新加坡中学教育','+65 8005 1099','大巴窑家庭住址','保存孩子的学校纪念册，并坚持在照片背面写下日期、地点和人物。',null,null,'拓文福'),
 ('拓文成',1,'male','deceased','1935-03-12','2018-11-06',null,array[]::text[],'芽笼杂货与熟食店经营','海南私塾及新加坡夜校','', '芽笼旧店屋','1961 年从海南文昌南来，在芽笼经营杂货与熟食；晚年把旧信件、船票和照片交给下一代整理。',null,null,'林秀兰'),
@@ -36,19 +37,18 @@ insert into r1099_demo_people values
 ('王思颖',3,'female','living','2001-07-19',null,'UK',array[]::text[],'博物馆教育','英国文化遗产课程','+44 800 1099','英国伦敦家庭住址','拓志芳与王国强的女儿，在英国求学和工作，负责整理母亲一支的跨国照片。','王国强','拓志芳',null),
 ('拓嘉宁',3,'male','living','1992-06-22',null,'S',array['compiler'],'视觉设计与家族档案整理','新加坡视觉传达课程','+65 8014 1099','实龙岗家庭住址','本册立谱者。把祖父母留下的相片、家书、录音和三代关系整理成相册家谱。','拓志明','许雅琴',null),
 ('李敏慧',3,'female','living','1994-09-18',null,'US',array[]::text[],'数码内容策划','美国媒体研究课程','+1 800 1099','美国旧金山家庭住址','拓志华与李国安的女儿，保存香港一支的数码相片，并定期补充英文说明。','李国安','拓志华',null),
-('拓嘉豪',3,'male','living','1995-01-27',null,'S',array[]::text[],'影像制作与数码档案','新加坡媒体制作课程','+65 8015 1099','宏茂桥家庭住址','拓志安与林美珍的儿子，负责拍摄家庭聚会和扫描修理铺留下的工作记录。','拓志安','林美珍',null);
-
-with target as (
-  select g.id as book_id from public.genealogy_books g
-  join public.members m on m.id = g.member_id where m.member_id = 'R1099'
+('拓嘉豪',3,'male','living','1995-01-27',null,'S',array[]::text[],'影像制作与数码档案','新加坡媒体制作课程','+65 8015 1099','宏茂桥家庭住址','拓志安与林美珍的儿子，负责拍摄家庭聚会和扫描修理铺留下的工作记录。','拓志安','林美珍',null)
 )
-update public.people p set
+merge into public.people p
+using (select target.book_id, demo.* from target cross join demo) d
+on p.book_id = d.book_id and p.name = d.name
+when matched then update set
     generation_number = d.generation_number,
     sex = d.sex,
     life_status = d.life_status,
-    birth_year = extract(year from d.birth_date)::integer,
-    birth_date = d.birth_date,
-    death_date = d.death_date,
+    birth_year = extract(year from d.birth_date::date)::integer,
+    birth_date = d.birth_date::date,
+    death_date = d.death_date::date,
     residence_code = d.residence_code,
     genealogy_markers = d.genealogy_markers,
     occupation = d.occupation,
@@ -56,36 +56,39 @@ update public.people p set
     phone = d.phone,
     address = d.address,
     note = d.note
-from r1099_demo_people d, target
-where p.book_id = target.book_id and p.name = d.name;
-
-with target as (
-  select g.id as book_id from public.genealogy_books g
-  join public.members m on m.id = g.member_id where m.member_id = 'R1099'
-)
-insert into public.people (
+when not matched then insert (
     book_id, name, generation_number, sex, life_status, birth_year,
     birth_date, death_date, residence_code, genealogy_markers,
     occupation, education, phone, address, note
-  )
-select target.book_id, d.name, d.generation_number, d.sex, d.life_status,
-    extract(year from d.birth_date)::integer, d.birth_date, d.death_date,
+  ) values (
+    d.book_id, d.name, d.generation_number, d.sex, d.life_status,
+    extract(year from d.birth_date::date)::integer, d.birth_date::date, d.death_date::date,
     d.residence_code, d.genealogy_markers, d.occupation, d.education,
     d.phone, d.address, d.note
-from r1099_demo_people d cross join target
-where not exists (
-  select 1 from public.people p where p.book_id = target.book_id and p.name = d.name
-);
+  );
 
 with target as (
   select g.id as book_id from public.genealogy_books g
   join public.members m on m.id = g.member_id where m.member_id = 'R1099'
+), relations (name, father_name, mother_name, spouse_name) as (values
+  ('拓文福',null,null,'陈月华'),('陈月华',null,null,'拓文福'),
+  ('拓文成',null,null,'林秀兰'),('林秀兰',null,null,'拓文成'),
+  ('拓文兴',null,null,'吴金兰'),('吴金兰',null,null,'拓文兴'),
+  ('拓志远','拓文福','陈月华','周慧君'),('周慧君',null,null,'拓志远'),
+  ('拓志芳','拓文福','陈月华','王国强'),('王国强',null,null,'拓志芳'),
+  ('拓志明','拓文成','林秀兰','许雅琴'),('许雅琴',null,null,'拓志明'),
+  ('拓志华','拓文成','林秀兰','李国安'),('李国安',null,null,'拓志华'),
+  ('拓志安','拓文兴','吴金兰','林美珍'),('林美珍',null,null,'拓志安'),
+  ('拓志玲','拓文兴','吴金兰',null),
+  ('拓嘉慧','拓志远','周慧君',null),('王思颖','王国强','拓志芳',null),
+  ('拓嘉宁','拓志明','许雅琴',null),('李敏慧','李国安','拓志华',null),
+  ('拓嘉豪','拓志安','林美珍',null)
 )
 update public.people p set
     father_id = father.id,
     mother_id = mother.id,
     spouse_id = spouse.id
-from r1099_demo_people d
+from relations d
 cross join target
 left join public.people father on father.book_id = target.book_id and father.name = d.father_name
 left join public.people mother on mother.book_id = target.book_id and mother.name = d.mother_name
