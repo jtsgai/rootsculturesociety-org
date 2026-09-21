@@ -197,7 +197,7 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
   parent.append(note);
 }
 
-function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
+function renderRegister(parent: HTMLElement, people: StudioPerson[], thumbnailSize: string) {
   if (!people.length) {
     parent.textContent = '尚未加入族人。';
     return;
@@ -207,10 +207,12 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
   heading.textContent = '族人资料表';
   parent.append(heading);
   const table = document.createElement('table');
-  table.className = 'preview-register-table';
+  const allowedSizes = ['small', 'medium', 'large'];
+  const size = allowedSizes.includes(thumbnailSize) ? thumbnailSize : 'medium';
+  table.className = `preview-register-table register-thumb-${size}`;
   const head = document.createElement('thead');
   const headRow = document.createElement('tr');
-  ['世代与姓名', '关系与生卒', '教育与职业', '联络资料', '人物小记'].forEach((label) => {
+  ['照片', '世代与姓名', '关系与生卒', '教育与职业', '联络资料', '人物小记'].forEach((label) => {
     const cell = document.createElement('th');
     cell.scope = 'col';
     cell.textContent = label;
@@ -222,13 +224,25 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
     const familyRow = document.createElement('tr');
     familyRow.className = 'preview-register-family-heading';
     const familyCell = document.createElement('th');
-    familyCell.colSpan = 5;
+    familyCell.colSpan = 6;
     familyCell.scope = 'rowgroup';
     familyCell.textContent = `第 ${generation.generation} 代 · 家庭支系 ${branchIndex + 1}：${familyBranchLabel(branch)}`;
     familyRow.append(familyCell);
     body.append(familyRow);
     orderedFamilyMembers(branch.members).forEach((person) => {
       const row = document.createElement('tr');
+      const photoCell = document.createElement('td');
+      photoCell.className = 'preview-register-photo';
+      if (person.photo_signed_url) {
+        const image = document.createElement('img');
+        image.src = person.photo_signed_url;
+        image.alt = `${person.name}的族人照片`;
+        image.loading = 'lazy';
+        photoCell.append(image);
+      } else {
+        photoCell.textContent = '未上传';
+      }
+      row.append(photoCell);
       const cells = [
         `第 ${person.generation_number} 代\n${person.name}`,
         `${relationText(person, people)}\n${personSexLabel(person)} · ${personMeta(person)}`,
@@ -236,8 +250,9 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
         [person.phone, person.address].filter(Boolean).join('\n') || '私密资料未填写',
         person.note || '未填写',
       ];
-      cells.forEach((text) => {
+      cells.forEach((text, index) => {
         const cell = document.createElement('td');
+        if (index === 0) cell.className = 'preview-register-name';
         cell.textContent = text;
         row.append(cell);
       });
@@ -372,7 +387,10 @@ async function renderPreview(bookId: string) {
     const body = document.createElement('div');
     body.className = 'preview-chapter-body';
     if (step.method === 5) renderLineage(body, people);
-    else if (step.method === 8) renderRegister(body, people);
+    else if (step.method === 8) {
+      const registerContent = sectionMap.get(8)?.content ?? {};
+      renderRegister(body, people, typeof registerContent.thumbnailSize === 'string' ? registerContent.thumbnailSize : 'medium');
+    }
     else if (section) Object.entries(section.content).forEach(([key, value]) => addDefinition(body, key, value));
     if (!body.childElementCount) {
       const empty = document.createElement('p');

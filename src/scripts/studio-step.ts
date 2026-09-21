@@ -1,4 +1,4 @@
-import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
+import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, uploadPersonPhoto, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
 import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 
@@ -86,7 +86,12 @@ function renderPeople(people: StudioPerson[], register = false) {
 function renderRegisterRows(people: StudioPerson[]) {
   return buildLineageGenerations(people).map((record) => record.branches.map((branch, branchIndex) => {
     const heading = `<div class="studio-register-family-heading"><span>第 ${record.generation} 代 · 家庭支系 ${branchIndex + 1}</span><strong>${escapeHtml(familyBranchLabel(branch))}</strong></div>`;
-    const rows = orderedFamilyMembers(branch.members).map((person) => `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${escapeHtml(personLifespan(person) || '生卒未填写')}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`).join('');
+    const rows = orderedFamilyMembers(branch.members).map((person) => {
+      const thumbnail = person.photo_signed_url
+        ? `<img src="${escapeAttribute(person.photo_signed_url)}" alt="${escapeAttribute(person.name)}的族人照片" loading="lazy" />`
+        : '<span class="studio-person-thumbnail-empty">暂无缩略图</span>';
+      return `<form class="studio-person-row" data-register-person="${person.id}"><div class="studio-register-identity"><div class="studio-person-thumbnail">${thumbnail}<label>族人照片<input type="file" accept="image/jpeg,image/png,image/webp" data-person-photo /></label></div><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${escapeHtml(personLifespan(person) || '生卒未填写')}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`;
+    }).join('');
     return `${heading}${rows}`;
   }).join('')).join('');
 }
@@ -292,6 +297,11 @@ async function fillSavedContent() {
     setSaveState(form, Boolean(section?.is_complete), section?.is_complete ? '已完成' : '保存这一章');
     watchForEdits(form, '保存这一章');
   }
+  if (type === 'register') {
+    const thumbnailSize = document.querySelector<HTMLSelectElement>('[data-register-thumbnail-size]');
+    const savedSize = String(content.thumbnailSize ?? 'medium');
+    if (thumbnailSize) thumbnailSize.value = ['small', 'medium', 'large'].includes(savedSize) ? savedSize : 'medium';
+  }
 }
 
 document.querySelector<HTMLElement>('[data-structured-fields]')?.addEventListener('click', (event) => {
@@ -437,7 +447,9 @@ document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('s
   try {
     const values = new FormData(form);
     await updatePerson(form.dataset.registerPerson, { occupation: stringOrNull(values.get('occupation')), education: stringOrNull(values.get('education')), phone: stringOrNull(values.get('privatePhone')), address: stringOrNull(values.get('privateAddress')) });
-    await saveSection(bookId, method, {}, true);
+    const section = await getSection(bookId, method);
+    const thumbnailSize = document.querySelector<HTMLSelectElement>('[data-register-thumbnail-size]')?.value ?? 'medium';
+    await saveSection(bookId, method, { ...(section?.content ?? {}), thumbnailSize }, true);
     const saveButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (saveButton) {
       saveButton.textContent = '已完成';
@@ -446,6 +458,47 @@ document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('s
     report('族人资料已保存。');
   } catch (error) {
     report(error instanceof Error ? error.message : '无法保存。');
+  }
+});
+
+document.querySelector<HTMLSelectElement>('[data-register-thumbnail-size]')?.addEventListener('change', async (event) => {
+  const select = event.currentTarget as HTMLSelectElement;
+  if (!bookId) return;
+  try {
+    const section = await getSection(bookId, method);
+    await saveSection(bookId, method, { ...(section?.content ?? {}), thumbnailSize: select.value }, Boolean(section?.is_complete));
+    report('族人资料表缩略图大小已保存。');
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法保存缩略图设置。');
+  }
+});
+
+document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('change', async (event) => {
+  const input = event.target;
+  if (!(input instanceof HTMLInputElement) || !input.matches('[data-person-photo]') || !input.files?.length) return;
+  const form = input.closest<HTMLFormElement>('[data-register-person]');
+  const personId = form?.dataset.registerPerson;
+  if (!bookId || !personId) return;
+  const file = input.files[0];
+  const thumbnail = input.closest<HTMLElement>('.studio-person-thumbnail');
+  try {
+    input.disabled = true;
+    report(`正在校正方向并压缩 ${file.name}…`);
+    const signedUrl = await uploadPersonPhoto(bookId, personId, file);
+    if (thumbnail) {
+      thumbnail.querySelector('img, .studio-person-thumbnail-empty')?.remove();
+      const image = document.createElement('img');
+      image.src = signedUrl;
+      image.alt = `${form.querySelector('strong')?.textContent ?? '族人'}的族人照片`;
+      image.loading = 'lazy';
+      thumbnail.prepend(image);
+    }
+    report('族人缩略图已保存，并已自动校正方向与压缩。');
+  } catch (error) {
+    report(error instanceof Error ? error.message : '无法保存族人照片。');
+  } finally {
+    input.disabled = false;
+    input.value = '';
   }
 });
 

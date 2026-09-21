@@ -8,6 +8,7 @@ export type StudioPerson = {
   father_id: string | null; mother_id: string | null; spouse_id: string | null;
   birth_year: number | null; occupation: string | null; education: string | null; phone: string | null; address: string | null; note: string | null;
   birth_date: string | null; death_date: string | null; residence_code: string | null; genealogy_markers: string[];
+  photo_path?: string | null; photo_signed_url?: string;
 };
 export type StudioMedia = {
   id: string;
@@ -138,9 +139,12 @@ export async function saveBook(bookId: string, fields: Record<string, string | n
 
 export async function listPeople(bookId: string, options: { includeSensitive?: boolean } = {}): Promise<StudioPerson[]> {
   const sensitiveFields = options.includeSensitive ? ', occupation, education, phone, address' : '';
-  const { data, error } = await requireClient().from('people').select(`id, name, generation_number, sex, life_status, father_id, mother_id, spouse_id, birth_year, birth_date, death_date, residence_code, genealogy_markers${sensitiveFields}, note`).eq('book_id', bookId).order('generation_number').order('name');
+  const { data, error } = await requireClient().from('people').select(`id, name, generation_number, sex, life_status, father_id, mother_id, spouse_id, birth_year, birth_date, death_date, residence_code, genealogy_markers, photo_path${sensitiveFields}, note`).eq('book_id', bookId).order('generation_number').order('name');
   if (error) throw error;
-  return (data ?? []) as unknown as StudioPerson[];
+  return Promise.all(((data ?? []) as unknown as StudioPerson[]).map(async (person) => ({
+    ...person,
+    photo_signed_url: person.photo_path ? await signedPreviewUrl(person.photo_path) : undefined,
+  })));
 }
 
 export async function addPerson(bookId: string, person: Omit<StudioPerson, 'id'>) {
@@ -261,6 +265,33 @@ async function uploadStorageFile(path: string, file: File) {
   const client = requireClient();
   const { error } = await client.storage.from('genealogy-media').upload(path, file, { contentType: file.type, upsert: false });
   if (error) throw error;
+}
+
+export async function uploadPersonPhoto(bookId: string, personId: string, file: File) {
+  const client = requireClient();
+  const { data: { user } } = await client.auth.getUser();
+  if (!user) throw new Error('请先登录。');
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('请上传 JPG、PNG 或 WebP 图片。');
+  if (file.size > 10 * 1024 * 1024) throw new Error('人物照片不能超过 10MB。');
+
+  const normalized = await normalizeImage(file, getStudioMediaProfile(8));
+  const base = `${user.id}/${bookId}/people/${personId}/${crypto.randomUUID()}`;
+  const originalPath = `${base}/original.${originalExtension(file)}`;
+  const displayPath = `${base}/display.jpg`;
+  const thumbPath = `${base}/thumb.jpg`;
+  const uploadedPaths: string[] = [];
+  try {
+    for (const [path, image] of [[originalPath, normalized.original], [displayPath, normalized.display], [thumbPath, normalized.thumb]] as const) {
+      await uploadStorageFile(path, image);
+      uploadedPaths.push(path);
+    }
+    const { error } = await client.from('people').update({ photo_path: originalPath }).eq('id', personId).eq('book_id', bookId);
+    if (error) throw error;
+    return await signedMediaUrl(displayPath);
+  } catch (uploadError) {
+    if (uploadedPaths.length) await client.storage.from('genealogy-media').remove(uploadedPaths);
+    throw uploadError;
+  }
 }
 
 export async function listMedia(bookId: string, method: number): Promise<StudioMedia[]> {
