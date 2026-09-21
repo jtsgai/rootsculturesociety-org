@@ -1,5 +1,6 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel } from '../lib/lineage';
+import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel, orderedFamilyMembers, parentBranchIds } from '../lib/lineage';
+import { drawLineageConnections } from '../lib/lineage-connections';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
@@ -76,7 +77,7 @@ function renderPeople(people: StudioPerson[], register = false) {
 function renderRegisterRows(people: StudioPerson[]) {
   return buildLineageGenerations(people).map((record) => record.branches.map((branch, branchIndex) => {
     const heading = `<div class="studio-register-family-heading"><span>第 ${record.generation} 代 · 家庭支系 ${branchIndex + 1}</span><strong>${escapeHtml(familyBranchLabel(branch))}</strong></div>`;
-    const rows = branch.members.map((person) => `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people, false))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`).join('');
+    const rows = orderedFamilyMembers(branch.members).map((person) => `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people, false))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`).join('');
     return `${heading}${rows}`;
   }).join('')).join('');
 }
@@ -101,18 +102,21 @@ function renderLineage(people: StudioPerson[]) {
   const generationRecords = buildLineageGenerations(people);
   target.innerHTML = `<div class="lineage-tree" aria-label="按代次、家庭支系和父母子女关系排列的世系关系图">
     <div class="lineage-tree-head"><div><strong>拓氏相册家谱</strong><span>按第一代落地新加坡为起点，逐代记录家庭支系</span></div><p><b>横线</b>表示配偶或同一家庭，<b>竖线</b>表示父母与子女。</p></div>
-    <div class="lineage-tree-grid">${generationRecords.map((record) => {
-    const branchCards = record.branches.map(({ members, parents, children }, branchIndex) => {
+    <div class="lineage-tree-grid">${generationRecords.map((record, generationIndex) => {
+    const branchCards = record.branches.map((branch, branchIndex) => {
+      const { members, parents, children } = branch;
       const parentLine = parents.length ? `<div class="lineage-branch-parents"><span>上承</span>${parents.map((parent) => escapeHtml(parent.name)).join('、')}</div>` : '';
       const childLine = children.length ? `<div class="lineage-branch-children"><span>子女</span><div class="lineage-child-list">${children.map((child) => `<span class="lineage-child-node">${escapeHtml(child.name)}</span>`).join('')}</div></div>` : '<div class="lineage-branch-children lineage-unlinked"><span>子女</span><div class="lineage-child-list"><span class="lineage-child-node">待补充</span></div></div>';
-      const familyText = members.map((person) => `${escapeHtml(person.name)}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`).join(' × ');
+      const familyMembers = orderedFamilyMembers(members).map((person) => `<strong class="lineage-couple-member">${escapeHtml(person.name)}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）</strong>`).join('');
       const familyType = members.length > 1 ? '夫妻家庭' : '个人支系';
-      return `<article class="lineage-branch"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><strong>${familyText}</strong></div></div>${childLine}</article>`;
+      const parentsForConnection = parentBranchIds(generationRecords, generationIndex, branch).join(',');
+      return `<article class="lineage-branch" data-branch-id="${escapeAttribute(branch.id)}" data-parent-branch-ids="${escapeAttribute(parentsForConnection)}"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><div class="lineage-couple-members">${familyMembers}</div></div></div>${childLine}</article>`;
     }).join('');
     return `<section class="lineage-generation-row" data-generation="${record.generation}"><div class="lineage-generation-axis"><span>第 ${record.generation} 代</span><small>${record.members.length} 位族人<br>${record.branches.length} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
   }).join('')}</div>
     <div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
   </div>`;
+  drawLineageConnections(target.querySelector<HTMLElement>('.lineage-tree')!, { rowSelector: '.lineage-generation-row', branchSelector: '.lineage-branch' });
 }
 
 function escapeHtml(value: string) {

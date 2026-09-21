@@ -1,5 +1,6 @@
 import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel } from '../lib/lineage';
+import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel, orderedFamilyMembers, parentBranchIds } from '../lib/lineage';
+import { drawLineageConnections } from '../lib/lineage-connections';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
 
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
@@ -114,7 +115,7 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
   head.textContent = '横线表示同一家庭；竖线对应父母与下一代。夫妻只在同一家庭支系中出现一次。';
   tree.append(head);
   const generations = buildLineageGenerations(people);
-  generations.forEach((record) => {
+  generations.forEach((record, generationIndex) => {
     const level = document.createElement('section');
     level.className = 'preview-lineage-generation';
     const label = document.createElement('span');
@@ -128,11 +129,19 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
     record.branches.forEach((branch, index) => {
       const card = document.createElement('article');
       card.className = 'preview-lineage-family';
+      card.dataset.branchId = branch.id;
+      card.dataset.parentBranchIds = parentBranchIds(generations, generationIndex, branch).join(',');
       const branchLabel = document.createElement('span');
       branchLabel.className = 'preview-lineage-branch-label';
       branchLabel.textContent = `家庭支系 ${index + 1}`;
-      const family = document.createElement('strong');
-      family.textContent = branch.members.map((person) => `${person.name}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`).join(' × ');
+      const family = document.createElement('div');
+      family.className = 'preview-lineage-family-members';
+      orderedFamilyMembers(branch.members).forEach((person) => {
+        const member = document.createElement('strong');
+        member.className = 'preview-lineage-family-member';
+        member.textContent = `${person.name}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`;
+        family.append(member);
+      });
       const type = document.createElement('small');
       type.textContent = branch.members.length > 1 ? '夫妻家庭' : '个人支系';
       card.append(branchLabel, family, type);
@@ -152,6 +161,7 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
     tree.append(level);
   });
   parent.append(tree);
+  drawLineageConnections(tree, { rowSelector: '.preview-lineage-generation', branchSelector: '.preview-lineage-family' });
   const note = document.createElement('p');
   note.className = 'preview-lineage-note';
   note.textContent = '关系只依据会员填写的父亲、母亲与配偶字段；未注明的关系不会由系统推测。';
@@ -188,7 +198,7 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
     familyCell.textContent = `第 ${generation.generation} 代 · 家庭支系 ${branchIndex + 1}：${familyBranchLabel(branch)}`;
     familyRow.append(familyCell);
     body.append(familyRow);
-    branch.members.forEach((person) => {
+    orderedFamilyMembers(branch.members).forEach((person) => {
       const row = document.createElement('tr');
       const cells = [
         `第 ${person.generation_number} 代\n${person.name}`,

@@ -1684,6 +1684,7 @@ html[lang='en'] .prose-column p {
   font-weight: 500;
 }
 .preview-lineage-tree {
+  position: relative;
   min-width: 920px;
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
@@ -1759,24 +1760,6 @@ html[lang='en'] .prose-column p {
 }
 .preview-lineage-family::before,
 .preview-lineage-family::after {
-  position: relative;
-  position: absolute;
-  left: 50%;
-  width: 1px;
-  background: var(--maroon);
-  content: '';
-}
-.preview-lineage-family::before {
-  top: -23px;
-  height: 22px;
-}
-.preview-lineage-family::after {
-  bottom: -29px;
-  left: 50%;
-  height: 28px;
-}
-.preview-lineage-generation:nth-child(2) .preview-lineage-family::before,
-.preview-lineage-generation:last-child .preview-lineage-family::after {
   display: none;
 }
 .preview-lineage-branch-label,
@@ -1785,10 +1768,30 @@ html[lang='en'] .prose-column p {
   font-size: 0.66rem;
   letter-spacing: 0.06em;
 }
-.preview-lineage-family strong {
+.preview-lineage-family-members {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.preview-lineage-family-member {
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.55;
+}
+.lineage-connection-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.lineage-connection {
+  fill: none;
+  stroke: var(--maroon);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
 }
 .preview-lineage-family p,
 .preview-lineage-note {
@@ -2076,6 +2079,7 @@ html[lang='en'] .prose-column p {
   min-width: min(100%, 680px);
 }
 .lineage-tree {
+  position: relative;
   min-width: 920px;
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
@@ -2191,24 +2195,6 @@ html[lang='en'] .prose-column p {
 }
 .lineage-branch::before,
 .lineage-branch::after {
-  position: absolute;
-  left: 50%;
-  width: 1px;
-  background: var(--maroon);
-  content: '';
-}
-.lineage-branch::before {
-  top: -25px;
-  height: 24px;
-}
-.lineage-branch::after {
-  bottom: -29px;
-  height: 28px;
-}
-.lineage-generation-row:first-child .lineage-branch::before {
-  display: none;
-}
-.lineage-generation-row:last-child .lineage-branch::after {
   display: none;
 }
 .lineage-branch-label {
@@ -2235,15 +2221,6 @@ html[lang='en'] .prose-column p {
   border: 1px solid var(--line);
   background: var(--paper);
 }
-.lineage-couple::after {
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  width: 1px;
-  height: 11px;
-  background: var(--maroon);
-  content: '';
-}
 .lineage-couple span {
   display: block;
   margin-bottom: 5px;
@@ -2251,7 +2228,12 @@ html[lang='en'] .prose-column p {
   font-size: 0.66rem;
   letter-spacing: 0.06em;
 }
-.lineage-couple strong {
+.lineage-couple-members {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.lineage-couple-member {
   display: block;
   font-size: 0.88rem;
   font-weight: 600;
@@ -2863,6 +2845,11 @@ html[lang='en'] .prose-column p {
   letter-spacing: 0.08em;
 }
 @media (max-width: 800px) {
+  .preview-lineage-family-members,
+  .lineage-couple-members {
+    flex-direction: column;
+    gap: 3px;
+  }
   .header-inner {
     display: flex;
     min-height: 72px;
