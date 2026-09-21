@@ -1654,6 +1654,9 @@ html[lang='en'] .prose-column p {
   max-width: none;
   overflow-x: auto;
 }
+.preview-chapter:has(.preview-register-table) .preview-chapter-body {
+  max-width: none;
+}
 .preview-definition {
   display: grid;
   grid-template-columns: minmax(130px, 0.34fr) 1fr;
@@ -1785,7 +1788,7 @@ html[lang='en'] .prose-column p {
 .preview-photo-spread figcaption p {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  font-size: clamp(1.55rem, 2.35vw, 2.45rem);
   line-height: 1.35;
   line-break: strict;
   text-wrap: pretty;
@@ -2025,8 +2028,9 @@ html[lang='en'] .prose-column p {
 }
 .preview-register-table {
   width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
-  table-layout: auto;
+  table-layout: fixed;
   border-top: 2px solid var(--ink);
   font-size: 0.82rem;
 }
@@ -2052,9 +2056,12 @@ html[lang='en'] .prose-column p {
 }
 .preview-register-table th:first-child,
 .preview-register-table td:first-child { width: 1%; }
-.preview-register-table th:nth-child(2) { min-width: 10rem; }
-.preview-register-table th:nth-child(3) { min-width: 14rem; }
-.preview-register-table th:nth-child(4) { min-width: 10rem; }
+.preview-register-table th:nth-child(1) { width: 11%; }
+.preview-register-table th:nth-child(2) { width: 16%; }
+.preview-register-table th:nth-child(3) { width: 20%; }
+.preview-register-table th:nth-child(4) { width: 15%; }
+.preview-register-table th:nth-child(5) { width: 17%; }
+.preview-register-table th:nth-child(6) { width: 21%; }
 .preview-register-photo {
   color: var(--muted);
   text-align: center !important;
@@ -3823,7 +3830,7 @@ html[lang='en'] .prose-column p {
     padding: 6mm 0 6mm 6mm;
   }
   .preview-photo-spread figcaption p {
-    font-size: 15pt;
+    font-size: 17pt;
     line-height: 1.35;
   }
   .preview-photo-spread figcaption small {
