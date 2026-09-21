@@ -61,12 +61,26 @@ function personOptions(people: StudioPerson[], current: StudioPerson, selectedId
   return `<option value="">${emptyLabel}</option>${options}`;
 }
 
+const standardResidenceCodes = ['S', 'M', 'HK', 'UK', 'US'];
+
+function residenceFieldMarkup(person: StudioPerson) {
+  const custom = person.residence_code && !standardResidenceCodes.includes(person.residence_code) ? person.residence_code : '';
+  const selected = custom ? 'OTHER' : person.residence_code ?? '';
+  return `<label>现居地缩写 <select name="residenceCode" data-residence-select><option value="">不标注</option>${standardResidenceCodes.map((code) => `<option value="${code}"${selected === code ? ' selected' : ''}>${code}</option>`).join('')}<option value="OTHER"${selected === 'OTHER' ? ' selected' : ''}>其他</option></select></label><label data-residence-custom-wrap${custom ? '' : ' hidden'}>其他居住地<input name="residenceCustom" data-residence-custom value="${escapeAttribute(custom)}" placeholder="例如：澳大利亚墨尔本" /></label>`;
+}
+
+function residenceValue(form: HTMLFormElement) {
+  const select = form.querySelector<HTMLSelectElement>('[data-residence-select]')?.value ?? '';
+  if (select === 'OTHER') return form.querySelector<HTMLInputElement>('[data-residence-custom]')?.value.trim() || null;
+  return select || null;
+}
+
 function markerCheckboxes(person: StudioPerson) {
   return Object.entries(genealogyMarkerLabels).map(([value, marker]) => `<label><input type="checkbox" name="markers" value="${value}"${person.genealogy_markers?.includes(value) ? ' checked' : ''}> <b>${marker.symbol}</b> ${marker.label}</label>`).join('');
 }
 
 function renderPersonEditor(person: StudioPerson, people: StudioPerson[]) {
-  return `<form class="studio-person-row studio-person-edit" data-person-edit="${person.id}"><div class="studio-person-identity"><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${lifeStatus(person.life_status)}</small><p>${escapeHtml(person.note || '尚未填写人物小记。')}</p></div><div class="studio-person-edit-fields"><div class="studio-fields"><label>姓名<input name="name" value="${escapeAttribute(person.name)}" required /></label><label>世代<input name="generation" type="number" min="1" value="${person.generation_number}" required /></label><label>性别<select name="sex"><option value="unspecified"${person.sex === 'unspecified' ? ' selected' : ''}>不注明</option><option value="female"${person.sex === 'female' ? ' selected' : ''}>女</option><option value="male"${person.sex === 'male' ? ' selected' : ''}>男</option></select></label><label>状态<select name="lifeStatus"><option value="unspecified"${person.life_status === 'unspecified' ? ' selected' : ''}>不注明</option><option value="living"${person.life_status === 'living' ? ' selected' : ''}>在世</option><option value="deceased"${person.life_status === 'deceased' ? ' selected' : ''}>已故</option></select></label><label>出生日期<input name="birthDate" type="date" value="${escapeAttribute(person.birth_date)}" /></label><label>去世日期<input name="deathDate" type="date" value="${escapeAttribute(person.death_date)}" /></label><label>现居地缩写<select name="residenceCode"><option value="">不标注</option>${['S', 'M', 'HK', 'UK', 'US'].map((code) => `<option value="${code}"${person.residence_code === code ? ' selected' : ''}>${code}</option>`).join('')}</select></label></div><div class="studio-fields"><label>父亲（只列上一代男性）<select name="fatherId">${personOptions(people, person, person.father_id, '未选择', 'father')}</select></label><label>母亲（只列上一代女性）<select name="motherId">${personOptions(people, person, person.mother_id, '未选择', 'mother')}</select></label><label>配偶（只列同一代）<select name="spouseId">${personOptions(people, person, person.spouse_id, '未选择', 'spouse')}</select></label></div><fieldset class="studio-marker-fields"><legend>谱系标注</legend>${markerCheckboxes(person)}</fieldset><label>人物小记<textarea name="note" rows="3">${escapeHtml(person.note || '')}</textarea></label><div class="studio-person-actions"><button class="text-link" type="submit">保存人物与关系</button><button class="text-link media-remove" type="button" data-delete-person>删除人物</button></div></div></form>`;
+  return `<form class="studio-person-row studio-person-edit" data-person-edit="${person.id}"><div class="studio-person-identity"><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${lifeStatus(person.life_status)}</small><p>${escapeHtml(person.note || '尚未填写人物小记。')}</p></div><div class="studio-person-edit-fields"><div class="studio-fields"><label>姓名<input name="name" value="${escapeAttribute(person.name)}" required /></label><label>世代<input name="generation" type="number" min="1" value="${person.generation_number}" required /></label><label>性别<select name="sex"><option value="unspecified"${person.sex === 'unspecified' ? ' selected' : ''}>不注明</option><option value="female"${person.sex === 'female' ? ' selected' : ''}>女</option><option value="male"${person.sex === 'male' ? ' selected' : ''}>男</option></select></label><label>状态<select name="lifeStatus"><option value="unspecified"${person.life_status === 'unspecified' ? ' selected' : ''}>不注明</option><option value="living"${person.life_status === 'living' ? ' selected' : ''}>在世</option><option value="deceased"${person.life_status === 'deceased' ? ' selected' : ''}>已故</option></select></label><label>出生日期<input name="birthDate" type="date" value="${escapeAttribute(person.birth_date)}" /></label><label>去世日期<input name="deathDate" type="date" value="${escapeAttribute(person.death_date)}" /></label>${residenceFieldMarkup(person)}</div><div class="studio-fields"><label>父亲（只列上一代男性）<select name="fatherId">${personOptions(people, person, person.father_id, '未选择', 'father')}</select></label><label>母亲（只列上一代女性）<select name="motherId">${personOptions(people, person, person.mother_id, '未选择', 'mother')}</select></label><label>配偶（只列同一代）<select name="spouseId">${personOptions(people, person, person.spouse_id, '未选择', 'spouse')}</select></label></div><fieldset class="studio-marker-fields"><legend>谱系标注</legend>${markerCheckboxes(person)}</fieldset><label>人物小记<textarea name="note" rows="3">${escapeHtml(person.note || '')}</textarea></label><div class="studio-person-actions"><button class="button studio-inline-button" type="submit">保存人物与关系</button><button class="button studio-inline-button studio-danger-button" type="button" data-delete-person>删除人物</button></div></div></form>`;
 }
 
 function renderPeople(people: StudioPerson[], register = false) {
@@ -88,12 +102,33 @@ function renderRegisterRows(people: StudioPerson[]) {
     const heading = `<div class="studio-register-family-heading"><span>第 ${record.generation} 代 · 家庭支系 ${branchIndex + 1}</span><strong>${escapeHtml(familyBranchLabel(branch))}</strong></div>`;
     const rows = orderedFamilyMembers(branch.members).map((person) => {
       const thumbnail = person.photo_signed_url
-        ? `<img src="${escapeAttribute(person.photo_signed_url)}" alt="${escapeAttribute(person.name)}的族人照片" loading="lazy" />`
+        ? `<img src="${escapeAttribute(person.photo_signed_url)}" alt="${escapeAttribute(person.name)}的族人照片" data-photo-preview loading="lazy" />`
         : '<span class="studio-person-thumbnail-empty">暂无缩略图</span>';
-      return `<form class="studio-person-row" data-register-person="${person.id}"><div class="studio-register-identity"><div class="studio-person-thumbnail">${thumbnail}<label>族人照片<input type="file" accept="image/jpeg,image/png,image/webp" data-person-photo /></label></div><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${escapeHtml(personLifespan(person) || '生卒未填写')}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`;
+      return `<form class="studio-person-row" data-register-person="${person.id}"><div class="studio-register-identity"><div class="studio-person-thumbnail">${thumbnail}<label class="button studio-photo-upload">上传照片<input type="file" accept="image/jpeg,image/png,image/webp" data-person-photo /></label></div><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${escapeHtml(personLifespan(person) || '生卒未填写')}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="button studio-inline-button" type="submit">保存资料</button></form>`;
     }).join('');
     return `${heading}${rows}`;
   }).join('')).join('');
+}
+
+function openPhotoPreview(image: HTMLImageElement) {
+  document.querySelector<HTMLElement>('[data-photo-lightbox]')?.remove();
+  const overlay = document.createElement('div');
+  overlay.className = 'photo-lightbox';
+  overlay.dataset.photoLightbox = '';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-label', '族人照片预览');
+  const enlarged = document.createElement('img');
+  enlarged.src = image.src;
+  enlarged.alt = image.alt;
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'button photo-lightbox-close';
+  close.textContent = '关闭照片';
+  overlay.append(enlarged, close);
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay || event.target === close) overlay.remove();
+  });
+  document.body.append(overlay);
 }
 
 function relationSummary(person: StudioPerson, people: StudioPerson[], includeSpouse = true) {
@@ -166,7 +201,7 @@ function repeatRow(kind: string, row: Record<string, string> = {}) {
     : kind === 'childhoodRows'
       ? `<label>年代或年份<input name="year" value="${rowValue(row, 'year')}" placeholder="例如：1960 年代" /></label><label>新加坡地点<input name="place" value="${rowValue(row, 'place')}" placeholder="例如：实龙岗" /></label><label>记忆<textarea name="note" rows="3" placeholder="一件具体的小事就很好。">${rowValue(row, 'note')}</textarea></label>`
       : `<label>菜名<input name="dish" value="${rowValue(row, 'dish')}" placeholder="例如：海南鸡饭" /></label><label>材料<textarea name="ingredients" rows="3" placeholder="写下主要材料。">${rowValue(row, 'ingredients')}</textarea></label><label>做法<textarea name="method" rows="3" placeholder="按家里习惯写即可。">${rowValue(row, 'method')}</textarea></label><label>谁教会你的？<input name="taughtBy" value="${rowValue(row, 'taughtBy')}" /></label>`;
-  return `<div class="studio-repeat-row" data-repeat-row="${kind}">${fields}<button class="text-link studio-remove-row" type="button" data-remove-row>移除这一项</button></div>`;
+  return `<div class="studio-repeat-row" data-repeat-row="${kind}">${fields}<button class="button studio-inline-button studio-remove-row" type="button" data-remove-row>移除这一项</button></div>`;
 }
 
 function renderStructuredFields(method: number, content: Record<string, unknown>) {
@@ -245,12 +280,12 @@ function renderMedia(items: StudioMedia[]) {
     caption.placeholder = '图片说明（可选）';
     caption.dataset.mediaCaption = '';
     const save = document.createElement('button');
-    save.className = 'text-link';
+    save.className = 'button studio-inline-button';
     save.type = 'button';
     save.dataset.mediaSave = '';
     save.textContent = '保存说明';
     const remove = document.createElement('button');
-    remove.className = 'text-link media-remove';
+    remove.className = 'button studio-inline-button studio-danger-button';
     remove.type = 'button';
     remove.dataset.mediaRemove = '';
     remove.textContent = '删除图片';
@@ -320,7 +355,25 @@ document.querySelector<HTMLElement>('[data-structured-fields]')?.addEventListene
     const group = target.closest<HTMLElement>('[data-repeat-group]');
     const list = group?.querySelector<HTMLElement>('[data-repeat-list]');
     if (list && !list.children.length) list.innerHTML = '<p class="studio-empty">还没有记录。可以先添加一项。</p>';
+    report('这一项已移除；点击“保存这一章”后才会写入。');
   }
+});
+
+document.querySelector<HTMLElement>('[data-media-list]')?.addEventListener('input', (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement) || !target.matches('[data-media-caption]')) return;
+  const saveButton = target.closest<HTMLElement>('[data-media-id]')?.querySelector<HTMLButtonElement>('[data-media-save]');
+  if (saveButton?.classList.contains('is-complete')) {
+    saveButton.textContent = '保存说明';
+    saveButton.classList.remove('is-complete');
+  }
+});
+
+document.addEventListener('change', (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLSelectElement) || !target.matches('[data-residence-select]')) return;
+  const wrap = target.closest('form')?.querySelector<HTMLElement>('[data-residence-custom-wrap]');
+  if (wrap) wrap.hidden = target.value !== 'OTHER';
 });
 
 document.querySelector<HTMLFormElement>('[data-section-form]')?.addEventListener('submit', async (event) => {
@@ -362,7 +415,7 @@ document.querySelector<HTMLFormElement>('[data-person-form]')?.addEventListener(
     const lifeStatusValue = String(data.get('lifeStatus') || 'unspecified');
     if (birthDate && deathDate && deathDate < birthDate) throw new Error('去世日期不能早于出生日期。');
     if (deathDate && lifeStatusValue !== 'deceased') throw new Error('填写去世日期时，状态必须选择“已故”。');
-    await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: lifeStatusValue, father_id: null, mother_id: null, spouse_id: null, birth_year: birthDate ? Number(birthDate.slice(0, 4)) : null, birth_date: birthDate, death_date: lifeStatusValue === 'deceased' ? deathDate : null, residence_code: lifeStatusValue === 'deceased' ? null : stringOrNull(data.get('residenceCode')), genealogy_markers: [], occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
+    await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: lifeStatusValue, father_id: null, mother_id: null, spouse_id: null, birth_year: birthDate ? Number(birthDate.slice(0, 4)) : null, birth_date: birthDate, death_date: lifeStatusValue === 'deceased' ? deathDate : null, residence_code: lifeStatusValue === 'deceased' ? null : residenceValue(form), genealogy_markers: [], occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
     await saveSection(bookId, method, {}, true);
     form.reset();
     renderPeople(await listPeople(bookId, { includeSensitive: true }));
@@ -406,7 +459,7 @@ document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('sub
       birth_year: birthDate ? Number(birthDate.slice(0, 4)) : person.birth_year,
       birth_date: birthDate,
       death_date: lifeStatusValue === 'deceased' ? deathDate : null,
-      residence_code: lifeStatusValue === 'deceased' ? null : stringOrNull(values.get('residenceCode')),
+      residence_code: lifeStatusValue === 'deceased' ? null : residenceValue(form),
       genealogy_markers: markers,
       note: stringOrNull(values.get('note')),
     });
@@ -459,6 +512,11 @@ document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('s
   } catch (error) {
     report(error instanceof Error ? error.message : '无法保存。');
   }
+});
+
+document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('click', (event) => {
+  const target = event.target;
+  if (target instanceof HTMLImageElement && target.matches('[data-photo-preview]')) openPhotoPreview(target);
 });
 
 document.querySelector<HTMLSelectElement>('[data-register-thumbnail-size]')?.addEventListener('change', async (event) => {
@@ -535,6 +593,11 @@ document.querySelector<HTMLElement>('[data-media-list]')?.addEventListener('clic
       const caption = card.querySelector<HTMLInputElement>('[data-media-caption]')?.value.trim() ?? '';
       await updateMediaCaption(item.id, caption || null);
       item.caption = caption || null;
+      const saveButton = target.closest<HTMLElement>('[data-media-id]')?.querySelector<HTMLButtonElement>('[data-media-save]');
+      if (saveButton) {
+        saveButton.textContent = '已完成';
+        saveButton.classList.add('is-complete');
+      }
       if (mediaStatus) mediaStatus.textContent = '图片说明已保存。';
     }
     if (target.closest('[data-media-remove]')) {

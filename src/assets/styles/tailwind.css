@@ -2112,8 +2112,7 @@ html[lang='en'] .prose-column p {
 }
 .studio-repeat-row .studio-remove-row {
   justify-self: start;
-  color: var(--muted);
-  font-size: 0.82rem;
+  color: var(--maroon);
 }
 .studio-media-picker {
   margin-top: 38px;
@@ -2214,6 +2213,20 @@ html[lang='en'] .prose-column p {
 .studio-media-controls button {
   justify-self: start;
   font-size: 0.78rem;
+}
+.studio-inline-button {
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
+.studio-danger-button {
+  background: transparent;
+  color: var(--maroon);
+}
+.studio-danger-button:hover {
+  color: #fff;
+  background: var(--maroon);
 }
 .studio-media-controls .media-remove {
   color: #8b2f2f;
@@ -2330,7 +2343,7 @@ html[lang='en'] .prose-column p {
 }
 .lineage-tree {
   position: relative;
-  width: max(920px, calc(148px + var(--lineage-columns, 3) * 220px));
+  width: max(1180px, calc(180px + var(--lineage-columns, 3) * 280px));
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
 }
@@ -2430,7 +2443,7 @@ html[lang='en'] .prose-column p {
 .lineage-generation-branches {
   display: grid;
   grid-template-columns: repeat(var(--lineage-columns, 3), minmax(190px, 1fr));
-  gap: 16px;
+  gap: 24px;
   padding: 24px 0 28px 28px;
 }
 .lineage-branch {
@@ -2443,7 +2456,7 @@ html[lang='en'] .prose-column p {
   padding: 12px;
   border: 1px solid var(--line);
   background: var(--paper);
-  width: min(100%, 260px);
+  width: min(100%, 310px);
   justify-self: center;
 }
 .lineage-branch::before,
@@ -2687,6 +2700,11 @@ html[lang='en'] .prose-column p {
   border: 0;
   cursor: pointer;
 }
+.studio-person-row[data-register-person] button.studio-inline-button {
+  border: 1px solid var(--maroon);
+  background: var(--maroon);
+  color: #fff;
+}
 .studio-register-settings {
   display: flex;
   align-items: end;
@@ -2722,14 +2740,14 @@ html[lang='en'] .prose-column p {
 }
 .studio-person-thumbnail {
   display: grid;
-  flex: 0 0 72px;
+  flex: 0 0 132px;
   gap: 5px;
 }
 .studio-person-thumbnail img,
 .studio-person-thumbnail-empty {
   display: grid;
-  width: 72px;
-  height: 54px;
+  width: 132px;
+  height: 99px;
   place-items: center;
   object-fit: cover;
   border: 1px solid var(--line);
@@ -2739,16 +2757,53 @@ html[lang='en'] .prose-column p {
   text-align: center;
 }
 .studio-person-thumbnail label {
-  color: var(--maroon);
-  font-size: 0.65rem;
+  width: fit-content;
+  color: #fff;
+  background: var(--maroon);
+  font-size: 0.72rem;
   line-height: 1.2;
 }
 .studio-person-thumbnail input {
-  width: 100%;
-  margin-top: 4px;
-  padding: 0;
-  border: 0;
-  font-size: 0.62rem;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.studio-photo-upload {
+  min-height: 32px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.72rem;
+}
+.studio-person-thumbnail img[data-photo-preview] {
+  cursor: zoom-in;
+}
+.photo-lightbox {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: rgba(26, 20, 16, 0.88);
+  cursor: zoom-out;
+}
+.photo-lightbox img {
+  max-width: min(92vw, 1200px);
+  max-height: 84vh;
+  object-fit: contain;
+  background: #fffaf3;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  cursor: default;
+}
+.photo-lightbox-close {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  cursor: pointer;
 }
 .studio-person-relation {
   color: var(--maroon) !important;

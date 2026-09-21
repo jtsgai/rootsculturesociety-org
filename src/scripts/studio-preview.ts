@@ -379,6 +379,9 @@ async function renderPreview(bookId: string) {
     title.textContent = book.title || '尚未命名的相册家谱';
     const ancestor = document.createElement('p');
     ancestor.textContent = book.generation_one_ancestor ? `第一代开族始祖：${book.generation_one_ancestor}` : '尚未填写第一代开族始祖。';
+    const coverCopy = document.createElement('div');
+    coverCopy.className = 'preview-cover-copy';
+    coverCopy.append(coverKicker, title, ancestor);
     const dedication = sectionMap.get(1)?.content?.dedication;
     const description = typeof dedication === 'string' ? dedication.trim() : '';
     if (description) {
@@ -387,9 +390,6 @@ async function renderPreview(bookId: string) {
       coverDescription.textContent = description;
       coverCopy.append(coverDescription);
     }
-    const coverCopy = document.createElement('div');
-    coverCopy.className = 'preview-cover-copy';
-    coverCopy.append(coverKicker, title, ancestor);
     cover.append(coverCopy);
     try {
       const coverPhoto = createCoverPhoto(await listMedia(bookId, 1));
