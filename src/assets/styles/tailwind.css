@@ -3609,9 +3609,9 @@ html[lang='en'] .prose-column p {
     width: 100% !important;
     max-width: none;
     min-width: 0;
-    overflow: hidden;
-    font-size: 5.7pt;
-    break-inside: avoid;
+    overflow: visible;
+    font-size: 5.4pt;
+    break-inside: auto;
   }
   .preview-chapter:has(.preview-lineage-tree) {
     height: auto;
@@ -3623,6 +3623,7 @@ html[lang='en'] .prose-column p {
   }
   .preview-chapter:has(.preview-lineage-tree) .preview-chapter-body {
     gap: 0;
+    break-before: page;
     overflow: visible;
   }
   .preview-lineage-head {
@@ -3720,10 +3721,16 @@ html[lang='en'] .prose-column p {
   }
   .preview-chapter:has(.preview-register-table) .preview-chapter-body {
     gap: 0;
+    break-before: page;
     overflow: visible;
   }
   .preview-register-table thead {
     display: table-header-group;
+  }
+  .preview-register-table,
+  .preview-register-table tbody,
+  .preview-register-table tr {
+    break-inside: auto;
   }
   .preview-register-table th:nth-child(2) { min-width: 24mm; }
   .preview-register-table th:nth-child(3) { min-width: 34mm; }
@@ -3734,9 +3741,11 @@ html[lang='en'] .prose-column p {
   }
   .register-thumb-small .preview-register-photo img { width: 10mm; height: 7.5mm; }
   .register-thumb-large .preview-register-photo img { width: 17mm; height: 12.75mm; }
-  .preview-register-family-heading,
-  .preview-register-table tr {
+  .preview-register-family-heading {
     break-inside: avoid;
+  }
+  .preview-register-table tr {
+    break-inside: auto;
   }
   .preview-register-family-heading th {
     padding: 1mm 1.5mm;
