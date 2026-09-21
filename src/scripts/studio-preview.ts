@@ -442,6 +442,44 @@ async function renderPreview(bookId: string) {
   if (!chapterMode && window.location.hash) {
     document.querySelector(window.location.hash)?.scrollIntoView({ block: 'start' });
   }
+  if (!chapterMode) {
+    const coverContent = sectionMap.get(1)?.content ?? {};
+    const backCover = document.createElement('footer');
+    backCover.className = 'preview-back-cover page-break-before';
+    const mark = document.createElement('div');
+    mark.className = 'preview-back-cover-mark';
+    const logo = document.createElement('img');
+    logo.src = '/brand/RCSSLogo.png';
+    logo.alt = '';
+    logo.setAttribute('aria-hidden', 'true');
+    const society = document.createElement('span');
+    society.textContent = '新加坡根缘文化学会';
+    const societyEnglish = document.createElement('small');
+    societyEnglish.textContent = 'Roots Culture Society of Singapore';
+    mark.append(logo, society, societyEnglish);
+    const backCopy = document.createElement('div');
+    backCopy.className = 'preview-back-cover-copy';
+    const backKicker = document.createElement('span');
+    backKicker.className = 'eyebrow';
+    backKicker.textContent = 'A BOOK TO BE CARRIED FORWARD';
+    const backHeading = document.createElement('h3');
+    backHeading.textContent = '把名字留下，\n把记忆交给后来的人。';
+    const backNote = document.createElement('p');
+    const savedBackNote = typeof coverContent.backCoverNote === 'string' ? coverContent.backCoverNote.trim() : '';
+    backNote.textContent = savedBackNote || '一张照片，一段口述，一条从祖籍走到狮城的路。愿这本相册家谱，让家人重新看见彼此，也让后来的人知道自己从哪里来。';
+    backCopy.append(backKicker, backHeading, backNote);
+    const details = document.createElement('div');
+    details.className = 'preview-back-cover-details';
+    const detailTitle = document.createElement('strong');
+    detailTitle.textContent = book.title || '相册家谱';
+    const detailAncestor = document.createElement('span');
+    detailAncestor.textContent = book.generation_one_ancestor ? `第一代开族始祖：${book.generation_one_ancestor}` : '';
+    const detailPlace = document.createElement('span');
+    detailPlace.textContent = typeof coverContent.ancestralPlace === 'string' && coverContent.ancestralPlace.trim() ? `祖籍：${coverContent.ancestralPlace.trim()}` : '';
+    details.append(detailTitle, detailAncestor, detailPlace);
+    backCover.append(mark, backCopy, details);
+    target.append(backCover);
+  }
 }
 
 document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventListener('click', async () => {

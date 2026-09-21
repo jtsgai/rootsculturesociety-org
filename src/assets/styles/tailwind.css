@@ -1584,6 +1584,70 @@ html[lang='en'] .prose-column p {
   gap: 12px;
   max-width: 920px;
 }
+.preview-back-cover {
+  min-height: min(76vw, 760px);
+  display: grid;
+  align-content: space-between;
+  gap: 48px;
+  padding: clamp(42px, 6vw, 88px);
+  background: linear-gradient(145deg, #fffaf3 0%, var(--paper-deep) 100%);
+  border-top: 1px solid var(--line);
+}
+.preview-back-cover-mark {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  column-gap: 14px;
+  max-width: 420px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+}
+.preview-back-cover-mark img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.preview-back-cover-mark small {
+  grid-column: 2;
+  margin-top: -10px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+.preview-back-cover-copy {
+  max-width: 680px;
+}
+.preview-back-cover-copy h3 {
+  margin: 18px 0 24px;
+  white-space: pre-line;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+.preview-back-cover-copy p {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.preview-back-cover-details {
+  display: grid;
+  gap: 6px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.preview-back-cover-details strong {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
 .preview-chapter:has(.preview-lineage-tree) .preview-chapter-body {
   max-width: none;
   overflow-x: auto;
@@ -3467,6 +3531,24 @@ html[lang='en'] .prose-column p {
   .preview-cover {
     min-height: 0;
     grid-template-columns: 1fr;
+  }
+  .preview-back-cover {
+    min-height: 0;
+    height: 185mm;
+    box-sizing: border-box;
+    padding: 16mm;
+    break-before: page;
+  }
+  .preview-back-cover-copy h3 {
+    font-size: 30pt;
+  }
+  .preview-back-cover-copy p {
+    max-width: 110mm;
+    font-size: 10pt;
+    line-height: 1.6;
+  }
+  .preview-back-cover-details {
+    font-size: 8pt;
   }
   .preview-cover-photo img {
     min-height: 300px;

@@ -279,7 +279,7 @@ async function fillSavedContent() {
   const form = document.querySelector<HTMLFormElement>('[data-section-form]');
   if (type === 'cover' && form) {
     const book = await currentBook();
-    const fields: Record<string, string | null | undefined> = { title: book?.title, ancestor: book?.generation_one_ancestor, dialect: (content.dialect as string) ?? '', ancestralPlace: (content.ancestralPlace as string) ?? '', dedication: (content.dedication as string) ?? '' };
+    const fields: Record<string, string | null | undefined> = { title: book?.title, ancestor: book?.generation_one_ancestor, dialect: (content.dialect as string) ?? '', ancestralPlace: (content.ancestralPlace as string) ?? '', dedication: (content.dedication as string) ?? '', backCoverNote: (content.backCoverNote as string) ?? '' };
     Object.entries(fields).forEach(([name, value]) => { const field = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null; if (field) field.value = value ?? ''; });
     const consent = form.elements.namedItem('consent') as HTMLInputElement | null;
     if (consent) consent.checked = Boolean(book?.consent_at);
@@ -334,7 +334,7 @@ document.querySelector<HTMLFormElement>('[data-section-form]')?.addEventListener
       const ancestor = stringOrNull(data.get('ancestor'));
       if (!title || !ancestor || !data.get('consent')) throw new Error('请填写书名、开族始祖，并确认已取得资料授权。');
       await saveBook(bookId, { title, generation_one_ancestor: ancestor, dialect_group: stringOrNull(data.get('dialect')), ancestral_place: stringOrNull(data.get('ancestralPlace')), dedication: stringOrNull(data.get('dedication')), consent_at: new Date().toISOString() });
-      await saveSection(bookId, method, { dialect: stringOrNull(data.get('dialect')) ?? '', ancestralPlace: stringOrNull(data.get('ancestralPlace')) ?? '', dedication: stringOrNull(data.get('dedication')) ?? '' }, true);
+      await saveSection(bookId, method, { dialect: stringOrNull(data.get('dialect')) ?? '', ancestralPlace: stringOrNull(data.get('ancestralPlace')) ?? '', dedication: stringOrNull(data.get('dedication')) ?? '', backCoverNote: stringOrNull(data.get('backCoverNote')) ?? '' }, true);
       setSaveState(form, true, '已完成');
     } else {
       const content = structuredContent(form);
