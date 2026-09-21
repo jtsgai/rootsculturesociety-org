@@ -6,13 +6,14 @@ export type PageKey =
   | 'publications'
   | 'stories'
   | 'events'
+  | 'records'
   | 'membership'
   | 'privacy'
   | 'terms'
   | 'contact';
 
 export const nav = [
-  { key: 'about', zh: '学会使命', en: 'The Society' },
+  { key: 'about', zh: '学会资料', en: 'Society' },
   { key: 'method', zh: '相册家谱', en: 'Photo Genealogy' },
   { key: 'publications', zh: '出版书籍', en: 'Publications' },
   { key: 'stories', zh: '参考资料', en: 'Stories' },
@@ -232,6 +233,10 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
   events: {
     zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['以下先整理现有资料中的历史记录、出版资料与现场照片。正式活动日期、地点和报名安排，会在确认后发布。'] },
     en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['This page first gathers historical records, publication materials and available event photographs. Confirmed dates, venues and registration details will be published when available.'] },
+  },
+  records: {
+    zh: { title: '会务记录', deck: '把学会的工作、活动与交流，放回一条可以查阅的时间线。', paragraphs: ['这里合并整理学会历年的资料记录与会员大会报告。它们是已经发生的工作记录，不等同于最新活动公告。'] },
+    en: { title: 'Society records', deck: 'A readable timeline of the Society’s work, activities and exchanges.', paragraphs: ['This page brings together the Society’s historical records and members’ meeting report. These are records of past work, not current event announcements.'] },
   },
   membership: {
     zh: { title: '入会', deck: '把一家的故事，认真保存下来。', paragraphs: ['年费 S$99，含一年谱坊账号一个。交费后由学会开通会员号，并通过邮件或者 WhatsApp 通知您。网站不收款；年费不含印刷成书。'] },
