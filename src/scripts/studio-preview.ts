@@ -77,7 +77,7 @@ function addDefinition(parent: HTMLElement, key: string, value: unknown) {
     return;
   }
   const row = document.createElement('div');
-  row.className = 'preview-definition';
+  row.className = `preview-definition${key === 'story' ? ' preview-definition-story' : ''}`;
   const term = document.createElement('dt');
   term.textContent = labelFor(key);
   const detail = document.createElement('dd');
@@ -126,6 +126,15 @@ function lineagePersonElement(person: StudioPerson) {
   return row;
 }
 
+function lineageResidenceLabel(members: StudioPerson[]) {
+  const address = members.map((person) => person.address?.trim()).find(Boolean);
+  if (!address) return '';
+  const place = address.replace(/家庭住址$/, '').trim();
+  if (!place) return '';
+  const deceased = members.every((person) => person.life_status === 'deceased');
+  return `${deceased ? '曾居' : '居住地'}：${place}`;
+}
+
 function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
   if (!people.length) {
     parent.textContent = '尚未加入族人。';
@@ -170,7 +179,12 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
       orderedFamilyMembers(branch.members).forEach((person) => family.append(lineagePersonElement(person)));
       const type = document.createElement('small');
       type.textContent = branch.members.length > 1 ? '夫妻家庭' : '个人支系';
+      const residence = lineageResidenceLabel(branch.members);
+      const residenceNote = document.createElement('small');
+      residenceNote.className = 'preview-lineage-residence';
+      residenceNote.textContent = residence;
       card.append(branchLabel, family, type);
+      if (residence) card.append(residenceNote);
       if (branch.parents.length) {
         const parentLine = document.createElement('p');
         parentLine.className = 'preview-lineage-parent';
@@ -304,6 +318,15 @@ function createMediaSpreads(media: Awaited<ReturnType<typeof listMedia>>, method
     const captionText = item.caption || photoFallbacks[method] || '请为这张照片补充一段记忆说明。';
     image.alt = captionText;
     image.loading = 'lazy';
+    const setOrientation = () => {
+      if (!image.naturalWidth || !image.naturalHeight) return;
+      const orientation = image.naturalWidth >= image.naturalHeight ? 'landscape' : 'portrait';
+      visual.classList.remove('is-landscape', 'is-portrait');
+      visual.classList.add(`is-${orientation}`);
+      figure.classList.remove('is-landscape', 'is-portrait');
+      figure.classList.add(`is-${orientation}`);
+    };
+    image.addEventListener('load', setOrientation, { once: true });
     const caption = document.createElement('figcaption');
     const number = document.createElement('span');
     number.textContent = `图 ${String(index + 1).padStart(2, '0')}`;
@@ -312,6 +335,7 @@ function createMediaSpreads(media: Awaited<ReturnType<typeof listMedia>>, method
     const context = document.createElement('small');
     context.textContent = '一张照片，一段可以被后人读懂的家族记忆。';
     visual.append(image);
+    setOrientation();
     caption.append(number, description, context);
     figure.append(visual, caption);
     spreads.append(figure);
@@ -328,7 +352,13 @@ function createCoverPhoto(media: Awaited<ReturnType<typeof listMedia>>) {
   image.src = item.signed_url!;
   image.alt = item.caption || '相册家谱封面';
   image.loading = 'eager';
+  const setOrientation = () => {
+    if (!image.naturalWidth || !image.naturalHeight) return;
+    visual.classList.add(image.naturalWidth >= image.naturalHeight ? 'is-landscape' : 'is-portrait');
+  };
+  image.addEventListener('load', setOrientation, { once: true });
   visual.append(image);
+  setOrientation();
   return visual;
 }
 
@@ -336,6 +366,7 @@ async function renderPreview(bookId: string) {
   if (!target) return;
   const [book, sections, people] = await Promise.all([currentBook(), allSections(bookId), listPeople(bookId, { includeSensitive: true })]);
   if (!book) throw new Error('找不到你的相册家谱。');
+  const sectionMap = new Map(sections.map((section) => [section.method, section]));
   if (!chapterMode) renderReadiness(book, sections, people);
   target.replaceChildren();
   const appendCover = async () => {
@@ -348,6 +379,14 @@ async function renderPreview(bookId: string) {
     title.textContent = book.title || '尚未命名的相册家谱';
     const ancestor = document.createElement('p');
     ancestor.textContent = book.generation_one_ancestor ? `第一代开族始祖：${book.generation_one_ancestor}` : '尚未填写第一代开族始祖。';
+    const dedication = sectionMap.get(1)?.content?.dedication;
+    const description = typeof dedication === 'string' ? dedication.trim() : '';
+    if (description) {
+      const coverDescription = document.createElement('p');
+      coverDescription.className = 'preview-cover-description';
+      coverDescription.textContent = description;
+      coverCopy.append(coverDescription);
+    }
     const coverCopy = document.createElement('div');
     coverCopy.className = 'preview-cover-copy';
     coverCopy.append(coverKicker, title, ancestor);
@@ -363,7 +402,6 @@ async function renderPreview(bookId: string) {
 
   if (!chapterMode || selectedStep?.method === 1) await appendCover();
 
-  const sectionMap = new Map(sections.map((section) => [section.method, section]));
   const stepsToRender = selectedStep?.method === 1 ? [] : selectedStep ? [selectedStep] : studioSteps;
   for (const step of stepsToRender) {
     const section = sectionMap.get(step.method);
