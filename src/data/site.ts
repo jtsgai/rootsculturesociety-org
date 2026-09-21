@@ -231,8 +231,8 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Family stories', deck: 'A family story begins with the sentence someone chooses to keep.', paragraphs: ['This section gathers source-based stories of Singapore life, migration, dialect, food, and family memory. Public stories are published with consent; private material does not become public by default.', 'The first entries are based on the articles and photographs provided to the Society; each story links back to its source material.'] },
   },
   events: {
-    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['以下先整理现有资料中的历史记录、出版资料与现场照片。正式活动日期、地点和报名安排，会在确认后发布。'] },
-    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['This page first gathers historical records, publication materials and available event photographs. Confirmed dates, venues and registration details will be published when available.'] },
+    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['以下整理学会活动花絮与现场照片。正式活动日期、地点和报名安排，会在确认后发布。'] },
+    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['This page gathers activity highlights and available event photographs. Confirmed dates, venues and registration details will be published when available.'] },
   },
   records: {
     zh: { title: '会务记录', deck: '把学会的工作、活动与交流，放回一条可以查阅的时间线。', paragraphs: ['这里合并整理学会历年的资料记录与会员大会报告。它们是已经发生的工作记录，不等同于最新活动公告。'] },
