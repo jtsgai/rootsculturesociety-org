@@ -1,4 +1,5 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
+import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel } from '../lib/lineage';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
@@ -62,22 +63,29 @@ function renderPeople(people: StudioPerson[], register = false) {
   peopleItems = people;
   const target = document.querySelector<HTMLElement>(register ? '[data-register-list]' : '[data-person-list]');
   if (!target) return;
+  target.setAttribute('aria-busy', 'false');
   if (!people.length) {
     target.innerHTML = '<p class="studio-empty">还没有资料。先从最确定的一位家人开始。</p>';
     if (!register) renderLineage([]);
     return;
   }
-  target.innerHTML = people.map((person) => register
-    ? `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}"></label><label>电话（私密）<input name="phone" value="${escapeAttribute(person.phone)}"></label><label>地址（私密）<input name="address" value="${escapeAttribute(person.address)}"></label><button class="text-link" type="submit">保存</button></form>`
-    : renderPersonEditor(person, people)).join('');
+  target.innerHTML = register ? renderRegisterRows(people) : people.map((person) => renderPersonEditor(person, people)).join('');
   if (!register) renderLineage(people);
 }
 
-function relationSummary(person: StudioPerson, people: StudioPerson[]) {
+function renderRegisterRows(people: StudioPerson[]) {
+  return buildLineageGenerations(people).map((record) => record.branches.map((branch, branchIndex) => {
+    const heading = `<div class="studio-register-family-heading"><span>第 ${record.generation} 代 · 家庭支系 ${branchIndex + 1}</span><strong>${escapeHtml(familyBranchLabel(branch))}</strong></div>`;
+    const rows = branch.members.map((person) => `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people, false))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`).join('');
+    return `${heading}${rows}`;
+  }).join('')).join('');
+}
+
+function relationSummary(person: StudioPerson, people: StudioPerson[], includeSpouse = true) {
   const relations = [
     person.father_id ? `父：${people.find((item) => item.id === person.father_id)?.name ?? '未注明'}` : '',
     person.mother_id ? `母：${people.find((item) => item.id === person.mother_id)?.name ?? '未注明'}` : '',
-    person.spouse_id ? `配偶：${people.find((item) => item.id === person.spouse_id)?.name ?? '未注明'}` : '',
+    includeSpouse && person.spouse_id ? `配偶：${people.find((item) => item.id === person.spouse_id)?.name ?? '未注明'}` : '',
   ].filter(Boolean);
   return relations.length ? relations.join(' · ') : '关系待补充';
 }
@@ -85,49 +93,20 @@ function relationSummary(person: StudioPerson, people: StudioPerson[]) {
 function renderLineage(people: StudioPerson[]) {
   const target = document.querySelector<HTMLElement>('[data-lineage-canvas]');
   if (!target) return;
+  target.setAttribute('aria-busy', 'false');
   if (!people.length) {
     target.innerHTML = '<p class="studio-empty">加入族人后，这里会显示关系图。</p>';
     return;
   }
-  const generations = [...new Set(people.map((person) => person.generation_number))].sort((a, b) => a - b);
-  const generationRecords = generations.map((generation) => {
-    const members = people.filter((person) => person.generation_number === generation).sort((a, b) => a.name.localeCompare(b.name));
-    const branches = new Map<string, StudioPerson[]>();
-    members.forEach((person) => {
-      const spouse = people.find((item) => item.id === person.spouse_id);
-      const branchId = spouse ? [person.id, spouse.id].sort().join(':') : person.id;
-      const branch = branches.get(branchId) ?? [];
-      if (!branch.some((item) => item.id === person.id)) branch.push(person);
-      if (spouse && !branch.some((item) => item.id === spouse.id)) branch.push(spouse);
-      branches.set(branchId, branch);
-    });
-    return {
-      generation,
-      members,
-      branches: [...branches.values()].map((branch) => {
-        const parents = [...new Map(branch.flatMap((person) => [person.father_id, person.mother_id]).filter((id): id is string => Boolean(id)).map((id) => [id, people.find((person) => person.id === id)]).filter((entry): entry is [string, StudioPerson] => Boolean(entry[1]))).values()];
-        const children = people.filter((person) => branch.some((parent) => person.father_id === parent.id || person.mother_id === parent.id));
-        return { branch, parents, children };
-      }),
-    };
-  });
-  generationRecords.forEach((record, index) => {
-    if (index === 0) return;
-    const previous = generationRecords[index - 1].branches;
-    record.branches.sort((a, b) => {
-      const aParentIndex = previous.findIndex((parentBranch) => a.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)));
-      const bParentIndex = previous.findIndex((parentBranch) => b.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)));
-      return (aParentIndex < 0 ? Number.MAX_SAFE_INTEGER : aParentIndex) - (bParentIndex < 0 ? Number.MAX_SAFE_INTEGER : bParentIndex);
-    });
-  });
+  const generationRecords = buildLineageGenerations(people);
   target.innerHTML = `<div class="lineage-tree" aria-label="按代次、家庭支系和父母子女关系排列的世系关系图">
     <div class="lineage-tree-head"><div><strong>拓氏相册家谱</strong><span>按第一代落地新加坡为起点，逐代记录家庭支系</span></div><p><b>横线</b>表示配偶或同一家庭，<b>竖线</b>表示父母与子女。</p></div>
     <div class="lineage-tree-grid">${generationRecords.map((record) => {
-    const branchCards = record.branches.map(({ branch, parents, children }, branchIndex) => {
+    const branchCards = record.branches.map(({ members, parents, children }, branchIndex) => {
       const parentLine = parents.length ? `<div class="lineage-branch-parents"><span>上承</span>${parents.map((parent) => escapeHtml(parent.name)).join('、')}</div>` : '';
       const childLine = children.length ? `<div class="lineage-branch-children"><span>子女</span><div class="lineage-child-list">${children.map((child) => `<span class="lineage-child-node">${escapeHtml(child.name)}</span>`).join('')}</div></div>` : '<div class="lineage-branch-children lineage-unlinked"><span>子女</span><div class="lineage-child-list"><span class="lineage-child-node">待补充</span></div></div>';
-      const familyText = branch.map((person) => `${escapeHtml(person.name)}（${lifeStatus(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`).join(' × ');
-      const familyType = branch.length > 1 ? '夫妻家庭' : '个人支系';
+      const familyText = members.map((person) => `${escapeHtml(person.name)}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`).join(' × ');
+      const familyType = members.length > 1 ? '夫妻家庭' : '个人支系';
       return `<article class="lineage-branch"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><strong>${familyText}</strong></div></div>${childLine}</article>`;
     }).join('');
     return `<section class="lineage-generation-row" data-generation="${record.generation}"><div class="lineage-generation-axis"><span>第 ${record.generation} 代</span><small>${record.members.length} 位族人<br>${record.branches.length} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
@@ -208,6 +187,7 @@ function structuredContent(form: HTMLFormElement) {
 function renderMedia(items: StudioMedia[]) {
   const list = document.querySelector<HTMLElement>('[data-media-list]');
   if (!list) return;
+  list.setAttribute('aria-busy', 'false');
   list.replaceChildren();
   if (!items.length) {
     list.innerHTML = '<p class="studio-empty">尚未上传图片。</p>';
@@ -347,7 +327,7 @@ document.querySelector<HTMLFormElement>('[data-person-form]')?.addEventListener(
     await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: String(data.get('lifeStatus') || 'unspecified'), father_id: null, mother_id: null, spouse_id: null, birth_year: birthYear, occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
     await saveSection(bookId, method, {}, true);
     form.reset();
-    renderPeople(await listPeople(bookId));
+    renderPeople(await listPeople(bookId, { includeSensitive: true }));
     report('已加入世系。');
   } catch (error) {
     report(error instanceof Error ? error.message : '无法保存人物。');
@@ -380,7 +360,7 @@ document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('sub
     });
     if (previousSpouseId && previousSpouseId !== spouseId) await updatePerson(previousSpouseId, { spouse_id: null });
     if (spouseId && spouseId !== previousSpouseId) await updatePerson(spouseId, { spouse_id: person.id });
-    renderPeople(await listPeople(bookId));
+    renderPeople(await listPeople(bookId, { includeSensitive: true }));
     const savedForm = document.querySelector<HTMLFormElement>(`[data-person-edit="${person.id}"]`);
     const saveButton = savedForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (saveButton) {
@@ -401,7 +381,7 @@ document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('cli
   if (!id || !window.confirm('确定删除这位族人吗？已有关系会自动断开，其他资料不会删除。')) return;
   try {
     await deletePerson(id);
-    renderPeople(await listPeople(bookId));
+    renderPeople(await listPeople(bookId, { includeSensitive: true }));
     report('人物已删除，相关关系已断开。');
   } catch (error) {
     report(error instanceof Error ? error.message : '无法删除人物。');
@@ -414,7 +394,7 @@ document.querySelector<HTMLElement>('[data-register-list]')?.addEventListener('s
   event.preventDefault();
   try {
     const values = new FormData(form);
-    await updatePerson(form.dataset.registerPerson, { occupation: stringOrNull(values.get('occupation')), education: stringOrNull(values.get('education')), phone: stringOrNull(values.get('phone')), address: stringOrNull(values.get('address')) });
+    await updatePerson(form.dataset.registerPerson, { occupation: stringOrNull(values.get('occupation')), education: stringOrNull(values.get('education')), phone: stringOrNull(values.get('privatePhone')), address: stringOrNull(values.get('privateAddress')) });
     await saveSection(bookId, method, {}, true);
     const saveButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (saveButton) {
@@ -484,7 +464,7 @@ void (async () => {
   try {
     if (!(await ensureMember())) return;
     await fillSavedContent();
-    if (type === 'people') renderPeople(await listPeople(bookId));
+    if (type === 'people') renderPeople(await listPeople(bookId, { includeSensitive: true }));
     if (type === 'register') {
       renderPeople(await listPeople(bookId, { includeSensitive: true }), true);
       if ((await getSection(bookId, method))?.is_complete) {

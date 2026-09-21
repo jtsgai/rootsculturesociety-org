@@ -1684,80 +1684,123 @@ html[lang='en'] .prose-column p {
   font-weight: 500;
 }
 .preview-lineage-tree {
-  display: grid;
-  gap: 0;
-  padding: 22px 0 12px;
-  border-top: 1px solid var(--line);
+  min-width: 920px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
+  overflow: hidden;
+}
+.preview-lineage-head {
+  padding: 14px 18px;
   border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.6;
 }
 .preview-lineage-generation {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
   position: relative;
-  padding: 0 0 34px;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  min-height: 168px;
 }
 .preview-lineage-generation:not(:last-child)::after {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  height: 34px;
-  border-left: 1px solid var(--maroon);
+  left: 112px;
+  right: 0;
+  height: 1px;
+  background: var(--line);
   content: '';
 }
 .preview-generation-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 22px 16px 20px 0;
+  border-right: 1px solid color-mix(in srgb, var(--maroon) 46%, var(--line));
   color: var(--maroon);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
+  text-align: right;
 }
-.preview-lineage-person {
+.preview-generation-label::after {
+  position: absolute;
+  top: 27px;
+  right: -5px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--maroon);
+  border-radius: 50%;
+  background: var(--paper-deep);
+  content: '';
+}
+.preview-generation-label small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+.preview-lineage-branches {
   display: grid;
-  gap: 5px;
-  min-width: min(100%, 250px);
-  padding: 14px 20px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-  text-align: center;
+  grid-template-columns: repeat(3, minmax(210px, 1fr));
+  gap: 16px;
+  padding: 22px 0 28px 28px;
 }
-.preview-lineage-nodes {
+.preview-lineage-family {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 250px));
-  justify-content: center;
-  gap: 18px 36px;
-  width: 100%;
-  padding-top: 24px;
+  align-content: start;
+  gap: 7px;
+  min-height: 118px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
 }
-.preview-lineage-nodes::before {
+.preview-lineage-family::before,
+.preview-lineage-family::after {
+  position: relative;
   position: absolute;
-  top: 0;
   left: 50%;
-  height: 24px;
-  border-left: 1px solid var(--maroon);
+  width: 1px;
+  background: var(--maroon);
   content: '';
 }
-.preview-lineage-generation:first-child .preview-lineage-nodes::before {
+.preview-lineage-family::before {
+  top: -23px;
+  height: 22px;
+}
+.preview-lineage-family::after {
+  bottom: -29px;
+  left: 50%;
+  height: 28px;
+}
+.preview-lineage-generation:nth-child(2) .preview-lineage-family::before,
+.preview-lineage-generation:last-child .preview-lineage-family::after {
   display: none;
 }
-.preview-lineage-nodes.has-branches::after {
-  position: absolute;
-  top: 0;
-  left: 12%;
-  right: 12%;
-  border-top: 1px solid var(--maroon);
-  content: '';
+.preview-lineage-branch-label,
+.preview-lineage-family small {
+  color: var(--maroon);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
 }
-.preview-lineage-person strong {
-  font-family: var(--serif);
-  font-size: 1.18rem;
-  font-weight: 500;
+.preview-lineage-family strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.55;
 }
-.preview-lineage-person small,
-.preview-lineage-person span,
+.preview-lineage-family p,
 .preview-lineage-note {
+  margin: 0;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   line-height: 1.5;
+}
+.preview-lineage-family .preview-lineage-parent,
+.preview-lineage-family .preview-lineage-child {
+  padding-top: 7px;
+  border-top: 1px solid var(--line);
 }
 .preview-lineage-note {
   margin: 12px 0 0;
@@ -1788,6 +1831,15 @@ html[lang='en'] .prose-column p {
 .preview-register-table th:nth-child(2) { width: 21%; }
 .preview-register-table th:nth-child(3) { width: 18%; }
 .preview-register-table th:nth-child(4) { width: 21%; }
+.preview-register-family-heading th {
+  padding: 9px 14px;
+  border-top: 2px solid var(--maroon);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper-deep) 70%, var(--paper));
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
 .studio-preview-footer-nav {
   display: flex;
   justify-content: flex-start;
