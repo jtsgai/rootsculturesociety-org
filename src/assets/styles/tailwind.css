@@ -1583,6 +1583,8 @@ html[lang='en'] .prose-column p {
   display: grid;
   gap: 12px;
   max-width: 920px;
+  line-break: strict;
+  text-wrap: pretty;
 }
 .preview-back-cover {
   min-height: min(76vw, 760px);
@@ -1670,6 +1672,12 @@ html[lang='en'] .prose-column p {
 }
 .preview-definition dd {
   white-space: pre-wrap;
+  line-break: strict;
+  text-wrap: pretty;
+}
+.text-chunk {
+  display: inline-block;
+  white-space: nowrap;
 }
 .preview-repeat-group {
   margin-top: 18px;
@@ -1686,6 +1694,8 @@ html[lang='en'] .prose-column p {
 .preview-repeat-item {
   padding: 10px 0;
   border-top: 1px solid var(--line);
+  line-break: strict;
+  text-wrap: pretty;
 }
 .preview-person-card {
   padding: 22px;
@@ -1777,6 +1787,8 @@ html[lang='en'] .prose-column p {
   font-family: var(--serif);
   font-size: clamp(1.35rem, 2.1vw, 2rem);
   line-height: 1.35;
+  line-break: strict;
+  text-wrap: pretty;
 }
 .preview-photo-spread figcaption small {
   color: var(--muted);

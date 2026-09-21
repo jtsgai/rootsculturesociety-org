@@ -58,6 +58,20 @@ function labelFor(key: string) {
   return labels[key] ?? key;
 }
 
+function punctuationText(value: string) {
+  const fragment = document.createDocumentFragment();
+  const chunks = value.split(/(?<=[，。；！？：])/u);
+  chunks.forEach((chunk, index) => {
+    if (!chunk) return;
+    const span = document.createElement('span');
+    span.className = 'text-chunk';
+    span.textContent = chunk;
+    fragment.append(span);
+    if (index < chunks.length - 1) fragment.append(document.createTextNode(' '));
+  });
+  return fragment;
+}
+
 function addDefinition(parent: HTMLElement, key: string, value: unknown) {
   if (value === null || value === undefined || value === '') return;
   if (Array.isArray(value)) {
@@ -81,7 +95,8 @@ function addDefinition(parent: HTMLElement, key: string, value: unknown) {
   const term = document.createElement('dt');
   term.textContent = labelFor(key);
   const detail = document.createElement('dd');
-  detail.textContent = typeof value === 'object' ? JSON.stringify(value) : String(value);
+  if (typeof value === 'string') detail.append(punctuationText(value));
+  else detail.textContent = typeof value === 'object' ? JSON.stringify(value) : String(value);
   row.append(term, detail);
   parent.append(row);
 }
@@ -331,7 +346,7 @@ function createMediaSpreads(media: Awaited<ReturnType<typeof listMedia>>, method
     const number = document.createElement('span');
     number.textContent = `图 ${String(index + 1).padStart(2, '0')}`;
     const description = document.createElement('p');
-    description.textContent = captionText;
+    description.append(punctuationText(captionText));
     const context = document.createElement('small');
     context.textContent = '一张照片，一段可以被后人读懂的家族记忆。';
     visual.append(image);
