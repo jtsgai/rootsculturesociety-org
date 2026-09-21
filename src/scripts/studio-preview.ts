@@ -266,7 +266,9 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[], thumbnailSi
         const image = document.createElement('img');
         image.src = person.photo_signed_url;
         image.alt = `${person.name}的族人照片`;
-        image.loading = 'lazy';
+        // The print dialog must have every private preview image available;
+        // lazy loading can leave later chapter photos out of the PDF.
+        image.loading = 'eager';
         photoCell.append(image);
       } else {
         photoCell.textContent = '未上传';
@@ -332,7 +334,7 @@ function createMediaSpreads(media: Awaited<ReturnType<typeof listMedia>>, method
     image.src = item.signed_url!;
     const captionText = item.caption || photoFallbacks[method] || '请为这张照片补充一段记忆说明。';
     image.alt = captionText;
-    image.loading = 'lazy';
+    image.loading = 'eager';
     const setOrientation = () => {
       if (!image.naturalWidth || !image.naturalHeight) return;
       const orientation = image.naturalWidth >= image.naturalHeight ? 'landscape' : 'portrait';
@@ -502,7 +504,24 @@ document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventList
   window.location.assign('/studio/login');
 });
 
-printButton?.addEventListener('click', () => window.print());
+printButton?.addEventListener('click', async () => {
+  if (!printButton) return;
+  printButton.disabled = true;
+  const images = [...document.querySelectorAll<HTMLImageElement>('.studio-preview-book img')];
+  await Promise.all(images.map(async (image) => {
+    if (!image.complete) {
+      await new Promise<void>((resolve) => {
+        image.addEventListener('load', () => resolve(), { once: true });
+        image.addEventListener('error', () => resolve(), { once: true });
+      });
+    }
+    if (image.complete && image.naturalWidth && 'decode' in image) {
+      try { await image.decode(); } catch { /* the print preview still shows the fallback box */ }
+    }
+  }));
+  window.print();
+  printButton.disabled = false;
+});
 
 void (async () => {
   try {
