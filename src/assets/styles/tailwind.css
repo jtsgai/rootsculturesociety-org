@@ -1652,7 +1652,8 @@ html[lang='en'] .prose-column p {
   width: 100%;
   height: 100%;
   min-height: 340px;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--paper-deep);
 }
 .media-frame-portrait .preview-photo-visual {
   max-width: 560px;
@@ -3613,8 +3614,8 @@ html[lang='en'] .prose-column p {
     break-inside: avoid;
   }
   .preview-chapter:has(.preview-lineage-tree) {
-    height: 185mm;
-    overflow: hidden;
+    height: auto;
+    overflow: visible;
   }
   .preview-chapter:has(.preview-lineage-tree) h3 {
     margin-bottom: 3mm;
@@ -3622,7 +3623,7 @@ html[lang='en'] .prose-column p {
   }
   .preview-chapter:has(.preview-lineage-tree) .preview-chapter-body {
     gap: 0;
-    overflow: hidden;
+    overflow: visible;
   }
   .preview-lineage-head {
     padding: 2.2mm 3mm;
@@ -3710,8 +3711,8 @@ html[lang='en'] .prose-column p {
     overflow-wrap: break-word;
   }
   .preview-chapter:has(.preview-register-table) {
-    height: 185mm;
-    overflow: hidden;
+    height: auto;
+    overflow: visible;
   }
   .preview-chapter:has(.preview-register-table) h3 {
     margin-bottom: 3mm;
@@ -3719,7 +3720,10 @@ html[lang='en'] .prose-column p {
   }
   .preview-chapter:has(.preview-register-table) .preview-chapter-body {
     gap: 0;
-    overflow: hidden;
+    overflow: visible;
+  }
+  .preview-register-table thead {
+    display: table-header-group;
   }
   .preview-register-table th:nth-child(2) { min-width: 24mm; }
   .preview-register-table th:nth-child(3) { min-width: 34mm; }
