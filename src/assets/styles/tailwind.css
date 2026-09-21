@@ -1794,7 +1794,7 @@ html[lang='en'] .prose-column p {
   margin: 0;
   min-width: 0;
   font-family: var(--serif);
-  font-size: clamp(1.75rem, 2.6vw, 2.75rem);
+  font-size: clamp(1.85rem, 2.75vw, 3rem);
   line-height: 1.35;
   line-break: strict;
   text-wrap: pretty;
@@ -1802,8 +1802,10 @@ html[lang='en'] .prose-column p {
 }
 .preview-photo-spread figcaption small {
   color: var(--muted);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   line-height: 1.6;
+  line-break: strict;
+  text-wrap: balance;
 }
 .preview-subheading {
   margin: 26px 0 12px;
@@ -3789,8 +3791,7 @@ html[lang='en'] .prose-column p {
     gap: 0;
     margin: 0;
   }
-  .preview-photo-spread,
-  .preview-photo-spread.is-reversed {
+  .preview-photo-spread {
     grid-template-columns: minmax(0, 1.55fr) minmax(52mm, 0.7fr);
     height: 125mm;
     min-height: 0;
@@ -3798,6 +3799,9 @@ html[lang='en'] .prose-column p {
     break-before: page;
     break-inside: avoid;
     min-width: 0;
+  }
+  .preview-photo-spread.is-reversed {
+    grid-template-columns: minmax(52mm, 0.7fr) minmax(0, 1.55fr);
   }
   .preview-photo-spread:first-child {
     break-before: auto;
@@ -3853,11 +3857,11 @@ html[lang='en'] .prose-column p {
     padding: 6mm 0 6mm 6mm;
   }
   .preview-photo-spread figcaption p {
-    font-size: 19pt;
+    font-size: 21pt;
     line-height: 1.35;
   }
   .preview-photo-spread figcaption small {
-    font-size: 11pt;
+    font-size: 13pt;
   }
   /* Let ordinary chapter notes use the remaining space after their photos.
      Large diagrams and tables keep their own page start below. */

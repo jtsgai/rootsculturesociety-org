@@ -65,7 +65,9 @@ function punctuationText(value: string) {
     if (!chunk) return;
     const span = document.createElement('span');
     span.className = 'text-chunk';
-    span.textContent = chunk;
+    // Keep Chinese punctuation attached to the preceding phrase when a long
+    // caption has to wrap in the screen preview or the printed page.
+    span.textContent = chunk.replace(/([，。；！？：])/gu, '\u2060$1');
     fragment.append(span);
     if (index < chunks.length - 1) fragment.append(document.createTextNode(' '));
   });
