@@ -1,4 +1,4 @@
-import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
+import { allSections, currentBook, currentMember, listMedia, listPeople, memberPdfDownloadEnabled, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
 import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
@@ -6,6 +6,7 @@ import { getStudioMediaProfile, studioSteps } from '../data/studio';
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const readiness = document.querySelector<HTMLElement>('[data-preview-readiness]');
+const printButton = document.querySelector<HTMLButtonElement>('[data-preview-print]');
 const requestedChapter = Number(new URLSearchParams(window.location.search).get('chapter'));
 const selectedStep = studioSteps.find((step) => step.method === requestedChapter);
 const chapterMode = Boolean(selectedStep);
@@ -392,14 +393,17 @@ document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventList
   window.location.assign('/studio/login');
 });
 
+printButton?.addEventListener('click', () => window.print());
+
 void (async () => {
   try {
     setPreviewMode();
-    const [member, book] = await Promise.all([currentMember(), currentBook()]);
+    const [member, book, canDownloadPdf] = await Promise.all([currentMember(), currentBook(), memberPdfDownloadEnabled()]);
     if (!member || !book) return window.location.assign('/studio/login');
     if (member.status !== 'active') return report('此会员账户目前未启用；请联系学会确认会籍状态。');
     const signout = document.querySelector<HTMLButtonElement>('[data-studio-signout]');
     if (signout) signout.hidden = false;
+    if (printButton && !chapterMode && canDownloadPdf) printButton.hidden = false;
     await renderPreview(book.id);
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());

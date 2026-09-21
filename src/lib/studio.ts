@@ -81,7 +81,7 @@ export async function currentMember() {
   const client = requireClient();
   const { data: { user } } = await client.auth.getUser();
   if (!user) return undefined;
-  const { data, error } = await client.from('members').select('member_id, display_name, status, ends_on, must_change_password').eq('id', user.id).maybeSingle();
+  const { data, error } = await client.from('members').select('member_id, display_name, status, starts_on, ends_on, must_change_password, pdf_download_enabled').eq('id', user.id).maybeSingle();
   if (error) throw error;
   return data ?? undefined;
 }
@@ -96,13 +96,13 @@ export async function currentProfile() {
 }
 
 export async function memberPdfDownloadEnabled() {
-  const { data, error } = await requireClient()
-    .from('site_settings')
-    .select('value')
-    .eq('key', 'member_pdf_download_enabled')
-    .maybeSingle();
-  if (error) throw error;
-  return data?.value === true;
+  const member = await currentMember();
+  if (!member) return false;
+  const today = new Date().toISOString().slice(0, 10);
+  return member.pdf_download_enabled === true
+    && member.status === 'active'
+    && member.starts_on <= today
+    && member.ends_on >= today;
 }
 
 export async function currentBook(): Promise<StudioBook | undefined> {

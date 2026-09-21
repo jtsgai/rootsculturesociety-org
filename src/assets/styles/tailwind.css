@@ -2915,6 +2915,20 @@ html[lang='en'] .prose-column p {
   color: var(--muted);
   font-size: 0.7rem;
 }
+.admin-member-update .admin-member-download {
+  gap: 8px;
+  padding-top: 3px;
+}
+.admin-member-download > span:first-child {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.admin-member-download .admin-switch {
+  width: fit-content;
+  font-size: 0.78rem;
+}
 .admin-member-update button {
   justify-self: start;
   border: 0;

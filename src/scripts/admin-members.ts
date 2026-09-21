@@ -18,6 +18,7 @@ type MemberRecord = {
   starts_on: string;
   ends_on: string;
   status: 'active' | 'suspended' | 'expired';
+  pdf_download_enabled: boolean;
   closed_at?: string | null;
   purge_after?: string | null;
 };
@@ -45,39 +46,6 @@ async function callAdmin<T>(action: 'create' | 'reset-password' | 'list' | 'upda
   if (data?.error) throw new Error(data.error);
   return data as T;
 }
-
-const pdfDownloadSetting = document.querySelector<HTMLInputElement>('[data-admin-pdf-download-setting]');
-const pdfDownloadSettingStatus = document.querySelector<HTMLElement>('[data-admin-pdf-download-setting-status]');
-
-async function loadPdfDownloadSetting() {
-  try {
-    const client = getSupabase();
-    const { data, error } = await client!.from('site_settings').select('value').eq('key', 'member_pdf_download_enabled').maybeSingle();
-    if (error) throw error;
-    if (pdfDownloadSetting) pdfDownloadSetting.checked = data?.value === true;
-  } catch (error) {
-    if (pdfDownloadSettingStatus) pdfDownloadSettingStatus.textContent = error instanceof Error ? error.message : '无法读取 PDF 下载开关。';
-  }
-}
-
-pdfDownloadSetting?.addEventListener('change', async () => {
-  if (!pdfDownloadSetting) return;
-  pdfDownloadSetting.disabled = true;
-  try {
-    const client = getSupabase();
-    const enabled = pdfDownloadSetting.checked;
-    const { error } = await client!.from('site_settings').upsert({ key: 'member_pdf_download_enabled', value: enabled, updated_at: new Date().toISOString() });
-    if (error) throw error;
-    if (pdfDownloadSettingStatus) pdfDownloadSettingStatus.textContent = enabled ? '已开启：有效会员可在私密预览下载 PDF。' : '已关闭：会员端不显示 PDF 下载入口。';
-  } catch (error) {
-    pdfDownloadSetting.checked = !pdfDownloadSetting.checked;
-    if (pdfDownloadSettingStatus) pdfDownloadSettingStatus.textContent = error instanceof Error ? error.message : '无法保存 PDF 下载开关。';
-  } finally {
-    pdfDownloadSetting.disabled = false;
-  }
-});
-
-void loadPdfDownloadSetting();
 
 document.querySelector<HTMLFormElement>('[data-admin-export-form]')?.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -189,7 +157,7 @@ function renderRoster(members: MemberRecord[]) {
     const dates = cell(`${member.starts_on} 至 ${member.ends_on}`);
     const memberStatus = cell(statusLabel(member.status), `admin-status is-${member.status}`);
     const management = document.createElement('td');
-    management.innerHTML = `<form class="admin-member-update" data-admin-update="${escapeAttribute(member.member_id)}"><select name="status" aria-label="${escapeAttribute(member.member_id)} 状态"><option value="active"${member.status === 'active' ? ' selected' : ''}>有效</option><option value="suspended"${member.status === 'suspended' ? ' selected' : ''}>暂停</option><option value="expired"${member.status === 'expired' ? ' selected' : ''}>届满</option></select><label>结束日<input name="endsOn" type="date" value="${escapeAttribute(member.ends_on)}" required /></label><button class="text-link" type="submit">保存</button></form>`;
+    management.innerHTML = `<form class="admin-member-update" data-admin-update="${escapeAttribute(member.member_id)}"><select name="status" aria-label="${escapeAttribute(member.member_id)} 状态"><option value="active"${member.status === 'active' ? ' selected' : ''}>有效</option><option value="suspended"${member.status === 'suspended' ? ' selected' : ''}>暂停</option><option value="expired"${member.status === 'expired' ? ' selected' : ''}>届满</option></select><label>结束日<input name="endsOn" type="date" value="${escapeAttribute(member.ends_on)}" required /></label><label class="admin-member-download"><span>MEMBER DOWNLOAD / 会员下载</span><span class="admin-switch"><input name="pdfDownloadEnabled" type="checkbox" value="true"${member.pdf_download_enabled ? ' checked' : ''} /><span aria-hidden="true"></span><strong>允许会员下载 PDF</strong></span></label><button class="text-link" type="submit">保存</button></form>`;
     row.append(person, contact, dates, memberStatus, management);
     roster.append(row);
   });
@@ -213,6 +181,7 @@ roster?.addEventListener('submit', async (event) => {
   event.preventDefault();
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
   const values = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+  values.pdfDownloadEnabled = form.querySelector<HTMLInputElement>('input[name="pdfDownloadEnabled"]')?.checked ? 'true' : 'false';
   values.memberId = form.dataset.adminUpdate;
   try {
     if (button) {

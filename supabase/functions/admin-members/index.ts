@@ -56,26 +56,12 @@ serve(async (request) => {
     const action = body.action;
     const memberId = String(body.memberId ?? '').trim().toUpperCase();
 
-    if (action === 'get-settings') {
-      const { data: setting, error } = await admin.from('site_settings').select('value').eq('key', 'member_pdf_download_enabled').maybeSingle();
-      if (error) return json({ error: 'Could not read member download settings.' }, 400);
-      return json({ memberPdfDownloadEnabled: setting?.value === true });
-    }
-
-    if (action === 'update-settings') {
-      const enabled = body.memberPdfDownloadEnabled === true || body.memberPdfDownloadEnabled === 'true';
-      const { error } = await admin.from('site_settings').upsert({ key: 'member_pdf_download_enabled', value: enabled, updated_at: new Date().toISOString() });
-      if (error) return json({ error: 'Could not save member download settings.' }, 400);
-      await admin.from('member_audit_log').insert({ actor_id: operator.id, action: 'member_pdf_download_setting_updated', metadata: { enabled } });
-      return json({ memberPdfDownloadEnabled: enabled });
-    }
-
     if (action === 'list') {
       const today = new Date().toISOString().slice(0, 10);
       await admin.from('members').update({ status: 'expired', closed_at: new Date().toISOString(), purge_after: new Date(Date.now() + 90 * 86400000).toISOString() }).eq('status', 'active').lt('ends_on', today);
       const { data: members, error } = await admin
         .from('members')
-        .select('member_id, display_name, contact_email, contact_phone, starts_on, ends_on, status, closed_at, purge_after')
+        .select('member_id, display_name, contact_email, contact_phone, starts_on, ends_on, status, pdf_download_enabled, closed_at, purge_after')
         .order('member_id');
       if (error) return json({ error: 'Could not read member records.' }, 400);
       return json({ members });
@@ -85,14 +71,15 @@ serve(async (request) => {
       const status = String(body.status ?? '');
       const startsOn = String(body.startsOn ?? '').trim();
       const endsOn = String(body.endsOn ?? '').trim();
+      const pdfDownloadEnabled = body.pdfDownloadEnabled === true || body.pdfDownloadEnabled === 'true';
       if (!['active', 'suspended', 'expired'].includes(status)) return json({ error: 'Invalid membership status.' }, 400);
       if (!endsOn || (startsOn && endsOn < startsOn)) return json({ error: 'The membership dates are invalid.' }, 400);
       const { data: member } = await admin.from('members').select('id, starts_on').eq('member_id', memberId).maybeSingle();
       if (!member) return json({ error: 'Member not found.' }, 404);
-      const updates: Record<string, string> = { status, ends_on: endsOn };
+      const updates: Record<string, string | boolean | null> = { status, ends_on: endsOn, pdf_download_enabled: pdfDownloadEnabled };
       if (status === 'active') {
-        updates.closed_at = null as unknown as string;
-        updates.purge_after = null as unknown as string;
+        updates.closed_at = null;
+        updates.purge_after = null;
       } else if (status === 'expired') {
         updates.closed_at = new Date().toISOString();
         updates.purge_after = new Date(Date.now() + 90 * 86400000).toISOString();
@@ -100,8 +87,8 @@ serve(async (request) => {
       if (startsOn) updates.starts_on = startsOn;
       const { error } = await admin.from('members').update(updates).eq('id', member.id);
       if (error) return json({ error: 'Could not update this membership.' }, 400);
-      await admin.from('member_audit_log').insert({ actor_id: operator.id, member_id: member.id, action: 'membership_updated', metadata: { member_id: memberId, status, starts_on: startsOn || member.starts_on, ends_on: endsOn } });
-      return json({ memberId, status, startsOn: startsOn || member.starts_on, endsOn: endsOn });
+      await admin.from('member_audit_log').insert({ actor_id: operator.id, member_id: member.id, action: 'membership_updated', metadata: { member_id: memberId, status, starts_on: startsOn || member.starts_on, ends_on: endsOn, pdf_download_enabled: pdfDownloadEnabled } });
+      return json({ memberId, status, startsOn: startsOn || member.starts_on, endsOn: endsOn, pdfDownloadEnabled });
     }
 
     if (action === 'prepare-download') {
