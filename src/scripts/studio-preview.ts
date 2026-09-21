@@ -1,5 +1,5 @@
 import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel, orderedFamilyMembers, parentBranchIds } from '../lib/lineage';
+import { buildLineageGenerations, familyBranchLabel, orderedFamilyMembers, parentBranchIds, personDisplayName } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
 
@@ -134,14 +134,8 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
       const branchLabel = document.createElement('span');
       branchLabel.className = 'preview-lineage-branch-label';
       branchLabel.textContent = `家庭支系 ${index + 1}`;
-      const family = document.createElement('div');
-      family.className = 'preview-lineage-family-members';
-      orderedFamilyMembers(branch.members).forEach((person) => {
-        const member = document.createElement('strong');
-        member.className = 'preview-lineage-family-member';
-        member.textContent = `${person.name}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）`;
-        family.append(member);
-      });
+      const family = document.createElement('strong');
+      family.textContent = orderedFamilyMembers(branch.members).map((person) => personDisplayName(person)).join('\n');
       const type = document.createElement('small');
       type.textContent = branch.members.length > 1 ? '夫妻家庭' : '个人支系';
       card.append(branchLabel, family, type);
@@ -162,6 +156,10 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
   });
   parent.append(tree);
   drawLineageConnections(tree, { rowSelector: '.preview-lineage-generation', branchSelector: '.preview-lineage-family' });
+  const legend = document.createElement('div');
+  legend.className = 'lineage-tree-legend';
+  legend.textContent = '标注说明　立谱者　卓越表现者　△ 联系不上　止 无子嗣　夭 夭折　│ 传承中　S 新加坡 · M 马来西亚 · HK 香港 · UK 英国 · US 美国；空白：已故世者';
+  parent.append(legend);
   const note = document.createElement('p');
   note.className = 'preview-lineage-note';
   note.textContent = '关系只依据会员填写的父亲、母亲与配偶字段；未注明的关系不会由系统推测。';

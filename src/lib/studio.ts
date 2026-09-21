@@ -7,6 +7,7 @@ export type StudioPerson = {
   id: string; name: string; generation_number: number; sex: string | null; life_status: string | null;
   father_id: string | null; mother_id: string | null; spouse_id: string | null;
   birth_year: number | null; occupation: string | null; education: string | null; phone: string | null; address: string | null; note: string | null;
+  birth_date?: string | null; death_date?: string | null; residence_code?: string | null; genealogy_marker?: string | null;
 };
 export type StudioMedia = {
   id: string;

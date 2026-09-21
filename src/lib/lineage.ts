@@ -17,6 +17,28 @@ export function lifeStatusLabel(value: string | null) {
   return value === 'living' ? '在世' : value === 'deceased' ? '已故' : '状态未注明';
 }
 
+function genealogyDate(value: string | null | undefined, year: number | null) {
+  if (value) {
+    const parts = value.split('-').map((part) => Number(part));
+    if (parts.length === 3 && parts.every((part) => Number.isFinite(part))) return parts.join('.');
+    return value;
+  }
+  return year ? String(year) : '';
+}
+
+export function personLifespan(person: StudioPerson) {
+  const birth = genealogyDate(person.birth_date, person.birth_year);
+  const death = genealogyDate(person.death_date, null);
+  if (!birth && !death) return '';
+  const ending = death ? ` ${death}` : person.life_status === 'deceased' ? ' 待补' : '';
+  return `${birth || '?'} --${ending}`;
+}
+
+export function personDisplayName(person: StudioPerson) {
+  const lifespan = personLifespan(person);
+  return lifespan ? `${person.name}（${lifespan}）` : person.name;
+}
+
 export function buildLineageGenerations(people: StudioPerson[]): LineageGeneration[] {
   const generations = [...new Set(people.map((person) => person.generation_number))].sort((a, b) => a - b);
   const records = generations.map((generation) => {

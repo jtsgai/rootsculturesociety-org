@@ -1768,12 +1768,9 @@ html[lang='en'] .prose-column p {
   font-size: 0.66rem;
   letter-spacing: 0.06em;
 }
-.preview-lineage-family-members {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-.preview-lineage-family-member {
+.preview-lineage-family strong {
+  display: block;
+  white-space: pre-line;
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.55;
@@ -1807,6 +1804,20 @@ html[lang='en'] .prose-column p {
 }
 .preview-lineage-note {
   margin: 12px 0 0;
+}
+.lineage-tree-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 12px 20px 4px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+.lineage-tree-legend strong {
+  color: var(--maroon);
+  font-weight: 600;
 }
 .preview-register-table {
   width: 100%;
@@ -2228,13 +2239,9 @@ html[lang='en'] .prose-column p {
   font-size: 0.66rem;
   letter-spacing: 0.06em;
 }
-.lineage-couple-members {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-.lineage-couple-member {
+.lineage-couple strong {
   display: block;
+  white-space: pre-line;
   font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.55;
@@ -2845,11 +2852,6 @@ html[lang='en'] .prose-column p {
   letter-spacing: 0.08em;
 }
 @media (max-width: 800px) {
-  .preview-lineage-family-members,
-  .lineage-couple-members {
-    flex-direction: column;
-    gap: 3px;
-  }
   .header-inner {
     display: flex;
     min-height: 72px;

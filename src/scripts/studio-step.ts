@@ -1,5 +1,5 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, lifeStatusLabel, orderedFamilyMembers, parentBranchIds } from '../lib/lineage';
+import { buildLineageGenerations, familyBranchLabel, orderedFamilyMembers, parentBranchIds, personDisplayName } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
@@ -107,14 +107,14 @@ function renderLineage(people: StudioPerson[]) {
       const { members, parents, children } = branch;
       const parentLine = parents.length ? `<div class="lineage-branch-parents"><span>上承</span>${parents.map((parent) => escapeHtml(parent.name)).join('、')}</div>` : '';
       const childLine = children.length ? `<div class="lineage-branch-children"><span>子女</span><div class="lineage-child-list">${children.map((child) => `<span class="lineage-child-node">${escapeHtml(child.name)}</span>`).join('')}</div></div>` : '<div class="lineage-branch-children lineage-unlinked"><span>子女</span><div class="lineage-child-list"><span class="lineage-child-node">待补充</span></div></div>';
-      const familyMembers = orderedFamilyMembers(members).map((person) => `<strong class="lineage-couple-member">${escapeHtml(person.name)}（${lifeStatusLabel(person.life_status)}${person.birth_year ? `，出生 ${person.birth_year}` : ''}）</strong>`).join('');
+      const familyMembers = escapeHtml(orderedFamilyMembers(members).map((person) => personDisplayName(person)).join('\n'));
       const familyType = members.length > 1 ? '夫妻家庭' : '个人支系';
       const parentsForConnection = parentBranchIds(generationRecords, generationIndex, branch).join(',');
-      return `<article class="lineage-branch" data-branch-id="${escapeAttribute(branch.id)}" data-parent-branch-ids="${escapeAttribute(parentsForConnection)}"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><div class="lineage-couple-members">${familyMembers}</div></div></div>${childLine}</article>`;
+      return `<article class="lineage-branch" data-branch-id="${escapeAttribute(branch.id)}" data-parent-branch-ids="${escapeAttribute(parentsForConnection)}"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><strong>${familyMembers}</strong></div></div>${childLine}</article>`;
     }).join('');
     return `<section class="lineage-generation-row" data-generation="${record.generation}"><div class="lineage-generation-axis"><span>第 ${record.generation} 代</span><small>${record.members.length} 位族人<br>${record.branches.length} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
   }).join('')}</div>
-    <div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
+    <div class="lineage-tree-legend"><strong>标注说明</strong><span>立谱者</span><span>卓越表现者</span><span>△ 联系不上</span><span>止 无子嗣</span><span>夭 夭折</span><span>│ 传承中</span><span>S 新加坡 · M 马来西亚 · HK 香港 · UK 英国 · US 美国；空白：已故世者</span></div><div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
   </div>`;
   drawLineageConnections(target.querySelector<HTMLElement>('.lineage-tree')!, { rowSelector: '.lineage-generation-row', branchSelector: '.lineage-branch' });
 }
