@@ -2111,8 +2111,25 @@ html[lang='en'] .prose-column p {
   grid-column: 1 / -1;
 }
 .studio-repeat-row .studio-remove-row {
+  display: inline-flex;
+  width: fit-content;
+  min-width: 0;
+  height: auto;
+  min-height: 36px;
+  align-self: start;
   justify-self: start;
+  padding: 8px 14px;
+  border: 1px solid var(--maroon);
+  border-radius: 4px;
+  background: transparent;
   color: var(--maroon);
+  font-size: 0.78rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.studio-repeat-row .studio-remove-row:hover {
+  color: #fff;
+  background: var(--maroon);
 }
 .studio-media-picker {
   margin-top: 38px;
