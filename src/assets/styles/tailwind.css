@@ -1781,7 +1781,7 @@ html[lang='en'] .prose-column p {
 }
 .preview-photo-spread figcaption span {
   color: var(--maroon);
-  font-size: 0.75rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
@@ -1795,8 +1795,8 @@ html[lang='en'] .prose-column p {
 }
 .preview-photo-spread figcaption small {
   color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 .preview-subheading {
   margin: 26px 0 12px;
@@ -3834,7 +3834,7 @@ html[lang='en'] .prose-column p {
     line-height: 1.35;
   }
   .preview-photo-spread figcaption small {
-    font-size: 8pt;
+    font-size: 10pt;
   }
   /* Let ordinary chapter notes use the remaining space after their photos.
      Large diagrams and tables keep their own page start below. */
