@@ -3602,8 +3602,10 @@ html[lang='en'] .prose-column p {
   .preview-photo-spread figcaption small {
     font-size: 8pt;
   }
-  .preview-photo-spreads + .preview-chapter-body {
-    break-before: page;
+  /* Let ordinary chapter notes use the remaining space after their photos.
+     Large diagrams and tables keep their own page start below. */
+  .preview-chapter-body {
+    break-before: auto;
   }
   .preview-lineage-tree {
     width: 100% !important;
@@ -3752,6 +3754,10 @@ html[lang='en'] .prose-column p {
     font-size: 5.6pt;
   }
   .preview-repeat-group {
+    break-inside: avoid;
+  }
+  .preview-definition,
+  .preview-repeat-item {
     break-inside: avoid;
   }
 }
