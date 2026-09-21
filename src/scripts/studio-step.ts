@@ -1,5 +1,5 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
-import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
+import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
@@ -104,7 +104,8 @@ function relationSummary(person: StudioPerson, people: StudioPerson[], includeSp
 
 function lineagePersonMarkup(person: StudioPerson) {
   const codes = escapeHtml(`${personMarkerSymbols(person)}${personResidenceCode(person)}`);
-  return `<span class="lineage-person-line"><i class="lineage-person-codes">${codes}</i><b>${escapeHtml(personDisplayName(person))}</b><em class="lineage-sex lineage-sex-${escapeAttribute(person.sex)}">${personSexLabel(person)}</em></span>`;
+  const lifespan = personLifespan(person);
+  return `<span class="lineage-person-line"><i class="lineage-person-codes">${codes}</i><b><span class="lineage-person-name">${escapeHtml(person.name)}</span>${lifespan ? `<span class="lineage-person-lifespan">（${escapeHtml(lifespan)}）</span>` : ''}</b><em class="lineage-sex lineage-sex-${escapeAttribute(person.sex)}">${personSexLabel(person)}</em></span>`;
 }
 
 function renderLineage(people: StudioPerson[]) {

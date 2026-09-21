@@ -1,5 +1,5 @@
 import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
-import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
+import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
 
@@ -111,7 +111,13 @@ function lineagePersonElement(person: StudioPerson) {
   codes.className = 'lineage-person-codes';
   codes.textContent = `${personMarkerSymbols(person)}${personResidenceCode(person)}`;
   const name = document.createElement('b');
-  name.textContent = personDisplayName(person);
+  const personName = document.createElement('span');
+  personName.className = 'lineage-person-name';
+  personName.textContent = person.name;
+  const lifespan = document.createElement('span');
+  lifespan.className = 'lineage-person-lifespan';
+  lifespan.textContent = `（${personLifespan(person)}）`;
+  name.append(personName, lifespan);
   const sex = document.createElement('em');
   sex.className = `lineage-sex lineage-sex-${person.sex ?? 'unspecified'}`;
   sex.textContent = personSexLabel(person);

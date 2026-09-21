@@ -1791,17 +1791,29 @@ html[lang='en'] .prose-column p {
 .lineage-person-line {
   display: grid;
   grid-template-columns: minmax(2.8em, auto) minmax(0, 1fr) auto;
-  align-items: baseline;
+  align-items: start;
   gap: 6px;
-  white-space: nowrap;
 }
 .lineage-person-line b {
+  display: grid;
+  gap: 1px;
   min-width: 0;
   color: var(--ink);
   font-size: 0.86rem;
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0;
+}
+.lineage-person-name,
+.lineage-person-lifespan {
+  display: block;
+  white-space: nowrap;
+}
+.lineage-person-lifespan {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.45;
 }
 .lineage-person-codes {
   color: var(--maroon);
