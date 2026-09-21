@@ -1,5 +1,5 @@
 import { allSections, currentBook, currentMember, listMedia, listPeople, signOut, studioUnavailableMessage, type StudioPerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName } from '../lib/lineage';
+import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
 
@@ -86,17 +86,37 @@ function addDefinition(parent: HTMLElement, key: string, value: unknown) {
 }
 
 function relationText(person: StudioPerson, people: StudioPerson[], includeSpouse = true) {
+  const siblings = siblingsOf(person, people);
   const relations = [
     person.father_id ? `父：${people.find((item) => item.id === person.father_id)?.name ?? '未注明'}` : '',
     person.mother_id ? `母：${people.find((item) => item.id === person.mother_id)?.name ?? '未注明'}` : '',
     includeSpouse && person.spouse_id ? `配偶：${people.find((item) => item.id === person.spouse_id)?.name ?? '未注明'}` : '',
+    siblings.length ? `兄弟姐妹：${siblings.map((item) => `${item.name}（${personSexLabel(item)}）`).join('、')}` : '',
   ].filter(Boolean);
-  return relations.length ? relations.join(' · ') : '关系待补充';
+  return relations.length ? relations.join('\n') : '关系未填写';
 }
 
 function personMeta(person: StudioPerson) {
   const life = person.life_status === 'living' ? '在世' : person.life_status === 'deceased' ? '已故' : '状态未注明';
-  return `第 ${person.generation_number} 代 · ${life}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}`;
+  const lifespan = personLifespan(person);
+  const residence = personResidenceCode(person);
+  const markers = (person.genealogy_markers ?? []).map((marker) => genealogyMarkerLabels[marker]?.label).filter(Boolean).join('、');
+  return [`第 ${person.generation_number} 代`, life, lifespan, residence ? `现居 ${residence}` : '', markers].filter(Boolean).join(' · ');
+}
+
+function lineagePersonElement(person: StudioPerson) {
+  const row = document.createElement('span');
+  row.className = 'lineage-person-line';
+  const codes = document.createElement('i');
+  codes.className = 'lineage-person-codes';
+  codes.textContent = `${personMarkerSymbols(person)}${personResidenceCode(person)}`;
+  const name = document.createElement('b');
+  name.textContent = personDisplayName(person);
+  const sex = document.createElement('em');
+  sex.className = `lineage-sex lineage-sex-${person.sex ?? 'unspecified'}`;
+  sex.textContent = personSexLabel(person);
+  row.append(codes, name, sex);
+  return row;
 }
 
 function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
@@ -115,6 +135,8 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
   head.textContent = '横线表示同一家庭；竖线对应父母与下一代。夫妻只在同一家庭支系中出现一次。';
   tree.append(head);
   const generations = buildLineageGenerations(people);
+  const grid = buildLineageGrid(generations);
+  tree.style.setProperty('--lineage-columns', String(grid.columns));
   generations.forEach((record, generationIndex) => {
     const level = document.createElement('section');
     level.className = 'preview-lineage-generation';
@@ -131,11 +153,14 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
       card.className = 'preview-lineage-family';
       card.dataset.branchId = branch.id;
       card.dataset.parentBranchIds = parentBranchIds(generations, generationIndex, branch).join(',');
+      const placement = grid.placements.get(branch.id);
+      if (placement) card.style.gridColumn = `${placement.start} / span ${placement.span}`;
       const branchLabel = document.createElement('span');
       branchLabel.className = 'preview-lineage-branch-label';
       branchLabel.textContent = `家庭支系 ${index + 1}`;
-      const family = document.createElement('strong');
-      family.textContent = orderedFamilyMembers(branch.members).map((person) => personDisplayName(person)).join('\n');
+      const family = document.createElement('div');
+      family.className = 'lineage-person-list';
+      orderedFamilyMembers(branch.members).forEach((person) => family.append(lineagePersonElement(person)));
       const type = document.createElement('small');
       type.textContent = branch.members.length > 1 ? '夫妻家庭' : '个人支系';
       card.append(branchLabel, family, type);
@@ -147,7 +172,7 @@ function renderLineage(parent: HTMLElement, people: StudioPerson[]) {
       }
       const childLine = document.createElement('p');
       childLine.className = 'preview-lineage-child';
-      childLine.textContent = `子女：${branch.children.length ? branch.children.map((person) => person.name).join('、') : '待补充'}`;
+      childLine.textContent = `子女：${branchChildSummary(branch)}`;
       card.append(childLine);
       nodes.append(card);
     });
@@ -199,10 +224,10 @@ function renderRegister(parent: HTMLElement, people: StudioPerson[]) {
       const row = document.createElement('tr');
       const cells = [
         `第 ${person.generation_number} 代\n${person.name}`,
-        `${relationText(person, people, false)}\n${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'} · ${personMeta(person)}`,
-        [person.education, person.occupation].filter(Boolean).join('\n') || '待补充',
+        `${relationText(person, people)}\n${personSexLabel(person)} · ${personMeta(person)}`,
+        [person.education, person.occupation].filter(Boolean).join('\n') || '未填写',
         [person.phone, person.address].filter(Boolean).join('\n') || '私密资料未填写',
-        person.note || '待补充',
+        person.note || '未填写',
       ];
       cells.forEach((text) => {
         const cell = document.createElement('td');

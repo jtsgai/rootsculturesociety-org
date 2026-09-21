@@ -1567,6 +1567,10 @@ html[lang='en'] .prose-column p {
   gap: 12px;
   max-width: 920px;
 }
+.preview-chapter:has(.preview-lineage-tree) .preview-chapter-body {
+  max-width: none;
+  overflow-x: auto;
+}
 .preview-definition {
   display: grid;
   grid-template-columns: minmax(130px, 0.34fr) 1fr;
@@ -1685,7 +1689,7 @@ html[lang='en'] .prose-column p {
 }
 .preview-lineage-tree {
   position: relative;
-  min-width: 920px;
+  width: max(920px, calc(148px + var(--lineage-columns, 3) * 220px));
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
   overflow: hidden;
@@ -1744,7 +1748,7 @@ html[lang='en'] .prose-column p {
 }
 .preview-lineage-branches {
   display: grid;
-  grid-template-columns: repeat(3, minmax(210px, 1fr));
+  grid-template-columns: repeat(var(--lineage-columns, 3), minmax(190px, 1fr));
   gap: 16px;
   padding: 22px 0 28px 28px;
 }
@@ -1758,6 +1762,8 @@ html[lang='en'] .prose-column p {
   padding: 12px;
   border: 1px solid var(--line);
   background: var(--paper);
+  width: min(100%, 260px);
+  justify-self: center;
 }
 .preview-lineage-family::before,
 .preview-lineage-family::after {
@@ -1778,6 +1784,43 @@ html[lang='en'] .prose-column p {
   font-weight: 600;
   line-height: 1.55;
 }
+.lineage-person-list {
+  display: grid;
+  gap: 5px;
+}
+.lineage-person-line {
+  display: grid;
+  grid-template-columns: minmax(2.8em, auto) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+.lineage-person-line b {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.lineage-person-codes {
+  color: var(--maroon);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.lineage-sex {
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.6rem;
+  font-style: normal;
+  font-weight: 500;
+}
+.lineage-sex-male { border-color: color-mix(in srgb, var(--ink) 35%, var(--line)); }
+.lineage-sex-female { border-color: color-mix(in srgb, var(--maroon) 55%, var(--line)); color: var(--maroon); }
 .lineage-connection-layer {
   position: absolute;
   z-index: 1;
@@ -1864,6 +1907,11 @@ html[lang='en'] .prose-column p {
   vertical-align: top;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+.preview-register-table td:first-child,
+.preview-register-table td:nth-child(2) {
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 .preview-register-table th {
   color: var(--maroon);
@@ -2073,6 +2121,31 @@ html[lang='en'] .prose-column p {
   display: grid;
   gap: 4px;
 }
+.studio-marker-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin: 10px 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+}
+.studio-marker-fields legend {
+  padding: 0 7px;
+  color: var(--maroon);
+  font-size: 0.78rem;
+}
+.studio-marker-fields label {
+  display: flex;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+.studio-marker-fields input {
+  width: auto;
+}
 .studio-person-edit-fields .studio-fields {
   margin-bottom: 0;
 }
@@ -2121,7 +2194,7 @@ html[lang='en'] .prose-column p {
 }
 .lineage-tree {
   position: relative;
-  min-width: 920px;
+  width: max(920px, calc(148px + var(--lineage-columns, 3) * 220px));
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
 }
@@ -2220,7 +2293,7 @@ html[lang='en'] .prose-column p {
 }
 .lineage-generation-branches {
   display: grid;
-  grid-template-columns: repeat(3, minmax(210px, 1fr));
+  grid-template-columns: repeat(var(--lineage-columns, 3), minmax(190px, 1fr));
   gap: 16px;
   padding: 24px 0 28px 28px;
 }
@@ -2234,6 +2307,8 @@ html[lang='en'] .prose-column p {
   padding: 12px;
   border: 1px solid var(--line);
   background: var(--paper);
+  width: min(100%, 260px);
+  justify-self: center;
 }
 .lineage-branch::before,
 .lineage-branch::after {

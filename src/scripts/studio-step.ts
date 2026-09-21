@@ -1,5 +1,5 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName } from '../lib/lineage';
+import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
@@ -51,13 +51,22 @@ async function ensureMember() {
   return true;
 }
 
-function personOptions(people: StudioPerson[], currentId: string, selectedId: string | null, emptyLabel: string) {
-  const options = people.filter((person) => person.id !== currentId).map((person) => `<option value="${person.id}"${person.id === selectedId ? ' selected' : ''}>第 ${person.generation_number} 代 · ${escapeHtml(person.name)}</option>`).join('');
+function personOptions(people: StudioPerson[], current: StudioPerson, selectedId: string | null, emptyLabel: string, relation: 'father' | 'mother' | 'spouse') {
+  const options = people.filter((person) => {
+    if (person.id === current.id) return false;
+    if (relation === 'father') return person.sex === 'male' && person.generation_number === current.generation_number - 1;
+    if (relation === 'mother') return person.sex === 'female' && person.generation_number === current.generation_number - 1;
+    return person.generation_number === current.generation_number;
+  }).map((person) => `<option value="${person.id}"${person.id === selectedId ? ' selected' : ''}>第 ${person.generation_number} 代 · ${escapeHtml(person.name)}（${personSexLabel(person)}）</option>`).join('');
   return `<option value="">${emptyLabel}</option>${options}`;
 }
 
+function markerCheckboxes(person: StudioPerson) {
+  return Object.entries(genealogyMarkerLabels).map(([value, marker]) => `<label><input type="checkbox" name="markers" value="${value}"${person.genealogy_markers?.includes(value) ? ' checked' : ''}> <b>${marker.symbol}</b> ${marker.label}</label>`).join('');
+}
+
 function renderPersonEditor(person: StudioPerson, people: StudioPerson[]) {
-  return `<form class="studio-person-row studio-person-edit" data-person-edit="${person.id}"><div class="studio-person-identity"><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${lifeStatus(person.life_status)}</small><p>${escapeHtml(person.note || '尚未填写人物小记。')}</p></div><div class="studio-person-edit-fields"><div class="studio-fields"><label>姓名<input name="name" value="${escapeAttribute(person.name)}" required /></label><label>世代<input name="generation" type="number" min="1" value="${person.generation_number}" required /></label><label>性别<select name="sex"><option value="unspecified"${person.sex === 'unspecified' ? ' selected' : ''}>不注明</option><option value="female"${person.sex === 'female' ? ' selected' : ''}>女</option><option value="male"${person.sex === 'male' ? ' selected' : ''}>男</option></select></label><label>状态<select name="lifeStatus"><option value="unspecified"${person.life_status === 'unspecified' ? ' selected' : ''}>不注明</option><option value="living"${person.life_status === 'living' ? ' selected' : ''}>在世</option><option value="deceased"${person.life_status === 'deceased' ? ' selected' : ''}>已故</option></select></label><label>出生年份<input name="birthYear" type="number" min="1800" max="2200" value="${person.birth_year ?? ''}" /></label></div><div class="studio-fields"><label>父亲<select name="fatherId">${personOptions(people, person.id, person.father_id, '未选择')}</select></label><label>母亲<select name="motherId">${personOptions(people, person.id, person.mother_id, '未选择')}</select></label><label>配偶<select name="spouseId">${personOptions(people, person.id, person.spouse_id, '未选择')}</select></label></div><label>人物小记<textarea name="note" rows="3">${escapeHtml(person.note || '')}</textarea></label><div class="studio-person-actions"><button class="text-link" type="submit">保存人物与关系</button><button class="text-link media-remove" type="button" data-delete-person>删除人物</button></div></div></form>`;
+  return `<form class="studio-person-row studio-person-edit" data-person-edit="${person.id}"><div class="studio-person-identity"><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${lifeStatus(person.life_status)}</small><p>${escapeHtml(person.note || '尚未填写人物小记。')}</p></div><div class="studio-person-edit-fields"><div class="studio-fields"><label>姓名<input name="name" value="${escapeAttribute(person.name)}" required /></label><label>世代<input name="generation" type="number" min="1" value="${person.generation_number}" required /></label><label>性别<select name="sex"><option value="unspecified"${person.sex === 'unspecified' ? ' selected' : ''}>不注明</option><option value="female"${person.sex === 'female' ? ' selected' : ''}>女</option><option value="male"${person.sex === 'male' ? ' selected' : ''}>男</option></select></label><label>状态<select name="lifeStatus"><option value="unspecified"${person.life_status === 'unspecified' ? ' selected' : ''}>不注明</option><option value="living"${person.life_status === 'living' ? ' selected' : ''}>在世</option><option value="deceased"${person.life_status === 'deceased' ? ' selected' : ''}>已故</option></select></label><label>出生日期<input name="birthDate" type="date" value="${escapeAttribute(person.birth_date)}" /></label><label>去世日期<input name="deathDate" type="date" value="${escapeAttribute(person.death_date)}" /></label><label>现居地缩写<select name="residenceCode"><option value="">不标注</option>${['S', 'M', 'HK', 'UK', 'US'].map((code) => `<option value="${code}"${person.residence_code === code ? ' selected' : ''}>${code}</option>`).join('')}</select></label></div><div class="studio-fields"><label>父亲（只列上一代男性）<select name="fatherId">${personOptions(people, person, person.father_id, '未选择', 'father')}</select></label><label>母亲（只列上一代女性）<select name="motherId">${personOptions(people, person, person.mother_id, '未选择', 'mother')}</select></label><label>配偶（只列同一代）<select name="spouseId">${personOptions(people, person, person.spouse_id, '未选择', 'spouse')}</select></label></div><fieldset class="studio-marker-fields"><legend>谱系标注</legend>${markerCheckboxes(person)}</fieldset><label>人物小记<textarea name="note" rows="3">${escapeHtml(person.note || '')}</textarea></label><div class="studio-person-actions"><button class="text-link" type="submit">保存人物与关系</button><button class="text-link media-remove" type="button" data-delete-person>删除人物</button></div></div></form>`;
 }
 
 function renderPeople(people: StudioPerson[], register = false) {
@@ -77,18 +86,25 @@ function renderPeople(people: StudioPerson[], register = false) {
 function renderRegisterRows(people: StudioPerson[]) {
   return buildLineageGenerations(people).map((record) => record.branches.map((branch, branchIndex) => {
     const heading = `<div class="studio-register-family-heading"><span>第 ${record.generation} 代 · 家庭支系 ${branchIndex + 1}</span><strong>${escapeHtml(familyBranchLabel(branch))}</strong></div>`;
-    const rows = orderedFamilyMembers(branch.members).map((person) => `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明'}${person.birth_year ? ` · 出生 ${person.birth_year}` : ''}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people, false))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`).join('');
+    const rows = orderedFamilyMembers(branch.members).map((person) => `<form class="studio-person-row" data-register-person="${person.id}"><div><strong>${escapeHtml(person.name)}</strong><small>第 ${person.generation_number} 代 · ${personSexLabel(person)} · ${escapeHtml(personLifespan(person) || '生卒未填写')}</small><small class="studio-person-relation">${escapeHtml(relationSummary(person, people))}</small></div><label>职业<input name="occupation" value="${escapeAttribute(person.occupation)}" autocomplete="organization-title"></label><label>教育<input name="education" value="${escapeAttribute(person.education)}" autocomplete="off"></label><label>电话（私密）<input name="privatePhone" value="${escapeAttribute(person.phone)}" autocomplete="off"></label><label>地址（私密）<input name="privateAddress" value="${escapeAttribute(person.address)}" autocomplete="off"></label><button class="text-link" type="submit">保存</button></form>`).join('');
     return `${heading}${rows}`;
   }).join('')).join('');
 }
 
 function relationSummary(person: StudioPerson, people: StudioPerson[], includeSpouse = true) {
+  const siblings = siblingsOf(person, people);
   const relations = [
     person.father_id ? `父：${people.find((item) => item.id === person.father_id)?.name ?? '未注明'}` : '',
     person.mother_id ? `母：${people.find((item) => item.id === person.mother_id)?.name ?? '未注明'}` : '',
     includeSpouse && person.spouse_id ? `配偶：${people.find((item) => item.id === person.spouse_id)?.name ?? '未注明'}` : '',
+    siblings.length ? `兄弟姐妹：${siblings.map((item) => `${item.name}（${personSexLabel(item)}）`).join('、')}` : '',
   ].filter(Boolean);
-  return relations.length ? relations.join(' · ') : '关系待补充';
+  return relations.length ? relations.join(' · ') : '关系未填写';
+}
+
+function lineagePersonMarkup(person: StudioPerson) {
+  const codes = escapeHtml(`${personMarkerSymbols(person)}${personResidenceCode(person)}`);
+  return `<span class="lineage-person-line"><i class="lineage-person-codes">${codes}</i><b>${escapeHtml(personDisplayName(person))}</b><em class="lineage-sex lineage-sex-${escapeAttribute(person.sex)}">${personSexLabel(person)}</em></span>`;
 }
 
 function renderLineage(people: StudioPerson[]) {
@@ -100,21 +116,24 @@ function renderLineage(people: StudioPerson[]) {
     return;
   }
   const generationRecords = buildLineageGenerations(people);
-  target.innerHTML = `<div class="lineage-tree" aria-label="按代次、家庭支系和父母子女关系排列的世系关系图">
+  const grid = buildLineageGrid(generationRecords);
+  target.innerHTML = `<div class="lineage-tree" style="--lineage-columns:${grid.columns}" aria-label="按代次、家庭支系和父母子女关系排列的世系关系图">
     <div class="lineage-tree-head"><div><strong>拓氏相册家谱</strong><span>按第一代落地新加坡为起点，逐代记录家庭支系</span></div><p><b>横线</b>表示配偶或同一家庭，<b>竖线</b>表示父母与子女。</p></div>
     <div class="lineage-tree-grid">${generationRecords.map((record, generationIndex) => {
     const branchCards = record.branches.map((branch, branchIndex) => {
-      const { members, parents, children } = branch;
+      const { members, parents } = branch;
       const parentLine = parents.length ? `<div class="lineage-branch-parents"><span>上承</span>${parents.map((parent) => escapeHtml(parent.name)).join('、')}</div>` : '';
-      const childLine = children.length ? `<div class="lineage-branch-children"><span>子女</span><div class="lineage-child-list">${children.map((child) => `<span class="lineage-child-node">${escapeHtml(child.name)}</span>`).join('')}</div></div>` : '<div class="lineage-branch-children lineage-unlinked"><span>子女</span><div class="lineage-child-list"><span class="lineage-child-node">待补充</span></div></div>';
-      const familyMembers = escapeHtml(orderedFamilyMembers(members).map((person) => personDisplayName(person)).join('\n'));
+      const childLine = `<div class="lineage-branch-children"><span>子女</span><div class="lineage-child-list"><span class="lineage-child-node">${escapeHtml(branchChildSummary(branch))}</span></div></div>`;
+      const familyMembers = orderedFamilyMembers(members).map(lineagePersonMarkup).join('');
       const familyType = members.length > 1 ? '夫妻家庭' : '个人支系';
       const parentsForConnection = parentBranchIds(generationRecords, generationIndex, branch).join(',');
-      return `<article class="lineage-branch" data-branch-id="${escapeAttribute(branch.id)}" data-parent-branch-ids="${escapeAttribute(parentsForConnection)}"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><strong>${familyMembers}</strong></div></div>${childLine}</article>`;
+      const placement = grid.placements.get(branch.id);
+      const gridStyle = placement ? ` style="grid-column:${placement.start} / span ${placement.span}"` : '';
+      return `<article class="lineage-branch"${gridStyle} data-branch-id="${escapeAttribute(branch.id)}" data-parent-branch-ids="${escapeAttribute(parentsForConnection)}"><div class="lineage-branch-label">家庭支系 ${branchIndex + 1}</div>${parentLine}<div class="lineage-family-pair"><div class="lineage-couple"><span>${familyType}</span><div class="lineage-person-list">${familyMembers}</div></div></div>${childLine}</article>`;
     }).join('');
     return `<section class="lineage-generation-row" data-generation="${record.generation}"><div class="lineage-generation-axis"><span>第 ${record.generation} 代</span><small>${record.members.length} 位族人<br>${record.branches.length} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
   }).join('')}</div>
-    ${lineageLegendMarkup()}<div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
+    ${lineageLegendMarkup()}<div class="lineage-tree-note">资料图以目前已填写的族人为准；“未填写”只表示尚未登记子女资料。“止”表示确认无子嗣，“夭”表示夭折未续支。</div>
   </div>`;
   drawLineageConnections(target.querySelector<HTMLElement>('.lineage-tree')!, { rowSelector: '.lineage-generation-row', branchSelector: '.lineage-branch' });
 }
@@ -327,8 +346,12 @@ document.querySelector<HTMLFormElement>('[data-person-form]')?.addEventListener(
     const name = stringOrNull(data.get('name'));
     const generation = Number(data.get('generation'));
     if (!name || !Number.isInteger(generation) || generation < 1) throw new Error('请填写姓名与正确的世代。');
-    const birthYear = Number(data.get('birthYear')) || null;
-    await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: String(data.get('lifeStatus') || 'unspecified'), father_id: null, mother_id: null, spouse_id: null, birth_year: birthYear, occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
+    const birthDate = stringOrNull(data.get('birthDate'));
+    const deathDate = stringOrNull(data.get('deathDate'));
+    const lifeStatusValue = String(data.get('lifeStatus') || 'unspecified');
+    if (birthDate && deathDate && deathDate < birthDate) throw new Error('去世日期不能早于出生日期。');
+    if (deathDate && lifeStatusValue !== 'deceased') throw new Error('填写去世日期时，状态必须选择“已故”。');
+    await addPerson(bookId, { name, generation_number: generation, sex: String(data.get('sex') || 'unspecified'), life_status: lifeStatusValue, father_id: null, mother_id: null, spouse_id: null, birth_year: birthDate ? Number(birthDate.slice(0, 4)) : null, birth_date: birthDate, death_date: lifeStatusValue === 'deceased' ? deathDate : null, residence_code: lifeStatusValue === 'deceased' ? null : stringOrNull(data.get('residenceCode')), genealogy_markers: [], occupation: null, education: null, phone: null, address: null, note: stringOrNull(data.get('note')) });
     await saveSection(bookId, method, {}, true);
     form.reset();
     renderPeople(await listPeople(bookId, { includeSensitive: true }));
@@ -351,15 +374,29 @@ document.querySelector<HTMLElement>('[data-person-list]')?.addEventListener('sub
     if (!name || !Number.isInteger(generation) || generation < 1) throw new Error('请填写姓名与正确的世代。');
     const previousSpouseId = person.spouse_id;
     const spouseId = stringOrNull(values.get('spouseId'));
+    const lifeStatusValue = String(values.get('lifeStatus') || 'unspecified');
+    const birthDate = stringOrNull(values.get('birthDate'));
+    const deathDate = stringOrNull(values.get('deathDate'));
+    const fatherId = stringOrNull(values.get('fatherId'));
+    const motherId = stringOrNull(values.get('motherId'));
+    const markers = values.getAll('markers').map(String);
+    if (birthDate && deathDate && deathDate < birthDate) throw new Error('去世日期不能早于出生日期。');
+    if (deathDate && lifeStatusValue !== 'deceased') throw new Error('填写去世日期时，状态必须选择“已故”。');
+    if (markers.includes('died_young') && lifeStatusValue !== 'deceased') throw new Error('选择“夭”时，状态必须选择“已故”。');
+    if (markers.includes('no_descendants') && peopleItems.some((candidate) => candidate.father_id === person.id || candidate.mother_id === person.id)) throw new Error('这位族人已有子女关系，不能同时标记“止／无子嗣”。');
     await updatePerson(person.id, {
       name,
       generation_number: generation,
       sex: String(values.get('sex') || 'unspecified'),
-      life_status: String(values.get('lifeStatus') || 'unspecified'),
-      father_id: stringOrNull(values.get('fatherId')),
-      mother_id: stringOrNull(values.get('motherId')),
+      life_status: lifeStatusValue,
+      father_id: fatherId,
+      mother_id: motherId,
       spouse_id: spouseId,
-      birth_year: Number(values.get('birthYear')) || null,
+      birth_year: birthDate ? Number(birthDate.slice(0, 4)) : person.birth_year,
+      birth_date: birthDate,
+      death_date: lifeStatusValue === 'deceased' ? deathDate : null,
+      residence_code: lifeStatusValue === 'deceased' ? null : stringOrNull(values.get('residenceCode')),
+      genealogy_markers: markers,
       note: stringOrNull(values.get('note')),
     });
     if (previousSpouseId && previousSpouseId !== spouseId) await updatePerson(previousSpouseId, { spouse_id: null });

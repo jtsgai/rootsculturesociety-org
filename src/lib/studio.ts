@@ -7,7 +7,7 @@ export type StudioPerson = {
   id: string; name: string; generation_number: number; sex: string | null; life_status: string | null;
   father_id: string | null; mother_id: string | null; spouse_id: string | null;
   birth_year: number | null; occupation: string | null; education: string | null; phone: string | null; address: string | null; note: string | null;
-  birth_date?: string | null; death_date?: string | null; residence_code?: string | null; genealogy_marker?: string | null;
+  birth_date: string | null; death_date: string | null; residence_code: string | null; genealogy_markers: string[];
 };
 export type StudioMedia = {
   id: string;
@@ -138,7 +138,7 @@ export async function saveBook(bookId: string, fields: Record<string, string | n
 
 export async function listPeople(bookId: string, options: { includeSensitive?: boolean } = {}): Promise<StudioPerson[]> {
   const sensitiveFields = options.includeSensitive ? ', occupation, education, phone, address' : '';
-  const { data, error } = await requireClient().from('people').select(`id, name, generation_number, sex, life_status, father_id, mother_id, spouse_id, birth_year${sensitiveFields}, note`).eq('book_id', bookId).order('generation_number').order('name');
+  const { data, error } = await requireClient().from('people').select(`id, name, generation_number, sex, life_status, father_id, mother_id, spouse_id, birth_year, birth_date, death_date, residence_code, genealogy_markers${sensitiveFields}, note`).eq('book_id', bookId).order('generation_number').order('name');
   if (error) throw error;
   return (data ?? []) as unknown as StudioPerson[];
 }

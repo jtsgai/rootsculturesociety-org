@@ -13,6 +13,65 @@ export type LineageGeneration = {
   branches: LineageBranch[];
 };
 
+export type LineageGridPlacement = { start: number; span: number };
+
+export function buildLineageGrid(generations: LineageGeneration[]) {
+  const childrenByParent = new Map<string, LineageBranch[]>();
+  generations.forEach((generation, generationIndex) => {
+    if (generationIndex === 0) return;
+    generation.branches.forEach((branch) => {
+      const parentId = parentBranchIds(generations, generationIndex, branch)[0];
+      if (!parentId) return;
+      const children = childrenByParent.get(parentId) ?? [];
+      children.push(branch);
+      childrenByParent.set(parentId, children);
+    });
+  });
+
+  const widths = new Map<string, number>();
+  const branchWidth = (branch: LineageBranch): number => {
+    const cached = widths.get(branch.id);
+    if (cached) return cached;
+    const children = childrenByParent.get(branch.id) ?? [];
+    const width = children.length ? children.reduce((sum, child) => sum + branchWidth(child), 0) : 1;
+    widths.set(branch.id, width);
+    return width;
+  };
+
+  const placements = new Map<string, LineageGridPlacement>();
+  const placeBranch = (branch: LineageBranch, start: number) => {
+    const span = branchWidth(branch);
+    placements.set(branch.id, { start, span });
+    let childStart = start;
+    (childrenByParent.get(branch.id) ?? []).forEach((child) => {
+      placeBranch(child, childStart);
+      childStart += branchWidth(child);
+    });
+  };
+
+  let nextColumn = 1;
+  (generations[0]?.branches ?? []).forEach((branch) => {
+    placeBranch(branch, nextColumn);
+    nextColumn += branchWidth(branch);
+  });
+  generations.flatMap((generation) => generation.branches).forEach((branch) => {
+    if (placements.has(branch.id)) return;
+    placeBranch(branch, nextColumn);
+    nextColumn += branchWidth(branch);
+  });
+
+  return { columns: Math.max(1, nextColumn - 1), placements };
+}
+
+export const genealogyMarkerLabels: Record<string, { symbol: string; label: string }> = {
+  compiler: { symbol: '本', label: '立谱者' },
+  distinguished: { symbol: '＊', label: '卓越表现者' },
+  unreachable: { symbol: '△', label: '联系不上' },
+  no_descendants: { symbol: '止', label: '无子嗣' },
+  died_young: { symbol: '夭', label: '夭折' },
+  continuing: { symbol: '│', label: '传承中' },
+};
+
 export function lifeStatusLabel(value: string | null) {
   return value === 'living' ? '在世' : value === 'deceased' ? '已故' : '状态未注明';
 }
@@ -29,14 +88,43 @@ function genealogyDate(value: string | null | undefined, year: number | null) {
 export function personLifespan(person: StudioPerson) {
   const birth = genealogyDate(person.birth_date, person.birth_year);
   const death = genealogyDate(person.death_date, null);
-  if (!birth && !death) return '';
-  const ending = death ? ` ${death}` : person.life_status === 'deceased' ? ' 待补' : '';
-  return `${birth || '?'} --${ending}`;
+  if (!birth && !death) return person.life_status === 'deceased' ? '生卒未详' : '';
+  if (death) return `${birth || '生年未详'} — ${death}`;
+  if (person.life_status === 'deceased') return `${birth || '生年未详'} — 卒年未详`;
+  return `${birth || '生年未详'} —`;
 }
 
 export function personDisplayName(person: StudioPerson) {
   const lifespan = personLifespan(person);
   return lifespan ? `${person.name}（${lifespan}）` : person.name;
+}
+
+export function personSexLabel(person: StudioPerson) {
+  return person.sex === 'male' ? '男' : person.sex === 'female' ? '女' : '性别未注明';
+}
+
+export function personMarkerSymbols(person: StudioPerson) {
+  return (person.genealogy_markers ?? []).map((marker) => genealogyMarkerLabels[marker]?.symbol).filter(Boolean).join('');
+}
+
+export function personResidenceCode(person: StudioPerson) {
+  return person.life_status === 'deceased' ? '' : person.residence_code ?? '';
+}
+
+export function siblingsOf(person: StudioPerson, people: StudioPerson[]) {
+  if (!person.father_id && !person.mother_id) return [];
+  return people.filter((candidate) => candidate.id !== person.id && (
+    (person.father_id && candidate.father_id === person.father_id)
+    || (person.mother_id && candidate.mother_id === person.mother_id)
+  ));
+}
+
+export function branchChildSummary(branch: LineageBranch) {
+  if (branch.children.length) return branch.children.map((person) => `${person.name}（${personSexLabel(person)}）`).join('、');
+  const markers = new Set(branch.members.flatMap((person) => person.genealogy_markers ?? []));
+  if (markers.has('died_young')) return '夭折，未续支';
+  if (markers.has('no_descendants')) return '无子嗣';
+  return '未填写';
 }
 
 export function buildLineageGenerations(people: StudioPerson[]): LineageGeneration[] {
