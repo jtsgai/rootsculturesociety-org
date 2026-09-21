@@ -1750,6 +1750,7 @@ html[lang='en'] .prose-column p {
 }
 .preview-lineage-family {
   position: relative;
+  z-index: 2;
   display: grid;
   align-content: start;
   gap: 7px;
@@ -1770,14 +1771,16 @@ html[lang='en'] .prose-column p {
 }
 .preview-lineage-family strong {
   display: block;
-  white-space: pre-line;
+  overflow-wrap: normal;
+  white-space: pre;
+  word-break: keep-all;
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.55;
 }
 .lineage-connection-layer {
   position: absolute;
-  z-index: 0;
+  z-index: 1;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -1806,18 +1809,45 @@ html[lang='en'] .prose-column p {
   margin: 12px 0 0;
 }
 .lineage-tree-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  padding: 12px 20px 4px;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(420px, 1.2fr);
+  gap: 18px 34px;
+  padding: 18px 20px;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.68rem;
   line-height: 1.6;
 }
 .lineage-tree-legend strong {
+  display: block;
+  margin-bottom: 7px;
   color: var(--maroon);
   font-weight: 600;
+}
+.lineage-legend-group p {
+  margin: 0 0 7px;
+}
+.lineage-legend-items {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 4px 20px;
+}
+.lineage-residence-codes {
+  grid-template-columns: repeat(3, max-content);
+}
+.lineage-legend-items span {
+  white-space: nowrap;
+}
+.lineage-legend-items b {
+  display: inline-block;
+  min-width: 2.4em;
+  color: var(--ink);
+  font-weight: 600;
+}
+.lineage-legend-note {
+  margin-top: 8px !important;
 }
 .preview-register-table {
   width: 100%;
@@ -2196,6 +2226,7 @@ html[lang='en'] .prose-column p {
 }
 .lineage-branch {
   position: relative;
+  z-index: 2;
   display: grid;
   align-content: start;
   gap: 10px;
@@ -2241,7 +2272,9 @@ html[lang='en'] .prose-column p {
 }
 .lineage-couple strong {
   display: block;
-  white-space: pre-line;
+  overflow-wrap: normal;
+  white-space: pre;
+  word-break: keep-all;
   font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.55;

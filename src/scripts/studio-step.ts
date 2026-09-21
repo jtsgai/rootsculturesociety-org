@@ -1,5 +1,5 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
-import { buildLineageGenerations, familyBranchLabel, orderedFamilyMembers, parentBranchIds, personDisplayName } from '../lib/lineage';
+import { buildLineageGenerations, familyBranchLabel, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personDisplayName } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
@@ -114,7 +114,7 @@ function renderLineage(people: StudioPerson[]) {
     }).join('');
     return `<section class="lineage-generation-row" data-generation="${record.generation}"><div class="lineage-generation-axis"><span>第 ${record.generation} 代</span><small>${record.members.length} 位族人<br>${record.branches.length} 个家庭支系</small></div><div class="lineage-generation-branches">${branchCards}</div></section>`;
   }).join('')}</div>
-    <div class="lineage-tree-legend"><strong>标注说明</strong><span>立谱者</span><span>卓越表现者</span><span>△ 联系不上</span><span>止 无子嗣</span><span>夭 夭折</span><span>│ 传承中</span><span>S 新加坡 · M 马来西亚 · HK 香港 · UK 英国 · US 美国；空白：已故世者</span></div><div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
+    ${lineageLegendMarkup()}<div class="lineage-tree-note">资料图以目前已填写的族人为准；空白的“待补充”位置，代表下一代或关系资料尚未建立。</div>
   </div>`;
   drawLineageConnections(target.querySelector<HTMLElement>('.lineage-tree')!, { rowSelector: '.lineage-generation-row', branchSelector: '.lineage-branch' });
 }

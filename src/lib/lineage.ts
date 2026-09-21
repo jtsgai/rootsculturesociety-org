@@ -78,8 +78,10 @@ export function buildLineageGenerations(people: StudioPerson[]): LineageGenerati
     if (index === 0) return;
     const previous = records[index - 1].branches;
     record.branches.sort((a, b) => {
-      const aParentIndex = previous.findIndex((parentBranch) => a.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)));
-      const bParentIndex = previous.findIndex((parentBranch) => b.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)));
+      const aParentIds = new Set(a.parents.map((parent) => parent.id));
+      const bParentIds = new Set(b.parents.map((parent) => parent.id));
+      const aParentIndex = previous.findIndex((parentBranch) => parentBranch.members.some((member) => aParentIds.has(member.id)));
+      const bParentIndex = previous.findIndex((parentBranch) => parentBranch.members.some((member) => bParentIds.has(member.id)));
       return (aParentIndex < 0 ? Number.MAX_SAFE_INTEGER : aParentIndex) - (bParentIndex < 0 ? Number.MAX_SAFE_INTEGER : bParentIndex);
     });
   });
@@ -95,9 +97,39 @@ export function orderedFamilyMembers(members: StudioPerson[]) {
 export function parentBranchIds(generations: LineageGeneration[], generationIndex: number, branch: LineageBranch) {
   if (generationIndex === 0) return [];
   const previous = generations[generationIndex - 1];
+  const parentIds = new Set(branch.parents.map((parent) => parent.id));
   return previous.branches
-    .filter((parentBranch) => branch.parents.some((parent) => parentBranch.children.some((child) => child.id === parent.id)))
+    .filter((parentBranch) => parentBranch.members.some((member) => parentIds.has(member.id)))
     .map((parentBranch) => parentBranch.id);
+}
+
+export function lineageLegendMarkup() {
+  return `<div class="lineage-tree-legend" aria-label="世系标注说明">
+    <section class="lineage-legend-group">
+      <strong>注明</strong>
+      <div class="lineage-legend-items">
+        <span><b>本</b>立谱者</span>
+        <span><b>＊</b>卓越表现者</span>
+        <span><b>△</b>联系不上</span>
+        <span><b>止</b>无子嗣</span>
+        <span><b>夭</b>夭折</span>
+        <span><b>│</b>传承中</span>
+      </div>
+    </section>
+    <section class="lineage-legend-group">
+      <strong>居住地缩写</strong>
+      <p>名字左上方英文字母，代表现在居住地。</p>
+      <div class="lineage-legend-items lineage-residence-codes">
+        <span><b>S</b>新加坡</span>
+        <span><b>M</b>马来西亚</span>
+        <span><b>HK</b>香港</span>
+        <span><b>UK</b>英国</span>
+        <span><b>US</b>美国</span>
+        <span><b>空白</b>已故世者</span>
+      </div>
+      <p class="lineage-legend-note">再移民：注明年代、地区；未记录者标为「失记」。</p>
+    </section>
+  </div>`;
 }
 
 export function familyBranchLabel(branch: LineageBranch) {
