@@ -1680,7 +1680,11 @@ html[lang='en'] .prose-column p {
 }
 .text-chunk {
   display: inline-block;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  vertical-align: top;
 }
 .preview-repeat-group {
   margin-top: 18px;
@@ -1774,6 +1778,7 @@ html[lang='en'] .prose-column p {
 }
 .preview-photo-spread figcaption {
   display: grid;
+  min-width: 0;
   gap: 14px;
   align-content: center;
   padding: 22px 0 22px 24px;
@@ -1787,11 +1792,13 @@ html[lang='en'] .prose-column p {
 }
 .preview-photo-spread figcaption p {
   margin: 0;
+  min-width: 0;
   font-family: var(--serif);
   font-size: clamp(1.55rem, 2.35vw, 2.45rem);
   line-height: 1.35;
   line-break: strict;
   text-wrap: pretty;
+  overflow-wrap: anywhere;
 }
 .preview-photo-spread figcaption small {
   color: var(--muted);
