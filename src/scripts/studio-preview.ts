@@ -104,7 +104,7 @@ function addDefinition(parent: HTMLElement, key: string, value: unknown) {
     return;
   }
   const row = document.createElement('div');
-  row.className = `preview-definition${key === 'story' ? ' preview-definition-story' : ''}`;
+  row.className = `preview-definition${key === 'story' ? ' preview-definition-story' : ''}${key === 'places' ? ' preview-definition-places' : ''}`;
   const term = document.createElement('dt');
   term.textContent = labelFor(key);
   const detail = document.createElement('dd');
