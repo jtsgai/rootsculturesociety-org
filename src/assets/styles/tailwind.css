@@ -2702,7 +2702,8 @@ html[lang='en'] .prose-column p {
   color: var(--muted);
 }
 .studio-person-row[data-register-person] {
-  grid-template-columns: minmax(260px, 1.2fr) repeat(4, minmax(120px, 1fr)) auto;
+  width: 100%;
+  grid-template-columns: minmax(300px, 1.35fr) repeat(4, minmax(150px, 1fr)) auto;
   align-items: end;
 }
 .studio-person-row[data-register-person] label {

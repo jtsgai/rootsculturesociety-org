@@ -12,7 +12,7 @@ const stepIndex = studioSteps.findIndex((item) => item.method === step.method);
 const previousStep = stepIndex > 0 ? studioSteps[stepIndex - 1] : null;
 const nextStep = stepIndex >= 0 && stepIndex < studioSteps.length - 1 ? studioSteps[stepIndex + 1] : null;
 ---
-<StudioFrame title={`${step.method}. ${step.title}`}>
+<StudioFrame title={`${step.method}. ${step.title}`} wide={step.type === 'register'}>
   <section class="studio-card studio-step" data-studio-step={step.method} data-step-type={step.type}>
     <div class="studio-step-intro"><span class="eyebrow">{step.english}</span><p>{step.guidance}</p></div>
     {step.type === 'cover' && <><MediaPicker method={step.method} label="封面照片" hint="先上传一张能代表这本家谱的家庭照片、地点或物件。" multiple={false} /><form data-section-form><div class="studio-fields"><label>相册家谱书名 <small>必填</small><input name="title" required placeholder="例如：黄氏相册家谱" /></label><label>第一代开族始祖 <small>必填</small><input name="ancestor" required placeholder="最早在新加坡落地生根的祖先" /></label><label>方言群 <input name="dialect" placeholder="例如：海南、福建、潮州" /></label><label>祖籍地 <input name="ancestralPlace" placeholder="例如：中国海南文昌" /></label></div><label>献词或引言 <textarea name="dedication" rows="5" placeholder="写给谁、为什么要留下这本书？"></textarea></label><label>封底寄语 <small>可选；会放在整本相册家谱最后一页</small><textarea name="backCoverNote" rows="4" placeholder="写给后来的人，或写下这本相册家谱想留下的一句话。"></textarea></label><label class="studio-consent"><input name="consent" type="checkbox" required /> 我确认已取得填写亲属资料所需的同意。</label><button class="button" type="submit">保存封面</button></form></>}
