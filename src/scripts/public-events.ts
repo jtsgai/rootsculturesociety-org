@@ -23,6 +23,8 @@ function renderTimeline(events: ActivityEvent[]) {
       figure.append(image);
       article.append(figure);
     }
+    const copy = document.createElement('div');
+    copy.className = 'activity-highlight-copy';
     const year = document.createElement('div');
     year.className = 'activity-record-year';
     year.textContent = lang === 'zh' ? event.date_label_zh || event.event_date || '' : event.date_label_en || event.event_date || '';
@@ -39,7 +41,8 @@ function renderTimeline(events: ActivityEvent[]) {
       place.textContent = `${lang === 'zh' ? '地点：' : 'Location: '}${location}`;
       content.append(place);
     }
-    article.append(year, content);
+    copy.append(year, content);
+    article.append(copy);
     list.append(article);
   });
 }

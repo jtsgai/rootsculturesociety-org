@@ -937,8 +937,8 @@ html[lang='en'] .prose-column p {
   border-top: 1px solid var(--line);
 }
 .activity-records.activity-highlights {
-  max-width: 1020px;
-  margin-left: 16%;
+  max-width: 1160px;
+  margin-left: 10%;
 }
 .activity-records .section-kicker h2 {
   max-width: 680px;
@@ -955,8 +955,16 @@ html[lang='en'] .prose-column p {
   border-bottom: 1px solid var(--line);
 }
 .activity-highlight-item {
-  grid-template-columns: minmax(250px, 0.8fr) 132px minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 1.75fr) minmax(280px, 1fr);
+  gap: 42px;
+  padding: 36px 0 48px;
   align-items: start;
+}
+.activity-highlight-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
 }
 .activity-record-image {
   margin: 0;
@@ -964,8 +972,10 @@ html[lang='en'] .prose-column p {
 .activity-record-image img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  max-height: 620px;
+  object-fit: contain;
+  background: var(--paper-deep);
   filter: saturate(0.88);
 }
 .activity-record-year {
@@ -3765,6 +3775,11 @@ html[lang='en'] .prose-column p {
   .activity-highlight-item {
     grid-template-columns: 1fr !important;
     gap: 14px !important;
+    padding: 28px 0 36px;
+  }
+  .activity-highlight-copy {
+    gap: 12px;
+    padding-top: 0;
   }
   .legal-page .prose-column p {
     margin-bottom: 28px;
