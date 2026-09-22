@@ -2,7 +2,7 @@
 interface Props { lang: 'zh' | 'en'; }
 const { lang } = Astro.props;
 const label = lang === 'en' ? 'Play music' : '播放音乐';
-const pauseLabel = lang === 'en' ? 'Pause music' : '暂停音乐';
+const playingLabel = lang === 'en' ? 'Playing' : '正在播放';
 ---
 
 <div class="home-hero-audio" data-home-audio>
@@ -13,7 +13,7 @@ const pauseLabel = lang === 'en' ? 'Pause music' : '暂停音乐';
   </button>
 </div>
 
-<script define:vars={{ label, pauseLabel }}>
+<script define:vars={{ label, playingLabel }}>
   const audioRoot = document.querySelector<HTMLElement>('[data-home-audio]');
   const audio = audioRoot?.querySelector<HTMLAudioElement>('audio');
   const toggle = audioRoot?.querySelector<HTMLButtonElement>('[data-audio-toggle]');
@@ -24,8 +24,8 @@ const pauseLabel = lang === 'en' ? 'Pause music' : '暂停音乐';
       const playing = !audio.paused;
       audioRoot?.classList.toggle('is-playing', playing);
       toggle.setAttribute('aria-pressed', String(playing));
-      toggle.setAttribute('aria-label', playing ? pauseLabel : label);
-      text.textContent = playing ? pauseLabel : label;
+      toggle.setAttribute('aria-label', playing ? playingLabel : label);
+      text.textContent = playing ? playingLabel : label;
     };
 
     toggle.addEventListener('click', async () => {
