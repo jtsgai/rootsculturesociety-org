@@ -954,7 +954,7 @@ html[lang='en'] .prose-column p {
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
 }
-.activity-highlight-item {
+.activity-record-list article.activity-highlight-item {
   grid-template-columns: 1fr;
   gap: 24px;
   padding: 52px 0 64px;
