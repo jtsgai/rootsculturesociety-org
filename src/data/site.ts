@@ -58,8 +58,8 @@ export const publications = [
     altEn: '2012 Our Roots Bulletin book display',
     typeZh: '出版资料',
     typeEn: 'Publication record',
-    descriptionZh: '2012 年《根缘》通讯封面，记录族谱文化与社群联系。',
-    descriptionEn: 'The 2012 Our Roots Bulletin, recording genealogy culture and community links.',
+    descriptionZh: '记录族谱文化与社群联系。',
+    descriptionEn: 'Recording genealogy culture and community links.',
   },
   {
     year: '2014',
@@ -94,8 +94,8 @@ export const publications = [
     altEn: '2017 Contemporary Association Mission book display',
     typeZh: '出版资料',
     typeEn: 'Publication record',
-    descriptionZh: '2017 年出版物，讨论当代公会使命与传承。',
-    descriptionEn: 'A 2017 publication on the mission and continuity of contemporary associations.',
+    descriptionZh: '讨论当代公会使命与传承。',
+    descriptionEn: 'On the mission and continuity of contemporary associations.',
   },
   {
     year: '2025',

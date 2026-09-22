@@ -472,28 +472,26 @@ html[lang='en'] .method-card h2 {
   object-fit: cover;
   object-position: center;
 }
-.publication-meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--muted);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
+.publication-caption {
+  min-width: 0;
 }
-.publication-stack h3 {
-  margin: 12px 0 8px;
-  font-size: 1.45rem;
-  line-height: 1.12;
+.publication-year-line,
+.publication-detail-line {
+  margin: 0;
 }
-.publication-card p {
-  max-width: 28rem;
-}
-.year {
+.publication-year-line {
   color: var(--maroon);
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.12em;
+}
+.publication-detail-line {
+  margin-top: 10px;
+  color: var(--muted);
+}
+.publication-detail-line strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 .pathways {
   background: var(--paper-deep);
@@ -737,14 +735,8 @@ html[lang='en'] .prose-column p {
   object-fit: cover;
   object-position: top;
 }
-.publication-list h2 {
-  margin: 0 0 8px;
-  font-size: 1.45rem;
-  line-height: 1.12;
-}
-.publication-list p {
-  margin: 0;
-  color: var(--muted);
+.publication-list .publication-detail-line {
+  max-width: 28rem;
 }
 .inline-download {
   display: inline-flex;
