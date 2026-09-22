@@ -3406,6 +3406,19 @@ html[lang='en'] .prose-column p {
   letter-spacing: 0.08em;
 }
 @media (max-width: 800px) {
+  html,
+  body {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+  .site-header,
+  .header-inner,
+  main,
+  .site-footer {
+    width: 100%;
+    max-width: none;
+  }
   .header-inner {
     display: flex;
     min-height: 72px;
@@ -3467,6 +3480,8 @@ html[lang='en'] .prose-column p {
   }
   .menu-toggle {
     display: block;
+    flex: 0 0 auto;
+    margin-left: auto;
   }
   .home-hero,
   .home-section,
@@ -3476,6 +3491,16 @@ html[lang='en'] .prose-column p {
     width: 100%;
     max-width: none;
     padding-inline: 20px;
+  }
+  .page-intro > *,
+  .page-body > *,
+  .page-body .prose-column,
+  .page-body .activity-records,
+  .page-body .activity-record-list,
+  .page-body .publication-list,
+  .page-body .resource-list {
+    width: 100%;
+    max-width: none;
   }
   .home-hero {
     min-height: calc(100svh - 72px);
