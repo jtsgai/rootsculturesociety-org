@@ -53,30 +53,35 @@ $$;
 
 grant execute on function public.can_manage_activity_events() to authenticated;
 
-drop trigger if exists activity_events_updated_at on public.activity_events;
-create trigger activity_events_updated_at before update on public.activity_events
-for each row execute procedure public.set_updated_at();
+do $$
+begin
+  if not exists (
+    select 1 from pg_trigger
+    where tgrelid = 'public.activity_events'::regclass
+      and tgname = 'activity_events_updated_at'
+  ) then
+    create trigger activity_events_updated_at before update on public.activity_events
+    for each row execute procedure public.set_updated_at();
+  end if;
+end;
+$$;
 
 alter table public.activity_events enable row level security;
 alter table public.activity_event_editors enable row level security;
 
-drop policy if exists "activity events: public reads published" on public.activity_events;
 create policy "activity events: public reads published" on public.activity_events
 for select to anon, authenticated
 using (is_published or public.can_manage_activity_events());
 
-drop policy if exists "activity events: authorised editors manage" on public.activity_events;
 create policy "activity events: authorised editors manage" on public.activity_events
 for all to authenticated
 using (public.can_manage_activity_events())
 with check (public.can_manage_activity_events());
 
-drop policy if exists "activity event editors: self reads" on public.activity_event_editors;
 create policy "activity event editors: self reads" on public.activity_event_editors
 for select to authenticated
 using (public.is_admin() or profile_id = auth.uid());
 
-drop policy if exists "activity event editors: admins manage" on public.activity_event_editors;
 create policy "activity event editors: admins manage" on public.activity_event_editors
 for all to authenticated
 using (public.is_admin())
