@@ -36,6 +36,72 @@ export const activityMoments = [
   { image: '/events/cultural-gathering-02.jpg', zh: '活动交流合影', en: 'Conversation at a Society activity' },
 ];
 
+export const activityHighlights = [
+  {
+    slug: '2011-genealogy-workshop',
+    year: '2011',
+    titleZh: '建谱研习班留下第一批活动记录',
+    titleEn: 'The genealogy workshops begin',
+    textZh: '2011 年 7 月 7 日举行第二场建谱研习班，由陈业雄主讲，参与者从家族资料、谱式与记录方法开始学习。',
+    textEn: 'The second genealogy workshop was held on 7 July 2011, led by Chen Yexiong. Participants began with family sources, formats, and methods of record-keeping.',
+    sourceHref: '/events/roots-culture-member-meeting-activity-report.pptx',
+  },
+  {
+    slug: '2014-workshops-and-talks',
+    year: '2014',
+    titleZh: '研习班与国家图书馆华族谱系讲座',
+    titleEn: 'Workshops and the Chinese genealogy talk',
+    textZh: '这一年的记录包括第三至第六场建谱研习班，以及在国家图书馆举行的华族谱系讲座，内容从修谱经验延伸到姓氏故事与族谱格式。',
+    textEn: 'The year included the third to sixth genealogy workshops and a Chinese genealogy talk at the National Library, covering genealogy practice, surname stories, and formats.',
+    sourceHref: '/events/roots-culture-member-meeting-activity-report.pptx',
+  },
+  {
+    slug: '2016-society-launch',
+    year: '2015—2016',
+    titleZh: '开族传世宗谱与根缘文化学会发起',
+    titleEn: 'Founding genealogies and the Society’s launch',
+    textZh: '活动资料记录了“开族传世宗谱”、家庭文化讲座，以及 2016 年 7 月 26 日根缘文化学会发起成立的过程。',
+    textEn: 'The records include talks on founding genealogies and family culture, followed by the launch of Roots Culture Society on 26 July 2016.',
+    sourceHref: '/events/roots-culture-member-meeting-activity-report.pptx',
+  },
+  {
+    slug: '2017-registration-and-talk',
+    year: '2017',
+    titleZh: '学会注册与“建修家谱，人人有责”讲座',
+    titleEn: 'Registration and a genealogy talk',
+    textZh: '学会于 2017 年完成正式注册，并在南洋理工大学举行“建修家谱，人人有责”讲座，把建谱从个人兴趣带进公共文化讨论。',
+    textEn: 'The Society completed formal registration in 2017 and held a “Genealogy is everyone’s responsibility” talk at Nanyang Technological University.',
+    sourceHref: '/events/roots-culture-member-meeting-activity-report.pptx',
+  },
+  {
+    slug: '2018-community-exchange',
+    year: '2018',
+    titleZh: '讲座、就职仪式与社群交流',
+    titleEn: 'Talks, an inauguration, and community exchange',
+    textZh: '这一年有相册家谱、家庭文化与通用软件建谱等讲座，也有新执委就职仪式、新年聚餐，以及与文化场馆和海南社群的交流。',
+    textEn: 'The year brought talks on Photo Genealogy, family culture, and using everyday software to build a genealogy, alongside an inauguration, a New Year gathering, and community exchanges.',
+    sourceHref: '/events/roots-culture-member-meeting-activity-report.pptx',
+  },
+  {
+    slug: '2019-external-exchanges',
+    year: '2019',
+    titleZh: '对外交流与会员大会',
+    titleEn: 'External exchanges and the members’ meeting',
+    textZh: '资料记录了学会与教育部母语司、宗乡总会的交流，以及 2019 年 2 月 22 日在琼崖黄氏公会举行的会员大会活动。',
+    textEn: 'The records include exchanges with the Ministry of Education’s Mother Tongue Languages Division and SFCCA, followed by the members’ meeting held on 22 February 2019.',
+    sourceHref: '/events/roots-culture-member-meeting-activity-report.pptx',
+  },
+  {
+    slug: '2024-hainan-roots-journey',
+    year: '2024',
+    titleZh: '海南寻根与宗亲交流',
+    titleEn: 'A Hainan roots journey and clan exchange',
+    textZh: '黄氏家族组织老少成员到海南文昌、公坡镇寻根，并与文昌黄氏大宗祠交流；旅程把祖籍地、家族口述与当代家庭重新连在一起。',
+    textEn: 'A Huang family roots journey brought several generations to Wenchang and Gongpo in Hainan for an exchange with the Wenchang Huang Clan Ancestral Hall, linking ancestral place, oral history, and family life today.',
+    sourceHref: '/articles/roots-culture-huang-liangnan.pdf',
+  },
+];
+
 export const publications = [
   {
     year: '2005',
@@ -249,7 +315,7 @@ export const articles = [
   { file: 'chinese-clan-genealogy-culture-sg60-chen-yexiong.pdf', zh: '华族传统族谱文化 SG60', en: 'Chinese Clan Genealogy Culture SG60', zhDescription: '陈业雄著手稿扫描本。', enDescription: 'A scanned manuscript by Chen Yexiong.' },
   { file: 'genealogy-main-contents.pdf', zh: '家谱的主要内容', en: 'The Main Contents of a Genealogy', zhDescription: '认识姓氏起源、世系表、家训等家谱内容。', enDescription: 'An overview of surname origin, lineage tables, family instructions, and related contents.' },
   { file: 'fulfilling-a-contemporary-mission-chen-yexiong.pdf', zh: '履行当代使命：建修族谱宝典', en: 'Fulfilling a Contemporary Mission', zhDescription: '陈业雄关于当代建修族谱的文章。', enDescription: 'Chen Yexiong on building and preserving genealogies today.' },
-  { file: 'eight-methods-singapore-photo-genealogy-sample.pdf', zh: '建修新加坡相册家谱的八大招', en: 'Eight Methods for a Singapore Photo Genealogy', zhDescription: '锺开增样本，展示谱首与谱实的编排。', enDescription: 'A Zhong Kaizeng sample showing the front matter and family record sections.' },
+  { file: 'eight-methods-singapore-photo-genealogy-sample.pdf', zh: '建修新加坡相册家谱八大步骤', en: 'Eight Steps for a Singapore Photo Genealogy', zhDescription: '锺开增样本，展示谱首与谱实的编排。', enDescription: 'A Zhong Kaizeng sample showing the front matter and family record sections.' },
   { file: 'roots-culture-huang-liangnan.pdf', zh: '根缘文化', en: 'Roots Culture', zhDescription: '黄良南分享制作相册家谱与寻根的经历。', enDescription: 'Huang Liangnan on making a Photo Genealogy and tracing family roots.' },
   { file: 'zhong-surname-origin.pdf', zh: '百家姓：钟姓来源', en: '百家姓: The Origin of the Zhong Surname', zhDescription: '钟姓来源资料扫描本。', enDescription: 'A scanned reference on the origin of the Zhong surname.' },
   { file: 'photo-genealogy-format-sample.pdf', zh: '相册家谱格式', en: 'Photo Genealogy Format', zhDescription: '新加坡根缘文化学会倡导的相册家谱格式样本。', enDescription: 'A sample of the Photo Genealogy format promoted by the Society.' },
@@ -277,8 +343,8 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Committee', deck: 'A practical team for cultural work.', paragraphs: ['The Society works in a public, clear, and sustainable way. Personal phone numbers and home addresses are not published; please contact the Secretary for enquiries.'] },
   },
   method: {
-    zh: { title: '新加坡相册家谱', deck: '八大招，把一个家庭的根与路排成可读的书。', paragraphs: ['相册家谱不是把资料堆在一起，而是从第一代在新加坡落地生根的人开始，按本地生活的时间与地点重新组织。'] },
-    en: { title: 'Singapore Photo Genealogy', deck: 'Eight Methods for making a family’s roots and routes readable.', paragraphs: ['A Photo Genealogy is not a pile of records. It begins with the first generation to settle in Singapore and arranges a family’s life through local time and place.'] },
+    zh: { title: '新加坡相册家谱', deck: '建修相册家谱八大步骤，把一个家庭的根与路排成可读的书。', paragraphs: ['相册家谱不是把资料堆在一起，而是从第一代在新加坡落地生根的人开始，按本地生活的时间与地点重新组织。'] },
+    en: { title: 'Singapore Photo Genealogy', deck: 'Eight steps to build a Photo Genealogy and make a family’s roots and routes readable.', paragraphs: ['A Photo Genealogy is not a pile of records. It begins with the first generation to settle in Singapore and arranges a family’s life through local time and place.'] },
   },
   publications: {
     zh: { title: '出版', deck: '把口述、文献与家庭记忆，留成可以翻阅的东西。', paragraphs: ['学会的出版工作以文化记录为先。书名与出版资料以现有正式版本为准。', '相关文章与相册家谱样本请前往参考资料页面阅读。'] },
@@ -289,8 +355,8 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Family stories', deck: 'A family story begins with the sentence someone chooses to keep.', paragraphs: ['This section gathers source-based stories of Singapore life, migration, dialect, food, and family memory. Public stories are published with consent; private material does not become public by default.', 'The first entries are based on the articles and photographs provided to the Society; each story links back to its source material.'] },
   },
   events: {
-    zh: { title: '活动', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['以下整理学会活动花絮与现场照片。正式活动日期、地点和报名安排，会在确认后发布。'] },
-    en: { title: 'Events', deck: 'Meet our roots through gatherings and conversations.', paragraphs: ['This page gathers activity highlights and available event photographs. Confirmed dates, venues and registration details will be published when available.'] },
+    zh: { title: '活动花絮', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['这里整理学会的研习班、讲座、会员大会、社群交流与寻根活动。内容以已留存的活动记录和照片为基础，正式活动日期、地点和报名安排，会在确认后发布。'] },
+    en: { title: 'Activity highlights', deck: 'Meet our roots through gatherings, talks, and exchanges.', paragraphs: ['This page brings together workshops, talks, members’ meetings, community exchanges, and roots journeys recorded by the Society. Confirmed dates, venues, and registration details will be published when available.'] },
   },
   records: {
     zh: { title: '会务记录', deck: '把学会的工作、活动与交流，放回一条可以查阅的时间线。', paragraphs: ['这里合并整理学会历年的资料记录与会员大会报告。它们是已经发生的工作记录，不等同于最新活动公告。'] },

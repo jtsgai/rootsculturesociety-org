@@ -3262,6 +3262,86 @@ html[lang='en'] .prose-column p {
   cursor: pointer;
   font-size: 0.78rem;
 }
+.admin-event-editor {
+  margin-top: 28px;
+  border-top: 2px solid var(--maroon);
+}
+.admin-event-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 24px;
+}
+.admin-event-fields textarea {
+  width: 100%;
+  resize: vertical;
+}
+.admin-event-wide {
+  grid-column: 1 / -1;
+}
+.admin-event-publish {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  color: var(--maroon);
+}
+.admin-event-publish input {
+  width: 16px;
+  height: 16px;
+}
+.admin-event-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+.admin-event-list {
+  display: grid;
+  gap: 14px;
+}
+.admin-event-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  background: #fffaf3;
+}
+.admin-event-item.is-draft {
+  background: var(--paper-deep);
+}
+.admin-event-item h4 {
+  margin: 8px 0 4px;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.admin-event-item p {
+  max-width: 780px;
+  margin: 9px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.admin-event-item .admin-event-english {
+  margin-top: 0;
+  font-size: 0.84rem;
+}
+.admin-event-actions {
+  display: flex;
+  align-items: start;
+  gap: 18px;
+  white-space: nowrap;
+}
+.admin-event-actions button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.admin-event-actions .admin-event-delete {
+  color: var(--muted);
+}
+.activity-record-location {
+  font-size: 0.9rem;
+}
 .studio-admin-credits {
   max-width: 760px;
   margin-top: 52px;
@@ -3599,6 +3679,18 @@ html[lang='en'] .prose-column p {
   .admin-console-intro {
     align-items: start;
     padding: 26px 0 30px;
+  }
+  .admin-event-fields {
+    grid-template-columns: 1fr;
+  }
+  .admin-event-wide {
+    grid-column: auto;
+  }
+  .admin-event-item {
+    grid-template-columns: 1fr;
+  }
+  .admin-event-actions {
+    align-items: start;
   }
   .admin-password-help {
     align-items: start;

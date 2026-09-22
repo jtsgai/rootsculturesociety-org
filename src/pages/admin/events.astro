@@ -1,0 +1,46 @@
+---
+import StudioFrame from '../../components/StudioFrame.astro';
+---
+
+<StudioFrame title="活动花絮管理" description="整理、编辑并发布学会活动记录。" area="admin" wide>
+  <section class="studio-card admin-console admin-events-console" data-admin-events>
+    <div class="admin-console-intro">
+      <div><span class="admin-section-label">ACTIVITY HIGHLIGHTS / 活动花絮</span><h2>整理学会的活动记录</h2></div>
+      <p>管理员可以建立、修改、排序及发布活动资料。只有标记为“公开”的内容会出现在活动花絮页面；以后可由管理员把指定活动授权给某位有效会员协助编辑。</p>
+    </div>
+    <section class="admin-panel admin-event-editor" aria-labelledby="admin-event-editor-title">
+      <div class="admin-roster-heading"><div><span class="admin-section-label">EDITOR / 编辑</span><h3 id="admin-event-editor-title">新增活动记录</h3></div><button class="text-link" type="button" data-event-cancel hidden>取消编辑</button></div>
+      <form data-activity-event-form>
+        <input type="hidden" name="id" />
+        <div class="studio-fields admin-event-fields">
+          <label>中文标题 <input name="titleZh" required maxlength="240" /></label>
+          <label>英文标题 <input name="titleEn" required maxlength="240" /></label>
+          <label>日期显示（中文） <input name="dateLabelZh" placeholder="例如：2019 年" /></label>
+          <label>日期显示（英文） <input name="dateLabelEn" placeholder="例如：2019" /></label>
+          <label>活动日期（可选） <input name="eventDate" type="date" /></label>
+          <label>排序 <input name="sortOrder" type="number" value="100" step="10" /></label>
+          <label>地点（中文） <input name="locationZh" /></label>
+          <label>地点（英文） <input name="locationEn" /></label>
+          <label class="admin-event-wide">图片路径或图片网址 <input name="imagePath" placeholder="例如：/events/cultural-gathering-01.jpg" /></label>
+          <label class="admin-event-wide">图片说明（中文） <input name="imageAltZh" /></label>
+          <label class="admin-event-wide">图片说明（英文） <input name="imageAltEn" /></label>
+          <label class="admin-event-wide">中文内容 <textarea name="summaryZh" rows="4" required></textarea></label>
+          <label class="admin-event-wide">英文内容 <textarea name="summaryEn" rows="4" required></textarea></label>
+          <label class="admin-event-wide">资料链接（可选） <input name="sourceUrl" type="text" inputmode="url" placeholder="/articles/文件名.pdf 或完整网址" /></label>
+          <label>资料链接文字（中文） <input name="sourceLabelZh" value="查看活动资料" /></label>
+          <label>资料链接文字（英文） <input name="sourceLabelEn" value="View activity record" /></label>
+          <label class="admin-event-publish"><input name="isPublished" type="checkbox" checked /> 公开显示在活动花絮页面</label>
+        </div>
+        <div class="admin-event-form-actions"><button class="button" type="submit" data-event-submit>保存活动记录</button><span class="studio-note">Slug 由系统自动生成；保存后可再编辑。</span></div>
+      </form>
+    </section>
+    <section class="admin-roster" aria-labelledby="admin-event-list-title">
+      <div class="admin-roster-heading"><div><span class="admin-section-label">EVENT LIBRARY / 活动库</span><h3 id="admin-event-list-title">已有活动记录</h3></div><button class="text-link" type="button" data-event-refresh>刷新列表</button></div>
+      <div class="admin-event-list" data-activity-event-list><p class="studio-empty">正在读取活动资料…</p></div>
+    </section>
+    <p class="studio-status" aria-live="polite" data-studio-status></p>
+  </section>
+</StudioFrame>
+<script>
+  import '../../scripts/admin-events';
+</script>
