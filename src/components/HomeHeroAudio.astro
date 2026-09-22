@@ -6,7 +6,7 @@ const pauseLabel = lang === 'en' ? 'Pause music' : '暂停音乐';
 ---
 
 <div class="home-hero-audio" data-home-audio>
-  <audio src="/audio/home-theme.mp3" loop preload="metadata"></audio>
+  <audio src="/audio/home-theme.mp3" autoplay loop preload="auto"></audio>
   <button class="home-audio-toggle" type="button" data-audio-toggle aria-pressed="false" aria-label={label}>
     <span class="home-audio-mark" aria-hidden="true">♫</span>
     <span data-audio-label>{label}</span>
@@ -40,5 +40,8 @@ const pauseLabel = lang === 'en' ? 'Pause music' : '暂停音乐';
     audio.addEventListener('pause', sync);
     audio.addEventListener('error', () => { toggle.disabled = true; });
     sync();
+    // Ask the browser to start immediately. Browsers that block audible
+    // autoplay leave the visible button available as the fallback.
+    void audio.play().catch(() => undefined);
   }
 </script>
