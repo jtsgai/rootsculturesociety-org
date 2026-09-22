@@ -6,20 +6,31 @@ interface Props { lang: Lang; pageKey: PageKey; }
 const { lang, pageKey } = Astro.props;
 const content = pageCopy[pageKey][lang];
 const isZh = lang === 'zh';
-const sentences = (text: string) => text.split(/(?<=[。.!?])\s*/u).filter(Boolean);
+const sentences = (text: string) => text.split(/(?<=[。！？])|(?<=[.!?])\s+/u).map((sentence) => sentence.trim()).filter(Boolean);
 const eyebrow = isZh ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore';
 const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY);
+const legalSectionLabels = {
+  privacy: {
+    zh: ['适用范围与联络', '收集的资料', '使用目的', '提交家人资料', '公开申请', '服务供应商与跨境处理', '暂存与保留', '安全措施与责任范围', '资料泄露处理', '查阅、更正与撤回同意', '法律与版本更新'],
+    en: ['Scope and contact', 'Information collected', 'Purposes of use', 'Submitting family information', 'Publication requests', 'Service providers and overseas transfers', 'Temporary storage and retention', 'Security and responsibility', 'Data incidents', 'Access, correction and withdrawal', 'Law and policy updates'],
+  },
+  terms: {
+    zh: ['接受条款', '账号使用', '会员提交资料', '私密与公开申请', '暂存服务范围', '禁止行为', '版权与权利', '安全与责任范围', '会员赔偿责任', '联系与请求', '适用法律与更新'],
+    en: ['Acceptance', 'Account use', 'Member submissions', 'Private content and publication requests', 'Temporary service scope', 'Prohibited conduct', 'Copyright and rights', 'Security and responsibility', 'Member responsibility', 'Requests and contact', 'Governing law and updates'],
+  },
+};
+const legalLabels = pageKey === 'privacy' || pageKey === 'terms' ? legalSectionLabels[pageKey][lang] : [];
 ---
 <SiteLayout lang={lang} title={content.title} description={content.deck}>
   <PageIntro eyebrow={eyebrow} title={content.title} deck={content.deck} />
-  <div class="page-body">
-    <div class="prose-column">{content.paragraphs.map((p: string) => <p>{sentences(p).map((sentence) => <span class="sentence-line">{sentence}</span>)}</p>)}</div>
+  <div class:list={['page-body', { 'legal-page': legalLabels.length > 0 }]}>
+    <div class="prose-column">{content.paragraphs.map((p: string, index: number) => <p>{legalLabels[index] && <strong class="legal-section-label">{legalLabels[index]}</strong>}{sentences(p).map((sentence) => <span class="sentence-line">{sentence}</span>)}</p>)}</div>
 
     {pageKey === 'committee' && <section class="committee-orgchart" aria-label={isZh ? '执委会组织结构' : 'Committee structure'}><div class="committee-level committee-lead"><article class="committee-node"><img class="committee-photo" src={committee[0].image} alt={isZh ? committee[0].altZh : committee[0].altEn} loading="lazy" /><span class="person-role">{isZh ? committee[0].roleZh : committee[0].roleEn}</span><h2>{isZh ? committee[0].zh : committee[0].en}</h2></article></div><div class="committee-level committee-deputy"><article class="committee-node"><img class="committee-photo" src={committee[1].image} alt={isZh ? committee[1].altZh : committee[1].altEn} loading="lazy" /><span class="person-role">{isZh ? committee[1].roleZh : committee[1].roleEn}</span><h2>{isZh ? committee[1].zh : committee[1].en}</h2></article></div><div class="committee-level committee-members">{committee.slice(2).map((person) => <article class="committee-node"><img class="committee-photo" src={person.image} alt={isZh ? person.altZh : person.altEn} loading="lazy" /><span class="person-role">{isZh ? person.roleZh : person.roleEn}</span><h2>{isZh ? person.zh : person.en}</h2></article>)}</div></section>}
 
     {pageKey === 'method' && <section class="method-grid">{methods.map((method) => <article class="method-card"><span class="method-number">{method.number}</span><h2>{isZh ? method.zh : method.en}</h2><p>{isZh ? method.zhText : method.enText}</p></article>)}</section>}
 
-    {pageKey === 'publications' && <section class="publication-list">{publications.map((publication) => <article><img class="book-cover" src={publication.image} alt={isZh ? publication.altZh : publication.altEn} /><div class="publication-caption"><p class="publication-year-line">{publication.year} {isZh ? '年出版' : 'publication'}</p><p class="publication-detail-line"><strong>{isZh ? publication.titleZh : publication.titleEn}</strong>{isZh ? '：' : ': '}{isZh ? publication.descriptionZh : publication.descriptionEn}</p></div></article>)}</section>}
+    {pageKey === 'publications' && <section class="publication-list">{publications.map((publication) => <article><img class="book-cover" src={publication.image} alt={isZh ? publication.altZh : publication.altEn} loading="lazy" decoding="async" width="1882" height="3344" /><div class="publication-caption"><p class="publication-year-line">{publication.year} {isZh ? '年出版' : 'publication'}</p><p class="publication-detail-line"><strong>{isZh ? publication.titleZh : publication.titleEn}</strong>{isZh ? '：' : ': '}{isZh ? publication.descriptionZh : publication.descriptionEn}</p></div></article>)}</section>}
 
     {pageKey === 'stories' && <section class="published-story-section" data-published-stories data-lang={lang} hidden aria-labelledby="published-story-title"><div class="section-kicker"><span class="eyebrow">MEMBER STORIES / 会员故事</span><h2 id="published-story-title">{isZh ? '会员愿意分享的故事。' : 'Stories members have chosen to share.'}</h2><p>{isZh ? '以下内容经过会员同意并由学会审核后发布。' : 'These stories are published with member consent and Society review.'}</p></div><div class="published-story-grid" data-published-story-list></div></section>}
 
@@ -32,7 +43,7 @@ const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta
     {pageKey === 'events' && <>
       <section class="activity-records activity-highlights" data-activity-events data-lang={lang} aria-labelledby="activity-highlights-title">
         <div class="section-kicker"><span class="eyebrow">ACTIVITY HIGHLIGHTS / 活动花絮</span><h2 id="activity-highlights-title">{isZh ? '把一次次相聚，整理成可以回看的记录。' : 'A record of the gatherings we can return to.'}</h2></div>
-        <div class="activity-record-list">{activityHighlights.map((event) => <article class="activity-highlight-item">{event.image && <figure class="activity-record-image"><img src={event.image} alt={isZh ? event.imageAltZh : event.imageAltEn} loading="lazy" /></figure>}<div class="activity-record-year">{event.year}</div><div><h2>{isZh ? event.titleZh : event.titleEn}</h2><p>{isZh ? event.textZh : event.textEn}</p></div></article>)}</div>
+        <div class="activity-record-list">{activityHighlights.map((event) => <article class="activity-highlight-item">{event.image && <figure class="activity-record-image"><img src={event.image} alt={isZh ? event.imageAltZh : event.imageAltEn} loading="lazy" decoding="async" /></figure>}<div class="activity-record-year">{event.year}</div><div><h2>{isZh ? event.titleZh : event.titleEn}</h2><p>{isZh ? event.textZh : event.textEn}</p></div></article>)}</div>
       </section>
     </>}
     {pageKey === 'records' && <><section class="activity-records society-records"><div class="section-kicker"><span class="eyebrow">RECORDS / 资料记录</span><h2>{isZh ? '从过往资料，认识一条持续的文化工作线索。' : 'A continuing line of cultural work, seen through the records.'}</h2></div><div class="activity-record-list">{activityRecords.map((record) => <article><div class="activity-record-year">{record.year}</div><div><h2>{isZh ? record.zh : record.en}</h2><p>{isZh ? record.zhText : record.enText}</p><a class="inline-download" href={`/articles/${record.sourceFile}`} download>{isZh ? '查看来源资料' : 'View source material'} <span>↗</span></a></div></article>)}</div></section><section class="activity-records member-meeting-records"><div class="section-kicker"><span class="eyebrow">MEMBERS’ MEETING / 会员大会</span><h2>{isZh ? '从会员大会报告整理出的完整文字记录。' : 'The complete written record of the members’ meeting report.'}</h2><p>{isZh ? '下列内容按原始报告的日期、讲题和活动记录整理，供读者了解学会一路走来的工作脉络。' : 'The timeline follows the dates, topics and activity notes in the original report, preserving the Society’s working history in full written form.'}</p></div><div class="activity-record-list">{memberMeetingRecords.map((record) => <article><div class="activity-record-year">{record.year}</div><div><h2>{isZh ? record.zh : record.en}</h2><p>{isZh ? record.zhText : record.enText}</p></div></article>)}</div></section></>}

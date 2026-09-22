@@ -19,6 +19,7 @@ function renderTimeline(events: ActivityEvent[]) {
       image.src = event.image_path;
       image.alt = lang === 'zh' ? event.image_alt_zh || event.title_zh : event.image_alt_en || event.title_en;
       image.loading = 'lazy';
+      image.decoding = 'async';
       figure.append(image);
       article.append(figure);
     }

@@ -153,7 +153,15 @@ html[lang='en'] .site-nav {
   background: transparent;
   border-radius: 999px;
   padding: 7px 14px;
+  min-width: 44px;
+  min-height: 44px;
   font: inherit;
+}
+.menu-toggle:focus-visible,
+.site-nav a:focus-visible,
+.nav-dropdown summary:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 4px;
 }
 .home-hero,
 .home-section,
@@ -189,7 +197,7 @@ html[lang='en'] .site-nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(246, 241, 234, 0.25);
+  background: linear-gradient(90deg, rgba(246, 241, 234, 0.9) 0%, rgba(246, 241, 234, 0.68) 42%, rgba(246, 241, 234, 0.32) 100%);
   z-index: 3;
 }
 .home-hero-still {
@@ -452,13 +460,16 @@ html[lang='en'] .method-card h2 {
   display: block;
   white-space: nowrap;
 }
-.publication-stack {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.publication-stack,
+.publication-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 28px;
   align-items: start;
 }
 .publication-card {
+  flex: 0 0 calc((100% - 84px) / 4);
   min-width: 0;
   border-top: 1px solid var(--ink);
   padding-top: 20px;
@@ -591,6 +602,26 @@ html[lang='en'] .prose-column p {
   font-size: 1.12rem;
   text-wrap: pretty;
 }
+.legal-page .prose-column p {
+  margin-bottom: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.legal-page .prose-column p:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.legal-section-label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--maroon);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
 .sentence-line {
   display: block;
 }
@@ -715,11 +746,9 @@ html[lang='en'] .prose-column p {
 .publication-list {
   max-width: none;
   margin: 75px 0 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
 }
 .publication-list article {
+  flex: 0 0 calc((100% - 84px) / 4);
   display: grid;
   grid-template-columns: 1fr;
   gap: 18px;
@@ -907,6 +936,10 @@ html[lang='en'] .prose-column p {
   padding-top: 38px;
   border-top: 1px solid var(--line);
 }
+.activity-records.activity-highlights {
+  max-width: 1020px;
+  margin-left: 16%;
+}
 .activity-records .section-kicker h2 {
   max-width: 680px;
 }
@@ -922,7 +955,7 @@ html[lang='en'] .prose-column p {
   border-bottom: 1px solid var(--line);
 }
 .activity-highlight-item {
-  grid-template-columns: minmax(210px, 0.72fr) 120px minmax(0, 1fr);
+  grid-template-columns: minmax(250px, 0.8fr) 132px minmax(0, 1.2fr);
   align-items: start;
 }
 .activity-record-image {
@@ -3508,10 +3541,10 @@ html[lang='en'] .prose-column p {
     min-width: 0;
   }
   .brand-wordmark strong {
-    font-size: 0.74rem;
+    font-size: 0.78rem;
   }
   .brand-wordmark small {
-    font-size: 0.44rem;
+    font-size: 0.46rem;
     letter-spacing: 0.05em;
   }
   .site-nav {
@@ -3589,6 +3622,9 @@ html[lang='en'] .prose-column p {
     grid-template-columns: 1fr;
     gap: 52px;
   }
+  .home-hero-media::after {
+    background: linear-gradient(180deg, rgba(246, 241, 234, 0.78) 0%, rgba(246, 241, 234, 0.42) 100%);
+  }
   .hero-copy h1 {
     font-size: clamp(3.4rem, 16vw, 5.8rem);
   }
@@ -3637,6 +3673,12 @@ html[lang='en'] .prose-column p {
   }
   .publication-stack {
     grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .publication-card,
+  .publication-list article {
+    flex: 1 1 100%;
+    width: 100%;
   }
   .home-cover {
     height: auto;
@@ -3712,6 +3754,10 @@ html[lang='en'] .prose-column p {
   .activity-records {
     margin-top: 72px;
   }
+  .activity-records.activity-highlights {
+    max-width: none;
+    margin-left: 0;
+  }
   .activity-record-list article {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -3719,6 +3765,13 @@ html[lang='en'] .prose-column p {
   .activity-highlight-item {
     grid-template-columns: 1fr !important;
     gap: 14px !important;
+  }
+  .legal-page .prose-column p {
+    margin-bottom: 28px;
+    padding-top: 18px;
+  }
+  .legal-section-label {
+    font-size: 0.68rem;
   }
   .activity-record-image {
     max-width: 520px;

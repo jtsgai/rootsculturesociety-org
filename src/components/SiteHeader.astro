@@ -23,21 +23,31 @@ const counterpart = lang === 'en' ? '/' : '/en/';
 <script>
   const button = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#site-nav');
+  const header = document.querySelector('.site-header');
+  const closeMenu = () => {
+    button?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('is-open');
+  };
   button?.addEventListener('click', () => {
     const open = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', String(!open));
     nav?.classList.toggle('is-open', !open);
   });
+  nav?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) closeMenu();
+  });
   const dropdowns = document.querySelectorAll<HTMLDetailsElement>('.nav-dropdown');
   document.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Node)) return;
+    if (!header?.contains(target)) closeMenu();
     dropdowns.forEach((dropdown) => {
       if (dropdown.open && !dropdown.contains(target)) dropdown.open = false;
     });
   });
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    closeMenu();
     dropdowns.forEach((dropdown) => {
       if (dropdown.open) dropdown.open = false;
     });
