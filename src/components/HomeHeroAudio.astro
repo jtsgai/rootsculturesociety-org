@@ -1,0 +1,44 @@
+---
+interface Props { lang: 'zh' | 'en'; }
+const { lang } = Astro.props;
+const label = lang === 'en' ? 'Play music' : '播放音乐';
+const pauseLabel = lang === 'en' ? 'Pause music' : '暂停音乐';
+---
+
+<div class="home-hero-audio" data-home-audio>
+  <audio src="/audio/home-theme.mp3" loop preload="metadata"></audio>
+  <button class="home-audio-toggle" type="button" data-audio-toggle aria-pressed="false" aria-label={label}>
+    <span class="home-audio-mark" aria-hidden="true">♫</span>
+    <span data-audio-label>{label}</span>
+  </button>
+</div>
+
+<script define:vars={{ label, pauseLabel }}>
+  const audioRoot = document.querySelector<HTMLElement>('[data-home-audio]');
+  const audio = audioRoot?.querySelector<HTMLAudioElement>('audio');
+  const toggle = audioRoot?.querySelector<HTMLButtonElement>('[data-audio-toggle]');
+  const text = audioRoot?.querySelector<HTMLElement>('[data-audio-label]');
+
+  if (audio && toggle && text) {
+    const sync = () => {
+      const playing = !audio.paused;
+      audioRoot?.classList.toggle('is-playing', playing);
+      toggle.setAttribute('aria-pressed', String(playing));
+      toggle.setAttribute('aria-label', playing ? pauseLabel : label);
+      text.textContent = playing ? pauseLabel : label;
+    };
+
+    toggle.addEventListener('click', async () => {
+      if (audio.paused) {
+        try { await audio.play(); } catch { return; }
+      } else {
+        audio.pause();
+      }
+      sync();
+    });
+    audio.addEventListener('play', sync);
+    audio.addEventListener('pause', sync);
+    audio.addEventListener('error', () => { toggle.disabled = true; });
+    sync();
+  }
+</script>

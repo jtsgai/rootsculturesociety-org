@@ -259,6 +259,40 @@ h3 {
   color: var(--muted);
   font-size: 1.14rem;
 }
+.home-hero-audio {
+  position: absolute;
+  z-index: 4;
+  right: clamp(24px, 5vw, 76px);
+  bottom: 28px;
+}
+.home-audio-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid color-mix(in srgb, var(--maroon) 65%, var(--line));
+  border-radius: 999px;
+  color: var(--maroon);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  font: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+.home-audio-toggle:hover,
+.home-hero-audio.is-playing .home-audio-toggle {
+  color: var(--paper);
+  background: var(--maroon);
+}
+.home-audio-toggle:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.home-audio-mark {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 0.8;
+}
 .hero-title-line {
   display: inline-block;
   white-space: nowrap;
