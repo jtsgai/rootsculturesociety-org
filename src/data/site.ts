@@ -39,8 +39,8 @@ export const activityMoments = [
 export const publications = [
   {
     year: '2005',
-    titleZh: '2005 年《鲤跳人》',
-    titleEn: '2005 Li-tiao Ren',
+    titleZh: '《鲤跳人》',
+    titleEn: 'Li-tiao Ren',
     image: '/publications/publication-2005-book.jpg',
     altZh: '2005 年《鲤跳人》书本展示',
     altEn: '2005 Li-tiao Ren book display',
@@ -51,8 +51,8 @@ export const publications = [
   },
   {
     year: '2012',
-    titleZh: '2012 年《根缘》',
-    titleEn: '2012 Our Roots',
+    titleZh: '《根缘》',
+    titleEn: 'Our Roots',
     image: '/publications/publication-2012-book.jpg',
     altZh: '2012 年《根缘》书本展示',
     altEn: '2012 Our Roots book display',
@@ -63,8 +63,8 @@ export const publications = [
   },
   {
     year: '2014',
-    titleZh: '2014 年《新加坡华族谱系》',
-    titleEn: '2014 Chinese Genealogy in Singapore',
+    titleZh: '《新加坡华族谱系》',
+    titleEn: 'Chinese Genealogy in Singapore',
     image: '/publications/publication-2014-book.jpg',
     altZh: '2014 年《新加坡华族谱系》书本展示',
     altEn: '2014 Chinese Genealogy in Singapore book display',
@@ -75,8 +75,8 @@ export const publications = [
   },
   {
     year: '2016',
-    titleZh: '2016 年《新加坡华裔大宗谱》',
-    titleEn: '2016 Major Genealogy of Singapore Chinese',
+    titleZh: '《新加坡华裔大宗谱》',
+    titleEn: 'Major Genealogy of Singapore Chinese',
     image: '/publications/publication-2016-book.jpg',
     altZh: '2016 年《新加坡华裔大宗谱》书本展示',
     altEn: '2016 Major Genealogy of Singapore Chinese book display',
@@ -87,8 +87,8 @@ export const publications = [
   },
   {
     year: '2017',
-    titleZh: '2017 年《当代公会使命》',
-    titleEn: '2017 Contemporary Association Mission',
+    titleZh: '《当代公会使命》',
+    titleEn: 'Contemporary Association Mission',
     image: '/publications/publication-2017-book.jpg',
     altZh: '2017 年《当代公会使命》书本展示',
     altEn: '2017 Contemporary Association Mission book display',
@@ -99,8 +99,8 @@ export const publications = [
   },
   {
     year: '2025',
-    titleZh: '2025 年《传灯》',
-    titleEn: '2025 Chuan Deng',
+    titleZh: '《传灯》',
+    titleEn: 'Chuan Deng',
     image: '/publications/chuan-deng-2025-book.jpg',
     altZh: '2025 年《传灯》书本展示',
     altEn: '2025 Chuan Deng book display',
@@ -111,8 +111,8 @@ export const publications = [
   },
   {
     year: '2026',
-    titleZh: '2026 年《相册家谱》',
-    titleEn: '2026 Photo Genealogy',
+    titleZh: '《相册家谱》',
+    titleEn: 'Photo Genealogy',
     image: '/publications/photo-genealogy-2026-book.jpg',
     altZh: '2026 年《相册家谱》书本展示',
     altEn: '2026 Photo Genealogy book display',
