@@ -1,27 +1,8 @@
 import { listPublishedActivityEvents, type ActivityEvent } from '../lib/activity-events';
 import { isStudioConfigured } from '../lib/supabase';
 
-const gallery = document.querySelector<HTMLElement>('[data-activity-gallery]');
 const timeline = document.querySelector<HTMLElement>('[data-activity-events]');
 const lang = timeline?.dataset.lang === 'en' ? 'en' : 'zh';
-
-function renderGallery(events: ActivityEvent[]) {
-  if (!gallery) return;
-  const withImages = events.filter((event) => event.image_path);
-  if (!withImages.length) return;
-  gallery.replaceChildren();
-  withImages.forEach((event) => {
-    const figure = document.createElement('figure');
-    const image = document.createElement('img');
-    image.src = event.image_path || '';
-    image.alt = lang === 'zh' ? event.image_alt_zh || event.title_zh : event.image_alt_en || event.title_en;
-    image.loading = 'lazy';
-    const caption = document.createElement('figcaption');
-    caption.textContent = lang === 'zh' ? event.title_zh : event.title_en;
-    figure.append(image, caption);
-    gallery.append(figure);
-  });
-}
 
 function renderTimeline(events: ActivityEvent[]) {
   if (!timeline || !events.length) return;
@@ -65,7 +46,6 @@ function renderTimeline(events: ActivityEvent[]) {
 if (isStudioConfigured) {
   void listPublishedActivityEvents().then((events) => {
     if (!events.length) return;
-    renderGallery(events);
     renderTimeline(events);
   }).catch(() => {
     // Keep the curated static activity content when the optional database table

@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from './PageIntro.astro';
-import { activityHighlights, activityMoments, activityRecords, articles, committee, memberMeetingRecords, methods, pageCopy, publications, type Lang, type PageKey } from '../data/site';
+import { activityHighlights, activityRecords, articles, committee, memberMeetingRecords, methods, pageCopy, publications, type Lang, type PageKey } from '../data/site';
 interface Props { lang: Lang; pageKey: PageKey; }
 const { lang, pageKey } = Astro.props;
 const content = pageCopy[pageKey][lang];
@@ -30,7 +30,6 @@ const studioEnabled = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta
     {pageKey === 'contact' && <section class="contact-card"><div><span class="eyebrow">{isZh ? 'SECRETARY / 秘书长' : 'SECRETARY'}</span><h2>{isZh ? '锺骏源' : 'Ian Chung'}</h2><p>WhatsApp 9272 8933<br /><a href="mailto:ianchungcy@gmail.com">ianchungcy@gmail.com</a><br />95 Jalan Lokam, Singapore 537915</p></div><a class="button" href="mailto:ianchungcy@gmail.com">{isZh ? '写信给秘书长' : 'Email the Secretary'} ↗</a></section>}
 
     {pageKey === 'events' && <>
-      <section class="activity-gallery" data-activity-gallery>{activityMoments.map((moment) => <figure><img src={moment.image} alt={isZh ? moment.zh : moment.en} loading="lazy" /><figcaption>{isZh ? moment.zh : moment.en}</figcaption></figure>)}</section>
       <section class="activity-records activity-highlights" data-activity-events data-lang={lang} aria-labelledby="activity-highlights-title">
         <div class="section-kicker"><span class="eyebrow">ACTIVITY HIGHLIGHTS / 活动花絮</span><h2 id="activity-highlights-title">{isZh ? '把一次次相聚，整理成可以回看的记录。' : 'A record of the gatherings we can return to.'}</h2></div>
         <div class="activity-record-list">{activityHighlights.map((event) => <article class="activity-highlight-item">{event.image && <figure class="activity-record-image"><img src={event.image} alt={isZh ? event.imageAltZh : event.imageAltEn} loading="lazy" /></figure>}<div class="activity-record-year">{event.year}</div><div><h2>{isZh ? event.titleZh : event.titleEn}</h2><p>{isZh ? event.textZh : event.textEn}</p></div></article>)}</div>

@@ -922,7 +922,7 @@ html[lang='en'] .prose-column p {
   border-bottom: 1px solid var(--line);
 }
 .activity-highlight-item {
-  grid-template-columns: minmax(210px, 0.72fr) 120px minmax(0, 1fr) !important;
+  grid-template-columns: minmax(210px, 0.72fr) 120px minmax(0, 1fr);
   align-items: start;
 }
 .activity-record-image {
@@ -3473,6 +3473,8 @@ html[lang='en'] .prose-column p {
   .page-body,
   .page-intro,
   .home-band {
+    width: 100%;
+    max-width: none;
     padding-inline: 20px;
   }
   .home-hero {
@@ -3579,8 +3581,13 @@ html[lang='en'] .prose-column p {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+  .publication-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 54px;
+  }
   .book-cover {
-    width: min(58vw, 260px);
+    width: min(70vw, 320px);
   }
   .activity-gallery,
   .story-grid,
@@ -3605,6 +3612,7 @@ html[lang='en'] .prose-column p {
     gap: 10px;
   }
   .activity-highlight-item {
+    grid-template-columns: 1fr !important;
     gap: 14px !important;
   }
   .activity-record-image {

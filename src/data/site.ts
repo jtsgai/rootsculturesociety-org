@@ -31,12 +31,6 @@ export const committee = [
   { zh: '黄良南', en: 'Wong Liang Nam', roleZh: '委员', roleEn: 'Committee Member', image: '/committee/wong-liang-nam.jpg', altZh: '黄良南', altEn: 'Wong Liang Nam' },
 ];
 
-export const activityMoments = [
-  { image: '/events/cultural-gathering-01.jpg', zh: '学会文化活动现场', en: 'A Society cultural gathering' },
-  { image: '/events/cultural-gathering-02.jpg', zh: '活动交流合影', en: 'Conversation at a Society activity' },
-  { image: '/events/society-celebration-2019.jpg', zh: '宗亲社群会庆交流现场', en: 'A community celebration and exchange' },
-];
-
 export const activityHighlights = [
   {
     slug: '2011-genealogy-workshop',
