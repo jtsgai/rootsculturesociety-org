@@ -14,10 +14,10 @@ const playingLabel = lang === 'en' ? 'Playing' : '正在播放';
 </div>
 
 <script define:vars={{ label, playingLabel }}>
-  const audioRoot = document.querySelector<HTMLElement>('[data-home-audio]');
-  const audio = audioRoot?.querySelector<HTMLAudioElement>('audio');
-  const toggle = audioRoot?.querySelector<HTMLButtonElement>('[data-audio-toggle]');
-  const text = audioRoot?.querySelector<HTMLElement>('[data-audio-label]');
+  const audioRoot = document.querySelector('[data-home-audio]');
+  const audio = audioRoot?.querySelector('audio');
+  const toggle = audioRoot?.querySelector('[data-audio-toggle]');
+  const text = audioRoot?.querySelector('[data-audio-label]');
 
   if (audio && toggle && text) {
     const sync = () => {
