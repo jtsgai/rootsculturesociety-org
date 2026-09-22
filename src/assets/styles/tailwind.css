@@ -937,8 +937,8 @@ html[lang='en'] .prose-column p {
   border-top: 1px solid var(--line);
 }
 .activity-records.activity-highlights {
-  max-width: 1160px;
-  margin-left: 10%;
+  max-width: 1180px;
+  margin-left: 8%;
 }
 .activity-records .section-kicker h2 {
   max-width: 680px;
@@ -955,16 +955,17 @@ html[lang='en'] .prose-column p {
   border-bottom: 1px solid var(--line);
 }
 .activity-highlight-item {
-  grid-template-columns: minmax(0, 1.75fr) minmax(280px, 1fr);
-  gap: 42px;
-  padding: 36px 0 48px;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: 52px 0 64px;
   align-items: start;
 }
 .activity-highlight-copy {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding-top: 4px;
+  gap: 14px;
+  padding-top: 0;
+  max-width: 820px;
 }
 .activity-record-image {
   margin: 0;
@@ -973,7 +974,7 @@ html[lang='en'] .prose-column p {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 620px;
+  max-height: none;
   object-fit: contain;
   background: var(--paper-deep);
   filter: saturate(0.88);
