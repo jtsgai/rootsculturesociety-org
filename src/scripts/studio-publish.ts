@@ -1,6 +1,7 @@
 import { allSections, currentBook, currentMember, signOut, studioUnavailableMessage } from '../lib/studio';
 import { listOwnPublicationRequests, requestChapterPublication, withdrawPublicationRequest, type PublicStoryRequest } from '../lib/member-publication';
 import { studioSteps } from '../data/studio';
+import { ensureStudioPolicyAccepted } from '../lib/studio-policy';
 
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
 const form = document.querySelector<HTMLFormElement>('[data-publication-form]');
@@ -71,6 +72,7 @@ function fillMethods(completedMethods: Set<number>) {
 
 async function boot() {
   try {
+    if (!(await ensureStudioPolicyAccepted())) return;
     const [member, book] = await Promise.all([currentMember(), currentBook()]);
     if (!member || !book) return window.location.assign('/studio/login');
     if (member.status !== 'active') return report('此会员账户目前未启用；请联系学会确认会籍状态。');

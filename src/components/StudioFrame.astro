@@ -15,6 +15,17 @@ const backLabel = isAdmin ? '← 返回网站首页' : '← 我的相册家谱';
 ---
 <SiteLayout lang="zh" title={title} description={description} robots="noindex, nofollow" alternate={false}>
   <section class:list={['studio-shell', { 'studio-shell-admin': isAdmin, 'studio-shell-wide': wide }]}>
+    {!isAdmin && <section class="studio-policy-gate" data-studio-policy-gate hidden aria-labelledby="studio-policy-title">
+      <div class="studio-policy-gate-card">
+        <span class="eyebrow">MEMBER AGREEMENT / 会员确认</span>
+        <h2 id="studio-policy-title">进入会员谱坊前，请先阅读并同意</h2>
+        <p>会员谱坊用于整理和暂存相册家谱资料。家谱默认私密；公开章节必须另行申请并经学会审核。</p>
+        <p><a href="/privacy" target="_blank" rel="noreferrer">阅读隐私政策 ↗</a><span aria-hidden="true">　</span><a href="/terms" target="_blank" rel="noreferrer">阅读会员使用条款 ↗</a></p>
+        <label class="studio-policy-consent"><input type="checkbox" data-policy-consent /> 我已阅读并同意隐私政策和会员使用条款，并确认我有权提交所填写的家人资料。</label>
+        <div class="studio-policy-actions"><button class="button" type="button" data-policy-accept disabled>同意并继续</button><button class="text-link" type="button" data-policy-signout>退出会员谱坊</button></div>
+        <p class="studio-status" aria-live="polite" data-policy-status></p>
+      </div>
+    </section>}
     <div class="studio-topline">
       <a class="studio-back-link" href={backHref}>{backLabel}</a>
       <button class="studio-signout" type="button" data-studio-signout hidden>{isAdmin ? '退出管理员页面' : '退出谱坊'}</button>

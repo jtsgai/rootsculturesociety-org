@@ -2,6 +2,7 @@ import { allSections, currentBook, currentMember, listMedia, listPeople, memberP
 import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
 import { getStudioMediaProfile, studioSteps } from '../data/studio';
+import { ensureStudioPolicyAccepted } from '../lib/studio-policy';
 
 const target = document.querySelector<HTMLElement>('[data-preview-book]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
@@ -538,6 +539,7 @@ printButton?.addEventListener('click', async () => {
 
 void (async () => {
   try {
+    if (!(await ensureStudioPolicyAccepted())) return;
     setPreviewMode();
     const [member, book, canDownloadPdf] = await Promise.all([currentMember(), currentBook(), memberPdfDownloadEnabled()]);
     if (!member || !book) return window.location.assign('/studio/login');

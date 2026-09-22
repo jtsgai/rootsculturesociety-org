@@ -1,6 +1,7 @@
 import { addPerson, currentBook, currentMember, deletePerson, getSection, listMedia, listPeople, removeMedia, saveBook, saveSection, studioUnavailableMessage, updateMediaCaption, uploadMedia, uploadPersonPhoto, type StudioMedia, type StudioPerson, updatePerson } from '../lib/studio';
 import { branchChildSummary, buildLineageGenerations, buildLineageGrid, familyBranchLabel, genealogyMarkerLabels, lineageLegendMarkup, orderedFamilyMembers, parentBranchIds, personLifespan, personMarkerSymbols, personResidenceCode, personSexLabel, siblingsOf } from '../lib/lineage';
 import { drawLineageConnections } from '../lib/lineage-connections';
+import { ensureStudioPolicyAccepted } from '../lib/studio-policy';
 
 const container = document.querySelector<HTMLElement>('[data-studio-step]');
 const status = document.querySelector<HTMLElement>('[data-studio-status]');
@@ -620,6 +621,7 @@ document.querySelector<HTMLButtonElement>('[data-studio-signout]')?.addEventList
 
 void (async () => {
   try {
+    if (!(await ensureStudioPolicyAccepted())) return;
     if (!(await ensureMember())) return;
     await fillSavedContent();
     if (type === 'people') renderPeople(await listPeople(bookId, { includeSensitive: true }));
