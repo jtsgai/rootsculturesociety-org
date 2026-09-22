@@ -921,6 +921,20 @@ html[lang='en'] .prose-column p {
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
 }
+.activity-highlight-item {
+  grid-template-columns: minmax(210px, 0.72fr) 120px minmax(0, 1fr) !important;
+  align-items: start;
+}
+.activity-record-image {
+  margin: 0;
+}
+.activity-record-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.88);
+}
 .activity-record-year {
   color: var(--maroon);
   font-family: var(--serif);
@@ -3589,6 +3603,12 @@ html[lang='en'] .prose-column p {
   .activity-record-list article {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+  .activity-highlight-item {
+    gap: 14px !important;
+  }
+  .activity-record-image {
+    max-width: 520px;
   }
   .article-downloads {
     margin-top: 72px;

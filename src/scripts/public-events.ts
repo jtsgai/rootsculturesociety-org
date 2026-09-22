@@ -5,20 +5,6 @@ const gallery = document.querySelector<HTMLElement>('[data-activity-gallery]');
 const timeline = document.querySelector<HTMLElement>('[data-activity-events]');
 const lang = timeline?.dataset.lang === 'en' ? 'en' : 'zh';
 
-function addSource(parent: HTMLElement, event: ActivityEvent) {
-  if (!event.source_url) return;
-  const link = document.createElement('a');
-  link.className = 'inline-download';
-  link.href = event.source_url;
-  link.target = '_blank';
-  link.rel = 'noreferrer';
-  link.textContent = `${lang === 'zh' ? event.source_label_zh || '查看活动资料' : event.source_label_en || 'View activity record'} `;
-  const arrow = document.createElement('span');
-  arrow.textContent = '↗';
-  link.append(arrow);
-  parent.append(link);
-}
-
 function renderGallery(events: ActivityEvent[]) {
   if (!gallery) return;
   const withImages = events.filter((event) => event.image_path);
@@ -44,6 +30,17 @@ function renderTimeline(events: ActivityEvent[]) {
   list.replaceChildren();
   events.forEach((event) => {
     const article = document.createElement('article');
+    article.className = 'activity-highlight-item';
+    if (event.image_path) {
+      const figure = document.createElement('figure');
+      figure.className = 'activity-record-image';
+      const image = document.createElement('img');
+      image.src = event.image_path;
+      image.alt = lang === 'zh' ? event.image_alt_zh || event.title_zh : event.image_alt_en || event.title_en;
+      image.loading = 'lazy';
+      figure.append(image);
+      article.append(figure);
+    }
     const year = document.createElement('div');
     year.className = 'activity-record-year';
     year.textContent = lang === 'zh' ? event.date_label_zh || event.event_date || '' : event.date_label_en || event.event_date || '';
@@ -60,7 +57,6 @@ function renderTimeline(events: ActivityEvent[]) {
       place.textContent = `${lang === 'zh' ? '地点：' : 'Location: '}${location}`;
       content.append(place);
     }
-    addSource(content, event);
     article.append(year, content);
     list.append(article);
   });
