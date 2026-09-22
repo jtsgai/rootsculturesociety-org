@@ -6,7 +6,7 @@ const playingLabel = lang === 'en' ? 'Playing' : '正在播放';
 ---
 
 <div class="home-hero-audio" data-home-audio>
-  <audio src="/audio/home-theme.mp3" autoplay loop preload="auto"></audio>
+  <audio src="/audio/home-theme.mp3" autoplay loop muted playsinline preload="auto"></audio>
   <button class="home-audio-toggle" type="button" data-audio-toggle aria-pressed="false" aria-label={label}>
     <span class="home-audio-mark" aria-hidden="true">♫</span>
     <span data-audio-label>{label}</span>
@@ -21,7 +21,9 @@ const playingLabel = lang === 'en' ? 'Playing' : '正在播放';
 
   if (audio && toggle && text) {
     const sync = () => {
-      const playing = !audio.paused;
+      // Muted autoplay is the browser-safe starting state. Only show
+      // “Playing” after the visitor has enabled audible playback.
+      const playing = !audio.paused && !audio.muted;
       audioRoot?.classList.toggle('is-playing', playing);
       toggle.setAttribute('aria-pressed', String(playing));
       toggle.setAttribute('aria-label', playing ? playingLabel : label);
@@ -29,7 +31,14 @@ const playingLabel = lang === 'en' ? 'Playing' : '正在播放';
     };
 
     toggle.addEventListener('click', async () => {
-      if (audio.paused) {
+      if (audio.muted) {
+        audio.muted = false;
+        try { await audio.play(); } catch {
+          audio.muted = true;
+          sync();
+          return;
+        }
+      } else if (audio.paused) {
         try { await audio.play(); } catch { return; }
       } else {
         audio.pause();
@@ -38,10 +47,10 @@ const playingLabel = lang === 'en' ? 'Playing' : '正在播放';
     });
     audio.addEventListener('play', sync);
     audio.addEventListener('pause', sync);
+    audio.addEventListener('volumechange', sync);
     audio.addEventListener('error', () => { toggle.disabled = true; });
     sync();
-    // Ask the browser to start immediately. Browsers that block audible
-    // autoplay leave the visible button available as the fallback.
+    // Muted autoplay is allowed by modern browsers. The button enables sound.
     void audio.play().catch(() => undefined);
   }
 </script>
