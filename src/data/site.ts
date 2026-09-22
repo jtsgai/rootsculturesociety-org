@@ -98,17 +98,6 @@ export const activityHighlights = [
     imageAltZh: '学会与文化机构交流合影',
     imageAltEn: 'Society members at an external cultural exchange',
   },
-  {
-    slug: '2024-hainan-roots-journey',
-    year: '2024',
-    titleZh: '海南寻根与宗亲交流',
-    titleEn: 'A Hainan roots journey and clan exchange',
-    textZh: '黄氏家族组织老少成员到海南文昌、公坡镇寻根，并与文昌黄氏大宗祠交流；旅程把祖籍地、家族口述与当代家庭重新连在一起。',
-    textEn: 'A Huang family roots journey brought several generations to Wenchang and Gongpo in Hainan for an exchange with the Wenchang Huang Clan Ancestral Hall, linking ancestral place, oral history, and family life today.',
-    image: '/events/cultural-gathering-02.jpg',
-    imageAltZh: '海南寻根与宗亲交流',
-    imageAltEn: 'A Hainan roots journey and clan exchange',
-  },
 ];
 
 export const publications = [
@@ -302,18 +291,6 @@ export const stories = [
     textZh: '文章回顾本地族谱推广、相册家谱的实践，以及以现代、易懂的方式让更多家庭参与建谱修史的想法。',
     textEn: 'This account looks back at genealogy outreach in Singapore, the practice of Photo Genealogy, and the idea of making family history accessible to more households.',
     sourceFile: 'roots-culture-passing-the-torch-chen-jiancun.pdf',
-  },
-  {
-    image: '/events/cultural-gathering-02.jpg',
-    altZh: '文化活动中的交流合影',
-    altEn: 'Conversation at a cultural gathering',
-    titleZh: '迁徙留下的路',
-    titleEn: 'The routes migration leaves behind',
-    bylineZh: '迁徙观点资料',
-    bylineEn: 'Migration perspectives',
-    textZh: '从闯关东、填四川、下南洋到走西口，迁徙不仅改变地点，也留下方言、食物、关系与记忆。',
-    textEn: 'From Chuang Guandong and Tian Sichuan to going south across the seas and Zou Xikou, migration changes more than place; it leaves dialects, food, relationships and memory.',
-    sourceFile: 'migration-views-chuang-guandong-zou-xikou.pdf',
   },
 ];
 

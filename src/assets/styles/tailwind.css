@@ -3502,6 +3502,17 @@ html[lang='en'] .prose-column p {
     width: 100%;
     max-width: none;
   }
+  h1,
+  h2,
+  h3 {
+    word-break: normal;
+    overflow-wrap: anywhere;
+    text-wrap: wrap;
+  }
+  .page-intro h1,
+  .section-kicker h2 {
+    max-width: 100%;
+  }
   .home-hero {
     min-height: calc(100svh - 72px);
     padding-top: 80px;

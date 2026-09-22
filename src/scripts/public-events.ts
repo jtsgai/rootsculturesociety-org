@@ -45,8 +45,9 @@ function renderTimeline(events: ActivityEvent[]) {
 
 if (isStudioConfigured) {
   void listPublishedActivityEvents().then((events) => {
-    if (!events.length) return;
-    renderTimeline(events);
+    const verifiedEvents = events.filter((event) => event.slug !== '2024-hainan-roots-journey');
+    if (!verifiedEvents.length) return;
+    renderTimeline(verifiedEvents);
   }).catch(() => {
     // Keep the curated static activity content when the optional database table
     // has not been migrated or is temporarily unavailable.
