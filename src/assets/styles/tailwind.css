@@ -968,7 +968,9 @@ html[lang='en'] .prose-column p {
   max-width: 820px;
 }
 .activity-record-image {
+  width: min(80%, 1080px);
   margin: 0;
+  margin-inline: auto;
 }
 .activity-record-image img {
   display: block;
@@ -3790,6 +3792,7 @@ html[lang='en'] .prose-column p {
     font-size: 0.68rem;
   }
   .activity-record-image {
+    width: 92%;
     max-width: 520px;
   }
   .article-downloads {
