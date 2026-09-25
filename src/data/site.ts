@@ -13,10 +13,10 @@ export type PageKey =
   | 'contact';
 
 export const nav = [
-  { key: 'about', zh: '学会资料', en: 'Society' },
+  { key: 'about', zh: '有关学会', en: 'About Us' },
   { key: 'method', zh: '相册家谱', en: 'Photo Genealogy' },
   { key: 'publications', zh: '出版书籍', en: 'Publications' },
-  { key: 'stories', zh: '参考资料', en: 'Reference materials' },
+  { key: 'stories', zh: '修谱资料', en: 'Genealogy Resources' },
   { key: 'events', zh: '活动花絮', en: 'Events' },
   { key: 'membership', zh: '加入学会', en: 'Membership' },
 ];
@@ -333,12 +333,12 @@ export const pageCopy: Record<PageKey, { zh: any; en: any }> = {
     en: { title: 'Singapore Photo Genealogy', deck: 'Eight steps to build a Photo Genealogy and make a family’s roots and routes readable.', paragraphs: ['A Photo Genealogy is not a pile of records. It begins with the first generation to settle in Singapore and arranges a family’s life through local time and place.'] },
   },
   publications: {
-    zh: { title: '出版', deck: '把口述、文献与家庭记忆，留成可以翻阅的东西。', paragraphs: ['学会的出版工作以文化记录为先。书名与出版资料以现有正式版本为准。', '相关文章与相册家谱样本请前往参考资料页面阅读。'] },
-    en: { title: 'Publications', deck: 'Making oral history, documents, and family memory available to turn through.', paragraphs: ['The Society publishes with cultural record-keeping in mind. Titles and publication details follow the formal editions currently available.', 'Related articles and Photo Genealogy samples are available on the Reference Materials page.'] },
+    zh: { title: '出版', deck: '把口述、文献与家庭记忆，留成可以翻阅的东西。', paragraphs: ['学会的出版工作以文化记录为先。书名与出版资料以现有正式版本为准。', '相关文章与相册家谱样本请前往修谱资料页面阅读。'] },
+    en: { title: 'Publications', deck: 'Making oral history, documents, and family memory available to turn through.', paragraphs: ['The Society publishes with cultural record-keeping in mind. Titles and publication details follow the formal editions currently available.', 'Related articles and Photo Genealogy samples are available on the Genealogy Resources page.'] },
   },
   stories: {
-    zh: { title: '参考资料', deck: '从文章、样本与会员故事，继续认识相册家谱。', paragraphs: ['这里收录与新加坡生活、迁徙、方言、食物和家族记忆有关的文章、样本与资料故事。会员故事会在得到同意并经学会审核后刊出；私人资料不会自动成为公共内容。', '以下内容先以学会现有的文章、照片和相册家谱样本为基础，读者可以从文章和故事继续阅读原始资料。'] },
-    en: { title: 'Reference materials', deck: 'Continue learning about Photo Genealogy through articles, samples and member stories.', paragraphs: ['This section gathers articles, samples and source-based stories about Singapore life, migration, dialect, food and family memory. Member stories are published with consent and Society review; private material does not become public by default.', 'The first entries are based on the Society’s existing articles, photographs and Photo Genealogy samples, with links back to the original source material.'] },
+    zh: { title: '修谱资料', deck: '从文章、样本与会员故事，继续认识相册家谱。', paragraphs: ['这里收录与新加坡生活、迁徙、方言、食物和家族记忆有关的文章、样本与资料故事。会员故事会在得到同意并经学会审核后刊出；私人资料不会自动成为公共内容。', '以下内容先以学会现有的文章、照片和相册家谱样本为基础，读者可以从文章和故事继续阅读原始资料。'] },
+    en: { title: 'Genealogy Resources', deck: 'Continue learning about Photo Genealogy through articles, samples and member stories.', paragraphs: ['This section gathers articles, samples and source-based stories about Singapore life, migration, dialect, food and family memory. Member stories are published with consent and Society review; private material does not become public by default.', 'The first entries are based on the Society’s existing articles, photographs and Photo Genealogy samples, with links back to the original source material.'] },
   },
   events: {
     zh: { title: '活动花絮', deck: '从一次聚会、一场分享，继续认识我们的根。', paragraphs: ['这里挑选学会的研习班、讲座、文化交流、新年聚会与寻根活动，用日期、图片和文字留下生动的现场片段。完整的会务报告和会员大会文字记录，请前往会务记录。'] },
