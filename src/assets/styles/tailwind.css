@@ -3720,6 +3720,10 @@ html[lang='en'] .prose-column p {
     font-size: clamp(1.95rem, 9.8vw, 2.4rem);
     letter-spacing: -0.03em;
   }
+  html[lang='en'] .hero-title-line {
+    display: inline;
+    white-space: normal;
+  }
   .hero-copy > p {
     font-size: 1rem;
   }

@@ -36,7 +36,7 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) => !/\/(?:admin\/members|studio)(?:\/|$)/.test(page),
+      filter: (page) => !/\/(?:admin|studio)(?:\/|$)/.test(page),
     }),
     mdx(),
     icon({
