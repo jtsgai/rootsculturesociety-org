@@ -6,7 +6,7 @@
 以新加坡人，建修新加坡谱式。
 
 主句  
-源在祖籍，根在狮城。新加坡根缘文化学会推广通俗、易懂、易查的「相册家谱」，助家庭以南来落地的第一世为开族始点，记下自己的开族史。
+缘在祖籍，根在狮城。新加坡根缘文化学会推广通俗、易懂、易查的「相册家谱」，助家庭以南来落地的第一世为开族始点，记下自己的开族史。
 
 三列  
 1. 新加坡谱式 — 不混算中国祖谱世代，从迁入新加坡并落地生根的第一代起算。  
@@ -32,7 +32,7 @@ Eyebrow
 A Singapore register, written by Singaporeans.
 
 Lead  
-Our source may lie in an ancestral place. Our roots are here. The Society teaches a plain, searchable Photo Genealogy: begin with the first generation that settled in Singapore, and write the founding history of your own family.
+Our ancestral bond endures. Our roots are here. The Society teaches a plain, searchable Photo Genealogy: begin with the first generation that settled in Singapore, and write the founding history of your own family.
 
 Three columns  
 1. Singapore generation count — do not mix generations with a China-origin register.  
