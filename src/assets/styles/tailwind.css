@@ -346,6 +346,10 @@ h3 {
     display: block;
     white-space: nowrap;
   }
+
+  html[lang='en'] .hero-copy h1 br {
+    display: none;
+  }
 }
 
 html[lang='en'] .hero-copy h1 em {
