@@ -1214,6 +1214,9 @@ html[lang='en'] .prose-column p {
 .studio-shell-wide {
   max-width: 1440px;
 }
+[data-studio-content][hidden],
+[data-studio-features][hidden],
+[data-password-change][hidden],
 .studio-policy-gate[hidden] {
   display: none;
 }

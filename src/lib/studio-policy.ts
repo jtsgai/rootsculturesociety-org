@@ -1,3 +1,4 @@
+import { currentMember } from './studio';
 import { getSupabase } from './supabase';
 
 export const CURRENT_POLICY_VERSION = '2026-09-22-v1';
@@ -16,14 +17,24 @@ function showGate() {
 }
 
 export async function ensureStudioPolicyAccepted() {
+  const member = await currentMember();
+  if (member?.must_change_password) {
+    window.location.assign('/studio');
+    return false;
+  }
+  const reveal = () => {
+    const content = document.querySelector<HTMLElement>('[data-studio-content]');
+    if (content) content.hidden = false;
+    return true;
+  };
   const client = getSupabase();
-  if (!client) return true;
+  if (!client) return reveal();
   const { data: { user } } = await client.auth.getUser();
-  if (!user) return true;
+  if (!user) return reveal();
 
   const { data: profile, error: profileError } = await client.from('profiles').select('role').eq('id', user.id).maybeSingle();
   if (profileError) throw profileError;
-  if (profile?.role !== 'member') return true;
+  if (profile?.role !== 'member') return reveal();
 
   const { data: acceptance, error: acceptanceError } = await client
     .from('member_policy_acceptances')
@@ -31,7 +42,7 @@ export async function ensureStudioPolicyAccepted() {
     .eq('member_id', user.id)
     .maybeSingle<PolicyAcceptance>();
   if (acceptanceError) throw acceptanceError;
-  if (acceptance?.privacy_version === CURRENT_POLICY_VERSION && acceptance.terms_version === CURRENT_POLICY_VERSION) return true;
+  if (acceptance?.privacy_version === CURRENT_POLICY_VERSION && acceptance.terms_version === CURRENT_POLICY_VERSION) return reveal();
 
   const gate = showGate();
   if (!gate) throw new Error('无法显示会员协议确认页，请重新打开会员谱坊。');
@@ -44,6 +55,7 @@ export async function ensureStudioPolicyAccepted() {
     const finish = (accepted: boolean) => {
       gate.hidden = true;
       document.documentElement.classList.remove('studio-policy-required');
+      if (accepted) reveal();
       resolve(accepted);
     };
     checkbox?.addEventListener('change', () => {

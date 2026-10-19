@@ -41,7 +41,7 @@ export function membershipEmail(memberId: string) {
 export async function signIn(memberId: string, password: string) {
   const client = requireClient();
   const normalizedId = memberId.trim().toUpperCase();
-  if (!/^R[1-9][0-9]*$/.test(normalizedId)) throw new Error('请输入格式如 R1001 的会员号。');
+  if (!/^R[1-9][0-9]*$/.test(normalizedId)) throw new Error('请输入正确的会员号（R 加数字）。');
   const { error } = await client.auth.signInWithPassword({ email: membershipEmail(normalizedId), password });
   if (error) throw new Error('会员号或密码不正确，或账户暂未开通。');
 }

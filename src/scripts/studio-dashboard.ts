@@ -42,10 +42,20 @@ async function loadTools() {
 
 async function boot() {
   try {
+    const member = await currentMember();
+    if (!member) return window.location.assign('/studio/login');
+    const content = document.querySelector<HTMLElement>('[data-studio-content]');
+    if (content) content.hidden = false;
+    if (signout) signout.hidden = false;
+    const passwordPanel = document.querySelector<HTMLElement>('[data-password-change]');
+    if (passwordPanel) passwordPanel.hidden = !member.must_change_password;
+    if (member.must_change_password) return report('请先修改初始密码，再使用会员谱坊。');
     if (!(await ensureStudioPolicyAccepted())) return;
-    const [member, book] = await Promise.all([currentMember(), currentBook()]);
-    if (!member || !book) return window.location.assign('/studio/login');
+    const book = await currentBook();
+    if (!book) return window.location.assign('/studio/login');
     if (member.status !== 'active') return report('此会员账户目前未启用；请联系学会确认会籍状态。');
+    const features = document.querySelector<HTMLElement>('[data-studio-features]');
+    if (features) features.hidden = false;
     if (title) title.textContent = book.title || '尚未命名的相册家谱';
     if (memberName) memberName.textContent = `${member.display_name} · ${member.member_id}`;
     if (signout) signout.hidden = false;
@@ -76,8 +86,6 @@ async function boot() {
       item.classList.toggle('is-started', Boolean(section && !section.is_complete));
     });
     await loadTools();
-    const passwordPanel = document.querySelector<HTMLElement>('[data-password-change]');
-    if (passwordPanel) passwordPanel.hidden = !member.must_change_password;
   } catch (error) {
     report(error instanceof Error ? error.message : studioUnavailableMessage());
   }
@@ -95,7 +103,9 @@ document.querySelector<HTMLFormElement>('[data-password-form]')?.addEventListene
   try {
     await changeInitialPassword(password);
     form.closest<HTMLElement>('[data-password-change]')!.hidden = true;
+    form.reset();
     report('密码已更新。现在可以开始整理你的相册家谱。');
+    await boot();
   } catch (error) {
     report(error instanceof Error ? error.message : '无法更新密码。');
   }

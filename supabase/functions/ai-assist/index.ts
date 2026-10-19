@@ -35,6 +35,8 @@ serve(async (request) => {
 
   const session = await requireUser(request);
   if (!session) return json({ error: 'Login is required.' }, 401);
+  const { data: member, error: memberError } = await admin.from('members').select('must_change_password').eq('id', session.user.id).maybeSingle();
+  if (memberError || !member || member.must_change_password) return json({ error: '请先登录会员谱坊并修改初始密码。' }, 403);
   if (provider === 'disabled' || !configuredAdapters.has(provider))
     return json({ error: 'AI assistance is not enabled yet.' }, 503);
   if (!publishableKey) return json({ error: 'AI service is not configured.' }, 503);

@@ -6,6 +6,14 @@ import { aiPromptPresets } from '../../data/ai-prompts';
 
 <StudioFrame title="我的相册家谱">
   <section class="studio-card" data-studio-dashboard>
+    <div class="studio-password" data-password-change hidden>
+      <strong>先改初始密码</strong><p>为保护家人资料，请设置至少 8 位、同时含字母和数字的新密码；字母大小写均可。</p><form data-password-form>
+        <label
+          >新密码 <input name="password" type="password" minlength="8" autocomplete="new-password" required /></label
+        ><button class="button" type="submit">保存新密码</button>
+      </form>
+    </div>
+    <div data-studio-features hidden>
     <div class="studio-welcome">
       <div>
         <span class="eyebrow">PRIVATE BY DEFAULT / 默认私密</span><h2 data-studio-book-title>正在读取你的家谱…</h2><p
@@ -15,13 +23,6 @@ import { aiPromptPresets } from '../../data/ai-prompts';
       </div><a class="button" data-studio-continue href="/studio/1-cover">从封面开始 <span>↗</span></a>
     </div>
     <p class="studio-progress-summary" data-studio-progress-summary>正在计算完成进度…</p>
-    <div class="studio-password" data-password-change hidden>
-      <strong>先改初始密码</strong><p>为保护家人资料，请设置至少 8 位、同时含字母和数字的新密码；字母大小写均可。</p><form data-password-form>
-        <label
-          >新密码 <input name="password" type="password" minlength="8" autocomplete="new-password" required /></label
-        ><button class="button" type="submit">保存新密码</button>
-      </form>
-    </div>
     <ol class="studio-progress" data-studio-progress>
       {
         studioSteps.map((step) => (
@@ -68,6 +69,7 @@ import { aiPromptPresets } from '../../data/ai-prompts';
         </article>
       </div>
     </section>
+    </div>
     <p class="studio-status" aria-live="polite" data-studio-status></p>
   </section>
 </StudioFrame>

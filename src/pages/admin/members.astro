@@ -20,7 +20,7 @@ import StudioFrame from '../../components/StudioFrame.astro';
       <p>系统会产生一次性的 8 位初始密码，且会同时含字母和数字；请用 WhatsApp 或纸本交给会员，不要以电邮发送密码。</p>
       <form class="studio-admin-form" data-admin-create-form>
       <div class="studio-fields">
-        <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label
+        <label>会员号 <input name="memberId" placeholder="留空自动分配" /></label><label
           >会员姓名 <input name="displayName" required /></label
         ><label>联络电邮 <input name="contactEmail" type="email" autocomplete="email" required /></label><label
           >手机号码 <input name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="例如：9272 8933" required /></label><label
@@ -41,7 +41,7 @@ import StudioFrame from '../../components/StudioFrame.astro';
         <h3>重设会员初始密码</h3>
         <p>重设后，旧密码立即失效；新密码只会在这里显示一次。</p>
         <form class="studio-reset-form" data-admin-reset-form>
-          <label>会员号 <input name="memberId" placeholder="R1001" required /></label><button
+          <label>会员号 <input name="memberId" placeholder="会员号" required /></label><button
             class="text-link"
             type="submit">重设初始密码</button>
         </form>
@@ -52,7 +52,7 @@ import StudioFrame from '../../components/StudioFrame.astro';
       <p>这里只记录额度，不连接收款，也不会启用 AI 供应商。以后可按会员号发放、补回或调整额度。</p>
       <form data-admin-credit-form>
         <div class="studio-fields">
-          <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label
+          <label>会员号 <input name="memberId" placeholder="会员号" required /></label><label
             >额度 <input name="amount" type="number" min="1" step="1" required /></label
           ><label
             >记录类型 <select name="kind"
@@ -71,7 +71,7 @@ import StudioFrame from '../../components/StudioFrame.astro';
       <h3 id="admin-export-title">管理员临时下载照片原件</h3>
       <p>只在确定印书用途时生成 5 分钟有效的私有链接。每次生成都会记录管理员、会员号和用途。</p>
       <form class="studio-reset-form" data-admin-export-form>
-        <label>会员号 <input name="memberId" placeholder="R1001" required /></label><label>用途 <input name="purpose" value="印制相册家谱" required /></label><button class="text-link" type="submit">生成临时下载链接</button>
+        <label>会员号 <input name="memberId" placeholder="会员号" required /></label><label>用途 <input name="purpose" value="印制相册家谱" required /></label><button class="text-link" type="submit">生成临时下载链接</button>
       </form>
       <div class="admin-export-results" data-admin-export-results aria-live="polite"></div>
     </section>
@@ -80,10 +80,11 @@ import StudioFrame from '../../components/StudioFrame.astro';
         <div><span class="admin-section-label">私密名册</span><h3 id="admin-roster-title">现有会员</h3></div>
         <div class="admin-roster-actions"><a class="text-link" href="/admin/events">活动花絮管理 ↗</a><a class="text-link" href="/admin/stories">公开故事审核 ↗</a><button class="text-link" type="button" data-admin-refresh>刷新名册</button></div>
       </div>
+      <p data-admin-renewal-counts aria-live="polite"></p>
       <div class="admin-roster-filters" aria-label="筛选会员名册">
         <label>查找会员<input type="search" data-admin-search placeholder="会员号或姓名" /></label>
         <label>状态<select data-admin-status-filter><option value="all">全部状态</option><option value="active">有效</option><option value="suspended">暂停</option><option value="expired">届满</option></select></label>
-        <label class="admin-expiring-filter"><input type="checkbox" data-admin-expiring /> 只看 30 日内到期</label>
+        <label>到期提醒<select data-admin-expiring><option value="all">全部会籍</option><option value="soon">30 日内到期</option><option value="overdue">已过期</option></select></label>
       </div>
       <div class="admin-roster-wrap">
         <table>
