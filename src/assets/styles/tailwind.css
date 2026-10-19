@@ -328,6 +328,29 @@ h3 {
   display: inline-block;
   white-space: nowrap;
 }
+
+/* The English hero uses a longer two-line headline than the Chinese version. */
+@media (min-width: 801px) {
+  html[lang='en'] .hero-copy {
+    width: min(100%, 940px);
+    max-width: 940px;
+  }
+
+  html[lang='en'] .hero-copy h1 {
+    font-size: clamp(3rem, 4.6vw, 4.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  html[lang='en'] .hero-title-line {
+    display: block;
+    white-space: nowrap;
+  }
+}
+
+html[lang='en'] .hero-copy h1 em {
+  font-style: italic;
+}
 .hero-actions {
   margin-top: 34px;
   display: flex;
