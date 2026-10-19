@@ -11,7 +11,11 @@ const counterpart = lang === 'en' ? '/' : '/en/';
       <img src="/brand/RCSSLogo.png" alt="" class="brand-mark" />
       <span class="brand-wordmark"><strong>{lang === 'zh' ? '新加坡根缘文化学会' : 'Roots Culture Society of Singapore'}</strong><small>{lang === 'zh' ? 'Roots Culture Society of Singapore' : '新加坡根缘文化学会'}</small></span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">{lang === 'zh' ? '菜单' : 'Menu'}</button>
+    <div class="mobile-header-actions" aria-label={lang === 'zh' ? '快速入口' : 'Quick access'}>
+      <a class="mobile-member-login" href="/studio/login">{lang === 'zh' ? '会员登录' : 'Member login'}</a>
+      <a class="mobile-language-link" href={counterpart}>{lang === 'zh' ? 'EN' : '中文'}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">{lang === 'zh' ? '菜单' : 'Menu'}</button>
+    </div>
     <nav id="site-nav" class="site-nav" aria-label={lang === 'zh' ? '主要导航' : 'Main navigation'}>
       <a class="home-link" href={home}>{lang === 'zh' ? '首页' : 'Home'}</a>
       {nav.map((item) => item.key === 'about' ? <details class="nav-dropdown"><summary>{lang === 'zh' ? item.zh : item.en}</summary><div class="nav-submenu"><a href={pathFor(lang, 'about')}>{lang === 'zh' ? '学会使命' : 'Mission'}</a><a href={pathFor(lang, 'committee')}>{lang === 'zh' ? '执委会' : 'Committee'}</a><a href={pathFor(lang, 'records')}>{lang === 'zh' ? '会务记录' : 'Society records'}</a></div></details> : <a href={pathFor(lang, item.key as any)}>{lang === 'zh' ? item.zh : item.en}</a>)}
