@@ -194,14 +194,29 @@
    "name": "李",
    "traditional": "李",
    "pinyin": "Lǐ",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Lee"
+   ],
+   "junwang": [
+    "陇西郡",
+    "赵郡",
+    "渤海郡"
+   ],
+   "tanghao": [
+    "陇西堂",
+    "赵郡堂",
+    "姑臧堂",
+    "渤海堂",
+    "京兆堂",
+    "范阳堂"
+   ],
+   "origin": "李姓起源于河南，春秋战国时期扩散至周边地区。《史记·老子传》记载老子姓李名耳，正史将李耳视为李姓人物之首。",
+   "migration": "秦平定南越后李姓始入两广，唐初大批进入福建和海南，明代进入台湾；宋元明间人口主要由北方向东南迁移。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "新加坡李氏总会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -210,15 +225,32 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：李姓",
+     "url": "https://zh.wikipedia.org/zh-cn/%E6%9D%8E%E5%A7%93"
+    },
+    {
+     "title": "总理公署：李显龙出席新加坡李氏总会晚宴致辞",
+     "url": "https://www.pmo.gov.sg/newsroom/pm-lee-hsien-loong-singapore-lee-clan-association-gala-dinner/"
     }
    ],
    "id": "bjx-004-li",
    "order": 4,
    "simplified": "李",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "李耳（老子）",
+   "nanyang": "老子后裔多居甘肃陇西，海外李氏宗团传统上冠以“陇西”之名。新加坡李氏总会前身为1906年创立的李氏陇西公所，1951年改名陇西李氏总会，1976年改为现名。",
+   "notableFigures": [
+    {
+     "name": "李耳",
+     "note": "即老子，道家创始人"
+    },
+    {
+     "name": "李世绩",
+     "note": "原姓徐，获赐唐朝国姓改姓李"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -233,22 +265,85 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：李姓",
+      "detail": "罗马拼音表：新加坡、马来西亚作Lee",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9D%8E%E5%A7%93"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：李姓",
+      "detail": "郡望一节",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9D%8E%E5%A7%93"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：李姓",
+      "detail": "堂号一节（节选）",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9D%8E%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "总理公署：李显龙出席新加坡李氏总会晚宴致辞",
+      "detail": "李姓起源于河南；引《史记·老子传》",
+      "url": "https://www.pmo.gov.sg/newsroom/pm-lee-hsien-loong-singapore-lee-clan-association-gala-dinner/"
+     }
+    ],
+    "founder": [
+     {
+      "title": "总理公署：李显龙出席新加坡李氏总会晚宴致辞",
+      "detail": "正史明确指出李耳为李姓人物之首",
+      "url": "https://www.pmo.gov.sg/newsroom/pm-lee-hsien-loong-singapore-lee-clan-association-gala-dinner/"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：李姓",
+      "detail": "迁徙与分布一节",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9D%8E%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "总理公署：李显龙出席新加坡李氏总会晚宴致辞",
+      "detail": "李氏总会沿革及“陇西”命名缘由",
+      "url": "https://www.pmo.gov.sg/newsroom/pm-lee-hsien-loong-singapore-lee-clan-association-gala-dinner/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：李姓",
+      "detail": "来源及改姓一节提及之人物",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9D%8E%E5%A7%93"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "总理公署：李显龙出席新加坡李氏总会晚宴致辞",
+      "detail": "新加坡李氏总会",
+      "url": "https://www.pmo.gov.sg/newsroom/pm-lee-hsien-loong-singapore-lee-clan-association-gala-dinner/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -256,14 +351,20 @@
    "name": "周",
    "traditional": "周",
    "pinyin": "Zhōu",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Chew"
+   ],
+   "junwang": [
+    "汝南郡"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "源自周王室姬姓：秦灭周后，周平王后裔食邑汝坟（后划入汝南郡），亡国后以“周”为氏，成为汝南大姓。唐玄宗时为避讳“基”字，不少姬姓改姓周；北朝普氏、贺鲁氏等亦改姓周。",
+   "migration": "魏晋南北朝时期，因北方战乱与民族迁徙，周姓随其他华北居民向华南、华东迁移发展。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "周氏总会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -272,15 +373,44 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：周姓",
+     "url": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%A7%93"
+    },
+    {
+     "title": "SFCCA: Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
+    },
+    {
+     "title": "Wikipedia: Zhou (surname)",
+     "url": "https://en.wikipedia.org/wiki/Zhou_(surname)"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
     }
    ],
    "id": "bjx-005-zhou",
    "order": 5,
    "simplified": "周",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "周平王后裔（原为姬姓）",
+   "nanyang": "新加坡周氏总会（Chew Clan Association）成立于1953年，为新加坡宗乡会馆联合总会会员。",
+   "notableFigures": [
+    {
+     "name": "周亚夫",
+     "note": "西汉将领"
+    },
+    {
+     "name": "周瑜",
+     "note": "175–210，东吴将领"
+    },
+    {
+     "name": "周侗",
+     "note": "宋代箭术名家，岳飞之师"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -295,22 +425,98 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：周姓",
+      "detail": "信息框：新加坡拼写 Chew",
+      "url": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%A7%93"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "会馆英文名 Chew Clan Association",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：周姓",
+      "detail": "信息框郡望；来源一节称汝南周氏",
+      "url": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：周姓",
+      "detail": "来源·汉族与外族两节",
+      "url": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%A7%93"
+     },
+     {
+      "title": "Wikipedia: Zhou (surname)",
+      "detail": "Origin: descendants of King Ping of Zhou, originally surnamed Ji",
+      "url": "https://en.wikipedia.org/wiki/Zhou_(surname)"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：周姓",
+      "detail": "来源一节：周平王后代以周为氏",
+      "url": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%A7%93"
+     },
+     {
+      "title": "Wikipedia: Zhou (surname)",
+      "detail": "classical genealogy 一段",
+      "url": "https://en.wikipedia.org/wiki/Zhou_(surname)"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：周姓",
+      "detail": "来源·外族一节",
+      "url": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "周氏总会条目：成立年份1953",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "Chew Clan Association, established 1953",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "Wikipedia: Zhou (surname)",
+      "detail": "Notable people（Zhou Yafu, Zhou Yu, Zhou Tong）",
+      "url": "https://en.wikipedia.org/wiki/Zhou_(surname)"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会馆目录：周氏总会",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -318,11 +524,19 @@
    "name": "吴",
    "traditional": "吳",
    "pinyin": "Wú",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Goh",
+    "Ngoh",
+    "Ng",
+    "Wu"
+   ],
+   "junwang": [
+    "延陵郡",
+    "渤海郡"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "主要出自姬姓：周太王之子泰伯、仲雍南奔江南建立句吴，吴国为越所灭后子孙以国为氏；另有上古吴姓、颛顼时吴回及他族改姓等说。",
+   "migration": "泰伯、仲雍南下荆蛮，将中原文化带到江南；季札让国隐居延陵耕作，其后裔繁衍，构成今日吴姓的主体。",
    "generationPoems": [],
    "dialectGroups": [],
    "clanAssociations": [],
@@ -334,6 +548,14 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：吴姓",
+     "url": "https://zh.wikipedia.org/wiki/吴姓"
+    },
+    {
+     "title": "Wikipedia: Wu (surname)",
+     "url": "https://en.wikipedia.org/wiki/Wu_(surname)"
     }
    ],
    "id": "bjx-006-wu",
@@ -342,7 +564,20 @@
    "isCompound": false,
    "founder": "",
    "nanyang": "",
-   "notableFigures": [],
+   "notableFigures": [
+    {
+     "name": "泰伯",
+     "note": "周太王长子，句吴开创者"
+    },
+    {
+     "name": "仲雍",
+     "note": "周太王次子，继泰伯为君"
+    },
+    {
+     "name": "季札",
+     "note": "吴王寿梦之子，让国隐居延陵"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -357,19 +592,59 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：吴姓",
+      "detail": "各地写法：新加坡 Ngoh/Goh/Ng",
+      "url": "https://zh.wikipedia.org/wiki/吴姓"
+     },
+     {
+      "title": "Wikipedia: Wu (surname)",
+      "detail": "闽南语转写 Goh 等，列吴庆瑞（Goh Keng Swee）等新加坡人物",
+      "url": "https://en.wikipedia.org/wiki/Wu_(surname)"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：吴姓",
+      "detail": "郡望：延陵、渤海",
+      "url": "https://zh.wikipedia.org/wiki/吴姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：吴姓",
+      "detail": "起源一节",
+      "url": "https://zh.wikipedia.org/wiki/吴姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：吴姓",
+      "detail": "泰伯奔吴与季札居延陵",
+      "url": "https://zh.wikipedia.org/wiki/吴姓"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：吴姓",
+      "detail": "起源一节所述人物",
+      "url": "https://zh.wikipedia.org/wiki/吴姓"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
+    "origin": "verified",
     "founder": "needs_source",
-    "migration": "needs_source",
+    "migration": "verified",
     "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
     "clanAssociations": "needs_source"
@@ -380,14 +655,31 @@
    "name": "郑",
    "traditional": "鄭",
    "pinyin": "Zhèng",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Tay",
+    "Tee",
+    "Cheng"
+   ],
+   "junwang": [
+    "荥阳郡"
+   ],
+   "tanghao": [
+    "荥阳堂",
+    "博经堂",
+    "安远堂"
+   ],
+   "origin": "出自姬姓。周厉王少子友受封于郑，郑国后为韩国所灭，子孙散居陈、宋之间，以国为氏。另有出自子姓、鄚姓改郑及粟特人改姓等支脉。",
+   "migration": "族谱资料显示郑氏广布福建泉州、漳州、永春及广东潮阳、陆丰等地；永春桃源郑氏等支派后渡海迁台，如1835年郑文记自鹤浦渡台。",
    "generationPoems": [],
-   "dialectGroups": [],
-   "clanAssociations": [],
+   "dialectGroups": [
+    "闽南",
+    "潮州",
+    "广府"
+   ],
+   "clanAssociations": [
+    "Eng Yong Tong Tay Si Association",
+    "Kityang Tay Si Association"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -396,15 +688,36 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：郑姓",
+     "url": "https://zh.wikipedia.org/wiki/郑姓"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
     }
    ],
    "id": "bjx-007-zheng",
    "order": 7,
    "simplified": "郑",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "姬友（郑桓公，周厉王少子）",
+   "nanyang": "郑镛南渡暹罗经商，其子郑昭（郑信）后建立吞武里王朝。新加坡有荥阳堂郑氏总会等郑姓团体。",
+   "notableFigures": [
+    {
+     "name": "郑吉",
+     "note": "西汉西域都护，封安远侯"
+    },
+    {
+     "name": "郑玄",
+     "note": "东汉经学家，博通群经"
+    },
+    {
+     "name": "郑昭（郑信）",
+     "note": "暹罗吞武里王朝建立者"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -419,22 +732,97 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "罗马化拼写表，新加坡作 Tay/Tee（闽南语、潮语）、Cheng（粤语）",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "郡望",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "堂号一节，荥阳堂引《新唐书·宰相世系表》",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "起源一节，引《元和姓纂》《世本·氏姓篇》《朝野佥载》",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "起源一节，引《元和姓纂》",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "族谱字辈及渡台相关段落",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "泰国郑氏相关段落",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     },
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "Eng Yong Tong Tay Si Association（链接名为荥阳堂郑氏总会）",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "堂号及人物相关段落",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "dialectGroups": [
+     {
+      "title": "维基百科：郑姓",
+      "detail": "罗马化拼写表中新加坡拼法所标方言（闽南语、潮语、粤语）",
+      "url": "https://zh.wikipedia.org/wiki/郑姓"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "会员名录（英文名）",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
-    "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "dialectGroups": "verified",
+    "clanAssociations": "verified"
    }
   },
   {
@@ -442,14 +830,31 @@
    "name": "王",
    "traditional": "王",
    "pinyin": "Wáng",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Ong",
+    "Heng",
+    "Wong",
+    "Wang"
+   ],
+   "junwang": [
+    "太原郡",
+    "琅邪郡",
+    "汲郡",
+    "青州",
+    "北海郡",
+    "魏郡",
+    "京兆尹"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "王姓来源多元：一说出自周朝王族姬姓，以太子晋（王子乔）为始祖；一说商末比干后裔以王族之后为氏；一说出自妫姓，战国田安失济北王位后子孙改姓王。",
+   "migration": "秦末汉初王翦后代分迁山东琅琊与山西太原；唐末河南固始人王审知南下福建建立闽国，被视为开闽王氏始祖，宋元明时期王姓人口总体向东南迁移。",
    "generationPoems": [],
-   "dialectGroups": [],
-   "clanAssociations": [],
+   "dialectGroups": [
+    "福建"
+   ],
+   "clanAssociations": [
+    "开闽王氏总会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -458,15 +863,36 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：王姓",
+     "url": "https://zh.wikipedia.org/wiki/王姓"
+    },
+    {
+     "title": "Bukit Brown: Seh Ong Hill",
+     "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"
     }
    ],
    "id": "bjx-008-wang",
    "order": 8,
    "simplified": "王",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "王子乔（太子晋，姬姓王氏始祖）",
+   "nanyang": "新加坡福建王氏于1875年设立闽王祠，1944年改称闽王祠公会，1970年改为开闽王氏总会；宗族曾购置姓王山（Seh Ong Hill）作坟山，后于武吉巴督重建闽王祠。",
+   "notableFigures": [
+    {
+     "name": "王翦",
+     "note": "秦国名将"
+    },
+    {
+     "name": "王猛",
+     "note": "前秦丞相，属北海王氏"
+    },
+    {
+     "name": "王审知",
+     "note": "唐末南下福建，建立闽国"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -481,22 +907,85 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：王姓",
+      "detail": "各地写法：新加坡 Wang、Ong、Heng、Wong",
+      "url": "https://zh.wikipedia.org/wiki/王姓"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：王姓",
+      "detail": "郡望一节",
+      "url": "https://zh.wikipedia.org/wiki/王姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：王姓",
+      "detail": "来源一节（周王族说注明缺乏可靠佐证）",
+      "url": "https://zh.wikipedia.org/wiki/王姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：王姓",
+      "detail": "姬姓王氏以王子乔（太子晋）为始祖",
+      "url": "https://zh.wikipedia.org/wiki/王姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：王姓",
+      "detail": "王翦后裔分迁、开闽王氏、宋元明人口迁移",
+      "url": "https://zh.wikipedia.org/wiki/王姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "Bukit Brown: Seh Ong Hill",
+      "detail": "闽王祠（1875）、闽王祠公会（1944）、开闽王氏总会（1970）及姓王山沿革",
+      "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：王姓",
+      "detail": "郡望与迁徙相关人物",
+      "url": "https://zh.wikipedia.org/wiki/王姓"
+     }
+    ],
+    "dialectGroups": [
+     {
+      "title": "Bukit Brown: Seh Ong Hill",
+      "detail": "Singapore Hokkien Ong Clansmen General Association，福建王氏族人南来新加坡",
+      "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "Bukit Brown: Seh Ong Hill",
+      "detail": "Singapore Hokkien Ong Clansmen General Association（開閩王氏總會）",
+      "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
-    "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "dialectGroups": "verified",
+    "clanAssociations": "verified"
    }
   },
   {
@@ -566,14 +1055,35 @@
    "name": "陈",
    "traditional": "陳",
    "pinyin": "Chén",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
+   "romanizations": [
+    "Tan"
+   ],
+   "junwang": [
+    "颍川郡",
+    "汝南郡",
+    "下邳郡",
+    "广陵郡",
+    "东海郡",
+    "河南郡",
+    "武当郡",
+    "庐江郡",
+    "冯翊郡",
+    "京兆郡"
+   ],
+   "tanghao": [
+    "颍川堂",
+    "德星堂",
+    "世德堂",
+    "义门堂",
+    "聚德堂"
+   ],
+   "origin": "陈姓最早出自妫姓，为舜帝后裔。周武王灭商后封舜的后人胡公满于陈地，建立陈国，子孙以国为氏；此外亦有他姓及外族改姓为陈者。",
    "migration": "",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "保赤宫陈氏宗祠"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -582,15 +1092,36 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：陈姓",
+     "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+    },
+    {
+     "title": "Roots.gov.sg: Tan Si Chong Su",
+     "url": "https://www.roots.gov.sg/places/places-landing/places/national-monuments/tan-si-chong-su"
+    },
+    {
+     "title": "Wikipedia: Tan Si Chong Su",
+     "url": "https://en.wikipedia.org/wiki/Tan_Si_Chong_Su"
     }
    ],
    "id": "bjx-010-chen",
    "order": 10,
    "simplified": "陈",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "胡公满（陈胡公）",
+   "nanyang": "陈姓为新加坡、马来西亚第一大姓，星马闽南及潮州籍华人多拼作Tan。新加坡陈氏宗祠（保赤宫）为陈姓族人的祠堂，主要由陈金钟、陈明水出资兴建。",
+   "notableFigures": [
+    {
+     "name": "陈完",
+     "note": "陈国内乱时出奔齐国，子孙后改为田氏"
+    },
+    {
+     "name": "陈寔",
+     "note": "武当郡陈氏一支出自其后"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -605,22 +1136,88 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "各地写法：星马闽南及潮州籍华人多拼作Tan",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "郡望一节",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "堂号一节（节选）",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "来源一节，引《通志·氏族略》等",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "来源一节：周武王封胡公满于陈",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "分布与各地写法",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     },
+     {
+      "title": "Roots.gov.sg: Tan Si Chong Su",
+      "detail": "陈氏宗祠（保赤宫）简介及出资者",
+      "url": "https://www.roots.gov.sg/places/places-landing/places/national-monuments/tan-si-chong-su"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：陈姓",
+      "detail": "来源一节提及之人物",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%99%88%E5%A7%93"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "Roots.gov.sg: Tan Si Chong Su",
+      "detail": "陈氏宗祠，又称保赤宫",
+      "url": "https://www.roots.gov.sg/places/places-landing/places/national-monuments/tan-si-chong-su"
+     },
+     {
+      "title": "Wikipedia: Tan Si Chong Su",
+      "detail": "1876–1878年建成的陈姓宗祠",
+      "url": "https://en.wikipedia.org/wiki/Tan_Si_Chong_Su"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
     "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -938,14 +1535,33 @@
    "name": "杨",
    "traditional": "楊",
    "pinyin": "Yáng",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Yeo",
+    "Yong"
+   ],
+   "junwang": [
+    "弘农郡",
+    "天水郡",
+    "河内郡"
+   ],
+   "tanghao": [
+    "关西堂",
+    "四知堂"
+   ],
+   "origin": "多源于古杨国（今山西洪洞一带）。一说周康王封唐叔虞次子为杨侯，后裔以国为姓；另一说出自姬姓，晋国羊舌氏之叔向（杨誉）封于杨邑，以邑为氏。",
+   "migration": "伯侨后代立足华阴、弘农一带，再向各地开基繁衍，成为杨氏发展的主流。",
    "generationPoems": [],
-   "dialectGroups": [],
-   "clanAssociations": [],
+   "dialectGroups": [
+    "福建",
+    "潮州"
+   ],
+   "clanAssociations": [
+    "Yang Clan General Association",
+    "Hokkien Yeo See Association",
+    "Kheng Zai Yeo Clan Association",
+    "Teochew Hong Long Yeo Clan Association",
+    "Teo Ann Sian Luck Heo Yeo Clan Society"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -954,15 +1570,44 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：杨姓",
+     "url": "https://zh.wikipedia.org/wiki/杨姓"
+    },
+    {
+     "title": "BiblioAsia: A Glimpse of His Past: Yeo Chan Boon (1881–1967)",
+     "url": "https://biblioasia.nlb.gov.sg/vol-4/issue4/jan-2009/yeo-chan-boon/"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
     }
    ],
    "id": "bjx-016-yang",
    "order": 16,
    "simplified": "杨",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "伯侨（尊为杨姓一世祖）",
+   "nanyang": "新加坡有杨氏总会及潮州鸿陇杨氏公会等杨姓团体；杨缵文（Yeo Chan Boon）曾任这两个团体的赞助人。",
+   "notableFigures": [
+    {
+     "name": "伯侨",
+     "note": "晋武公次子，尊为杨姓一世祖"
+    },
+    {
+     "name": "叔向（杨誉）",
+     "note": "春秋晋国大夫，封于杨邑"
+    },
+    {
+     "name": "杨坚",
+     "note": "隋文帝"
+    },
+    {
+     "name": "杨广",
+     "note": "隋炀帝"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -977,22 +1622,92 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "罗马化拼写表，新加坡作 Yeo、Yong",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "郡望",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "堂号",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "来源一节",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "来源一节；另有以唐叔虞次子为首次受姓者之说",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "来源一节",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "BiblioAsia: A Glimpse of His Past: Yeo Chan Boon (1881–1967)",
+      "detail": "提及 Yang Clan General Association 与 Singapore Teochew Hong Long Yeo Clan Association",
+      "url": "https://biblioasia.nlb.gov.sg/vol-4/issue4/jan-2009/yeo-chan-boon/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：杨姓",
+      "detail": "来源及人物相关段落",
+      "url": "https://zh.wikipedia.org/wiki/杨姓"
+     }
+    ],
+    "dialectGroups": [
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "会员名称含 Hokkien（福建）、Teochew（潮州）的杨氏团体",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "会员名录（英文名）",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
-    "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "dialectGroups": "verified",
+    "clanAssociations": "verified"
    }
   },
   {
@@ -1186,14 +1901,33 @@
    "name": "许",
    "traditional": "許",
    "pinyin": "Xǔ",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
+   "romanizations": [
+    "Khoh",
+    "Koh",
+    "Kho",
+    "Hee"
+   ],
+   "junwang": [
+    "汝南郡",
+    "高阳郡",
+    "河南郡",
+    "太原郡",
+    "会稽郡",
+    "颍川郡",
+    "安陆郡",
+    "河内郡"
+   ],
+   "tanghao": [
+    "高阳堂",
+    "龙江堂"
+   ],
+   "origin": "许姓出自姜姓，以国为氏，为炎帝神农氏后裔，与齐氏同祖。周成王封许文叔为诸侯（《清华简·封许之命》载其事），许国于战国初为楚所灭，子孙以国为氏。另有一说称尧时隐士许由的后代亦称许氏。",
    "migration": "",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "新加坡许氏总会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -1202,15 +1936,52 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：许姓",
+     "url": "https://zh.wikipedia.org/wiki/许姓"
+    },
+    {
+     "title": "Singapore Khoh Clan Association",
+     "url": "http://www.khohclan.org.sg/"
+    },
+    {
+     "title": "新加坡许氏总会官网",
+     "url": "http://www.khohclan.org.sg/cn/home.html"
+    },
+    {
+     "title": "Wikipedia: Xu (surname 許)",
+     "url": "https://en.wikipedia.org/wiki/Xu_(surname_許)"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
     }
    ],
    "id": "bjx-020-xu",
    "order": 20,
    "simplified": "许",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "许文叔（周成王所封许国国君）",
+   "nanyang": "1936年许氏宗亲在新加坡先后成立高阳公会与许家协进社，日据期间停止活动；1951年两会合并为新加坡许氏总会，1953年注册，会所位于厦门街（Amoy Street）81号。",
+   "notableFigures": [
+    {
+     "name": "许由",
+     "note": "传说中尧时贤士"
+    },
+    {
+     "name": "许褚",
+     "note": "三国曹魏将领"
+    },
+    {
+     "name": "许浑",
+     "note": "唐代诗人"
+    },
+    {
+     "name": "许衡",
+     "note": "元代儒学家、教育家"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -1225,22 +1996,93 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：许姓",
+      "detail": "姓氏信息框“新加坡”栏：Hee/Kho/Koh/Khoh",
+      "url": "https://zh.wikipedia.org/wiki/许姓"
+     },
+     {
+      "title": "Singapore Khoh Clan Association",
+      "detail": "官网英文名称",
+      "url": "http://www.khohclan.org.sg/"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：许姓",
+      "detail": "郡望一节",
+      "url": "https://zh.wikipedia.org/wiki/许姓"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：许姓",
+      "detail": "堂号一节",
+      "url": "https://zh.wikipedia.org/wiki/许姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：许姓",
+      "detail": "来源一节，引《清华简·封许之命》",
+      "url": "https://zh.wikipedia.org/wiki/许姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：许姓",
+      "detail": "来源一节：周成王封许文叔为诸侯",
+      "url": "https://zh.wikipedia.org/wiki/许姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡许氏总会官网",
+      "detail": "中文主页会史",
+      "url": "http://www.khohclan.org.sg/cn/home.html"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：许姓",
+      "detail": "来源一节（许由）",
+      "url": "https://zh.wikipedia.org/wiki/许姓"
+     },
+     {
+      "title": "Wikipedia: Xu (surname 許)",
+      "detail": "People list (Xu Chu, Xu Hun, Xu Heng)",
+      "url": "https://en.wikipedia.org/wiki/Xu_(surname_許)"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡许氏总会官网",
+      "detail": "中文主页会史",
+      "url": "http://www.khohclan.org.sg/cn/home.html"
+     },
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "许氏总会条目，成立年份1953",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
     "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -1248,14 +2090,23 @@
    "name": "何",
    "traditional": "何",
    "pinyin": "Hé",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Ho",
+    "Hor"
+   ],
+   "junwang": [
+    "庐江郡"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "据《元和姓纂》，周成王弟唐叔虞后裔韩王安为秦所灭，子孙散居江淮间，当地口音读“韩”为“何”，遂为何氏，故有“何韩一家”之说。另有冒姓（如东汉何苗本姓朱）、东夷、鲜卑贺拔氏改姓等来源。",
+   "migration": "西晋末年中原何氏有移居福建者，为“永嘉入闽八族”之一；唐高宗时固始人何嗣韩随陈元光入闽，唐僖宗时又有固始人随王潮、王审之入闽。南宋至元末明初，何氏有迁往广东者。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "庐江何氏总会",
+    "海南何氏公会",
+    "茶阳何氏公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -1264,15 +2115,40 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：何姓",
+     "url": "https://zh.wikipedia.org/wiki/何姓"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+    },
+    {
+     "title": "Wikipedia: He (surname)",
+     "url": "https://en.wikipedia.org/wiki/He_(surname)"
     }
    ],
    "id": "bjx-021-he",
    "order": 21,
    "simplified": "何",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "韩瑊（后世称何瑊，据何氏族谱）",
+   "nanyang": "新加坡宗乡会馆联合总会名录收有多个何姓宗亲团体，如庐江何氏总会（1945年成立）、海南何氏公会（1948年成立）、茶阳何氏公会（1964年成立）。",
+   "notableFigures": [
+    {
+     "name": "何进",
+     "note": "东汉大将军"
+    },
+    {
+     "name": "何皇后",
+     "note": "东汉灵帝皇后，何进之妹"
+    },
+    {
+     "name": "何苗",
+     "note": "东汉人，本姓朱，冒姓何"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -1287,22 +2163,83 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：何姓",
+      "detail": "姓氏信息框“新加坡”栏：Ho/Hor",
+      "url": "https://zh.wikipedia.org/wiki/何姓"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：何姓",
+      "detail": "姓氏信息框“郡望”栏",
+      "url": "https://zh.wikipedia.org/wiki/何姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：何姓",
+      "detail": "渊源一节，引《元和姓纂》《汉书·五行志》",
+      "url": "https://zh.wikipedia.org/wiki/何姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：何姓",
+      "detail": "渊源一节，引何氏族谱及何颙《湞阳水木记》",
+      "url": "https://zh.wikipedia.org/wiki/何姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：何姓",
+      "detail": "导言及迁徙一节",
+      "url": "https://zh.wikipedia.org/wiki/何姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "各何氏团体条目及成立年份（索引名称省略“新加坡”字样）",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "Wikipedia: He (surname)",
+      "detail": "Notable people list (He Jin, Empress He)",
+      "url": "https://en.wikipedia.org/wiki/He_(surname)"
+     },
+     {
+      "title": "维基百科：何姓",
+      "detail": "渊源一节（何苗）",
+      "url": "https://zh.wikipedia.org/wiki/何姓"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会员团体名录（索引名称省略“新加坡”字样）",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -1434,14 +2371,33 @@
    "name": "张",
    "traditional": "張",
    "pinyin": "Zhāng",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Teo",
+    "Tiu",
+    "Tio",
+    "Teoh",
+    "Cheong",
+    "Chong",
+    "Zhang"
+   ],
+   "junwang": [
+    "清河郡",
+    "安定郡",
+    "敦煌郡",
+    "武威郡",
+    "范阳郡",
+    "南阳郡",
+    "吴郡"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "相传黄帝之孙挥任弓正，观弧星而始制弓矢，因以张为姓；另有出自春秋晋国大夫解张（字张侯）、源自长姓（先秦张、长通假）及他姓、他族改姓等说。",
+   "migration": "春秋时晋国是张姓发展的重要地区，河东解邑张城（今山西临猗西）为发祥地之一；三家分晋后解张后裔分居韩、赵、魏，逐渐形成山西、河北、河南各支张氏。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "新加坡张氏总会",
+    "清河张氏公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -1450,15 +2406,40 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：张姓",
+     "url": "https://zh.wikipedia.org/wiki/张姓"
+    },
+    {
+     "title": "Wikipedia: Zhang (surname)",
+     "url": "https://en.wikipedia.org/wiki/Zhang_(surname)"
+    },
+    {
+     "title": "新加坡总理公署：SM Teo Chee Hean at Chang Clan General Association and Chin Ho Teo Clan Association anniversary dinner",
+     "url": "https://www.pmo.gov.sg/Newsroom/SM-Teo-Chee-Hean-Chang-Clan-General-Association-and-Chin-Ho-Teo-Clan-Association-anniversary-dinner"
     }
    ],
    "id": "bjx-024-zhang",
    "order": 24,
    "simplified": "张",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "挥（黄帝之孙，一说第五子）",
+   "nanyang": "新加坡设有新加坡张氏总会与清河张氏公会；2022年两会分别庆祝成立85周年和67周年。",
+   "notableFigures": [
+    {
+     "name": "张良",
+     "note": "韩国贵族后裔，汉朝开国功臣"
+    },
+    {
+     "name": "张辽",
+     "note": "三国曹魏名将，原姓聂"
+    },
+    {
+     "name": "解张",
+     "note": "春秋晋国大夫，字张侯，部分张姓奉为先祖"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -1473,22 +2454,83 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：张姓",
+      "detail": "各地写法：新加坡 Zhang、Tiu/Tio/Teoh、Teo、Cheong、Chong",
+      "url": "https://zh.wikipedia.org/wiki/张姓"
+     },
+     {
+      "title": "Wikipedia: Zhang (surname)",
+      "detail": "Teo、Chong 为新加坡华人常见姓氏拼写",
+      "url": "https://en.wikipedia.org/wiki/Zhang_(surname)"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：张姓",
+      "detail": "郡望：清河张氏最知名，另列安定、敦煌、武威、范阳、南阳、吴郡",
+      "url": "https://zh.wikipedia.org/wiki/张姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：张姓",
+      "detail": "起源一节",
+      "url": "https://zh.wikipedia.org/wiki/张姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：张姓",
+      "detail": "起源一节：黄帝孙挥制弓矢，因姓张氏，清河张氏以此为祖",
+      "url": "https://zh.wikipedia.org/wiki/张姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：张姓",
+      "detail": "晋国解邑张城及三家分晋后的分布",
+      "url": "https://zh.wikipedia.org/wiki/张姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡总理公署：SM Teo Chee Hean at Chang Clan General Association and Chin Ho Teo Clan Association anniversary dinner",
+      "detail": "2022年11月23日致辞，85周年及67周年纪念",
+      "url": "https://www.pmo.gov.sg/Newsroom/SM-Teo-Chee-Hean-Chang-Clan-General-Association-and-Chin-Ho-Teo-Clan-Association-anniversary-dinner"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：张姓",
+      "detail": "起源及人物相关段落",
+      "url": "https://zh.wikipedia.org/wiki/张姓"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡总理公署：SM Teo Chee Hean at Chang Clan General Association and Chin Ho Teo Clan Association anniversary dinner",
+      "detail": "Singapore Chang Clan General Association（新加坡张氏总会）、Chin Ho Teo Clan Association（清河张氏公会）",
+      "url": "https://www.pmo.gov.sg/Newsroom/SM-Teo-Chee-Hean-Chang-Clan-General-Association-and-Chin-Ho-Teo-Clan-Association-anniversary-dinner"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -2054,14 +3096,27 @@
    "name": "谢",
    "traditional": "謝",
    "pinyin": "Xiè",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Seah",
+    "Sia",
+    "Chia"
+   ],
+   "junwang": [
+    "陈留郡"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "最早起源于古代任姓谢国，任姓相传为黄帝之后，谢国后裔以国为氏。",
+   "migration": "魏晋时陈郡谢氏南迁，部分经会稽入闽南泉州、漳州；唐末固始县令谢之郡随王潮、王审知入闽定居泉州；宋元以后江西谢姓客家人进入闽西、粤东拓垦。",
    "generationPoems": [],
-   "dialectGroups": [],
-   "clanAssociations": [],
+   "dialectGroups": [
+    "闽南",
+    "潮州",
+    "客家"
+   ],
+   "clanAssociations": [
+    "Chia General Association",
+    "Chia (Pow Soo) Hakka Clan Association"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -2070,6 +3125,18 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：谢姓",
+     "url": "https://zh.wikipedia.org/wiki/谢姓"
+    },
+    {
+     "title": "Roots.gov.sg: Chinatown Clans & Associations Trail",
+     "url": "https://www.roots.gov.sg/places/places-landing/trails/chinatown-clans-associations-trail"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
     }
    ],
    "id": "bjx-034-xie",
@@ -2077,8 +3144,21 @@
    "simplified": "谢",
    "isCompound": false,
    "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "nanyang": "宋代泉州“金鱼谢氏”后裔有人迁往台湾、南洋等地。新加坡谢氏总会成立于1929年，1969年会所迁至 Teo Hong Road。",
+   "notableFigures": [
+    {
+     "name": "谢之郡",
+     "note": "唐末固始县令，随王潮、王审知入闽"
+    },
+    {
+     "name": "谢仲规",
+     "note": "北宋福建转运使，家族称“金鱼谢氏”"
+    },
+    {
+     "name": "谢枋得",
+     "note": "宋末忠臣"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -2093,22 +3173,88 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "罗马化拼写表，新加坡作 Seah/Sia（闽南语）、Chia（潮语）",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "郡望",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "起源一节，引《世本》《国语·晋语四》《潜夫论·志氏姓》",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "迁徙相关段落",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "金鱼谢氏段落",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     },
+     {
+      "title": "Roots.gov.sg: Chinatown Clans & Associations Trail",
+      "detail": "Chia General Association 条目",
+      "url": "https://www.roots.gov.sg/places/places-landing/trails/chinatown-clans-associations-trail"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "迁徙相关段落",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     }
+    ],
+    "dialectGroups": [
+     {
+      "title": "维基百科：谢姓",
+      "detail": "罗马化拼写表中新加坡拼法所标方言（闽南语、潮语）",
+      "url": "https://zh.wikipedia.org/wiki/谢姓"
+     },
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "Chia (Pow Soo) Hakka Clan Association（客家）",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "会员名录（英文名）",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
+    "origin": "verified",
     "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
-    "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "dialectGroups": "verified",
+    "clanAssociations": "verified"
    }
   },
   {
@@ -4596,14 +5742,36 @@
    "name": "罗",
    "traditional": "羅",
    "pinyin": "Luó",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Lo",
+    "Lor",
+    "Law",
+    "Loh"
+   ],
+   "junwang": [
+    "豫章郡",
+    "长沙郡",
+    "襄阳郡"
+   ],
+   "tanghao": [
+    "豫章堂",
+    "长沙堂",
+    "昭陵堂",
+    "越国堂",
+    "尊尧堂",
+    "尊敬堂",
+    "崇文堂",
+    "崇彝堂",
+    "崇本堂",
+    "思本堂"
+   ],
+   "origin": "主要出自妘姓，为祝融后裔：据《通志·氏族略》，周代有罗国，初封宜城，后迁枝江，春秋时为楚所灭，国人以国名为氏。另有源自周代掌管捕养禽鸟的官职“罗氏”，以及北魏叱罗氏等少数民族改姓。",
+   "migration": "罗国遗民周末居于长沙。罗姓历史上是中国南方大姓之一，在客家、湖湘、巴蜀、江右等民系中比例较高，广府、闽海民系中也有不少。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "罗氏公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -4612,6 +5780,22 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：罗姓",
+     "url": "https://zh.wikipedia.org/wiki/%E7%BE%85%E5%A7%93"
+    },
+    {
+     "title": "SFCCA: Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+    },
+    {
+     "title": "Wikipedia: Luo (surname)",
+     "url": "https://en.wikipedia.org/wiki/Luo_(surname)"
     }
    ],
    "id": "bjx-075-luo",
@@ -4619,8 +5803,17 @@
    "simplified": "罗",
    "isCompound": false,
    "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "nanyang": "新加坡罗氏公会（Loh Clan Association）成立于1950年，为新加坡宗乡会馆联合总会会员。",
+   "notableFigures": [
+    {
+     "name": "罗贯中",
+     "note": "元明之际作家"
+    },
+    {
+     "name": "罗香林",
+     "note": "1906–1978，客家语言与文化研究学者"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -4635,22 +5828,88 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：罗姓",
+      "detail": "信息框：新加坡拼写 Lo/Lor/Law",
+      "url": "https://zh.wikipedia.org/wiki/%E7%BE%85%E5%A7%93"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "会馆英文名 Loh Clan Association",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：罗姓",
+      "detail": "郡望堂号·郡望一节",
+      "url": "https://zh.wikipedia.org/wiki/%E7%BE%85%E5%A7%93"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：罗姓",
+      "detail": "郡望堂号·堂号一节",
+      "url": "https://zh.wikipedia.org/wiki/%E7%BE%85%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：罗姓",
+      "detail": "来源一节，引《通志·氏族略·以国为氏》《魏书·官氏志》",
+      "url": "https://zh.wikipedia.org/wiki/%E7%BE%85%E5%A7%93"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：罗姓",
+      "detail": "来源及分布两节",
+      "url": "https://zh.wikipedia.org/wiki/%E7%BE%85%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "罗氏公会条目：成立年份1950",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "Loh Clan Association, established 1950",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "Wikipedia: Luo (surname)",
+      "detail": "Notable people 列表（Luo Guanzhong; Lo Hsiang-lin）",
+      "url": "https://en.wikipedia.org/wiki/Luo_(surname)"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会馆目录：罗氏公会",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
     "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -5898,14 +7157,36 @@
    "name": "黄",
    "traditional": "黃",
    "pinyin": "Huáng",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Ng",
+    "Wee",
+    "Ooi",
+    "Oei",
+    "Wong",
+    "Huang"
+   ],
+   "junwang": [
+    "江夏郡",
+    "南安郡",
+    "濮阳郡",
+    "东阳郡",
+    "安定郡",
+    "上谷郡"
+   ],
+   "tanghao": [
+    "江夏堂",
+    "紫云堂",
+    "燕山堂",
+    "四德堂",
+    "千顷堂"
+   ],
+   "origin": "黄姓主要出自嬴姓黄国（《后汉书·郡国志》称“故黄国，嬴姓”），黄国灭亡后，国人不忘故国，以黄为氏。",
+   "migration": "据《三山志》《闽书》，西晋永嘉衣冠南渡时黄氏为入闽八姓之一，唐末黄敦等随王潮、王审知入闽；广府黄氏多由江夏经南雄珠玑巷散居珠江三角洲。明清以后黄氏迁往东南亚各地。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "新加坡黄氏总会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -5914,6 +7195,14 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：黄姓",
+     "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+    },
+    {
+     "title": "总理公署：黄循财出席黄氏总会新大厦揭幕仪式致辞",
+     "url": "https://www.pmo.gov.sg/newsroom/dpm-lawrence-wong-at-official-opening-of-huang-shi-zong-hui-building/"
     }
    ],
    "id": "bjx-096-huang",
@@ -5921,8 +7210,21 @@
    "simplified": "黄",
    "isCompound": false,
    "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "nanyang": "新加坡黄氏总会成立于1924年，是新加坡历史较悠久的宗乡会馆之一，自1952年起以江夏堂为会所。新加坡的Huang、Wong、Ng、Wee等拼写同属黄姓。",
+   "notableFigures": [
+    {
+     "name": "黄歇",
+     "note": "楚考烈王时任令尹，封春申君"
+    },
+    {
+     "name": "黄霸",
+     "note": "西汉丞相"
+    },
+    {
+     "name": "黄香",
+     "note": "东汉江夏安陆人，以孝著称"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -5937,22 +7239,83 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：黄姓",
+      "detail": "写法表：新加坡华语Huang、泉州/潮州音Ng、漳州音/海南话Wee/Ooi/Oei、粤语Wong",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+     },
+     {
+      "title": "总理公署：黄循财出席黄氏总会新大厦揭幕仪式致辞",
+      "detail": "Huang、Wong、Ng、Wee同为黄姓",
+      "url": "https://www.pmo.gov.sg/newsroom/dpm-lawrence-wong-at-official-opening-of-huang-shi-zong-hui-building/"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：黄姓",
+      "detail": "郡望一节（江夏为主要郡望）",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：黄姓",
+      "detail": "堂号一节（节选）",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：黄姓",
+      "detail": "来源一节，引《后汉书·郡国志》",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：黄姓",
+      "detail": "迁徙一节，引《三山志》《闽书》",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "总理公署：黄循财出席黄氏总会新大厦揭幕仪式致辞",
+      "detail": "黄氏总会成立于1924年，江夏堂1952年起为会所",
+      "url": "https://www.pmo.gov.sg/newsroom/dpm-lawrence-wong-at-official-opening-of-huang-shi-zong-hui-building/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：黄姓",
+      "detail": "历史人物",
+      "url": "https://zh.wikipedia.org/zh-cn/%E9%BB%84%E5%A7%93"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "总理公署：黄循财出席黄氏总会新大厦揭幕仪式致辞",
+      "detail": "新加坡黄氏总会",
+      "url": "https://www.pmo.gov.sg/newsroom/dpm-lawrence-wong-at-official-opening-of-huang-shi-zong-hui-building/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
     "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -7882,14 +9245,21 @@
    "name": "梁",
    "traditional": "梁",
    "pinyin": "Liáng",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Leong"
+   ],
+   "junwang": [
+    "安定郡"
+   ],
    "tanghao": [],
-   "origin": "",
+   "origin": "梁姓出自嬴姓，以国为氏。据《通志·氏族略》，周平王时秦仲伐西戎有功，其少子梁伯康受封于夏阳梁山（今陕西韩城南）；春秋时梁国为秦所灭，其后有梁氏。",
    "migration": "",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "星洲梁氏总会",
+    "梁氏公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -7898,15 +9268,36 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "Wikipedia: Liang (surname)",
+     "url": "https://en.wikipedia.org/wiki/Liang_(surname)"
+    },
+    {
+     "title": "维基百科：梁姓",
+     "url": "https://zh.wikipedia.org/wiki/梁姓"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
     }
    ],
    "id": "bjx-128-liang",
    "order": 128,
    "simplified": "梁",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "梁伯康（秦仲少子）",
+   "nanyang": "新加坡宗乡会馆联合总会名录收有梁氏公会（1932年成立）与星洲梁氏总会（1949年成立）。",
+   "notableFigures": [
+    {
+     "name": "梁诚",
+     "note": "清朝驻美国公使"
+    },
+    {
+     "name": "梁启超",
+     "note": "近代学者、思想家、报人、改革家"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -7921,22 +9312,71 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "Wikipedia: Liang (surname)",
+      "detail": "Transliteration table: Leong used in Singapore",
+      "url": "https://en.wikipedia.org/wiki/Liang_(surname)"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：梁姓",
+      "detail": "姓氏信息框“郡望”栏",
+      "url": "https://zh.wikipedia.org/wiki/梁姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：梁姓",
+      "detail": "起源一节，引《通志·氏族略·以国为氏》",
+      "url": "https://zh.wikipedia.org/wiki/梁姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：梁姓",
+      "detail": "起源一节",
+      "url": "https://zh.wikipedia.org/wiki/梁姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "梁氏团体条目及成立年份",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "Wikipedia: Liang (surname)",
+      "detail": "Notable people list",
+      "url": "https://en.wikipedia.org/wiki/Liang_(surname)"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会员团体名录（索引名称省略“新加坡”字样）",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
     "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -8874,14 +10314,25 @@
    "name": "郭",
    "traditional": "郭",
    "pinyin": "Guō",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
+   "romanizations": [
+    "Quek",
+    "Kuek",
+    "Koay",
+    "Kwek"
+   ],
+   "junwang": [
+    "太原郡"
+   ],
+   "tanghao": [
+    "汾阳堂"
+   ],
+   "origin": "郭姓来源多元：一说出自姬姓虢国，古时“郭”“虢”相通，东虢叔裔孙序受封于阳曲，号“郭公”，后代以郭为氏；另据《风俗通义》，有因居于外城（郭）而以郭为氏者。《姓氏考略》并载夏有郭支、商有郭崇。",
    "migration": "",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "汾阳郭氏公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -8890,15 +10341,44 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：郭姓",
+     "url": "https://zh.wikipedia.org/wiki/郭姓"
+    },
+    {
+     "title": "Wikipedia: Guo (surname)",
+     "url": "https://en.wikipedia.org/wiki/Guo"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
     }
    ],
    "id": "bjx-144-guo",
    "order": 144,
    "simplified": "郭",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "虢叔裔孙序（号虢公，又称郭公）",
+   "nanyang": "新加坡汾阳郭氏公会成立于1940年，为新加坡宗乡会馆联合总会会员团体。",
+   "notableFigures": [
+    {
+     "name": "郭子仪",
+     "note": "唐代将领，平定安史之乱"
+    },
+    {
+     "name": "郭守敬",
+     "note": "元代天文学家、工程师、数学家"
+    },
+    {
+     "name": "郭璞",
+     "note": "东晋文学家、学者"
+    },
+    {
+     "name": "郭熙",
+     "note": "宋代画家"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -8913,22 +10393,83 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：郭姓",
+      "detail": "姓氏信息框“新加坡”栏：Kuek/Koay/Quek",
+      "url": "https://zh.wikipedia.org/wiki/郭姓"
+     },
+     {
+      "title": "Wikipedia: Guo (surname)",
+      "detail": "Infobox variants: Hokkien Kwek, Quek, Koay",
+      "url": "https://en.wikipedia.org/wiki/Guo"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：郭姓",
+      "detail": "姓氏信息框“郡望”栏",
+      "url": "https://zh.wikipedia.org/wiki/郭姓"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：郭姓",
+      "detail": "姓氏信息框“堂号”栏；内湖郭氏古宅山墙题“汾阳”堂号",
+      "url": "https://zh.wikipedia.org/wiki/郭姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：郭姓",
+      "detail": "来源一节，引《风俗通义》《姓氏考略》",
+      "url": "https://zh.wikipedia.org/wiki/郭姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：郭姓",
+      "detail": "来源一节第三说（出自姬姓虢国）",
+      "url": "https://zh.wikipedia.org/wiki/郭姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "汾阳郭氏公会条目，成立年份1940（目录索引名称省略“新加坡”字样）",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "Wikipedia: Guo (surname)",
+      "detail": "Notable people list",
+      "url": "https://en.wikipedia.org/wiki/Guo"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会员团体名录（索引名称省略“新加坡”字样）",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
     "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -9060,11 +10601,25 @@
    "name": "林",
    "traditional": "林",
    "pinyin": "Lín",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Lim",
+    "Lam",
+    "Lin"
+   ],
+   "junwang": [
+    "西河郡",
+    "南安郡",
+    "下邳郡"
+   ],
+   "tanghao": [
+    "西河堂",
+    "九牧堂",
+    "济南堂",
+    "忠孝堂",
+    "九龙堂"
+   ],
+   "origin": "林姓一说出自子姓，商朝比干遗腹子生于山林，周武王赐名林坚，子孙以林为氏；另据《通志·氏族略》，周平王庶子开字林，其后以祖父之字为氏。亦有鲜卑等族改姓为林者。",
+   "migration": "东晋初年林禄入闽，出守晋安郡（今福州一带），后衍出“九牧林”等重要分支；今林姓主要分布于福建、广东两省。",
    "generationPoems": [],
    "dialectGroups": [],
    "clanAssociations": [],
@@ -9076,15 +10631,32 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：林姓",
+     "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
     }
    ],
    "id": "bjx-147-lin",
    "order": 147,
    "simplified": "林",
    "isCompound": false,
-   "founder": "",
+   "founder": "林坚（比干之子）",
    "nanyang": "",
-   "notableFigures": [],
+   "notableFigures": [
+    {
+     "name": "比干",
+     "note": "商朝宗室，因直谏纣王被杀"
+    },
+    {
+     "name": "林坚",
+     "note": "比干遗腹子，被视为林姓始祖"
+    },
+    {
+     "name": "林禄",
+     "note": "东晋初年入闽，出守晋安郡"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -9099,19 +10671,68 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "各地写法表：新加坡华语Lin、闽南语/客语/潮州话Lim、粤语Lam",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "郡望一节",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "堂号一节（节选）",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "来源一节，姬姓一支引《通志·氏族略》",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "来源一节：比干遗腹子坚为林姓始祖",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "郡望（九牧林）及分布一节",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：林姓",
+      "detail": "来源及郡望一节提及之人物",
+      "url": "https://zh.wikipedia.org/zh-cn/%E6%9E%97%E5%A7%93"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
     "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
     "clanAssociations": "needs_source"
@@ -9308,14 +10929,23 @@
    "name": "邱",
    "traditional": "邱",
    "pinyin": "Qiū",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Khoo",
+    "Chiu"
+   ],
+   "junwang": [
+    "河南郡",
+    "吴兴郡"
+   ],
    "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "origin": "邱与丘同源，起源于周代山东临淄：姜太公受封于齐、建都营丘，田氏代齐后部分姜齐后裔以“营丘”之“丘”为氏。清雍正三年（1725年）诏令避孔子名讳，华北多数丘氏加“邑”旁改为邱。",
+   "migration": "晋代“八姓入闽”时，少部分丘氏迁入福建、广东，居莆田、蕉岭，成为闽粤丘氏籍贯地，后又有部分迁往香港、台湾等地。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "丘（邱）氏公会",
+    "曾邱公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -9324,15 +10954,40 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：邱姓",
+     "url": "https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A7%93"
+    },
+    {
+     "title": "SFCCA: Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
+    },
+    {
+     "title": "维基百科：丘姓",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%98%E5%A7%93"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
     }
    ],
    "id": "bjx-151-qiu",
    "order": 151,
    "simplified": "邱",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "姜太公（姜尚）后裔，以“营丘”之“丘”为氏",
+   "nanyang": "新加坡丘（邱）氏公会（Chiu (Khoo) Shih Association）成立于1968年；另有1948年成立的曾邱公会（Chan Khoo Kong Huay），均为新加坡宗乡会馆联合总会会员。",
+   "notableFigures": [
+    {
+     "name": "丘行恭",
+     "note": "其支出自鲜卑丘敦氏，后代为西北望族"
+    },
+    {
+     "name": "丘大林",
+     "note": "唐朝将军，韩国平海丘氏始祖"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -9347,22 +11002,88 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：邱姓",
+      "detail": "信息框：新加坡拼写 Khoo",
+      "url": "https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A7%93"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "会馆英文名 Chiu (Khoo) Shih Association",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：邱姓",
+      "detail": "信息框郡望",
+      "url": "https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：邱姓",
+      "detail": "汉族的邱姓一节",
+      "url": "https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A7%93"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：邱姓",
+      "detail": "汉族的邱姓一节：姜齐后代以营丘之丘为氏",
+      "url": "https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A7%93"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：丘姓",
+      "detail": "来源一节：八姓入闽、莆田与蕉岭",
+      "url": "https://zh.wikipedia.org/wiki/%E4%B8%98%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "丘（邱）氏公会成立于1968年；曾邱公会成立于1948年",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "Chiu (Khoo) Shih Association; Chan Khoo Kong Huay",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：邱姓",
+      "detail": "汉族的邱姓及朝鲜族的邱姓两节",
+      "url": "https://zh.wikipedia.org/wiki/%E9%82%B1%E5%A7%93"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会馆目录：丘（邱）氏公会、曾邱公会",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -9556,14 +11277,21 @@
    "name": "蔡",
    "traditional": "蔡",
    "pinyin": "Cài",
-   "romanizations": [],
-   "junwang": [],
+   "romanizations": [
+    "Chua"
+   ],
+   "junwang": [
+    "济阳郡"
+   ],
    "tanghao": [],
-   "origin": "",
+   "origin": "出自姬姓，以国为氏。周文王之子蔡叔度受封于蔡，其子蔡仲复封于蔡，子孙以国名为姓。",
    "migration": "",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "Ji Yang Cai Clan Association",
+    "Theng-Hai District Her Chiew Village Chua Clan Association"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -9572,15 +11300,36 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：蔡姓",
+     "url": "https://zh.wikipedia.org/wiki/蔡姓"
+    },
+    {
+     "title": "Roots.gov.sg: Chinatown Clans & Associations Trail",
+     "url": "https://www.roots.gov.sg/places/places-landing/trails/chinatown-clans-associations-trail"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
     }
    ],
    "id": "bjx-155-cai",
    "order": 155,
    "simplified": "蔡",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "蔡叔度（周文王之子）",
+   "nanyang": "1866年，新加坡蔡氏先人向殖民地政府购地，作为蔡氏族人的坟山（蔡氏坟山）。新加坡宗乡会馆联合总会会员中有济阳蔡氏公会等蔡姓团体。",
+   "notableFigures": [
+    {
+     "name": "蔡叔度",
+     "note": "周文王之子，蔡国始封者"
+    },
+    {
+     "name": "蔡仲",
+     "note": "蔡叔度之子，受封于蔡"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -9595,22 +11344,76 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：蔡姓",
+      "detail": "罗马化拼写表，新加坡作 Chua",
+      "url": "https://zh.wikipedia.org/wiki/蔡姓"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：蔡姓",
+      "detail": "郡望：济阳郡",
+      "url": "https://zh.wikipedia.org/wiki/蔡姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：蔡姓",
+      "detail": "源流一节，引《姓氏考略》《通志·氏族略》；蔡叔度排行各书说法不一（第五子或第十四子）",
+      "url": "https://zh.wikipedia.org/wiki/蔡姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：蔡姓",
+      "detail": "源流一节，引《姓氏考略》《元和姓纂》",
+      "url": "https://zh.wikipedia.org/wiki/蔡姓"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "Roots.gov.sg: Chinatown Clans & Associations Trail",
+      "detail": "Sehnh Chua Burial Ground 条目",
+      "url": "https://www.roots.gov.sg/places/places-landing/trails/chinatown-clans-associations-trail"
+     },
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "会员名录",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：蔡姓",
+      "detail": "源流一节引文",
+      "url": "https://zh.wikipedia.org/wiki/蔡姓"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：Members' Directory",
+      "detail": "会员名录（英文名）",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
     "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
+    "origin": "verified",
+    "founder": "verified",
     "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
@@ -15571,9 +17374,35 @@
    "traditional": "劉",
    "pinyin": "Liú",
    "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
+   "junwang": [
+    "彭城郡",
+    "沛郡",
+    "弘农郡",
+    "河间郡",
+    "中山郡",
+    "南阳郡",
+    "东平郡",
+    "广平郡",
+    "长沙郡",
+    "琅邪郡",
+    "兰陵郡"
+   ],
+   "tanghao": [
+    "彭城堂",
+    "藜照堂",
+    "中山堂",
+    "蒲编堂",
+    "五忠堂",
+    "墨庄堂",
+    "汉里堂",
+    "豢龙堂",
+    "七业堂",
+    "传经堂",
+    "铁汉堂",
+    "清爱堂",
+    "磐宗堂"
+   ],
+   "origin": "一说出自祁姓，尧的后裔刘累为夏帝孔甲养龙，后迁鲁阳（今河南鲁山）；一说出自姬姓，周定王封王季子于刘邑，建立刘国；另有汉代赐姓及匈奴、北魏独孤氏改姓等来源。",
    "migration": "",
    "generationPoems": [],
    "dialectGroups": [],
@@ -15586,15 +17415,36 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：刘姓",
+     "url": "https://zh.wikipedia.org/wiki/刘姓"
     }
    ],
    "id": "bjx-252-liu",
    "order": 252,
    "simplified": "刘",
    "isCompound": false,
-   "founder": "",
+   "founder": "刘累",
    "nanyang": "",
-   "notableFigures": [],
+   "notableFigures": [
+    {
+     "name": "刘累",
+     "note": "传为尧的后裔，刘姓得姓始祖"
+    },
+    {
+     "name": "刘康公",
+     "note": "周定王之弟王季子，受封刘邑"
+    },
+    {
+     "name": "刘邦",
+     "note": "建立汉朝，曾赐项伯刘姓"
+    },
+    {
+     "name": "刘知几",
+     "note": "撰《刘氏》三卷，考证刘氏为陆终苗裔"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -15609,19 +17459,54 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：刘姓",
+      "detail": "郡望一节，彭城刘氏最为知名",
+      "url": "https://zh.wikipedia.org/wiki/刘姓"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：刘姓",
+      "detail": "堂号一节",
+      "url": "https://zh.wikipedia.org/wiki/刘姓"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：刘姓",
+      "detail": "渊源一节，引《唐会要》《新唐书》《魏书·官氏志》",
+      "url": "https://zh.wikipedia.org/wiki/刘姓"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：刘姓",
+      "detail": "称刘累为得姓始祖",
+      "url": "https://zh.wikipedia.org/wiki/刘姓"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "维基百科：刘姓",
+      "detail": "渊源一节所述人物",
+      "url": "https://zh.wikipedia.org/wiki/刘姓"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
     "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
     "migration": "needs_source",
     "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
     "clanAssociations": "needs_source"
@@ -23816,14 +25701,34 @@
    "name": "曾",
    "traditional": "曾",
    "pinyin": "Zēng",
-   "romanizations": [],
-   "junwang": [],
-   "tanghao": [],
-   "origin": "",
-   "migration": "",
+   "romanizations": [
+    "Chan",
+    "Tsen",
+    "Cheng"
+   ],
+   "junwang": [
+    "鲁郡",
+    "天水郡",
+    "庐陵郡"
+   ],
+   "tanghao": [
+    "三省堂",
+    "武城堂",
+    "追远堂",
+    "鲁阳堂",
+    "敦本堂",
+    "宗圣堂",
+    "守约堂",
+    "养志堂"
+   ],
+   "origin": "一支源自姒姓：夏王少康封次子曲烈于鄫（今山东兰陵一带），鄫国于公元前567年为莒所灭，太子巫奔鲁，后人去“邑”旁以“曾”为氏。另一支源自姬姓，为西周功臣南宫适后裔所建曾国（今湖北随州一带），以国为氏。",
+   "migration": "曾姓发源于今山东兰陵西北，先秦时奔鲁的后裔在鲁繁衍并播迁至山东、河北等地；今人口以湖南、四川、广东、江西、湖北、福建等省为多。",
    "generationPoems": [],
    "dialectGroups": [],
-   "clanAssociations": [],
+   "clanAssociations": [
+    "潮州曾氏公会",
+    "曾邱公会"
+   ],
    "sources": [
     {
      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
@@ -23832,15 +25737,44 @@
     {
      "title": "pypinyin 注音 + 姓氏读音校订表",
      "url": "https://github.com/mozillazg/python-pinyin"
+    },
+    {
+     "title": "维基百科：曾姓",
+     "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+    },
+    {
+     "title": "Wikipedia: Zeng (surname)",
+     "url": "https://en.wikipedia.org/wiki/Zeng_(surname)"
+    },
+    {
+     "title": "SFCCA: Members' Directory",
+     "url": "https://sfcca.sg/en/our-members/"
+    },
+    {
+     "title": "新加坡宗乡会馆联合总会：会馆目录",
+     "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
     }
    ],
    "id": "bjx-385-zeng",
    "order": 385,
    "simplified": "曾",
    "isCompound": false,
-   "founder": "",
-   "nanyang": "",
-   "notableFigures": [],
+   "founder": "曲烈（夏王少康之子）；太子巫去邑旁为曾氏",
+   "nanyang": "中国大陆以外的曾姓多分布于新加坡、马来西亚、泰国、印尼、菲律宾等国。新加坡有潮州曾氏公会（1963年成立）及曾邱公会（1948年成立）。",
+   "notableFigures": [
+    {
+     "name": "曾参",
+     "note": "孔子弟子，以“三省”修身著称"
+    },
+    {
+     "name": "曾巩",
+     "note": "1019–1083，宋代散文家、史学家"
+    },
+    {
+     "name": "曾国藩",
+     "note": "1811–1872，清代政治家、军事统帅"
+    }
+   ],
    "fieldSources": {
     "traditional": [
      {
@@ -23855,22 +25789,110 @@
       "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
       "url": "https://github.com/mozillazg/python-pinyin"
      }
+    ],
+    "romanizations": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "信息框：新加坡拼写 Chan",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     },
+     {
+      "title": "Wikipedia: Zeng (surname)",
+      "detail": "Malaysia and Singapore: Tsen, Chen or Cheng",
+      "url": "https://en.wikipedia.org/wiki/Zeng_(surname)"
+     },
+     {
+      "title": "SFCCA: Members' Directory",
+      "detail": "Teochew Chan Clan Association; Chan Khoo Kong Huay",
+      "url": "https://sfcca.sg/en/our-members/"
+     }
+    ],
+    "junwang": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "郡望和堂号·郡望一节",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     }
+    ],
+    "tanghao": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "郡望和堂号·堂号一节",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     }
+    ],
+    "origin": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "起源一节，提及《世本》曲烈",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     },
+     {
+      "title": "Wikipedia: Zeng (surname)",
+      "detail": "Origin: state of Céng, Qu Lie, crown prince Wu",
+      "url": "https://en.wikipedia.org/wiki/Zeng_(surname)"
+     }
+    ],
+    "founder": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "起源一节",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     }
+    ],
+    "migration": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "导言及迁徙分布一节",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     }
+    ],
+    "nanyang": [
+     {
+      "title": "维基百科：曾姓",
+      "detail": "导言：中国大陆之外的分布",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     },
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "潮州曾氏公会（1963）、曾邱公会（1948）条目",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
+    ],
+    "notableFigures": [
+     {
+      "title": "Wikipedia: Zeng (surname)",
+      "detail": "Notable people（Zengzi, Zeng Gong, Zeng Guofan）",
+      "url": "https://en.wikipedia.org/wiki/Zeng_(surname)"
+     },
+     {
+      "title": "维基百科：曾姓",
+      "detail": "堂号一节：曾参三省",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E5%A7%93"
+     }
+    ],
+    "clanAssociations": [
+     {
+      "title": "新加坡宗乡会馆联合总会：会馆目录",
+      "detail": "会馆目录：潮州曾氏公会、曾邱公会",
+      "url": "https://sfcca.sg/%e4%bc%9a%e9%a6%86%e7%9b%ae%e5%bd%95/"
+     }
     ]
    },
    "fieldStatus": {
     "traditional": "verified",
     "pinyin": "verified",
-    "romanizations": "needs_source",
-    "junwang": "needs_source",
-    "tanghao": "needs_source",
-    "origin": "needs_source",
-    "founder": "needs_source",
-    "migration": "needs_source",
-    "nanyang": "needs_source",
-    "notableFigures": "needs_source",
+    "romanizations": "verified",
+    "junwang": "verified",
+    "tanghao": "verified",
+    "origin": "verified",
+    "founder": "verified",
+    "migration": "verified",
+    "nanyang": "verified",
+    "notableFigures": "verified",
     "generationPoems": "needs_source",
     "dialectGroups": "needs_source",
-    "clanAssociations": "needs_source"
+    "clanAssociations": "verified"
    }
   },
   {
