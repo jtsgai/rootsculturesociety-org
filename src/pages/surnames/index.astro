@@ -1,0 +1,79 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import '../../assets/styles/heritage.css';
+import { isEnriched, surnameNote, surnames, tonelessPinyin } from '../../lib/surnames';
+
+const enrichedCount = surnames.filter(isEnriched).length;
+const filters = [
+  { key: 'all', label: '全部' },
+  { key: 'single', label: '单姓' },
+  { key: 'compound', label: '复姓' },
+  { key: 'enriched', label: '已考证' },
+];
+---
+<SiteLayout lang="zh" title="百家姓" description="依《百家姓》原文次序整理的姓氏索引：郡望、堂号、起源与出处，逐项标明已考证或待考证。" alternate={false}>
+  <section class="page-intro heritage-intro"><div class="eyebrow">HUNDRED FAMILY SURNAMES / 百家姓</div><h1>百家姓</h1><p class="deck deck-zh"><span>依原文次序，</span><span>一姓一页，逐项注明出处。</span></p></section>
+  <div class="page-body">
+    <p class="heritage-note">共 {surnames.length} 姓，其中 {enrichedCount} 姓已整理郡望、堂号或起源等资料；其余暂只列读音与繁体，标为「待考证」。字辈属各支派自定，本站不代拟，请依家中族谱或宗亲会资料填写。<br />{surnameNote}</p>
+    <div class="surname-toolbar" role="search">
+      <label class="sr-only" for="surname-search">搜索姓氏</label>
+      <input id="surname-search" class="surname-search" type="search" placeholder="搜索：陈 / 陳 / chen / Tan" autocomplete="off" data-surname-search />
+      <div class="surname-filter" role="group" aria-label="筛选">{filters.map((f, i) => <button type="button" data-filter={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>{f.label}</button>)}</div>
+      <span class="surname-count" aria-live="polite" data-surname-count>{surnames.length} 姓</span>
+    </div>
+    <ol class="surname-grid" data-surname-grid>
+      {surnames.map((s) => (
+        <li class:list={['surname-card', { 'is-compound': s.isCompound, 'is-enriched': isEnriched(s) }]} data-compound={String(s.isCompound)} data-enriched={String(isEnriched(s))} data-search={[s.name, s.traditional, tonelessPinyin(s.pinyin), ...s.romanizations.map((r) => r.toLowerCase())].join(' ')}>
+          <a href={`/surnames/${s.slug}/`}>
+            <span class="surname-order">{String(s.order).padStart(3, '0')}</span>
+            <span class="surname-char" lang="zh-CN">{s.name}</span>
+            <span class="surname-meta">{s.traditional !== s.name && <span lang="zh-TW">{s.traditional} · </span>}{s.pinyin}</span>
+            {isEnriched(s) ? <span class="status-badge is-verified">已考证</span> : <span class="status-badge is-pending">待考证</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
+    <p class="surname-empty" hidden data-surname-empty>没有找到相符的姓氏。</p>
+  </div>
+</SiteLayout>
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-surname-search]');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-surname-grid] > li')];
+  const count = document.querySelector('[data-surname-count]');
+  const empty = document.querySelector<HTMLElement>('[data-surname-empty]');
+  let filter = 'all';
+  const normalize = (value: string) =>
+    value
+      .trim()
+      .toLowerCase()
+      .normalize('NFC')
+      .replace(/[ǖǘǚǜü]/g, 'v')
+      .normalize('NFD')
+      .replace(/\p{M}/gu, '')
+      .replace(/\s+/g, '');
+  const apply = () => {
+    const query = normalize(input?.value ?? '');
+    let shown = 0;
+    for (const card of cards) {
+      const matchesFilter = filter === 'all' || (filter === 'single' && card.dataset.compound === 'false') || (filter === 'compound' && card.dataset.compound === 'true') || (filter === 'enriched' && card.dataset.enriched === 'true');
+      const matchesQuery = !query || (card.dataset.search ?? '').split(' ').some((term) => term.startsWith(query) || term.includes(query));
+      const visible = matchesFilter && matchesQuery;
+      card.hidden = !visible;
+      if (visible) shown += 1;
+    }
+    if (count) count.textContent = `${shown} 姓`;
+    if (empty) empty.hidden = shown > 0;
+  };
+  input?.addEventListener('input', apply);
+  buttons.forEach((button) =>
+    button.addEventListener('click', () => {
+      filter = button.dataset.filter ?? 'all';
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      apply();
+    })
+  );
+  const initial = new URLSearchParams(location.search).get('q');
+  if (initial && input) input.value = initial;
+  apply();
+</script>

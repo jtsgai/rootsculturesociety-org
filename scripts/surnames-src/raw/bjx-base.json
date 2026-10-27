@@ -1,0 +1,3404 @@
+[
+{
+"order": 1,
+"name": "赵",
+"traditional": "趙",
+"pinyin_auto": "zhào",
+"isCompound": false
+},
+{
+"order": 2,
+"name": "钱",
+"traditional": "錢",
+"pinyin_auto": "qián",
+"isCompound": false
+},
+{
+"order": 3,
+"name": "孙",
+"traditional": "孫",
+"pinyin_auto": "sūn",
+"isCompound": false
+},
+{
+"order": 4,
+"name": "李",
+"traditional": "李",
+"pinyin_auto": "lǐ",
+"isCompound": false
+},
+{
+"order": 5,
+"name": "周",
+"traditional": "周",
+"pinyin_auto": "zhōu",
+"isCompound": false
+},
+{
+"order": 6,
+"name": "吴",
+"traditional": "吳",
+"pinyin_auto": "wú",
+"isCompound": false
+},
+{
+"order": 7,
+"name": "郑",
+"traditional": "鄭",
+"pinyin_auto": "zhèng",
+"isCompound": false
+},
+{
+"order": 8,
+"name": "王",
+"traditional": "王",
+"pinyin_auto": "wáng",
+"isCompound": false
+},
+{
+"order": 9,
+"name": "冯",
+"traditional": "馮",
+"pinyin_auto": "féng",
+"isCompound": false
+},
+{
+"order": 10,
+"name": "陈",
+"traditional": "陳",
+"pinyin_auto": "chén",
+"isCompound": false
+},
+{
+"order": 11,
+"name": "褚",
+"traditional": "褚",
+"pinyin_auto": "chǔ",
+"isCompound": false
+},
+{
+"order": 12,
+"name": "卫",
+"traditional": "衛",
+"pinyin_auto": "wèi",
+"isCompound": false
+},
+{
+"order": 13,
+"name": "蒋",
+"traditional": "蔣",
+"pinyin_auto": "jiǎng",
+"isCompound": false
+},
+{
+"order": 14,
+"name": "沈",
+"traditional": "沈",
+"pinyin_auto": "shěn",
+"isCompound": false
+},
+{
+"order": 15,
+"name": "韩",
+"traditional": "韓",
+"pinyin_auto": "hán",
+"isCompound": false
+},
+{
+"order": 16,
+"name": "杨",
+"traditional": "楊",
+"pinyin_auto": "yáng",
+"isCompound": false
+},
+{
+"order": 17,
+"name": "朱",
+"traditional": "朱",
+"pinyin_auto": "zhū",
+"isCompound": false
+},
+{
+"order": 18,
+"name": "秦",
+"traditional": "秦",
+"pinyin_auto": "qín",
+"isCompound": false
+},
+{
+"order": 19,
+"name": "尤",
+"traditional": "尤",
+"pinyin_auto": "yóu",
+"isCompound": false
+},
+{
+"order": 20,
+"name": "许",
+"traditional": "許",
+"pinyin_auto": "xǔ",
+"isCompound": false
+},
+{
+"order": 21,
+"name": "何",
+"traditional": "何",
+"pinyin_auto": "hé",
+"isCompound": false
+},
+{
+"order": 22,
+"name": "吕",
+"traditional": "呂",
+"pinyin_auto": "lǚ",
+"isCompound": false
+},
+{
+"order": 23,
+"name": "施",
+"traditional": "施",
+"pinyin_auto": "shī",
+"isCompound": false
+},
+{
+"order": 24,
+"name": "张",
+"traditional": "張",
+"pinyin_auto": "zhāng",
+"isCompound": false
+},
+{
+"order": 25,
+"name": "孔",
+"traditional": "孔",
+"pinyin_auto": "kǒng",
+"isCompound": false
+},
+{
+"order": 26,
+"name": "曹",
+"traditional": "曹",
+"pinyin_auto": "cáo",
+"isCompound": false
+},
+{
+"order": 27,
+"name": "严",
+"traditional": "嚴",
+"pinyin_auto": "yán",
+"isCompound": false
+},
+{
+"order": 28,
+"name": "华",
+"traditional": "華",
+"pinyin_auto": "huá",
+"isCompound": false
+},
+{
+"order": 29,
+"name": "金",
+"traditional": "金",
+"pinyin_auto": "jīn",
+"isCompound": false
+},
+{
+"order": 30,
+"name": "魏",
+"traditional": "魏",
+"pinyin_auto": "wèi",
+"isCompound": false
+},
+{
+"order": 31,
+"name": "陶",
+"traditional": "陶",
+"pinyin_auto": "táo",
+"isCompound": false
+},
+{
+"order": 32,
+"name": "姜",
+"traditional": "姜",
+"pinyin_auto": "jiāng",
+"isCompound": false
+},
+{
+"order": 33,
+"name": "戚",
+"traditional": "戚",
+"pinyin_auto": "qī",
+"isCompound": false
+},
+{
+"order": 34,
+"name": "谢",
+"traditional": "謝",
+"pinyin_auto": "xiè",
+"isCompound": false
+},
+{
+"order": 35,
+"name": "邹",
+"traditional": "鄒",
+"pinyin_auto": "zōu",
+"isCompound": false
+},
+{
+"order": 36,
+"name": "喻",
+"traditional": "喻",
+"pinyin_auto": "yù",
+"isCompound": false
+},
+{
+"order": 37,
+"name": "柏",
+"traditional": "柏",
+"pinyin_auto": "bǎi",
+"isCompound": false
+},
+{
+"order": 38,
+"name": "水",
+"traditional": "水",
+"pinyin_auto": "shuǐ",
+"isCompound": false
+},
+{
+"order": 39,
+"name": "窦",
+"traditional": "竇",
+"pinyin_auto": "dòu",
+"isCompound": false
+},
+{
+"order": 40,
+"name": "章",
+"traditional": "章",
+"pinyin_auto": "zhāng",
+"isCompound": false
+},
+{
+"order": 41,
+"name": "云",
+"traditional": "雲",
+"pinyin_auto": "yún",
+"isCompound": false
+},
+{
+"order": 42,
+"name": "苏",
+"traditional": "蘇",
+"pinyin_auto": "sū",
+"isCompound": false
+},
+{
+"order": 43,
+"name": "潘",
+"traditional": "潘",
+"pinyin_auto": "pān",
+"isCompound": false
+},
+{
+"order": 44,
+"name": "葛",
+"traditional": "葛",
+"pinyin_auto": "gé",
+"isCompound": false
+},
+{
+"order": 45,
+"name": "奚",
+"traditional": "奚",
+"pinyin_auto": "xī",
+"isCompound": false
+},
+{
+"order": 46,
+"name": "范",
+"traditional": "範",
+"pinyin_auto": "fàn",
+"isCompound": false
+},
+{
+"order": 47,
+"name": "彭",
+"traditional": "彭",
+"pinyin_auto": "péng",
+"isCompound": false
+},
+{
+"order": 48,
+"name": "郎",
+"traditional": "郎",
+"pinyin_auto": "láng",
+"isCompound": false
+},
+{
+"order": 49,
+"name": "鲁",
+"traditional": "魯",
+"pinyin_auto": "lǔ",
+"isCompound": false
+},
+{
+"order": 50,
+"name": "韦",
+"traditional": "韋",
+"pinyin_auto": "wéi",
+"isCompound": false
+},
+{
+"order": 51,
+"name": "昌",
+"traditional": "昌",
+"pinyin_auto": "chāng",
+"isCompound": false
+},
+{
+"order": 52,
+"name": "马",
+"traditional": "馬",
+"pinyin_auto": "mǎ",
+"isCompound": false
+},
+{
+"order": 53,
+"name": "苗",
+"traditional": "苗",
+"pinyin_auto": "miáo",
+"isCompound": false
+},
+{
+"order": 54,
+"name": "凤",
+"traditional": "鳳",
+"pinyin_auto": "fèng",
+"isCompound": false
+},
+{
+"order": 55,
+"name": "花",
+"traditional": "花",
+"pinyin_auto": "huā",
+"isCompound": false
+},
+{
+"order": 56,
+"name": "方",
+"traditional": "方",
+"pinyin_auto": "fāng",
+"isCompound": false
+},
+{
+"order": 57,
+"name": "俞",
+"traditional": "俞",
+"pinyin_auto": "yú",
+"isCompound": false
+},
+{
+"order": 58,
+"name": "任",
+"traditional": "任",
+"pinyin_auto": "rèn",
+"isCompound": false
+},
+{
+"order": 59,
+"name": "袁",
+"traditional": "袁",
+"pinyin_auto": "yuán",
+"isCompound": false
+},
+{
+"order": 60,
+"name": "柳",
+"traditional": "柳",
+"pinyin_auto": "liǔ",
+"isCompound": false
+},
+{
+"order": 61,
+"name": "酆",
+"traditional": "酆",
+"pinyin_auto": "fēng",
+"isCompound": false
+},
+{
+"order": 62,
+"name": "鲍",
+"traditional": "鮑",
+"pinyin_auto": "bào",
+"isCompound": false
+},
+{
+"order": 63,
+"name": "史",
+"traditional": "史",
+"pinyin_auto": "shǐ",
+"isCompound": false
+},
+{
+"order": 64,
+"name": "唐",
+"traditional": "唐",
+"pinyin_auto": "táng",
+"isCompound": false
+},
+{
+"order": 65,
+"name": "费",
+"traditional": "費",
+"pinyin_auto": "fèi",
+"isCompound": false
+},
+{
+"order": 66,
+"name": "廉",
+"traditional": "廉",
+"pinyin_auto": "lián",
+"isCompound": false
+},
+{
+"order": 67,
+"name": "岑",
+"traditional": "岑",
+"pinyin_auto": "cén",
+"isCompound": false
+},
+{
+"order": 68,
+"name": "薛",
+"traditional": "薛",
+"pinyin_auto": "xuē",
+"isCompound": false
+},
+{
+"order": 69,
+"name": "雷",
+"traditional": "雷",
+"pinyin_auto": "léi",
+"isCompound": false
+},
+{
+"order": 70,
+"name": "贺",
+"traditional": "賀",
+"pinyin_auto": "hè",
+"isCompound": false
+},
+{
+"order": 71,
+"name": "倪",
+"traditional": "倪",
+"pinyin_auto": "ní",
+"isCompound": false
+},
+{
+"order": 72,
+"name": "汤",
+"traditional": "湯",
+"pinyin_auto": "tāng",
+"isCompound": false
+},
+{
+"order": 73,
+"name": "滕",
+"traditional": "滕",
+"pinyin_auto": "téng",
+"isCompound": false
+},
+{
+"order": 74,
+"name": "殷",
+"traditional": "殷",
+"pinyin_auto": "yīn",
+"isCompound": false
+},
+{
+"order": 75,
+"name": "罗",
+"traditional": "羅",
+"pinyin_auto": "luó",
+"isCompound": false
+},
+{
+"order": 76,
+"name": "毕",
+"traditional": "畢",
+"pinyin_auto": "bì",
+"isCompound": false
+},
+{
+"order": 77,
+"name": "郝",
+"traditional": "郝",
+"pinyin_auto": "hǎo",
+"isCompound": false
+},
+{
+"order": 78,
+"name": "邬",
+"traditional": "鄔",
+"pinyin_auto": "wū",
+"isCompound": false
+},
+{
+"order": 79,
+"name": "安",
+"traditional": "安",
+"pinyin_auto": "ān",
+"isCompound": false
+},
+{
+"order": 80,
+"name": "常",
+"traditional": "常",
+"pinyin_auto": "cháng",
+"isCompound": false
+},
+{
+"order": 81,
+"name": "乐",
+"traditional": "樂",
+"pinyin_auto": "lè",
+"isCompound": false
+},
+{
+"order": 82,
+"name": "于",
+"traditional": "于",
+"pinyin_auto": "yú",
+"isCompound": false
+},
+{
+"order": 83,
+"name": "时",
+"traditional": "時",
+"pinyin_auto": "shí",
+"isCompound": false
+},
+{
+"order": 84,
+"name": "傅",
+"traditional": "傅",
+"pinyin_auto": "fù",
+"isCompound": false
+},
+{
+"order": 85,
+"name": "皮",
+"traditional": "皮",
+"pinyin_auto": "pí",
+"isCompound": false
+},
+{
+"order": 86,
+"name": "卞",
+"traditional": "卞",
+"pinyin_auto": "biàn",
+"isCompound": false
+},
+{
+"order": 87,
+"name": "齐",
+"traditional": "齊",
+"pinyin_auto": "qí",
+"isCompound": false
+},
+{
+"order": 88,
+"name": "康",
+"traditional": "康",
+"pinyin_auto": "kāng",
+"isCompound": false
+},
+{
+"order": 89,
+"name": "伍",
+"traditional": "伍",
+"pinyin_auto": "wǔ",
+"isCompound": false
+},
+{
+"order": 90,
+"name": "余",
+"traditional": "余",
+"pinyin_auto": "yú",
+"isCompound": false
+},
+{
+"order": 91,
+"name": "元",
+"traditional": "元",
+"pinyin_auto": "yuán",
+"isCompound": false
+},
+{
+"order": 92,
+"name": "卜",
+"traditional": "蔔",
+"pinyin_auto": "bo",
+"isCompound": false
+},
+{
+"order": 93,
+"name": "顾",
+"traditional": "顧",
+"pinyin_auto": "gù",
+"isCompound": false
+},
+{
+"order": 94,
+"name": "孟",
+"traditional": "孟",
+"pinyin_auto": "mèng",
+"isCompound": false
+},
+{
+"order": 95,
+"name": "平",
+"traditional": "平",
+"pinyin_auto": "píng",
+"isCompound": false
+},
+{
+"order": 96,
+"name": "黄",
+"traditional": "黃",
+"pinyin_auto": "huáng",
+"isCompound": false
+},
+{
+"order": 97,
+"name": "和",
+"traditional": "和",
+"pinyin_auto": "hé",
+"isCompound": false
+},
+{
+"order": 98,
+"name": "穆",
+"traditional": "穆",
+"pinyin_auto": "mù",
+"isCompound": false
+},
+{
+"order": 99,
+"name": "萧",
+"traditional": "蕭",
+"pinyin_auto": "xiāo",
+"isCompound": false
+},
+{
+"order": 100,
+"name": "尹",
+"traditional": "尹",
+"pinyin_auto": "yǐn",
+"isCompound": false
+},
+{
+"order": 101,
+"name": "姚",
+"traditional": "姚",
+"pinyin_auto": "yáo",
+"isCompound": false
+},
+{
+"order": 102,
+"name": "邵",
+"traditional": "邵",
+"pinyin_auto": "shào",
+"isCompound": false
+},
+{
+"order": 103,
+"name": "湛",
+"traditional": "湛",
+"pinyin_auto": "zhàn",
+"isCompound": false
+},
+{
+"order": 104,
+"name": "汪",
+"traditional": "汪",
+"pinyin_auto": "wāng",
+"isCompound": false
+},
+{
+"order": 105,
+"name": "祁",
+"traditional": "祁",
+"pinyin_auto": "qí",
+"isCompound": false
+},
+{
+"order": 106,
+"name": "毛",
+"traditional": "毛",
+"pinyin_auto": "máo",
+"isCompound": false
+},
+{
+"order": 107,
+"name": "禹",
+"traditional": "禹",
+"pinyin_auto": "yǔ",
+"isCompound": false
+},
+{
+"order": 108,
+"name": "狄",
+"traditional": "狄",
+"pinyin_auto": "dí",
+"isCompound": false
+},
+{
+"order": 109,
+"name": "米",
+"traditional": "米",
+"pinyin_auto": "mǐ",
+"isCompound": false
+},
+{
+"order": 110,
+"name": "贝",
+"traditional": "貝",
+"pinyin_auto": "bèi",
+"isCompound": false
+},
+{
+"order": 111,
+"name": "明",
+"traditional": "明",
+"pinyin_auto": "míng",
+"isCompound": false
+},
+{
+"order": 112,
+"name": "臧",
+"traditional": "臧",
+"pinyin_auto": "zāng",
+"isCompound": false
+},
+{
+"order": 113,
+"name": "计",
+"traditional": "計",
+"pinyin_auto": "jì",
+"isCompound": false
+},
+{
+"order": 114,
+"name": "伏",
+"traditional": "伏",
+"pinyin_auto": "fú",
+"isCompound": false
+},
+{
+"order": 115,
+"name": "成",
+"traditional": "成",
+"pinyin_auto": "chéng",
+"isCompound": false
+},
+{
+"order": 116,
+"name": "戴",
+"traditional": "戴",
+"pinyin_auto": "dài",
+"isCompound": false
+},
+{
+"order": 117,
+"name": "谈",
+"traditional": "談",
+"pinyin_auto": "tán",
+"isCompound": false
+},
+{
+"order": 118,
+"name": "宋",
+"traditional": "宋",
+"pinyin_auto": "sòng",
+"isCompound": false
+},
+{
+"order": 119,
+"name": "茅",
+"traditional": "茅",
+"pinyin_auto": "máo",
+"isCompound": false
+},
+{
+"order": 120,
+"name": "庞",
+"traditional": "龐",
+"pinyin_auto": "páng",
+"isCompound": false
+},
+{
+"order": 121,
+"name": "熊",
+"traditional": "熊",
+"pinyin_auto": "xióng",
+"isCompound": false
+},
+{
+"order": 122,
+"name": "纪",
+"traditional": "紀",
+"pinyin_auto": "jì",
+"isCompound": false
+},
+{
+"order": 123,
+"name": "舒",
+"traditional": "舒",
+"pinyin_auto": "shū",
+"isCompound": false
+},
+{
+"order": 124,
+"name": "屈",
+"traditional": "屈",
+"pinyin_auto": "qū",
+"isCompound": false
+},
+{
+"order": 125,
+"name": "项",
+"traditional": "項",
+"pinyin_auto": "xiàng",
+"isCompound": false
+},
+{
+"order": 126,
+"name": "祝",
+"traditional": "祝",
+"pinyin_auto": "zhù",
+"isCompound": false
+},
+{
+"order": 127,
+"name": "董",
+"traditional": "董",
+"pinyin_auto": "dǒng",
+"isCompound": false
+},
+{
+"order": 128,
+"name": "梁",
+"traditional": "梁",
+"pinyin_auto": "liáng",
+"isCompound": false
+},
+{
+"order": 129,
+"name": "杜",
+"traditional": "杜",
+"pinyin_auto": "dù",
+"isCompound": false
+},
+{
+"order": 130,
+"name": "阮",
+"traditional": "阮",
+"pinyin_auto": "ruǎn",
+"isCompound": false
+},
+{
+"order": 131,
+"name": "蓝",
+"traditional": "藍",
+"pinyin_auto": "lán",
+"isCompound": false
+},
+{
+"order": 132,
+"name": "闵",
+"traditional": "閔",
+"pinyin_auto": "mǐn",
+"isCompound": false
+},
+{
+"order": 133,
+"name": "席",
+"traditional": "席",
+"pinyin_auto": "xí",
+"isCompound": false
+},
+{
+"order": 134,
+"name": "季",
+"traditional": "季",
+"pinyin_auto": "jì",
+"isCompound": false
+},
+{
+"order": 135,
+"name": "麻",
+"traditional": "麻",
+"pinyin_auto": "má",
+"isCompound": false
+},
+{
+"order": 136,
+"name": "强",
+"traditional": "強",
+"pinyin_auto": "qiáng",
+"isCompound": false
+},
+{
+"order": 137,
+"name": "贾",
+"traditional": "賈",
+"pinyin_auto": "jiǎ",
+"isCompound": false
+},
+{
+"order": 138,
+"name": "路",
+"traditional": "路",
+"pinyin_auto": "lù",
+"isCompound": false
+},
+{
+"order": 139,
+"name": "娄",
+"traditional": "婁",
+"pinyin_auto": "lóu",
+"isCompound": false
+},
+{
+"order": 140,
+"name": "危",
+"traditional": "危",
+"pinyin_auto": "wēi",
+"isCompound": false
+},
+{
+"order": 141,
+"name": "江",
+"traditional": "江",
+"pinyin_auto": "jiāng",
+"isCompound": false
+},
+{
+"order": 142,
+"name": "童",
+"traditional": "童",
+"pinyin_auto": "tóng",
+"isCompound": false
+},
+{
+"order": 143,
+"name": "颜",
+"traditional": "顏",
+"pinyin_auto": "yán",
+"isCompound": false
+},
+{
+"order": 144,
+"name": "郭",
+"traditional": "郭",
+"pinyin_auto": "guō",
+"isCompound": false
+},
+{
+"order": 145,
+"name": "梅",
+"traditional": "梅",
+"pinyin_auto": "méi",
+"isCompound": false
+},
+{
+"order": 146,
+"name": "盛",
+"traditional": "盛",
+"pinyin_auto": "shèng",
+"isCompound": false
+},
+{
+"order": 147,
+"name": "林",
+"traditional": "林",
+"pinyin_auto": "lín",
+"isCompound": false
+},
+{
+"order": 148,
+"name": "刁",
+"traditional": "刁",
+"pinyin_auto": "diāo",
+"isCompound": false
+},
+{
+"order": 149,
+"name": "钟",
+"traditional": "鐘",
+"pinyin_auto": "zhōng",
+"isCompound": false
+},
+{
+"order": 150,
+"name": "徐",
+"traditional": "徐",
+"pinyin_auto": "xú",
+"isCompound": false
+},
+{
+"order": 151,
+"name": "邱",
+"traditional": "邱",
+"pinyin_auto": "qiū",
+"isCompound": false
+},
+{
+"order": 152,
+"name": "骆",
+"traditional": "駱",
+"pinyin_auto": "luò",
+"isCompound": false
+},
+{
+"order": 153,
+"name": "高",
+"traditional": "高",
+"pinyin_auto": "gāo",
+"isCompound": false
+},
+{
+"order": 154,
+"name": "夏",
+"traditional": "夏",
+"pinyin_auto": "xià",
+"isCompound": false
+},
+{
+"order": 155,
+"name": "蔡",
+"traditional": "蔡",
+"pinyin_auto": "cài",
+"isCompound": false
+},
+{
+"order": 156,
+"name": "田",
+"traditional": "田",
+"pinyin_auto": "tián",
+"isCompound": false
+},
+{
+"order": 157,
+"name": "樊",
+"traditional": "樊",
+"pinyin_auto": "fán",
+"isCompound": false
+},
+{
+"order": 158,
+"name": "胡",
+"traditional": "胡",
+"pinyin_auto": "hú",
+"isCompound": false
+},
+{
+"order": 159,
+"name": "凌",
+"traditional": "淩",
+"pinyin_auto": "líng",
+"isCompound": false
+},
+{
+"order": 160,
+"name": "霍",
+"traditional": "霍",
+"pinyin_auto": "huò",
+"isCompound": false
+},
+{
+"order": 161,
+"name": "虞",
+"traditional": "虞",
+"pinyin_auto": "yú",
+"isCompound": false
+},
+{
+"order": 162,
+"name": "万",
+"traditional": "萬",
+"pinyin_auto": "wàn",
+"isCompound": false
+},
+{
+"order": 163,
+"name": "支",
+"traditional": "支",
+"pinyin_auto": "zhī",
+"isCompound": false
+},
+{
+"order": 164,
+"name": "柯",
+"traditional": "柯",
+"pinyin_auto": "kē",
+"isCompound": false
+},
+{
+"order": 165,
+"name": "昝",
+"traditional": "昝",
+"pinyin_auto": "zǎn",
+"isCompound": false
+},
+{
+"order": 166,
+"name": "管",
+"traditional": "管",
+"pinyin_auto": "guǎn",
+"isCompound": false
+},
+{
+"order": 167,
+"name": "卢",
+"traditional": "盧",
+"pinyin_auto": "lú",
+"isCompound": false
+},
+{
+"order": 168,
+"name": "莫",
+"traditional": "莫",
+"pinyin_auto": "mò",
+"isCompound": false
+},
+{
+"order": 169,
+"name": "经",
+"traditional": "經",
+"pinyin_auto": "jīng",
+"isCompound": false
+},
+{
+"order": 170,
+"name": "房",
+"traditional": "房",
+"pinyin_auto": "fáng",
+"isCompound": false
+},
+{
+"order": 171,
+"name": "裘",
+"traditional": "裘",
+"pinyin_auto": "qiú",
+"isCompound": false
+},
+{
+"order": 172,
+"name": "缪",
+"traditional": "繆",
+"pinyin_auto": "móu",
+"isCompound": false
+},
+{
+"order": 173,
+"name": "干",
+"traditional": "幹",
+"pinyin_auto": "gàn",
+"isCompound": false
+},
+{
+"order": 174,
+"name": "解",
+"traditional": "解",
+"pinyin_auto": "jiě",
+"isCompound": false
+},
+{
+"order": 175,
+"name": "应",
+"traditional": "應",
+"pinyin_auto": "yīng",
+"isCompound": false
+},
+{
+"order": 176,
+"name": "宗",
+"traditional": "宗",
+"pinyin_auto": "zōng",
+"isCompound": false
+},
+{
+"order": 177,
+"name": "丁",
+"traditional": "丁",
+"pinyin_auto": "dīng",
+"isCompound": false
+},
+{
+"order": 178,
+"name": "宣",
+"traditional": "宣",
+"pinyin_auto": "xuān",
+"isCompound": false
+},
+{
+"order": 179,
+"name": "贲",
+"traditional": "賁",
+"pinyin_auto": "bēn",
+"isCompound": false
+},
+{
+"order": 180,
+"name": "邓",
+"traditional": "鄧",
+"pinyin_auto": "dèng",
+"isCompound": false
+},
+{
+"order": 181,
+"name": "郁",
+"traditional": "郁",
+"pinyin_auto": "yù",
+"isCompound": false
+},
+{
+"order": 182,
+"name": "单",
+"traditional": "單",
+"pinyin_auto": "dān",
+"isCompound": false
+},
+{
+"order": 183,
+"name": "杭",
+"traditional": "杭",
+"pinyin_auto": "háng",
+"isCompound": false
+},
+{
+"order": 184,
+"name": "洪",
+"traditional": "洪",
+"pinyin_auto": "hóng",
+"isCompound": false
+},
+{
+"order": 185,
+"name": "包",
+"traditional": "包",
+"pinyin_auto": "bāo",
+"isCompound": false
+},
+{
+"order": 186,
+"name": "诸",
+"traditional": "諸",
+"pinyin_auto": "zhū",
+"isCompound": false
+},
+{
+"order": 187,
+"name": "左",
+"traditional": "左",
+"pinyin_auto": "zuǒ",
+"isCompound": false
+},
+{
+"order": 188,
+"name": "石",
+"traditional": "石",
+"pinyin_auto": "shí",
+"isCompound": false
+},
+{
+"order": 189,
+"name": "崔",
+"traditional": "崔",
+"pinyin_auto": "cuī",
+"isCompound": false
+},
+{
+"order": 190,
+"name": "吉",
+"traditional": "吉",
+"pinyin_auto": "jí",
+"isCompound": false
+},
+{
+"order": 191,
+"name": "钮",
+"traditional": "鈕",
+"pinyin_auto": "niǔ",
+"isCompound": false
+},
+{
+"order": 192,
+"name": "龚",
+"traditional": "龔",
+"pinyin_auto": "gōng",
+"isCompound": false
+},
+{
+"order": 193,
+"name": "程",
+"traditional": "程",
+"pinyin_auto": "chéng",
+"isCompound": false
+},
+{
+"order": 194,
+"name": "嵇",
+"traditional": "嵇",
+"pinyin_auto": "jī",
+"isCompound": false
+},
+{
+"order": 195,
+"name": "邢",
+"traditional": "邢",
+"pinyin_auto": "xíng",
+"isCompound": false
+},
+{
+"order": 196,
+"name": "滑",
+"traditional": "滑",
+"pinyin_auto": "huá",
+"isCompound": false
+},
+{
+"order": 197,
+"name": "裴",
+"traditional": "裴",
+"pinyin_auto": "péi",
+"isCompound": false
+},
+{
+"order": 198,
+"name": "陆",
+"traditional": "陸",
+"pinyin_auto": "lù",
+"isCompound": false
+},
+{
+"order": 199,
+"name": "荣",
+"traditional": "榮",
+"pinyin_auto": "róng",
+"isCompound": false
+},
+{
+"order": 200,
+"name": "翁",
+"traditional": "翁",
+"pinyin_auto": "wēng",
+"isCompound": false
+},
+{
+"order": 201,
+"name": "荀",
+"traditional": "荀",
+"pinyin_auto": "xún",
+"isCompound": false
+},
+{
+"order": 202,
+"name": "羊",
+"traditional": "羊",
+"pinyin_auto": "yáng",
+"isCompound": false
+},
+{
+"order": 203,
+"name": "于",
+"traditional": "於",
+"pinyin_auto": "yú",
+"isCompound": false
+},
+{
+"order": 204,
+"name": "惠",
+"traditional": "惠",
+"pinyin_auto": "huì",
+"isCompound": false
+},
+{
+"order": 205,
+"name": "甄",
+"traditional": "甄",
+"pinyin_auto": "zhēn",
+"isCompound": false
+},
+{
+"order": 206,
+"name": "曲",
+"traditional": "麴",
+"pinyin_auto": "qū",
+"isCompound": false
+},
+{
+"order": 207,
+"name": "家",
+"traditional": "家",
+"pinyin_auto": "jiā",
+"isCompound": false
+},
+{
+"order": 208,
+"name": "封",
+"traditional": "封",
+"pinyin_auto": "fēng",
+"isCompound": false
+},
+{
+"order": 209,
+"name": "芮",
+"traditional": "芮",
+"pinyin_auto": "ruì",
+"isCompound": false
+},
+{
+"order": 210,
+"name": "羿",
+"traditional": "羿",
+"pinyin_auto": "yì",
+"isCompound": false
+},
+{
+"order": 211,
+"name": "储",
+"traditional": "儲",
+"pinyin_auto": "chǔ",
+"isCompound": false
+},
+{
+"order": 212,
+"name": "靳",
+"traditional": "靳",
+"pinyin_auto": "jìn",
+"isCompound": false
+},
+{
+"order": 213,
+"name": "汲",
+"traditional": "汲",
+"pinyin_auto": "jí",
+"isCompound": false
+},
+{
+"order": 214,
+"name": "邴",
+"traditional": "邴",
+"pinyin_auto": "bǐng",
+"isCompound": false
+},
+{
+"order": 215,
+"name": "糜",
+"traditional": "糜",
+"pinyin_auto": "mí",
+"isCompound": false
+},
+{
+"order": 216,
+"name": "松",
+"traditional": "松",
+"pinyin_auto": "sōng",
+"isCompound": false
+},
+{
+"order": 217,
+"name": "井",
+"traditional": "井",
+"pinyin_auto": "jǐng",
+"isCompound": false
+},
+{
+"order": 218,
+"name": "段",
+"traditional": "段",
+"pinyin_auto": "duàn",
+"isCompound": false
+},
+{
+"order": 219,
+"name": "富",
+"traditional": "富",
+"pinyin_auto": "fù",
+"isCompound": false
+},
+{
+"order": 220,
+"name": "巫",
+"traditional": "巫",
+"pinyin_auto": "wū",
+"isCompound": false
+},
+{
+"order": 221,
+"name": "乌",
+"traditional": "烏",
+"pinyin_auto": "wū",
+"isCompound": false
+},
+{
+"order": 222,
+"name": "焦",
+"traditional": "焦",
+"pinyin_auto": "jiāo",
+"isCompound": false
+},
+{
+"order": 223,
+"name": "巴",
+"traditional": "巴",
+"pinyin_auto": "bā",
+"isCompound": false
+},
+{
+"order": 224,
+"name": "弓",
+"traditional": "弓",
+"pinyin_auto": "gōng",
+"isCompound": false
+},
+{
+"order": 225,
+"name": "牧",
+"traditional": "牧",
+"pinyin_auto": "mù",
+"isCompound": false
+},
+{
+"order": 226,
+"name": "隗",
+"traditional": "隗",
+"pinyin_auto": "kuí",
+"isCompound": false
+},
+{
+"order": 227,
+"name": "山",
+"traditional": "山",
+"pinyin_auto": "shān",
+"isCompound": false
+},
+{
+"order": 228,
+"name": "谷",
+"traditional": "谷",
+"pinyin_auto": "gǔ",
+"isCompound": false
+},
+{
+"order": 229,
+"name": "车",
+"traditional": "車",
+"pinyin_auto": "chē",
+"isCompound": false
+},
+{
+"order": 230,
+"name": "侯",
+"traditional": "侯",
+"pinyin_auto": "hóu",
+"isCompound": false
+},
+{
+"order": 231,
+"name": "宓",
+"traditional": "宓",
+"pinyin_auto": "mì",
+"isCompound": false
+},
+{
+"order": 232,
+"name": "蓬",
+"traditional": "蓬",
+"pinyin_auto": "péng",
+"isCompound": false
+},
+{
+"order": 233,
+"name": "全",
+"traditional": "全",
+"pinyin_auto": "quán",
+"isCompound": false
+},
+{
+"order": 234,
+"name": "郗",
+"traditional": "郗",
+"pinyin_auto": "xī",
+"isCompound": false
+},
+{
+"order": 235,
+"name": "班",
+"traditional": "班",
+"pinyin_auto": "bān",
+"isCompound": false
+},
+{
+"order": 236,
+"name": "仰",
+"traditional": "仰",
+"pinyin_auto": "yǎng",
+"isCompound": false
+},
+{
+"order": 237,
+"name": "秋",
+"traditional": "秋",
+"pinyin_auto": "qiū",
+"isCompound": false
+},
+{
+"order": 238,
+"name": "仲",
+"traditional": "仲",
+"pinyin_auto": "zhòng",
+"isCompound": false
+},
+{
+"order": 239,
+"name": "伊",
+"traditional": "伊",
+"pinyin_auto": "yī",
+"isCompound": false
+},
+{
+"order": 240,
+"name": "宫",
+"traditional": "宮",
+"pinyin_auto": "gōng",
+"isCompound": false
+},
+{
+"order": 241,
+"name": "宁",
+"traditional": "寧",
+"pinyin_auto": "níng",
+"isCompound": false
+},
+{
+"order": 242,
+"name": "仇",
+"traditional": "仇",
+"pinyin_auto": "chóu",
+"isCompound": false
+},
+{
+"order": 243,
+"name": "栾",
+"traditional": "欒",
+"pinyin_auto": "luán",
+"isCompound": false
+},
+{
+"order": 244,
+"name": "暴",
+"traditional": "暴",
+"pinyin_auto": "bào",
+"isCompound": false
+},
+{
+"order": 245,
+"name": "甘",
+"traditional": "甘",
+"pinyin_auto": "gān",
+"isCompound": false
+},
+{
+"order": 246,
+"name": "钭",
+"traditional": "鈄",
+"pinyin_auto": "tǒu",
+"isCompound": false
+},
+{
+"order": 247,
+"name": "厉",
+"traditional": "厲",
+"pinyin_auto": "lì",
+"isCompound": false
+},
+{
+"order": 248,
+"name": "戎",
+"traditional": "戎",
+"pinyin_auto": "róng",
+"isCompound": false
+},
+{
+"order": 249,
+"name": "祖",
+"traditional": "祖",
+"pinyin_auto": "zǔ",
+"isCompound": false
+},
+{
+"order": 250,
+"name": "武",
+"traditional": "武",
+"pinyin_auto": "wǔ",
+"isCompound": false
+},
+{
+"order": 251,
+"name": "符",
+"traditional": "符",
+"pinyin_auto": "fú",
+"isCompound": false
+},
+{
+"order": 252,
+"name": "刘",
+"traditional": "劉",
+"pinyin_auto": "liú",
+"isCompound": false
+},
+{
+"order": 253,
+"name": "景",
+"traditional": "景",
+"pinyin_auto": "jǐng",
+"isCompound": false
+},
+{
+"order": 254,
+"name": "詹",
+"traditional": "詹",
+"pinyin_auto": "zhān",
+"isCompound": false
+},
+{
+"order": 255,
+"name": "束",
+"traditional": "束",
+"pinyin_auto": "shù",
+"isCompound": false
+},
+{
+"order": 256,
+"name": "龙",
+"traditional": "龍",
+"pinyin_auto": "lóng",
+"isCompound": false
+},
+{
+"order": 257,
+"name": "叶",
+"traditional": "葉",
+"pinyin_auto": "yè",
+"isCompound": false
+},
+{
+"order": 258,
+"name": "幸",
+"traditional": "幸",
+"pinyin_auto": "xìng",
+"isCompound": false
+},
+{
+"order": 259,
+"name": "司",
+"traditional": "司",
+"pinyin_auto": "sī",
+"isCompound": false
+},
+{
+"order": 260,
+"name": "韶",
+"traditional": "韶",
+"pinyin_auto": "sháo",
+"isCompound": false
+},
+{
+"order": 261,
+"name": "郜",
+"traditional": "郜",
+"pinyin_auto": "gào",
+"isCompound": false
+},
+{
+"order": 262,
+"name": "黎",
+"traditional": "黎",
+"pinyin_auto": "lí",
+"isCompound": false
+},
+{
+"order": 263,
+"name": "蓟",
+"traditional": "薊",
+"pinyin_auto": "jì",
+"isCompound": false
+},
+{
+"order": 264,
+"name": "薄",
+"traditional": "薄",
+"pinyin_auto": "báo",
+"isCompound": false
+},
+{
+"order": 265,
+"name": "印",
+"traditional": "印",
+"pinyin_auto": "yìn",
+"isCompound": false
+},
+{
+"order": 266,
+"name": "宿",
+"traditional": "宿",
+"pinyin_auto": "sù",
+"isCompound": false
+},
+{
+"order": 267,
+"name": "白",
+"traditional": "白",
+"pinyin_auto": "bái",
+"isCompound": false
+},
+{
+"order": 268,
+"name": "怀",
+"traditional": "懷",
+"pinyin_auto": "huái",
+"isCompound": false
+},
+{
+"order": 269,
+"name": "蒲",
+"traditional": "蒲",
+"pinyin_auto": "pú",
+"isCompound": false
+},
+{
+"order": 270,
+"name": "邰",
+"traditional": "邰",
+"pinyin_auto": "tái",
+"isCompound": false
+},
+{
+"order": 271,
+"name": "从",
+"traditional": "從",
+"pinyin_auto": "cóng",
+"isCompound": false
+},
+{
+"order": 272,
+"name": "鄂",
+"traditional": "鄂",
+"pinyin_auto": "è",
+"isCompound": false
+},
+{
+"order": 273,
+"name": "索",
+"traditional": "索",
+"pinyin_auto": "suǒ",
+"isCompound": false
+},
+{
+"order": 274,
+"name": "咸",
+"traditional": "鹹",
+"pinyin_auto": "xián",
+"isCompound": false
+},
+{
+"order": 275,
+"name": "籍",
+"traditional": "籍",
+"pinyin_auto": "jí",
+"isCompound": false
+},
+{
+"order": 276,
+"name": "赖",
+"traditional": "賴",
+"pinyin_auto": "lài",
+"isCompound": false
+},
+{
+"order": 277,
+"name": "卓",
+"traditional": "卓",
+"pinyin_auto": "zhuó",
+"isCompound": false
+},
+{
+"order": 278,
+"name": "蔺",
+"traditional": "藺",
+"pinyin_auto": "lìn",
+"isCompound": false
+},
+{
+"order": 279,
+"name": "屠",
+"traditional": "屠",
+"pinyin_auto": "tú",
+"isCompound": false
+},
+{
+"order": 280,
+"name": "蒙",
+"traditional": "蒙",
+"pinyin_auto": "méng",
+"isCompound": false
+},
+{
+"order": 281,
+"name": "池",
+"traditional": "池",
+"pinyin_auto": "chí",
+"isCompound": false
+},
+{
+"order": 282,
+"name": "乔",
+"traditional": "喬",
+"pinyin_auto": "qiáo",
+"isCompound": false
+},
+{
+"order": 283,
+"name": "阴",
+"traditional": "陰",
+"pinyin_auto": "yīn",
+"isCompound": false
+},
+{
+"order": 284,
+"name": "郁",
+"traditional": "鬱",
+"pinyin_auto": "yù",
+"isCompound": false
+},
+{
+"order": 285,
+"name": "胥",
+"traditional": "胥",
+"pinyin_auto": "xū",
+"isCompound": false
+},
+{
+"order": 286,
+"name": "能",
+"traditional": "能",
+"pinyin_auto": "néng",
+"isCompound": false
+},
+{
+"order": 287,
+"name": "苍",
+"traditional": "蒼",
+"pinyin_auto": "cāng",
+"isCompound": false
+},
+{
+"order": 288,
+"name": "双",
+"traditional": "雙",
+"pinyin_auto": "shuāng",
+"isCompound": false
+},
+{
+"order": 289,
+"name": "闻",
+"traditional": "聞",
+"pinyin_auto": "wén",
+"isCompound": false
+},
+{
+"order": 290,
+"name": "莘",
+"traditional": "莘",
+"pinyin_auto": "shēn",
+"isCompound": false
+},
+{
+"order": 291,
+"name": "党",
+"traditional": "黨",
+"pinyin_auto": "dǎng",
+"isCompound": false
+},
+{
+"order": 292,
+"name": "翟",
+"traditional": "翟",
+"pinyin_auto": "dí",
+"isCompound": false
+},
+{
+"order": 293,
+"name": "谭",
+"traditional": "譚",
+"pinyin_auto": "tán",
+"isCompound": false
+},
+{
+"order": 294,
+"name": "贡",
+"traditional": "貢",
+"pinyin_auto": "gòng",
+"isCompound": false
+},
+{
+"order": 295,
+"name": "劳",
+"traditional": "勞",
+"pinyin_auto": "láo",
+"isCompound": false
+},
+{
+"order": 296,
+"name": "逄",
+"traditional": "逄",
+"pinyin_auto": "páng",
+"isCompound": false
+},
+{
+"order": 297,
+"name": "姬",
+"traditional": "姬",
+"pinyin_auto": "jī",
+"isCompound": false
+},
+{
+"order": 298,
+"name": "申",
+"traditional": "申",
+"pinyin_auto": "shēn",
+"isCompound": false
+},
+{
+"order": 299,
+"name": "扶",
+"traditional": "扶",
+"pinyin_auto": "fú",
+"isCompound": false
+},
+{
+"order": 300,
+"name": "堵",
+"traditional": "堵",
+"pinyin_auto": "dǔ",
+"isCompound": false
+},
+{
+"order": 301,
+"name": "冉",
+"traditional": "冉",
+"pinyin_auto": "rǎn",
+"isCompound": false
+},
+{
+"order": 302,
+"name": "宰",
+"traditional": "宰",
+"pinyin_auto": "zǎi",
+"isCompound": false
+},
+{
+"order": 303,
+"name": "郦",
+"traditional": "酈",
+"pinyin_auto": "lì",
+"isCompound": false
+},
+{
+"order": 304,
+"name": "雍",
+"traditional": "雍",
+"pinyin_auto": "yōng",
+"isCompound": false
+},
+{
+"order": 305,
+"name": "郤",
+"traditional": "郤",
+"pinyin_auto": "xì",
+"isCompound": false
+},
+{
+"order": 306,
+"name": "璩",
+"traditional": "璩",
+"pinyin_auto": "qú",
+"isCompound": false
+},
+{
+"order": 307,
+"name": "桑",
+"traditional": "桑",
+"pinyin_auto": "sāng",
+"isCompound": false
+},
+{
+"order": 308,
+"name": "桂",
+"traditional": "桂",
+"pinyin_auto": "guì",
+"isCompound": false
+},
+{
+"order": 309,
+"name": "濮",
+"traditional": "濮",
+"pinyin_auto": "pú",
+"isCompound": false
+},
+{
+"order": 310,
+"name": "牛",
+"traditional": "牛",
+"pinyin_auto": "niú",
+"isCompound": false
+},
+{
+"order": 311,
+"name": "寿",
+"traditional": "壽",
+"pinyin_auto": "shòu",
+"isCompound": false
+},
+{
+"order": 312,
+"name": "通",
+"traditional": "通",
+"pinyin_auto": "tōng",
+"isCompound": false
+},
+{
+"order": 313,
+"name": "边",
+"traditional": "邊",
+"pinyin_auto": "biān",
+"isCompound": false
+},
+{
+"order": 314,
+"name": "扈",
+"traditional": "扈",
+"pinyin_auto": "hù",
+"isCompound": false
+},
+{
+"order": 315,
+"name": "燕",
+"traditional": "燕",
+"pinyin_auto": "yàn",
+"isCompound": false
+},
+{
+"order": 316,
+"name": "冀",
+"traditional": "冀",
+"pinyin_auto": "jì",
+"isCompound": false
+},
+{
+"order": 317,
+"name": "郏",
+"traditional": "郟",
+"pinyin_auto": "jiá",
+"isCompound": false
+},
+{
+"order": 318,
+"name": "浦",
+"traditional": "浦",
+"pinyin_auto": "pǔ",
+"isCompound": false
+},
+{
+"order": 319,
+"name": "尚",
+"traditional": "尚",
+"pinyin_auto": "shàng",
+"isCompound": false
+},
+{
+"order": 320,
+"name": "农",
+"traditional": "農",
+"pinyin_auto": "nóng",
+"isCompound": false
+},
+{
+"order": 321,
+"name": "温",
+"traditional": "溫",
+"pinyin_auto": "wēn",
+"isCompound": false
+},
+{
+"order": 322,
+"name": "别",
+"traditional": "別",
+"pinyin_auto": "bié",
+"isCompound": false
+},
+{
+"order": 323,
+"name": "庄",
+"traditional": "莊",
+"pinyin_auto": "zhuāng",
+"isCompound": false
+},
+{
+"order": 324,
+"name": "晏",
+"traditional": "晏",
+"pinyin_auto": "yàn",
+"isCompound": false
+},
+{
+"order": 325,
+"name": "柴",
+"traditional": "柴",
+"pinyin_auto": "chái",
+"isCompound": false
+},
+{
+"order": 326,
+"name": "瞿",
+"traditional": "瞿",
+"pinyin_auto": "qú",
+"isCompound": false
+},
+{
+"order": 327,
+"name": "阎",
+"traditional": "閻",
+"pinyin_auto": "yán",
+"isCompound": false
+},
+{
+"order": 328,
+"name": "充",
+"traditional": "充",
+"pinyin_auto": "chōng",
+"isCompound": false
+},
+{
+"order": 329,
+"name": "慕",
+"traditional": "慕",
+"pinyin_auto": "mù",
+"isCompound": false
+},
+{
+"order": 330,
+"name": "连",
+"traditional": "連",
+"pinyin_auto": "lián",
+"isCompound": false
+},
+{
+"order": 331,
+"name": "茹",
+"traditional": "茹",
+"pinyin_auto": "rú",
+"isCompound": false
+},
+{
+"order": 332,
+"name": "习",
+"traditional": "習",
+"pinyin_auto": "xí",
+"isCompound": false
+},
+{
+"order": 333,
+"name": "宦",
+"traditional": "宦",
+"pinyin_auto": "huàn",
+"isCompound": false
+},
+{
+"order": 334,
+"name": "艾",
+"traditional": "艾",
+"pinyin_auto": "ài",
+"isCompound": false
+},
+{
+"order": 335,
+"name": "鱼",
+"traditional": "魚",
+"pinyin_auto": "yú",
+"isCompound": false
+},
+{
+"order": 336,
+"name": "容",
+"traditional": "容",
+"pinyin_auto": "róng",
+"isCompound": false
+},
+{
+"order": 337,
+"name": "向",
+"traditional": "向",
+"pinyin_auto": "xiàng",
+"isCompound": false
+},
+{
+"order": 338,
+"name": "古",
+"traditional": "古",
+"pinyin_auto": "gǔ",
+"isCompound": false
+},
+{
+"order": 339,
+"name": "易",
+"traditional": "易",
+"pinyin_auto": "yì",
+"isCompound": false
+},
+{
+"order": 340,
+"name": "慎",
+"traditional": "慎",
+"pinyin_auto": "shèn",
+"isCompound": false
+},
+{
+"order": 341,
+"name": "戈",
+"traditional": "戈",
+"pinyin_auto": "gē",
+"isCompound": false
+},
+{
+"order": 342,
+"name": "廖",
+"traditional": "廖",
+"pinyin_auto": "liào",
+"isCompound": false
+},
+{
+"order": 343,
+"name": "庾",
+"traditional": "庾",
+"pinyin_auto": "yǔ",
+"isCompound": false
+},
+{
+"order": 344,
+"name": "终",
+"traditional": "終",
+"pinyin_auto": "zhōng",
+"isCompound": false
+},
+{
+"order": 345,
+"name": "暨",
+"traditional": "暨",
+"pinyin_auto": "jì",
+"isCompound": false
+},
+{
+"order": 346,
+"name": "居",
+"traditional": "居",
+"pinyin_auto": "jū",
+"isCompound": false
+},
+{
+"order": 347,
+"name": "衡",
+"traditional": "衡",
+"pinyin_auto": "héng",
+"isCompound": false
+},
+{
+"order": 348,
+"name": "步",
+"traditional": "步",
+"pinyin_auto": "bù",
+"isCompound": false
+},
+{
+"order": 349,
+"name": "都",
+"traditional": "都",
+"pinyin_auto": "dōu",
+"isCompound": false
+},
+{
+"order": 350,
+"name": "耿",
+"traditional": "耿",
+"pinyin_auto": "gěng",
+"isCompound": false
+},
+{
+"order": 351,
+"name": "满",
+"traditional": "滿",
+"pinyin_auto": "mǎn",
+"isCompound": false
+},
+{
+"order": 352,
+"name": "弘",
+"traditional": "弘",
+"pinyin_auto": "hóng",
+"isCompound": false
+},
+{
+"order": 353,
+"name": "匡",
+"traditional": "匡",
+"pinyin_auto": "kuāng",
+"isCompound": false
+},
+{
+"order": 354,
+"name": "国",
+"traditional": "國",
+"pinyin_auto": "guó",
+"isCompound": false
+},
+{
+"order": 355,
+"name": "文",
+"traditional": "文",
+"pinyin_auto": "wén",
+"isCompound": false
+},
+{
+"order": 356,
+"name": "寇",
+"traditional": "寇",
+"pinyin_auto": "kòu",
+"isCompound": false
+},
+{
+"order": 357,
+"name": "广",
+"traditional": "廣",
+"pinyin_auto": "guǎng",
+"isCompound": false
+},
+{
+"order": 358,
+"name": "禄",
+"traditional": "祿",
+"pinyin_auto": "lù",
+"isCompound": false
+},
+{
+"order": 359,
+"name": "阙",
+"traditional": "闕",
+"pinyin_auto": "quē",
+"isCompound": false
+},
+{
+"order": 360,
+"name": "东",
+"traditional": "東",
+"pinyin_auto": "dōng",
+"isCompound": false
+},
+{
+"order": 361,
+"name": "欧",
+"traditional": "歐",
+"pinyin_auto": "ōu",
+"isCompound": false
+},
+{
+"order": 362,
+"name": "殳",
+"traditional": "殳",
+"pinyin_auto": "shū",
+"isCompound": false
+},
+{
+"order": 363,
+"name": "沃",
+"traditional": "沃",
+"pinyin_auto": "wò",
+"isCompound": false
+},
+{
+"order": 364,
+"name": "利",
+"traditional": "利",
+"pinyin_auto": "lì",
+"isCompound": false
+},
+{
+"order": 365,
+"name": "蔚",
+"traditional": "蔚",
+"pinyin_auto": "wèi",
+"isCompound": false
+},
+{
+"order": 366,
+"name": "越",
+"traditional": "越",
+"pinyin_auto": "yuè",
+"isCompound": false
+},
+{
+"order": 367,
+"name": "夔",
+"traditional": "夔",
+"pinyin_auto": "kuí",
+"isCompound": false
+},
+{
+"order": 368,
+"name": "隆",
+"traditional": "隆",
+"pinyin_auto": "lóng",
+"isCompound": false
+},
+{
+"order": 369,
+"name": "师",
+"traditional": "師",
+"pinyin_auto": "shī",
+"isCompound": false
+},
+{
+"order": 370,
+"name": "巩",
+"traditional": "鞏",
+"pinyin_auto": "gǒng",
+"isCompound": false
+},
+{
+"order": 371,
+"name": "厍",
+"traditional": "厙",
+"pinyin_auto": "shè",
+"isCompound": false
+},
+{
+"order": 372,
+"name": "聂",
+"traditional": "聶",
+"pinyin_auto": "niè",
+"isCompound": false
+},
+{
+"order": 373,
+"name": "晁",
+"traditional": "晁",
+"pinyin_auto": "cháo",
+"isCompound": false
+},
+{
+"order": 374,
+"name": "勾",
+"traditional": "勾",
+"pinyin_auto": "gōu",
+"isCompound": false
+},
+{
+"order": 375,
+"name": "敖",
+"traditional": "敖",
+"pinyin_auto": "áo",
+"isCompound": false
+},
+{
+"order": 376,
+"name": "融",
+"traditional": "融",
+"pinyin_auto": "róng",
+"isCompound": false
+},
+{
+"order": 377,
+"name": "冷",
+"traditional": "冷",
+"pinyin_auto": "lěng",
+"isCompound": false
+},
+{
+"order": 378,
+"name": "訾",
+"traditional": "訾",
+"pinyin_auto": "zī",
+"isCompound": false
+},
+{
+"order": 379,
+"name": "辛",
+"traditional": "辛",
+"pinyin_auto": "xīn",
+"isCompound": false
+},
+{
+"order": 380,
+"name": "阚",
+"traditional": "闞",
+"pinyin_auto": "hǎn",
+"isCompound": false
+},
+{
+"order": 381,
+"name": "那",
+"traditional": "那",
+"pinyin_auto": "nà",
+"isCompound": false
+},
+{
+"order": 382,
+"name": "简",
+"traditional": "簡",
+"pinyin_auto": "jiǎn",
+"isCompound": false
+},
+{
+"order": 383,
+"name": "饶",
+"traditional": "饒",
+"pinyin_auto": "ráo",
+"isCompound": false
+},
+{
+"order": 384,
+"name": "空",
+"traditional": "空",
+"pinyin_auto": "kōng",
+"isCompound": false
+},
+{
+"order": 385,
+"name": "曾",
+"traditional": "曾",
+"pinyin_auto": "céng",
+"isCompound": false
+},
+{
+"order": 386,
+"name": "毋",
+"traditional": "毋",
+"pinyin_auto": "wú",
+"isCompound": false
+},
+{
+"order": 387,
+"name": "沙",
+"traditional": "沙",
+"pinyin_auto": "shā",
+"isCompound": false
+},
+{
+"order": 388,
+"name": "乜",
+"traditional": "乜",
+"pinyin_auto": "miē",
+"isCompound": false
+},
+{
+"order": 389,
+"name": "养",
+"traditional": "養",
+"pinyin_auto": "yǎng",
+"isCompound": false
+},
+{
+"order": 390,
+"name": "鞠",
+"traditional": "鞠",
+"pinyin_auto": "jū",
+"isCompound": false
+},
+{
+"order": 391,
+"name": "须",
+"traditional": "須",
+"pinyin_auto": "xū",
+"isCompound": false
+},
+{
+"order": 392,
+"name": "丰",
+"traditional": "豐",
+"pinyin_auto": "fēng",
+"isCompound": false
+},
+{
+"order": 393,
+"name": "巢",
+"traditional": "巢",
+"pinyin_auto": "cháo",
+"isCompound": false
+},
+{
+"order": 394,
+"name": "关",
+"traditional": "關",
+"pinyin_auto": "guān",
+"isCompound": false
+},
+{
+"order": 395,
+"name": "蒯",
+"traditional": "蒯",
+"pinyin_auto": "kuǎi",
+"isCompound": false
+},
+{
+"order": 396,
+"name": "相",
+"traditional": "相",
+"pinyin_auto": "xiāng",
+"isCompound": false
+},
+{
+"order": 397,
+"name": "查",
+"traditional": "查",
+"pinyin_auto": "chá",
+"isCompound": false
+},
+{
+"order": 398,
+"name": "后",
+"traditional": "后",
+"pinyin_auto": "hòu",
+"isCompound": false
+},
+{
+"order": 399,
+"name": "荆",
+"traditional": "荊",
+"pinyin_auto": "jīng",
+"isCompound": false
+},
+{
+"order": 400,
+"name": "红",
+"traditional": "紅",
+"pinyin_auto": "hóng",
+"isCompound": false
+},
+{
+"order": 401,
+"name": "游",
+"traditional": "遊",
+"pinyin_auto": "yóu",
+"isCompound": false
+},
+{
+"order": 402,
+"name": "竺",
+"traditional": "竺",
+"pinyin_auto": "zhú",
+"isCompound": false
+},
+{
+"order": 403,
+"name": "权",
+"traditional": "權",
+"pinyin_auto": "quán",
+"isCompound": false
+},
+{
+"order": 404,
+"name": "逯",
+"traditional": "逯",
+"pinyin_auto": "lù",
+"isCompound": false
+},
+{
+"order": 405,
+"name": "盖",
+"traditional": "蓋",
+"pinyin_auto": "gài",
+"isCompound": false
+},
+{
+"order": 406,
+"name": "益",
+"traditional": "益",
+"pinyin_auto": "yì",
+"isCompound": false
+},
+{
+"order": 407,
+"name": "桓",
+"traditional": "桓",
+"pinyin_auto": "huán",
+"isCompound": false
+},
+{
+"order": 408,
+"name": "公",
+"traditional": "公",
+"pinyin_auto": "gōng",
+"isCompound": false
+},
+{
+"order": 409,
+"name": "万俟",
+"traditional": "萬俟",
+"pinyin_auto": "mò qí",
+"isCompound": true
+},
+{
+"order": 410,
+"name": "司马",
+"traditional": "司馬",
+"pinyin_auto": "sī mǎ",
+"isCompound": true
+},
+{
+"order": 411,
+"name": "上官",
+"traditional": "上官",
+"pinyin_auto": "shàng guān",
+"isCompound": true
+},
+{
+"order": 412,
+"name": "欧阳",
+"traditional": "歐陽",
+"pinyin_auto": "ōu yáng",
+"isCompound": true
+},
+{
+"order": 413,
+"name": "夏侯",
+"traditional": "夏侯",
+"pinyin_auto": "xià hóu",
+"isCompound": true
+},
+{
+"order": 414,
+"name": "诸葛",
+"traditional": "諸葛",
+"pinyin_auto": "zhū gě",
+"isCompound": true
+},
+{
+"order": 415,
+"name": "闻人",
+"traditional": "聞人",
+"pinyin_auto": "wén rén",
+"isCompound": true
+},
+{
+"order": 416,
+"name": "东方",
+"traditional": "東方",
+"pinyin_auto": "dōng fāng",
+"isCompound": true
+},
+{
+"order": 417,
+"name": "赫连",
+"traditional": "赫連",
+"pinyin_auto": "hè lián",
+"isCompound": true
+},
+{
+"order": 418,
+"name": "皇甫",
+"traditional": "皇甫",
+"pinyin_auto": "huáng fǔ",
+"isCompound": true
+},
+{
+"order": 419,
+"name": "尉迟",
+"traditional": "尉遲",
+"pinyin_auto": "yù chí",
+"isCompound": true
+},
+{
+"order": 420,
+"name": "公羊",
+"traditional": "公羊",
+"pinyin_auto": "gōng yáng",
+"isCompound": true
+},
+{
+"order": 421,
+"name": "澹台",
+"traditional": "澹台",
+"pinyin_auto": "tán tái",
+"isCompound": true
+},
+{
+"order": 422,
+"name": "公冶",
+"traditional": "公冶",
+"pinyin_auto": "gōng yě",
+"isCompound": true
+},
+{
+"order": 423,
+"name": "宗政",
+"traditional": "宗政",
+"pinyin_auto": "zōng zhèng",
+"isCompound": true
+},
+{
+"order": 424,
+"name": "濮阳",
+"traditional": "濮陽",
+"pinyin_auto": "pú yáng",
+"isCompound": true
+},
+{
+"order": 425,
+"name": "淳于",
+"traditional": "淳于",
+"pinyin_auto": "chún yú",
+"isCompound": true
+},
+{
+"order": 426,
+"name": "单于",
+"traditional": "單于",
+"pinyin_auto": "chán yú",
+"isCompound": true
+},
+{
+"order": 427,
+"name": "太叔",
+"traditional": "太叔",
+"pinyin_auto": "tài shū",
+"isCompound": true
+},
+{
+"order": 428,
+"name": "申屠",
+"traditional": "申屠",
+"pinyin_auto": "shēn tú",
+"isCompound": true
+},
+{
+"order": 429,
+"name": "公孙",
+"traditional": "公孫",
+"pinyin_auto": "gōng sūn",
+"isCompound": true
+},
+{
+"order": 430,
+"name": "仲孙",
+"traditional": "仲孫",
+"pinyin_auto": "zhòng sūn",
+"isCompound": true
+},
+{
+"order": 431,
+"name": "轩辕",
+"traditional": "軒轅",
+"pinyin_auto": "xuān yuán",
+"isCompound": true
+},
+{
+"order": 432,
+"name": "令狐",
+"traditional": "令狐",
+"pinyin_auto": "líng hú",
+"isCompound": true
+},
+{
+"order": 433,
+"name": "钟离",
+"traditional": "鐘離",
+"pinyin_auto": "zhōng lí",
+"isCompound": true
+},
+{
+"order": 434,
+"name": "宇文",
+"traditional": "宇文",
+"pinyin_auto": "yǔ wén",
+"isCompound": true
+},
+{
+"order": 435,
+"name": "长孙",
+"traditional": "長孫",
+"pinyin_auto": "zhǎng sūn",
+"isCompound": true
+},
+{
+"order": 436,
+"name": "慕容",
+"traditional": "慕容",
+"pinyin_auto": "mù róng",
+"isCompound": true
+},
+{
+"order": 437,
+"name": "鲜于",
+"traditional": "鮮于",
+"pinyin_auto": "xiān yú",
+"isCompound": true
+},
+{
+"order": 438,
+"name": "闾丘",
+"traditional": "閭丘",
+"pinyin_auto": "lǘ qiū",
+"isCompound": true
+},
+{
+"order": 439,
+"name": "司徒",
+"traditional": "司徒",
+"pinyin_auto": "sī tú",
+"isCompound": true
+},
+{
+"order": 440,
+"name": "司空",
+"traditional": "司空",
+"pinyin_auto": "sī kōng",
+"isCompound": true
+},
+{
+"order": 441,
+"name": "亓官",
+"traditional": "亓官",
+"pinyin_auto": "qí guān",
+"isCompound": true
+},
+{
+"order": 442,
+"name": "司寇",
+"traditional": "司寇",
+"pinyin_auto": "sī kòu",
+"isCompound": true
+},
+{
+"order": 443,
+"name": "仉督",
+"traditional": "仉督",
+"pinyin_auto": "zhǎng dū",
+"isCompound": true
+},
+{
+"order": 444,
+"name": "子车",
+"traditional": "子車",
+"pinyin_auto": "zi chē",
+"isCompound": true
+},
+{
+"order": 445,
+"name": "颛孙",
+"traditional": "顓孫",
+"pinyin_auto": "zhuān sūn",
+"isCompound": true
+},
+{
+"order": 446,
+"name": "端木",
+"traditional": "端木",
+"pinyin_auto": "duān mù",
+"isCompound": true
+},
+{
+"order": 447,
+"name": "巫马",
+"traditional": "巫馬",
+"pinyin_auto": "wū mǎ",
+"isCompound": true
+},
+{
+"order": 448,
+"name": "公西",
+"traditional": "公西",
+"pinyin_auto": "gōng xī",
+"isCompound": true
+},
+{
+"order": 449,
+"name": "漆雕",
+"traditional": "漆雕",
+"pinyin_auto": "qī diāo",
+"isCompound": true
+},
+{
+"order": 450,
+"name": "乐正",
+"traditional": "樂正",
+"pinyin_auto": "lè zhèng",
+"isCompound": true
+},
+{
+"order": 451,
+"name": "壤驷",
+"traditional": "壤駟",
+"pinyin_auto": "rǎng sì",
+"isCompound": true
+},
+{
+"order": 452,
+"name": "公良",
+"traditional": "公良",
+"pinyin_auto": "gōng liáng",
+"isCompound": true
+},
+{
+"order": 453,
+"name": "拓跋",
+"traditional": "拓跋",
+"pinyin_auto": "tuò bá",
+"isCompound": true
+},
+{
+"order": 454,
+"name": "夹谷",
+"traditional": "夾谷",
+"pinyin_auto": "jiā gǔ",
+"isCompound": true
+},
+{
+"order": 455,
+"name": "宰父",
+"traditional": "宰父",
+"pinyin_auto": "zǎi fù",
+"isCompound": true
+},
+{
+"order": 456,
+"name": "谷梁",
+"traditional": "谷梁",
+"pinyin_auto": "gǔ liáng",
+"isCompound": true
+},
+{
+"order": 457,
+"name": "晋楚",
+"traditional": "晉楚",
+"pinyin_auto": "jìn chǔ",
+"isCompound": true
+},
+{
+"order": 458,
+"name": "闫法",
+"traditional": "閆法",
+"pinyin_auto": "yán fǎ",
+"isCompound": true
+},
+{
+"order": 459,
+"name": "汝鄢",
+"traditional": "汝鄢",
+"pinyin_auto": "rǔ yān",
+"isCompound": true
+},
+{
+"order": 460,
+"name": "涂钦",
+"traditional": "塗欽",
+"pinyin_auto": "tú qīn",
+"isCompound": true
+},
+{
+"order": 461,
+"name": "段干",
+"traditional": "段幹",
+"pinyin_auto": "duàn gàn",
+"isCompound": true
+},
+{
+"order": 462,
+"name": "百里",
+"traditional": "百裏",
+"pinyin_auto": "bǎi lǐ",
+"isCompound": true
+},
+{
+"order": 463,
+"name": "东郭",
+"traditional": "東郭",
+"pinyin_auto": "dōng guō",
+"isCompound": true
+},
+{
+"order": 464,
+"name": "南门",
+"traditional": "南門",
+"pinyin_auto": "nán mén",
+"isCompound": true
+},
+{
+"order": 465,
+"name": "呼延",
+"traditional": "呼延",
+"pinyin_auto": "hū yán",
+"isCompound": true
+},
+{
+"order": 466,
+"name": "归海",
+"traditional": "歸海",
+"pinyin_auto": "guī hǎi",
+"isCompound": true
+},
+{
+"order": 467,
+"name": "羊舌",
+"traditional": "羊舌",
+"pinyin_auto": "yáng shé",
+"isCompound": true
+},
+{
+"order": 468,
+"name": "微生",
+"traditional": "微生",
+"pinyin_auto": "wēi shēng",
+"isCompound": true
+},
+{
+"order": 469,
+"name": "岳帅",
+"traditional": "嶽帥",
+"pinyin_auto": "yuè shuài",
+"isCompound": true
+},
+{
+"order": 470,
+"name": "缑亢",
+"traditional": "緱亢",
+"pinyin_auto": "gōu kàng",
+"isCompound": true
+},
+{
+"order": 471,
+"name": "况后",
+"traditional": "況后",
+"pinyin_auto": "kuàng hòu",
+"isCompound": true
+},
+{
+"order": 472,
+"name": "有琴",
+"traditional": "有琴",
+"pinyin_auto": "yǒu qín",
+"isCompound": true
+},
+{
+"order": 473,
+"name": "梁丘",
+"traditional": "梁丘",
+"pinyin_auto": "liáng qiū",
+"isCompound": true
+},
+{
+"order": 474,
+"name": "左丘",
+"traditional": "左丘",
+"pinyin_auto": "zuǒ qiū",
+"isCompound": true
+},
+{
+"order": 475,
+"name": "东门",
+"traditional": "東門",
+"pinyin_auto": "dōng mén",
+"isCompound": true
+},
+{
+"order": 476,
+"name": "西门",
+"traditional": "西門",
+"pinyin_auto": "xī mén",
+"isCompound": true
+},
+{
+"order": 477,
+"name": "商牟",
+"traditional": "商牟",
+"pinyin_auto": "shāng móu",
+"isCompound": true
+},
+{
+"order": 478,
+"name": "佘佴",
+"traditional": "佘佴",
+"pinyin_auto": "shé èr",
+"isCompound": true
+},
+{
+"order": 479,
+"name": "伯赏",
+"traditional": "伯賞",
+"pinyin_auto": "bó shǎng",
+"isCompound": true
+},
+{
+"order": 480,
+"name": "南宫",
+"traditional": "南宮",
+"pinyin_auto": "nán gōng",
+"isCompound": true
+},
+{
+"order": 481,
+"name": "墨哈",
+"traditional": "墨哈",
+"pinyin_auto": "mò hā",
+"isCompound": true
+},
+{
+"order": 482,
+"name": "谯笪",
+"traditional": "譙笪",
+"pinyin_auto": "qiáo dá",
+"isCompound": true
+},
+{
+"order": 483,
+"name": "年爱",
+"traditional": "年愛",
+"pinyin_auto": "nián ài",
+"isCompound": true
+},
+{
+"order": 484,
+"name": "阳佟",
+"traditional": "陽佟",
+"pinyin_auto": "yáng tóng",
+"isCompound": true
+},
+{
+"order": 485,
+"name": "第五",
+"traditional": "第五",
+"pinyin_auto": "dì wǔ",
+"isCompound": true
+},
+{
+"order": 486,
+"name": "言福",
+"traditional": "言福",
+"pinyin_auto": "yán fú",
+"isCompound": true
+}
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "张",
+    "romanizations": ["Teo", "Tiu", "Tio", "Teoh", "Cheong", "Chong", "Zhang"],
+    "junwang": ["清河郡", "安定郡", "敦煌郡", "武威郡", "范阳郡", "南阳郡", "吴郡"],
+    "tanghao": [],
+    "origin": "相传黄帝之孙挥任弓正，观弧星而始制弓矢，因以张为姓；另有出自春秋晋国大夫解张（字张侯）、源自长姓（先秦张、长通假）及他姓、他族改姓等说。",
+    "founder": "挥（黄帝之孙，一说第五子）",
+    "migration": "春秋时晋国是张姓发展的重要地区，河东解邑张城（今山西临猗西）为发祥地之一；三家分晋后解张后裔分居韩、赵、魏，逐渐形成山西、河北、河南各支张氏。",
+    "nanyang": "新加坡设有新加坡张氏总会与清河张氏公会；2022年两会分别庆祝成立85周年和67周年。",
+    "notableFigures": [
+      {"name": "张良", "note": "韩国贵族后裔，汉朝开国功臣"},
+      {"name": "张辽", "note": "三国曹魏名将，原姓聂"},
+      {"name": "解张", "note": "春秋晋国大夫，字张侯，部分张姓奉为先祖"}
+    ],
+    "dialectGroups": [],
+    "clanAssociations": ["新加坡张氏总会", "清河张氏公会"],
+    "fieldSources": {
+      "romanizations": [
+        {"title": "维基百科：张姓", "detail": "各地写法：新加坡 Zhang、Tiu/Tio/Teoh、Teo、Cheong、Chong", "url": "https://zh.wikipedia.org/wiki/张姓"},
+        {"title": "Wikipedia: Zhang (surname)", "detail": "Teo、Chong 为新加坡华人常见姓氏拼写", "url": "https://en.wikipedia.org/wiki/Zhang_(surname)"}
+      ],
+      "junwang": [{"title": "维基百科：张姓", "detail": "郡望：清河张氏最知名，另列安定、敦煌、武威、范阳、南阳、吴郡", "url": "https://zh.wikipedia.org/wiki/张姓"}],
+      "origin": [{"title": "维基百科：张姓", "detail": "起源一节", "url": "https://zh.wikipedia.org/wiki/张姓"}],
+      "founder": [{"title": "维基百科：张姓", "detail": "起源一节：黄帝孙挥制弓矢，因姓张氏，清河张氏以此为祖", "url": "https://zh.wikipedia.org/wiki/张姓"}],
+      "migration": [{"title": "维基百科：张姓", "detail": "晋国解邑张城及三家分晋后的分布", "url": "https://zh.wikipedia.org/wiki/张姓"}],
+      "nanyang": [{"title": "新加坡总理公署：SM Teo Chee Hean at Chang Clan General Association and Chin Ho Teo Clan Association anniversary dinner", "detail": "2022年11月23日致辞，85周年及67周年纪念", "url": "https://www.pmo.gov.sg/Newsroom/SM-Teo-Chee-Hean-Chang-Clan-General-Association-and-Chin-Ho-Teo-Clan-Association-anniversary-dinner"}],
+      "notableFigures": [{"title": "维基百科：张姓", "detail": "起源及人物相关段落", "url": "https://zh.wikipedia.org/wiki/张姓"}],
+      "clanAssociations": [{"title": "新加坡总理公署：SM Teo Chee Hean at Chang Clan General Association and Chin Ho Teo Clan Association anniversary dinner", "detail": "Singapore Chang Clan General Association（新加坡张氏总会）、Chin Ho Teo Clan Association（清河张氏公会）", "url": "https://www.pmo.gov.sg/Newsroom/SM-Teo-Chee-Hean-Chang-Clan-General-Association-and-Chin-Ho-Teo-Clan-Association-anniversary-dinner"}]
+    }
+  },
+  {
+    "name": "王",
+    "romanizations": ["Ong", "Heng", "Wong", "Wang"],
+    "junwang": ["太原郡", "琅邪郡", "汲郡", "青州", "北海郡", "魏郡", "京兆尹"],
+    "tanghao": [],
+    "origin": "王姓来源多元：一说出自周朝王族姬姓，以太子晋（王子乔）为始祖；一说商末比干后裔以王族之后为氏；一说出自妫姓，战国田安失济北王位后子孙改姓王。",
+    "founder": "王子乔（太子晋，姬姓王氏始祖）",
+    "migration": "秦末汉初王翦后代分迁山东琅琊与山西太原；唐末河南固始人王审知南下福建建立闽国，被视为开闽王氏始祖，宋元明时期王姓人口总体向东南迁移。",
+    "nanyang": "新加坡福建王氏于1875年设立闽王祠，1944年改称闽王祠公会，1970年改为开闽王氏总会；宗族曾购置姓王山（Seh Ong Hill）作坟山，后于武吉巴督重建闽王祠。",
+    "notableFigures": [
+      {"name": "王翦", "note": "秦国名将"},
+      {"name": "王猛", "note": "前秦丞相，属北海王氏"},
+      {"name": "王审知", "note": "唐末南下福建，建立闽国"}
+    ],
+    "dialectGroups": ["福建"],
+    "clanAssociations": ["开闽王氏总会"],
+    "fieldSources": {
+      "romanizations": [{"title": "维基百科：王姓", "detail": "各地写法：新加坡 Wang、Ong、Heng、Wong", "url": "https://zh.wikipedia.org/wiki/王姓"}],
+      "junwang": [{"title": "维基百科：王姓", "detail": "郡望一节", "url": "https://zh.wikipedia.org/wiki/王姓"}],
+      "origin": [{"title": "维基百科：王姓", "detail": "来源一节（周王族说注明缺乏可靠佐证）", "url": "https://zh.wikipedia.org/wiki/王姓"}],
+      "founder": [{"title": "维基百科：王姓", "detail": "姬姓王氏以王子乔（太子晋）为始祖", "url": "https://zh.wikipedia.org/wiki/王姓"}],
+      "migration": [{"title": "维基百科：王姓", "detail": "王翦后裔分迁、开闽王氏、宋元明人口迁移", "url": "https://zh.wikipedia.org/wiki/王姓"}],
+      "nanyang": [{"title": "Bukit Brown: Seh Ong Hill", "detail": "闽王祠（1875）、闽王祠公会（1944）、开闽王氏总会（1970）及姓王山沿革", "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"}],
+      "notableFigures": [{"title": "维基百科：王姓", "detail": "郡望与迁徙相关人物", "url": "https://zh.wikipedia.org/wiki/王姓"}],
+      "dialectGroups": [{"title": "Bukit Brown: Seh Ong Hill", "detail": "Singapore Hokkien Ong Clansmen General Association，福建王氏族人南来新加坡", "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"}],
+      "clanAssociations": [{"title": "Bukit Brown: Seh Ong Hill", "detail": "Singapore Hokkien Ong Clansmen General Association（開閩王氏總會）", "url": "https://bukitbrown.com/main/2012/seh-ong-hill/"}]
+    }
+  },
+  {
+    "name": "吴",
+    "romanizations": ["Goh", "Ngoh", "Ng", "Wu"],
+    "junwang": ["延陵郡", "渤海郡"],
+    "tanghao": [],
+    "origin": "主要出自姬姓：周太王之子泰伯、仲雍南奔江南建立句吴，吴国为越所灭后子孙以国为氏；另有上古吴姓、颛顼时吴回及他族改姓等说。",
+    "founder": "",
+    "migration": "泰伯、仲雍南下荆蛮，将中原文化带到江南；季札让国隐居延陵耕作，其后裔繁衍，构成今日吴姓的主体。",
+    "nanyang": "",
+    "notableFigures": [
+      {"name": "泰伯", "note": "周太王长子，句吴开创者"},
+      {"name": "仲雍", "note": "周太王次子，继泰伯为君"},
+      {"name": "季札", "note": "吴王寿梦之子，让国隐居延陵"}
+    ],
+    "dialectGroups": [],
+    "clanAssociations": [],
+    "fieldSources": {
+      "romanizations": [
+        {"title": "维基百科：吴姓", "detail": "各地写法：新加坡 Ngoh/Goh/Ng", "url": "https://zh.wikipedia.org/wiki/吴姓"},
+        {"title": "Wikipedia: Wu (surname)", "detail": "闽南语转写 Goh 等，列吴庆瑞（Goh Keng Swee）等新加坡人物", "url": "https://en.wikipedia.org/wiki/Wu_(surname)"}
+      ],
+      "junwang": [{"title": "维基百科：吴姓", "detail": "郡望：延陵、渤海", "url": "https://zh.wikipedia.org/wiki/吴姓"}],
+      "origin": [{"title": "维基百科：吴姓", "detail": "起源一节", "url": "https://zh.wikipedia.org/wiki/吴姓"}],
+      "migration": [{"title": "维基百科：吴姓", "detail": "泰伯奔吴与季札居延陵", "url": "https://zh.wikipedia.org/wiki/吴姓"}],
+      "notableFigures": [{"title": "维基百科：吴姓", "detail": "起源一节所述人物", "url": "https://zh.wikipedia.org/wiki/吴姓"}]
+    }
+  },
+  {
+    "name": "刘",
+    "romanizations": [],
+    "junwang": ["彭城郡", "沛郡", "弘农郡", "河间郡", "中山郡", "南阳郡", "东平郡", "广平郡", "长沙郡", "琅邪郡", "兰陵郡"],
+    "tanghao": ["彭城堂", "藜照堂", "中山堂", "蒲编堂", "五忠堂", "墨庄堂", "汉里堂", "豢龙堂", "七业堂", "传经堂", "铁汉堂", "清爱堂", "磐宗堂"],
+    "origin": "一说出自祁姓，尧的后裔刘累为夏帝孔甲养龙，后迁鲁阳（今河南鲁山）；一说出自姬姓，周定王封王季子于刘邑，建立刘国；另有汉代赐姓及匈奴、北魏独孤氏改姓等来源。",
+    "founder": "刘累",
+    "migration": "",
+    "nanyang": "",
+    "notableFigures": [
+      {"name": "刘累", "note": "传为尧的后裔，刘姓得姓始祖"},
+      {"name": "刘康公", "note": "周定王之弟王季子，受封刘邑"},
+      {"name": "刘邦", "note": "建立汉朝，曾赐项伯刘姓"},
+      {"name": "刘知几", "note": "撰《刘氏》三卷，考证刘氏为陆终苗裔"}
+    ],
+    "dialectGroups": [],
+    "clanAssociations": [],
+    "fieldSources": {
+      "junwang": [{"title": "维基百科：刘姓", "detail": "郡望一节，彭城刘氏最为知名", "url": "https://zh.wikipedia.org/wiki/刘姓"}],
+      "tanghao": [{"title": "维基百科：刘姓", "detail": "堂号一节", "url": "https://zh.wikipedia.org/wiki/刘姓"}],
+      "origin": [{"title": "维基百科：刘姓", "detail": "渊源一节，引《唐会要》《新唐书》《魏书·官氏志》", "url": "https://zh.wikipedia.org/wiki/刘姓"}],
+      "founder": [{"title": "维基百科：刘姓", "detail": "称刘累为得姓始祖", "url": "https://zh.wikipedia.org/wiki/刘姓"}],
+      "notableFigures": [{"title": "维基百科：刘姓", "detail": "渊源一节所述人物", "url": "https://zh.wikipedia.org/wiki/刘姓"}]
+    }
+  }
+]
