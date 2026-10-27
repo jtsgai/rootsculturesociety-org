@@ -4,6 +4,7 @@
 interface Props { title: string; src?: string; poster?: string; youtubeId?: string; id?: string; }
 const { title, src, poster, youtubeId, id } = Astro.props;
 ---
+<div class="video-player">
 <div class="video-frame">
   {src ? (
     <video id={id} controls preload="metadata" playsinline poster={poster || undefined} aria-label={title}>
@@ -19,3 +20,52 @@ const { title, src, poster, youtubeId, id } = Astro.props;
     </div>
   )}
 </div>
+{src && (
+  <div class="vp-controls" hidden role="group" aria-label={`${title} 播放控制`}>
+    <button type="button" class="vp-btn vp-play" aria-label="播放"><span aria-hidden="true" class="vp-icon">▶</span></button>
+    <input type="range" class="vp-seek" min="0" max="0" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00" />
+    <span class="vp-time" aria-hidden="true"><span class="vp-cur">0:00</span> / <span class="vp-dur">0:00</span></span>
+    <button type="button" class="vp-btn vp-mute" aria-label="静音" aria-pressed="false"><span aria-hidden="true" class="vp-icon">🔊</span></button>
+    <button type="button" class="vp-btn vp-fs" aria-label="全屏"><span aria-hidden="true" class="vp-icon">⛶</span></button>
+  </div>
+)}
+</div>
+
+<script>
+  // Controls sit under the picture so they never cover the burned-in subtitles.
+  // Without JS the native controls stay on (progressive enhancement).
+  const fmt = (t: number) => { if (!isFinite(t)) t = 0; const m = Math.floor(t / 60); const s = Math.floor(t % 60); return `${m}:${String(s).padStart(2, '0')}`; };
+  document.querySelectorAll<HTMLElement>('.video-player').forEach((root) => {
+    const v = root.querySelector('video'); const bar = root.querySelector<HTMLElement>('.vp-controls');
+    if (!v || !bar) return;
+    const play = bar.querySelector<HTMLButtonElement>('.vp-play')!, seek = bar.querySelector<HTMLInputElement>('.vp-seek')!;
+    const cur = bar.querySelector('.vp-cur')!, dur = bar.querySelector('.vp-dur')!;
+    const mute = bar.querySelector<HTMLButtonElement>('.vp-mute')!, fs = bar.querySelector<HTMLButtonElement>('.vp-fs')!;
+    v.controls = false; bar.hidden = false; root.classList.add('has-custom-controls');
+    const toggle = () => (v.paused || v.ended ? v.play() : v.pause());
+    play.addEventListener('click', toggle);
+    v.addEventListener('click', toggle);
+    const syncPlay = () => { const p = v.paused || v.ended; play.setAttribute('aria-label', p ? '播放' : '暂停'); play.querySelector('.vp-icon')!.textContent = p ? '▶' : '❚❚'; };
+    v.addEventListener('play', syncPlay); v.addEventListener('pause', syncPlay); v.addEventListener('ended', syncPlay);
+    const syncDur = () => { seek.max = String(v.duration || 0); dur.textContent = fmt(v.duration); };
+    v.addEventListener('loadedmetadata', syncDur); if (v.readyState >= 1) syncDur();
+    let dragging = false;
+    const syncTime = () => { cur.textContent = fmt(v.currentTime); if (!dragging) seek.value = String(v.currentTime); seek.setAttribute('aria-valuetext', `${fmt(v.currentTime)} / ${fmt(v.duration)}`); seek.style.setProperty('--vp-pct', `${v.duration ? (v.currentTime / v.duration) * 100 : 0}%`); };
+    v.addEventListener('timeupdate', syncTime); v.addEventListener('seeked', syncTime);
+    seek.addEventListener('input', () => { dragging = true; v.currentTime = Number(seek.value); syncTime(); });
+    seek.addEventListener('change', () => { dragging = false; });
+    const syncMute = () => { mute.setAttribute('aria-pressed', String(v.muted)); mute.setAttribute('aria-label', v.muted ? '取消静音' : '静音'); mute.querySelector('.vp-icon')!.textContent = v.muted ? '🔇' : '🔊'; };
+    mute.addEventListener('click', () => { v.muted = !v.muted; }); v.addEventListener('volumechange', syncMute);
+    fs.addEventListener('click', () => {
+      const anyV = v as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (root.requestFullscreen) root.requestFullscreen().catch(() => anyV.webkitEnterFullscreen?.());
+      else anyV.webkitEnterFullscreen?.();
+    });
+    // Keyboard shortcuts (k = play/pause, m = mute); buttons and the range keep their native keys.
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'k') { e.preventDefault(); toggle(); }
+      else if (e.key === 'm') { v.muted = !v.muted; }
+    });
+  });
+</script>
