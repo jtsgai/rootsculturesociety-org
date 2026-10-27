@@ -13,6 +13,8 @@
     "prebuild": "node scripts/check-publication-assets.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "build:surnames": "node scripts/build-surnames-base.mjs && node scripts/merge-surnames.mjs",
+    "validate:surnames": "node scripts/validate-surnames.mjs",
     "astro": "astro",
     "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
     "check:astro": "astro check",
