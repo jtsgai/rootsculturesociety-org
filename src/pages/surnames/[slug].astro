@@ -1,0 +1,60 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import '../../assets/styles/heritage.css';
+import { detailFields, surnames, type Surname } from '../../lib/surnames';
+
+export function getStaticPaths() {
+  return surnames.map((surname, index) => ({ params: { slug: surname.slug }, props: { surname, prev: surnames[index - 1], next: surnames[index + 1] } }));
+}
+const { surname: s, prev, next } = Astro.props as { surname: Surname; prev?: Surname; next?: Surname };
+const value = (key: string) => (s as unknown as Record<string, unknown>)[key];
+const description = s.origin || `《百家姓》第 ${s.order} 姓：${s.name}（${s.traditional}，${s.pinyin}）。`;
+---
+<SiteLayout lang="zh" title={`${s.name}姓 · 百家姓`} description={description} alternate={false}>
+  <section class="page-intro heritage-intro">
+    <div class="surname-hero">
+      <div class:list={['surname-seal', { 'is-compound': s.isCompound }]} lang="zh-CN" aria-hidden="true">{s.name}</div>
+      <div>
+        <div class="eyebrow"><a href="/surnames/">百家姓</a> · 第 {s.order} 姓</div>
+        <h1>{s.name}姓</h1>
+        <p class="surname-facts">
+          <span>繁体 <strong lang="zh-TW">{s.traditional}</strong></span>
+          <span>拼音 <strong>{s.pinyin}</strong></span>
+          <span>{s.isCompound ? '复姓' : '单姓'}</span>
+          <span>编号 <strong>{s.id}</strong></span>
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="page-body">
+    <div class="surname-sections">
+      {detailFields.map(({ key, label, ...rest }) => {
+        const v = value(key);
+        const verified = s.fieldStatus[key] === 'verified';
+        const cites = s.fieldSources[key] ?? [];
+        return (
+          <section class:list={['surname-field', { 'is-wide': 'wide' in rest && rest.wide }]}>
+            <header><h2>{label}</h2>{verified ? <span class="status-badge is-verified">已考证</span> : <span class="status-badge is-pending">待考证 · needs source</span>}</header>
+            {!verified && <p class="pending-text">{key === 'generationPoems' ? '字辈属各支派自定，本站不代拟。请依家中族谱或宗亲会资料填写。' : '暂无可引用的出处，留待考证。欢迎提供族谱、会馆刊物等资料。'}</p>}
+            {verified && typeof v === 'string' && <p>{v}</p>}
+            {verified && key === 'notableFigures' && <ul>{s.notableFigures.map((p) => <li><strong>{p.name}</strong>{p.note && `：${p.note}`}</li>)}</ul>}
+            {verified && key === 'generationPoems' && <ul>{s.generationPoems.map((p) => <li>{p.branch && <strong>{p.branch}：</strong>}{p.poem}</li>)}</ul>}
+            {verified && Array.isArray(v) && !['notableFigures', 'generationPoems'].includes(key) && <p>{(v as string[]).join('、')}</p>}
+            {cites.length > 0 && <p class="field-cite">出处：{cites.map((c, i) => <>{i > 0 && '；'}{c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.title}</a> : c.title}{c.detail && `（${c.detail}）`}</>)}</p>}
+          </section>
+        );
+      })}
+      <section class="surname-field is-wide">
+        <header><h2>本页出处</h2></header>
+        <ol class="source-list">
+          {Object.entries(s.fieldSources).flatMap(([field, list]) => list.map((c) => ({ field, ...c }))).map((c) => <li>{c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.title}</a> : c.title} — {c.detail}</li>)}
+        </ol>
+      </section>
+    </div>
+    <nav class="surname-pager" aria-label="上一姓 / 下一姓">
+      {prev ? <a href={`/surnames/${prev.slug}/`}>← {prev.name}</a> : <span></span>}
+      <a href="/surnames/">百家姓索引</a>
+      {next ? <a href={`/surnames/${next.slug}/`}>{next.name} →</a> : <span></span>}
+    </nav>
+  </div>
+</SiteLayout>
