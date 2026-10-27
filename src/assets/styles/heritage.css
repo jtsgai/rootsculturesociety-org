@@ -334,6 +334,32 @@
   content: '」';
   color: var(--gold);
 }
+.ai-disclosure {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--gold-soft);
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+.ai-disclosure .nowrap {
+  white-space: nowrap;
+}
+.ai-disclosure-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 0.75rem;
+  line-height: 1;
+}
 .video-list {
   display: grid;
   gap: 88px;
