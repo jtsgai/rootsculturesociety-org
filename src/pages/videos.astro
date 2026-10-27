@@ -4,29 +4,100 @@ import VideoPlayer from '../components/media/VideoPlayer.astro';
 import '../assets/styles/heritage.css';
 import config from '../data/videos.json';
 
-const { speaker, videos } = config;
-const isTodo = (text: string) => text.startsWith('TODO');
+const { baseUrl, speaker, videos } = config;
+// `src` / `poster` may be full URLs (R2, CDN); otherwise `file` / `poster` resolve against `baseUrl`.
+const resolve = (path: string) => (!path ? '' : /^(https?:)?\/\//.test(path) || path.startsWith('/') ? path : `${baseUrl}${path}`);
+const clock = (seconds: number) => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+const iso = (seconds: number) => `PT${Math.floor(seconds / 60)}M${Math.round(seconds % 60)}S`;
 ---
-<SiteLayout lang="zh" title="讲座视频" description="新加坡根缘文化学会讲座视频：寻根、修谱与相册家谱。" alternate={false}>
+<SiteLayout lang="zh" title="讲座视频" description="新加坡根缘文化学会讲座视频：陈老师谈相册家谱与家谱。" alternate={false}>
   <section class="page-intro heritage-intro"><div class="eyebrow">TALKS / 讲座视频</div><h1>讲座视频</h1><p class="deck deck-zh"><span>听讲者细说，</span><span>从姓氏与迁徙走进家谱。</span></p></section>
   <div class="page-body">
+    <aside class="speaker-intro" aria-labelledby="speaker-name">
+      <div class="speaker-seal" aria-hidden="true">{speaker.fullName.slice(0, 1)}</div>
+      <div>
+        <span class="eyebrow">讲者</span>
+        <h2 id="speaker-name">{speaker.name}{speaker.fullName && <small>{speaker.fullName}</small>}{speaker.nameEn && <small lang="en">{speaker.nameEn}</small>}</h2>
+        {speaker.bio && <blockquote><p>{speaker.bio}</p></blockquote>}
+      </div>
+    </aside>
+
     <div class="video-list">
-      {videos.map((video, index) => (
-        <article class="video-entry" id={video.id}>
-          <VideoPlayer title={video.title} src={video.src} poster={video.poster} youtubeId={video.youtubeId} />
-          <div class="video-copy">
-            <span class="eyebrow">第 {index + 1} 讲</span>
-            {isTodo(video.title) && <span class="todo-flag">TODO</span>}
-            <h2>{video.title}</h2>
-            <p>{video.description}</p>
-            <aside class="speaker-card" aria-label="讲者简介">
-              {speaker.bioStatus === 'todo' && <span class="todo-flag">TODO · 待补充</span>}
-              <h3>讲者：{speaker.name}</h3>
-              <p>{speaker.bio}</p>
-            </aside>
-          </div>
-        </article>
-      ))}
+      {videos.map((video, index) => {
+        const playerId = `player-${video.id}`;
+        return (
+          <article class="talk" id={video.id} aria-labelledby={`${video.id}-title`}>
+            <header class="talk-head">
+              <span class="eyebrow">第 {index + 1} 讲 · {clock(video.duration)}</span>
+              <h2 id={`${video.id}-title`}>《{video.title}》</h2>
+              {video.summary && <p class="talk-summary">{video.summary}</p>}
+            </header>
+            <div class="talk-body">
+              <VideoPlayer id={playerId} title={video.title} src={video.src || resolve(video.file)} poster={resolve(video.poster)} youtubeId={video.youtubeId} />
+              <nav class="chapter-list" aria-label={`《${video.title}》章节`}>
+                <h3>章节</h3>
+                <ol>
+                  {video.chapters.map((chapter, i) => (
+                    <li>
+                      <button type="button" data-player={playerId} data-start={chapter.start} aria-current={i === 0 ? 'true' : undefined}>
+                        <time datetime={iso(chapter.start)}>{clock(chapter.start)}</time>
+                        <span>{chapter.title}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </div>
+            <details class="transcript">
+              <summary>完整讲稿</summary>
+              {video.chapters.map((chapter) => (
+                <section class="transcript-chapter">
+                  <h3>
+                    <button type="button" class="transcript-seek" data-player={playerId} data-start={chapter.start} aria-label={`从 ${clock(chapter.start)} 播放：${chapter.title}`}>{clock(chapter.start)}</button>
+                    {chapter.title}
+                  </h3>
+                  {chapter.transcript.map((item) => (item.type === 'card' ? <p class="transcript-card">{item.text}</p> : <p>{item.text}</p>))}
+                </section>
+              ))}
+            </details>
+          </article>
+        );
+      })}
     </div>
   </div>
 </SiteLayout>
+<script>
+  const players = new Map<string, HTMLVideoElement>();
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('button[data-player][data-start]')];
+
+  const seek = (video: HTMLVideoElement, start: number) => {
+    const go = () => {
+      video.currentTime = start;
+      void video.play().catch(() => {});
+    };
+    if (video.readyState >= 1) go();
+    else video.addEventListener('loadedmetadata', go, { once: true });
+    video.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  for (const button of buttons) {
+    const id = button.dataset.player ?? '';
+    const video = document.getElementById(id);
+    if (!(video instanceof HTMLVideoElement)) continue;
+    players.set(id, video);
+    button.addEventListener('click', () => seek(video, Number(button.dataset.start)));
+  }
+
+  // Highlight the chapter that is currently playing.
+  for (const [id, video] of players) {
+    const items = [...document.querySelectorAll<HTMLButtonElement>(`.chapter-list button[data-player="${id}"]`)];
+    video.addEventListener('timeupdate', () => {
+      let current = items[0];
+      for (const item of items) if (video.currentTime + 0.25 >= Number(item.dataset.start)) current = item;
+      for (const item of items) {
+        if (item === current) item.setAttribute('aria-current', 'true');
+        else item.removeAttribute('aria-current');
+      }
+    });
+  }
+</script>

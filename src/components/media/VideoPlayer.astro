@@ -1,12 +1,12 @@
 ---
 // Responsive 16:9 player. Plays a self-hosted file (`src`) or a YouTube embed (`youtubeId`);
 // shows a placeholder frame until either is configured in src/data/videos.json.
-interface Props { title: string; src?: string; poster?: string; youtubeId?: string; }
-const { title, src, poster, youtubeId } = Astro.props;
+interface Props { title: string; src?: string; poster?: string; youtubeId?: string; id?: string; }
+const { title, src, poster, youtubeId, id } = Astro.props;
 ---
 <div class="video-frame">
   {src ? (
-    <video controls preload="metadata" playsinline poster={poster || undefined} aria-label={title}>
+    <video id={id} controls preload="metadata" playsinline poster={poster || undefined} aria-label={title}>
       <source src={src} type={src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
     </video>
   ) : youtubeId ? (
