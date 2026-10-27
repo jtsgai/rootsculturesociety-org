@@ -1,0 +1,21 @@
+---
+// Responsive 16:9 player. Plays a self-hosted file (`src`) or a YouTube embed (`youtubeId`);
+// shows a placeholder frame until either is configured in src/data/videos.json.
+interface Props { title: string; src?: string; poster?: string; youtubeId?: string; id?: string; }
+const { title, src, poster, youtubeId, id } = Astro.props;
+---
+<div class="video-frame">
+  {src ? (
+    <video id={id} controls preload="metadata" playsinline poster={poster || undefined} aria-label={title}>
+      <source src={src} type={src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+    </video>
+  ) : youtubeId ? (
+    <iframe src={`https://www.youtube-nocookie.com/embed/${youtubeId}`} title={title} loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  ) : (
+    <div class="video-placeholder" role="img" aria-label={`${title}（视频即将上线）`}>
+      <span class="play-mark" aria-hidden="true">▶</span>
+      <strong>视频即将上线</strong>
+      <small>Video coming soon</small>
+    </div>
+  )}
+</div>

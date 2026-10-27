@@ -1,0 +1,402 @@
+/* Ink-wash + gold-leaf styling for /videos/ (built on the tokens in tailwind.css). */
+:root {
+  --gold: #a8844a;
+  --gold-soft: rgba(168, 132, 74, 0.38);
+  --gold-leaf: linear-gradient(135deg, #c9a56a 0%, #a8844a 45%, #d8bd84 70%, #9a763e 100%);
+  --wash: radial-gradient(55% 75% at 22% 18%, rgba(26, 20, 18, 0.07), transparent 70%),
+    radial-gradient(30% 55% at 68% 45%, rgba(26, 20, 18, 0.04), transparent 70%);
+}
+
+.heritage-intro {
+  position: relative;
+  background: var(--wash);
+}
+.heritage-intro::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 2px;
+  margin-top: 28px;
+  background: var(--gold-leaf);
+}
+.heritage-note {
+  max-width: 760px;
+  margin: 0 0 40px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.status-badge.is-verified {
+  color: var(--gold);
+}
+.status-badge.is-pending {
+  color: var(--maroon);
+  border-style: dashed;
+}
+
+/* Index toolbar */
+.speaker-intro {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px 32px;
+  align-items: center;
+  max-width: 920px;
+  margin: 0 0 72px;
+  padding: 28px 32px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--gold);
+  background: var(--wash), color-mix(in srgb, #fffaf4 78%, var(--paper));
+}
+.speaker-seal {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border: 1px solid var(--gold-soft);
+  background: #fffaf4;
+  color: var(--maroon);
+  font-family: var(--serif);
+  font-size: 3.2rem;
+  line-height: 1;
+  box-shadow: inset 0 0 0 5px #fffaf4, inset 0 0 0 6px var(--gold-soft);
+}
+.speaker-intro h2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  align-items: baseline;
+  margin: 6px 0 10px;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+.speaker-intro h2 small {
+  color: var(--muted);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+.speaker-intro blockquote {
+  margin: 0;
+  padding: 0;
+}
+.speaker-intro blockquote p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.speaker-intro blockquote p::before {
+  content: '「';
+  color: var(--gold);
+}
+.speaker-intro blockquote p::after {
+  content: '」';
+  color: var(--gold);
+}
+.ai-disclosure {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--gold-soft);
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+.ai-disclosure .nowrap {
+  white-space: nowrap;
+}
+.ai-disclosure-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+.video-list {
+  display: grid;
+  gap: 88px;
+}
+.talk {
+  scroll-margin-top: 24px;
+}
+.talk-head {
+  max-width: 860px;
+  margin-bottom: 24px;
+}
+.talk-head h2 {
+  margin: 10px 0 12px;
+  font-size: 2.2rem;
+  line-height: 1.15;
+}
+.talk-head h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 16px;
+  background: var(--gold-leaf);
+}
+.talk-summary {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.talk-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(260px, 1fr);
+  gap: 24px 36px;
+  align-items: start;
+}
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--gold-soft);
+  background: #1a1412;
+  box-shadow: 0 18px 40px rgba(26, 20, 18, 0.12);
+}
+.video-frame video,
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  padding: 24px;
+  background:
+    radial-gradient(80% 90% at 20% 20%, rgba(246, 241, 234, 0.12), transparent 60%),
+    radial-gradient(70% 80% at 85% 85%, rgba(168, 132, 74, 0.18), transparent 60%),
+    #1a1412;
+  color: #f6f1ea;
+  text-align: center;
+}
+.video-placeholder .play-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  font-size: 1.3rem;
+}
+.video-placeholder small {
+  color: rgba(246, 241, 234, 0.7);
+}
+.chapter-list h3 {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+.chapter-list ol {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+.chapter-list li {
+  border-bottom: 1px solid var(--line);
+}
+.chapter-list button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.4em 1fr;
+  gap: 12px;
+  align-items: baseline;
+  width: 100%;
+  padding: 12px 10px 12px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.chapter-list button::before {
+  content: '';
+  position: absolute;
+  inset: 8px auto 8px 0;
+  width: 2px;
+  background: transparent;
+}
+.chapter-list button:hover {
+  background: color-mix(in srgb, #fffaf4 70%, var(--paper));
+}
+.chapter-list button[aria-current='true'] {
+  background: color-mix(in srgb, #fffaf4 82%, var(--paper));
+}
+.chapter-list button[aria-current='true']::before {
+  background: var(--gold-leaf);
+}
+.chapter-list button[aria-current='true'] span {
+  color: var(--maroon);
+}
+.chapter-list time {
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.chapter-list span {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+.chapter-list button:focus-visible,
+.transcript summary:focus-visible,
+.transcript-seek:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.transcript {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.transcript summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 2px;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  cursor: pointer;
+  list-style: none;
+}
+.transcript summary::-webkit-details-marker {
+  display: none;
+}
+.transcript summary::after {
+  content: '展开 +';
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+.transcript[open] summary::after {
+  content: '收起 −';
+}
+.transcript-chapter {
+  max-width: 860px;
+  padding: 6px 0 22px;
+}
+.transcript-chapter h3 {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin: 14px 0 10px;
+  font-size: 1.15rem;
+}
+.transcript-seek {
+  padding: 1px 8px;
+  border: 1px solid var(--gold-soft);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  cursor: pointer;
+}
+.transcript-seek:hover {
+  border-color: var(--gold);
+}
+.transcript-chapter p {
+  margin: 0 0 10px;
+  line-height: 1.9;
+}
+.transcript-card {
+  padding-left: 12px;
+  border-left: 2px solid var(--maroon);
+  color: var(--maroon);
+  font-family: var(--serif);
+}
+
+/* Homepage block */
+.home-heritage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.home-heritage a {
+  display: grid;
+  gap: 8px;
+  padding: 34px 30px;
+  border: 1px solid var(--line);
+  background: var(--wash), color-mix(in srgb, #fffaf4 78%, var(--paper));
+  transition: border-color 180ms ease;
+}
+.home-heritage a:hover {
+  border-color: var(--gold-soft);
+}
+.home-heritage strong {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+.home-heritage span {
+  color: var(--muted);
+}
+.home-heritage em {
+  color: var(--maroon);
+  font-style: normal;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 800px) {
+  .talk-body,
+  .home-heritage {
+    grid-template-columns: 1fr;
+  }
+  .video-list {
+    gap: 64px;
+  }
+  .talk-head h2 {
+    font-size: 1.75rem;
+  }
+  .speaker-intro {
+    grid-template-columns: 1fr;
+    margin-bottom: 56px;
+    padding: 22px 20px;
+  }
+  .speaker-seal {
+    width: 72px;
+    height: 72px;
+    font-size: 2.4rem;
+  }
+}
