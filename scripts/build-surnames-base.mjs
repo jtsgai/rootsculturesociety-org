@@ -3,7 +3,7 @@
 // from the raw source text (chinese-poetry dataset, traditional characters).
 // The raw auto-parse (raw/bjx-base.json) is only used as a per-character
 // simplified/pinyin lookup; segmentation is redone here.
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -12,8 +12,19 @@ const srcDir = join(here, 'surnames-src');
 const raw = JSON.parse(readFileSync(join(srcDir, 'raw/bjx.json'), 'utf8'));
 const autoParse = JSON.parse(readFileSync(join(srcDir, 'raw/bjx-base.json'), 'utf8'));
 
+// Standard edition (commonly cited): 568 characters including the closing 百家姓终 — 504 surnames, 444 single + 60 compound.
+const STANDARD = { chars: 568, total: 504, single: 444, compound: 60 };
+// Explicit patch list for characters missing from the raw text: { after: '<preceding chars>', insert: '<chars>', reason }.
+// Empty: a character-by-character comparison with the Wikisource text (zh.wikisource.org/wiki/百家姓) found the
+// raw text complete at 568 characters; the 27 mismatches are variant glyphs (handled by TRADITIONAL_FIXES below)
+// and the order of 荀羊於惠 (Wikisource: 荀於羊惠), where the raw text follows the common edition.
+const TEXT_PATCHES = [];
 // Single surnames that appear inside the compound-surname section (traditional form, as in the raw text).
 const SINGLE_IN_COMPOUND_SECTION = new Set([...'仉督晉楚閆法汝鄢塗欽嶽帥緱亢況后有琴佘佴墨哈譙笪年愛陽佟言福']);
+// Pairs in the compound section that the standard 444 + 60 count treats as two single surnames
+// (cf. the 百家姓 article on zh.wikipedia.org). 第五 stays compound. See sourceEdition.notes in merge-surnames.mjs.
+const SPLIT_INTO_SINGLES = ['歸海', '商牟', '伯賞'];
+for (const pair of SPLIT_INTO_SINGLES) for (const ch of pair) SINGLE_IN_COMPOUND_SECTION.add(ch);
 const COMPOUND_SECTION_START = '萬俟';
 const CLOSING = '百家姓終';
 
@@ -94,8 +105,6 @@ const PINYIN_OVERRIDES = {
   皇甫: 'Huángfǔ',
   公冶: 'Gōngyě',
   段干: 'Duàngān',
-  伯赏: 'Bóshǎng',
-  商牟: 'Shāngmóu',
   壤驷: 'Rǎngsì',
   漆雕: 'Qīdiāo',
   子车: 'Zǐjū',
@@ -131,8 +140,14 @@ for (const entry of autoParse) {
   });
 }
 
-const text = raw.paragraphs.join('').replace(/[，。、；\s]/gu, '');
+let text = raw.paragraphs.join('').replace(/[，。、；\s]/gu, '');
+for (const { after, insert } of TEXT_PATCHES) {
+  if (text.split(after).length !== 2) throw new Error(`patch anchor "${after}" must occur exactly once`);
+  text = text.replace(after, after + insert);
+}
 if (!text.endsWith(CLOSING)) throw new Error('raw text does not end with the closing phrase');
+if ([...text].length !== STANDARD.chars) throw new Error(`text has ${[...text].length} chars, standard ${STANDARD.chars}`);
+for (const pair of SPLIT_INTO_SINGLES) if (!text.includes(pair)) throw new Error(`split pair ${pair} not in text`);
 const body = [...text.slice(0, -CLOSING.length)];
 const split = text.indexOf(COMPOUND_SECTION_START);
 const tokens = body.slice(0, split);
@@ -181,8 +196,38 @@ for (const [base, group] of bySlug) {
   for (const e of group) e.slug = e === owner ? base : `${base}-${e.order}`;
 }
 
-const out = entries.map(({ order, slug, baseSlug, name, traditional, pinyin, isCompound, rawTraditional }) => ({
-  id: `bjx-${String(order).padStart(3, '0')}-${baseSlug}`,
+// id and slug are stable once published: an entry already in the previous base.json (matched by simplified +
+// traditional form) keeps its id and slug even if its order changed, so the numbers in older ids/slugs may
+// differ from `order`. Only entries new to the list get an id/slug derived from their current order.
+const basePath = join(srcDir, 'base.json');
+const previous = new Map();
+for (const p of existsSync(basePath) ? JSON.parse(readFileSync(basePath, 'utf8')) : []) {
+  const key = `${p.name}|${p.traditional}`;
+  if (previous.has(key)) throw new Error(`previous base.json: ambiguous key ${key}`);
+  previous.set(key, p);
+}
+const kept = entries.map((e) => previous.get(`${e.name}|${e.traditional}`));
+const takenIds = new Set(kept.filter(Boolean).map((p) => p.id));
+const takenSlugs = new Set(kept.filter(Boolean).map((p) => p.slug));
+const changes = { added: [], removed: [] };
+entries.forEach((e, i) => {
+  if (kept[i]) {
+    e.id = kept[i].id;
+    e.slug = kept[i].slug;
+    return;
+  }
+  e.id = `bjx-${String(e.order).padStart(3, '0')}-${e.baseSlug}`;
+  if (takenSlugs.has(e.slug)) e.slug = `${e.baseSlug}-${e.order}`;
+  if (takenIds.has(e.id) || takenSlugs.has(e.slug)) throw new Error(`id/slug collision for ${e.name}`);
+  takenIds.add(e.id);
+  takenSlugs.add(e.slug);
+  if (previous.size) changes.added.push(`${e.name} ${e.id} /${e.slug}/`);
+});
+const current = new Set(entries.map((e) => `${e.name}|${e.traditional}`));
+for (const [key, p] of previous) if (!current.has(key)) changes.removed.push(`${p.name} ${p.id} /${p.slug}/`);
+
+const out = entries.map(({ id, order, slug, name, traditional, pinyin, isCompound, rawTraditional }) => ({
+  id,
   order,
   slug,
   name,
@@ -192,6 +237,10 @@ const out = entries.map(({ order, slug, baseSlug, name, traditional, pinyin, isC
   ...(rawTraditional !== traditional ? { rawTraditional } : {}),
 }));
 
-writeFileSync(join(srcDir, 'base.json'), JSON.stringify(out, null, 1) + '\n');
+writeFileSync(basePath, JSON.stringify(out, null, 1) + '\n');
 const singles = out.filter((e) => !e.isCompound).length;
 console.log(`surnames: ${out.length} (single ${singles}, compound ${out.length - singles})`);
+if (singles !== STANDARD.single || out.length - singles !== STANDARD.compound)
+  throw new Error(`expected ${STANDARD.single} single + ${STANDARD.compound} compound`);
+for (const line of changes.removed) console.log(`removed: ${line}`);
+for (const line of changes.added) console.log(`added:   ${line}`);

@@ -1,7 +1,34 @@
 {
- "version": "1.0.0",
+ "version": "1.1.0",
  "title": "百家姓",
- "note": "次序依《百家姓》原文。原文去掉“百家姓终”后共 564 字，按姓氏切分得 501 姓（单姓 438、复姓 63）。通行说法为 504 姓（单姓 444、复姓 60）；按字数推算，差额恰等于把商牟、伯赏、第五各视作两个单姓。本数据按复姓处理，此差异待考证。",
+ "note": "次序依《百家姓》原文。共 504 姓（单姓 444、复姓 60），与通行本一致：“归海”“商牟”“伯赏”各按两个单姓计，“第五”为复姓。",
+ "sourceEdition": {
+  "baseText": {
+   "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集 baijiaxing.json）",
+   "url": "https://github.com/chinese-poetry/chinese-poetry",
+   "file": "scripts/surnames-src/raw/bjx.json"
+  },
+  "standardEdition": {
+   "title": "通行本《百家姓》：568 字（含末句“百家姓终”），504 姓 = 单姓 444 + 复姓 60",
+   "countReference": {
+    "title": "维基百科「百家姓」条",
+    "url": "https://zh.wikipedia.org/wiki/百家姓"
+   },
+   "textReference": {
+    "title": "维基文库《百家姓》",
+    "url": "https://zh.wikisource.org/wiki/百家姓"
+   }
+  },
+  "notes": [
+   "逐字校对：原文与维基文库本均为 568 字，无缺字，补字清单（TEXT_PATCHES）为空。27 处差异均为异体或简繁转换字形（如 範/范、蔔/卜、鐘/鍾、萬/万、台/臺），已在切分脚本的字形校订表中处理；另“荀羊於惠”维基文库作“荀於羊惠”，从原文。",
+   "更正旧说明：此前 501 姓（单姓 438、复姓 63）的成因并非“商牟、伯赏、第五被作复姓”，而是切分脚本的单姓集合漏了“归”“海”，把“归海”误作复姓，再加上“商牟”“伯赏”按复姓切分。",
+   "调整一：“归海”拆为单姓“归”“海”（与通行 444 + 60 计数一致）。",
+   "调整二：“商牟”拆为单姓“商”“牟”。",
+   "调整三：“伯赏”拆为单姓“伯”“赏”。需求方原希望保留“伯赏”为复姓，但字数固定为 564（不含“百家姓终”）时，504 姓必为单姓 444、复姓 60；保留“伯赏”则最多 503 姓。为与通行本计数一致，此项需求已被推翻，“伯赏”按两个单姓处理。",
+   "“第五”保留为复姓。",
+   "结果：504 姓（单姓 444、复姓 60）。新增 6 姓（归、海、商、牟、伯、赏）只有简繁与读音，其余字段为 needs_source；原有条目的 id 与 slug 保持不变（因此第 473 位以后部分条目 id/slug 中的数字与 order 不一致），删去的旧条目为 bjx-471-guihai、bjx-486-shangmou、bjx-489-boshang。"
+  ]
+ },
  "surnames": [
   {
    "slug": "zhao",
@@ -31166,10 +31193,10 @@
    }
   },
   {
-   "slug": "guihai",
-   "name": "归海",
-   "traditional": "歸海",
-   "pinyin": "Guīhǎi",
+   "slug": "gui-471",
+   "name": "归",
+   "traditional": "歸",
+   "pinyin": "Guī",
    "romanizations": [],
    "junwang": [],
    "tanghao": [],
@@ -31188,10 +31215,72 @@
      "url": "https://github.com/mozillazg/python-pinyin"
     }
    ],
-   "id": "bjx-471-guihai",
+   "id": "bjx-471-gui",
    "order": 471,
-   "simplified": "归海",
-   "isCompound": true,
+   "simplified": "归",
+   "isCompound": false,
+   "founder": "",
+   "nanyang": "",
+   "notableFigures": [],
+   "fieldSources": {
+    "traditional": [
+     {
+      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
+      "detail": "姓氏次序与字形取自原文；繁体字形按姓氏用字校订（见 scripts/build-surnames-base.mjs）",
+      "url": "https://github.com/chinese-poetry/chinese-poetry"
+     }
+    ],
+    "pinyin": [
+     {
+      "title": "pypinyin 注音 + 姓氏读音校订表",
+      "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
+      "url": "https://github.com/mozillazg/python-pinyin"
+     }
+    ]
+   },
+   "fieldStatus": {
+    "traditional": "verified",
+    "pinyin": "verified",
+    "romanizations": "needs_source",
+    "junwang": "needs_source",
+    "tanghao": "needs_source",
+    "origin": "needs_source",
+    "founder": "needs_source",
+    "migration": "needs_source",
+    "nanyang": "needs_source",
+    "notableFigures": "needs_source",
+    "generationPoems": "needs_source",
+    "dialectGroups": "needs_source",
+    "clanAssociations": "needs_source"
+   }
+  },
+  {
+   "slug": "hai",
+   "name": "海",
+   "traditional": "海",
+   "pinyin": "Hǎi",
+   "romanizations": [],
+   "junwang": [],
+   "tanghao": [],
+   "origin": "",
+   "migration": "",
+   "generationPoems": [],
+   "dialectGroups": [],
+   "clanAssociations": [],
+   "sources": [
+    {
+     "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
+     "url": "https://github.com/chinese-poetry/chinese-poetry"
+    },
+    {
+     "title": "pypinyin 注音 + 姓氏读音校订表",
+     "url": "https://github.com/mozillazg/python-pinyin"
+    }
+   ],
+   "id": "bjx-472-hai",
+   "order": 472,
+   "simplified": "海",
+   "isCompound": false,
    "founder": "",
    "nanyang": "",
    "notableFigures": [],
@@ -31251,7 +31340,7 @@
     }
    ],
    "id": "bjx-472-yangshe",
-   "order": 472,
+   "order": 473,
    "simplified": "羊舌",
    "isCompound": true,
    "founder": "",
@@ -31313,7 +31402,7 @@
     }
    ],
    "id": "bjx-473-weisheng",
-   "order": 473,
+   "order": 474,
    "simplified": "微生",
    "isCompound": true,
    "founder": "",
@@ -31375,7 +31464,7 @@
     }
    ],
    "id": "bjx-474-yue",
-   "order": 474,
+   "order": 475,
    "simplified": "岳",
    "isCompound": false,
    "founder": "",
@@ -31437,7 +31526,7 @@
     }
    ],
    "id": "bjx-475-shuai",
-   "order": 475,
+   "order": 476,
    "simplified": "帅",
    "isCompound": false,
    "founder": "",
@@ -31499,7 +31588,7 @@
     }
    ],
    "id": "bjx-476-gou",
-   "order": 476,
+   "order": 477,
    "simplified": "缑",
    "isCompound": false,
    "founder": "",
@@ -31561,7 +31650,7 @@
     }
    ],
    "id": "bjx-477-kang",
-   "order": 477,
+   "order": 478,
    "simplified": "亢",
    "isCompound": false,
    "founder": "",
@@ -31623,7 +31712,7 @@
     }
    ],
    "id": "bjx-478-kuang",
-   "order": 478,
+   "order": 479,
    "simplified": "况",
    "isCompound": false,
    "founder": "",
@@ -31685,7 +31774,7 @@
     }
    ],
    "id": "bjx-479-hou",
-   "order": 479,
+   "order": 480,
    "simplified": "后",
    "isCompound": false,
    "founder": "",
@@ -31747,7 +31836,7 @@
     }
    ],
    "id": "bjx-480-you",
-   "order": 480,
+   "order": 481,
    "simplified": "有",
    "isCompound": false,
    "founder": "",
@@ -31809,7 +31898,7 @@
     }
    ],
    "id": "bjx-481-qin",
-   "order": 481,
+   "order": 482,
    "simplified": "琴",
    "isCompound": false,
    "founder": "",
@@ -31871,7 +31960,7 @@
     }
    ],
    "id": "bjx-482-liangqiu",
-   "order": 482,
+   "order": 483,
    "simplified": "梁丘",
    "isCompound": true,
    "founder": "",
@@ -31933,7 +32022,7 @@
     }
    ],
    "id": "bjx-483-zuoqiu",
-   "order": 483,
+   "order": 484,
    "simplified": "左丘",
    "isCompound": true,
    "founder": "",
@@ -31995,7 +32084,7 @@
     }
    ],
    "id": "bjx-484-dongmen",
-   "order": 484,
+   "order": 485,
    "simplified": "东门",
    "isCompound": true,
    "founder": "",
@@ -32057,7 +32146,7 @@
     }
    ],
    "id": "bjx-485-ximen",
-   "order": 485,
+   "order": 486,
    "simplified": "西门",
    "isCompound": true,
    "founder": "",
@@ -32096,10 +32185,10 @@
    }
   },
   {
-   "slug": "shangmou",
-   "name": "商牟",
-   "traditional": "商牟",
-   "pinyin": "Shāngmóu",
+   "slug": "shang-487",
+   "name": "商",
+   "traditional": "商",
+   "pinyin": "Shāng",
    "romanizations": [],
    "junwang": [],
    "tanghao": [],
@@ -32118,10 +32207,72 @@
      "url": "https://github.com/mozillazg/python-pinyin"
     }
    ],
-   "id": "bjx-486-shangmou",
-   "order": 486,
-   "simplified": "商牟",
-   "isCompound": true,
+   "id": "bjx-487-shang",
+   "order": 487,
+   "simplified": "商",
+   "isCompound": false,
+   "founder": "",
+   "nanyang": "",
+   "notableFigures": [],
+   "fieldSources": {
+    "traditional": [
+     {
+      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
+      "detail": "姓氏次序与字形取自原文；繁体字形按姓氏用字校订（见 scripts/build-surnames-base.mjs）",
+      "url": "https://github.com/chinese-poetry/chinese-poetry"
+     }
+    ],
+    "pinyin": [
+     {
+      "title": "pypinyin 注音 + 姓氏读音校订表",
+      "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
+      "url": "https://github.com/mozillazg/python-pinyin"
+     }
+    ]
+   },
+   "fieldStatus": {
+    "traditional": "verified",
+    "pinyin": "verified",
+    "romanizations": "needs_source",
+    "junwang": "needs_source",
+    "tanghao": "needs_source",
+    "origin": "needs_source",
+    "founder": "needs_source",
+    "migration": "needs_source",
+    "nanyang": "needs_source",
+    "notableFigures": "needs_source",
+    "generationPoems": "needs_source",
+    "dialectGroups": "needs_source",
+    "clanAssociations": "needs_source"
+   }
+  },
+  {
+   "slug": "mou",
+   "name": "牟",
+   "traditional": "牟",
+   "pinyin": "Móu",
+   "romanizations": [],
+   "junwang": [],
+   "tanghao": [],
+   "origin": "",
+   "migration": "",
+   "generationPoems": [],
+   "dialectGroups": [],
+   "clanAssociations": [],
+   "sources": [
+    {
+     "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
+     "url": "https://github.com/chinese-poetry/chinese-poetry"
+    },
+    {
+     "title": "pypinyin 注音 + 姓氏读音校订表",
+     "url": "https://github.com/mozillazg/python-pinyin"
+    }
+   ],
+   "id": "bjx-488-mou",
+   "order": 488,
+   "simplified": "牟",
+   "isCompound": false,
    "founder": "",
    "nanyang": "",
    "notableFigures": [],
@@ -32181,7 +32332,7 @@
     }
    ],
    "id": "bjx-487-she",
-   "order": 487,
+   "order": 489,
    "simplified": "佘",
    "isCompound": false,
    "founder": "",
@@ -32243,7 +32394,7 @@
     }
    ],
    "id": "bjx-488-nai",
-   "order": 488,
+   "order": 490,
    "simplified": "佴",
    "isCompound": false,
    "founder": "",
@@ -32282,10 +32433,10 @@
    }
   },
   {
-   "slug": "boshang",
-   "name": "伯赏",
-   "traditional": "伯賞",
-   "pinyin": "Bóshǎng",
+   "slug": "bo-491",
+   "name": "伯",
+   "traditional": "伯",
+   "pinyin": "Bó",
    "romanizations": [],
    "junwang": [],
    "tanghao": [],
@@ -32304,10 +32455,72 @@
      "url": "https://github.com/mozillazg/python-pinyin"
     }
    ],
-   "id": "bjx-489-boshang",
-   "order": 489,
-   "simplified": "伯赏",
-   "isCompound": true,
+   "id": "bjx-491-bo",
+   "order": 491,
+   "simplified": "伯",
+   "isCompound": false,
+   "founder": "",
+   "nanyang": "",
+   "notableFigures": [],
+   "fieldSources": {
+    "traditional": [
+     {
+      "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
+      "detail": "姓氏次序与字形取自原文；繁体字形按姓氏用字校订（见 scripts/build-surnames-base.mjs）",
+      "url": "https://github.com/chinese-poetry/chinese-poetry"
+     }
+    ],
+    "pinyin": [
+     {
+      "title": "pypinyin 注音 + 姓氏读音校订表",
+      "detail": "按字自动注音；多音姓氏（如单、解、仇、曾、尉迟、万俟）以 scripts/build-surnames-base.mjs 中的校订表覆盖",
+      "url": "https://github.com/mozillazg/python-pinyin"
+     }
+    ]
+   },
+   "fieldStatus": {
+    "traditional": "verified",
+    "pinyin": "verified",
+    "romanizations": "needs_source",
+    "junwang": "needs_source",
+    "tanghao": "needs_source",
+    "origin": "needs_source",
+    "founder": "needs_source",
+    "migration": "needs_source",
+    "nanyang": "needs_source",
+    "notableFigures": "needs_source",
+    "generationPoems": "needs_source",
+    "dialectGroups": "needs_source",
+    "clanAssociations": "needs_source"
+   }
+  },
+  {
+   "slug": "shang-492",
+   "name": "赏",
+   "traditional": "賞",
+   "pinyin": "Shǎng",
+   "romanizations": [],
+   "junwang": [],
+   "tanghao": [],
+   "origin": "",
+   "migration": "",
+   "generationPoems": [],
+   "dialectGroups": [],
+   "clanAssociations": [],
+   "sources": [
+    {
+     "title": "《百家姓》繁体文本（chinese-poetry 开源古诗词数据集）",
+     "url": "https://github.com/chinese-poetry/chinese-poetry"
+    },
+    {
+     "title": "pypinyin 注音 + 姓氏读音校订表",
+     "url": "https://github.com/mozillazg/python-pinyin"
+    }
+   ],
+   "id": "bjx-492-shang",
+   "order": 492,
+   "simplified": "赏",
+   "isCompound": false,
    "founder": "",
    "nanyang": "",
    "notableFigures": [],
@@ -32367,7 +32580,7 @@
     }
    ],
    "id": "bjx-490-nangong",
-   "order": 490,
+   "order": 493,
    "simplified": "南宫",
    "isCompound": true,
    "founder": "",
@@ -32429,7 +32642,7 @@
     }
    ],
    "id": "bjx-491-mo",
-   "order": 491,
+   "order": 494,
    "simplified": "墨",
    "isCompound": false,
    "founder": "",
@@ -32491,7 +32704,7 @@
     }
    ],
    "id": "bjx-492-ha",
-   "order": 492,
+   "order": 495,
    "simplified": "哈",
    "isCompound": false,
    "founder": "",
@@ -32553,7 +32766,7 @@
     }
    ],
    "id": "bjx-493-qiao",
-   "order": 493,
+   "order": 496,
    "simplified": "谯",
    "isCompound": false,
    "founder": "",
@@ -32615,7 +32828,7 @@
     }
    ],
    "id": "bjx-494-da",
-   "order": 494,
+   "order": 497,
    "simplified": "笪",
    "isCompound": false,
    "founder": "",
@@ -32677,7 +32890,7 @@
     }
    ],
    "id": "bjx-495-nian",
-   "order": 495,
+   "order": 498,
    "simplified": "年",
    "isCompound": false,
    "founder": "",
@@ -32739,7 +32952,7 @@
     }
    ],
    "id": "bjx-496-ai",
-   "order": 496,
+   "order": 499,
    "simplified": "爱",
    "isCompound": false,
    "founder": "",
@@ -32801,7 +33014,7 @@
     }
    ],
    "id": "bjx-497-yang",
-   "order": 497,
+   "order": 500,
    "simplified": "阳",
    "isCompound": false,
    "founder": "",
@@ -32863,7 +33076,7 @@
     }
    ],
    "id": "bjx-498-tong",
-   "order": 498,
+   "order": 501,
    "simplified": "佟",
    "isCompound": false,
    "founder": "",
@@ -32925,7 +33138,7 @@
     }
    ],
    "id": "bjx-499-diwu",
-   "order": 499,
+   "order": 502,
    "simplified": "第五",
    "isCompound": true,
    "founder": "",
@@ -32987,7 +33200,7 @@
     }
    ],
    "id": "bjx-500-yan",
-   "order": 500,
+   "order": 503,
    "simplified": "言",
    "isCompound": false,
    "founder": "",
@@ -33049,7 +33262,7 @@
     }
    ],
    "id": "bjx-501-fu",
-   "order": 501,
+   "order": 504,
    "simplified": "福",
    "isCompound": false,
    "founder": "",

@@ -7,9 +7,10 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(join(root, 'src/data/surnames.json'), 'utf8'));
 
-// The source text segments into 501 surnames; the conventional figure is 504 (see `note` in the data file).
-const EXPECTED_TOTAL = 501;
-const CONVENTIONAL_TOTAL = 504;
+// Standard edition: 504 surnames, 444 single + 60 compound (see `sourceEdition` in the data file).
+const EXPECTED_TOTAL = 504;
+const EXPECTED_SINGLE = 444;
+const EXPECTED_COMPOUND = 60;
 const STATUS_FIELDS = [
   'traditional',
   'pinyin',
@@ -77,6 +78,16 @@ if (typeof data.version !== 'string' || !Array.isArray(data.surnames))
   fail('top level must be { version: string, surnames: [] }');
 const list = data.surnames ?? [];
 if (list.length !== EXPECTED_TOTAL) fail(`expected ${EXPECTED_TOTAL} surnames, found ${list.length}`);
+const compounds = list.filter((e) => e.isCompound).length;
+if (compounds !== EXPECTED_COMPOUND || list.length - compounds !== EXPECTED_SINGLE)
+  fail(
+    `expected ${EXPECTED_SINGLE} single + ${EXPECTED_COMPOUND} compound, found ${list.length - compounds} + ${compounds}`
+  );
+const edition = data.sourceEdition;
+if (typeof edition?.baseText?.title !== 'string' || typeof edition?.standardEdition?.title !== 'string')
+  fail('sourceEdition needs baseText.title and standardEdition.title');
+if (!Array.isArray(edition?.notes) || !edition.notes.length || !edition.notes.every((n) => typeof n === 'string'))
+  fail('sourceEdition.notes must be a non-empty string[]');
 
 const unique = (key) => {
   const seen = new Set();
@@ -121,7 +132,7 @@ list.forEach((e, i) => {
 const count = (pred) => list.filter(pred).length;
 const verifiedCore = (e) => CORE_FIELDS.filter((f) => e.fieldStatus?.[f] === 'verified').length;
 console.log(
-  `surnames: ${list.length} (single ${count((e) => !e.isCompound)}, compound ${count((e) => e.isCompound)}); conventional count ${CONVENTIONAL_TOTAL}`
+  `surnames: ${list.length} (single ${count((e) => !e.isCompound)}, compound ${count((e) => e.isCompound)}); expected ${EXPECTED_TOTAL}`
 );
 console.log(
   `fully verified (all ${CORE_FIELDS.length} core fields): ${count((e) => verifiedCore(e) === CORE_FIELDS.length)}`

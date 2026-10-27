@@ -4241,17 +4241,26 @@
   "isCompound": true
  },
  {
-  "id": "bjx-471-guihai",
+  "id": "bjx-471-gui",
   "order": 471,
-  "slug": "guihai",
-  "name": "归海",
-  "traditional": "歸海",
-  "pinyin": "Guīhǎi",
-  "isCompound": true
+  "slug": "gui-471",
+  "name": "归",
+  "traditional": "歸",
+  "pinyin": "Guī",
+  "isCompound": false
+ },
+ {
+  "id": "bjx-472-hai",
+  "order": 472,
+  "slug": "hai",
+  "name": "海",
+  "traditional": "海",
+  "pinyin": "Hǎi",
+  "isCompound": false
  },
  {
   "id": "bjx-472-yangshe",
-  "order": 472,
+  "order": 473,
   "slug": "yangshe",
   "name": "羊舌",
   "traditional": "羊舌",
@@ -4260,7 +4269,7 @@
  },
  {
   "id": "bjx-473-weisheng",
-  "order": 473,
+  "order": 474,
   "slug": "weisheng",
   "name": "微生",
   "traditional": "微生",
@@ -4269,7 +4278,7 @@
  },
  {
   "id": "bjx-474-yue",
-  "order": 474,
+  "order": 475,
   "slug": "yue-474",
   "name": "岳",
   "traditional": "岳",
@@ -4279,7 +4288,7 @@
  },
  {
   "id": "bjx-475-shuai",
-  "order": 475,
+  "order": 476,
   "slug": "shuai",
   "name": "帅",
   "traditional": "帥",
@@ -4288,7 +4297,7 @@
  },
  {
   "id": "bjx-476-gou",
-  "order": 476,
+  "order": 477,
   "slug": "gou-476",
   "name": "缑",
   "traditional": "緱",
@@ -4297,7 +4306,7 @@
  },
  {
   "id": "bjx-477-kang",
-  "order": 477,
+  "order": 478,
   "slug": "kang-477",
   "name": "亢",
   "traditional": "亢",
@@ -4306,7 +4315,7 @@
  },
  {
   "id": "bjx-478-kuang",
-  "order": 478,
+  "order": 479,
   "slug": "kuang-478",
   "name": "况",
   "traditional": "況",
@@ -4315,7 +4324,7 @@
  },
  {
   "id": "bjx-479-hou",
-  "order": 479,
+  "order": 480,
   "slug": "hou-479",
   "name": "后",
   "traditional": "后",
@@ -4324,7 +4333,7 @@
  },
  {
   "id": "bjx-480-you",
-  "order": 480,
+  "order": 481,
   "slug": "you-480",
   "name": "有",
   "traditional": "有",
@@ -4333,7 +4342,7 @@
  },
  {
   "id": "bjx-481-qin",
-  "order": 481,
+  "order": 482,
   "slug": "qin-481",
   "name": "琴",
   "traditional": "琴",
@@ -4342,7 +4351,7 @@
  },
  {
   "id": "bjx-482-liangqiu",
-  "order": 482,
+  "order": 483,
   "slug": "liangqiu",
   "name": "梁丘",
   "traditional": "梁丘",
@@ -4351,7 +4360,7 @@
  },
  {
   "id": "bjx-483-zuoqiu",
-  "order": 483,
+  "order": 484,
   "slug": "zuoqiu",
   "name": "左丘",
   "traditional": "左丘",
@@ -4360,7 +4369,7 @@
  },
  {
   "id": "bjx-484-dongmen",
-  "order": 484,
+  "order": 485,
   "slug": "dongmen",
   "name": "东门",
   "traditional": "東門",
@@ -4369,7 +4378,7 @@
  },
  {
   "id": "bjx-485-ximen",
-  "order": 485,
+  "order": 486,
   "slug": "ximen",
   "name": "西门",
   "traditional": "西門",
@@ -4377,17 +4386,26 @@
   "isCompound": true
  },
  {
-  "id": "bjx-486-shangmou",
-  "order": 486,
-  "slug": "shangmou",
-  "name": "商牟",
-  "traditional": "商牟",
-  "pinyin": "Shāngmóu",
-  "isCompound": true
+  "id": "bjx-487-shang",
+  "order": 487,
+  "slug": "shang-487",
+  "name": "商",
+  "traditional": "商",
+  "pinyin": "Shāng",
+  "isCompound": false
+ },
+ {
+  "id": "bjx-488-mou",
+  "order": 488,
+  "slug": "mou",
+  "name": "牟",
+  "traditional": "牟",
+  "pinyin": "Móu",
+  "isCompound": false
  },
  {
   "id": "bjx-487-she",
-  "order": 487,
+  "order": 489,
   "slug": "she-487",
   "name": "佘",
   "traditional": "佘",
@@ -4396,7 +4414,7 @@
  },
  {
   "id": "bjx-488-nai",
-  "order": 488,
+  "order": 490,
   "slug": "nai-488",
   "name": "佴",
   "traditional": "佴",
@@ -4404,17 +4422,26 @@
   "isCompound": false
  },
  {
-  "id": "bjx-489-boshang",
-  "order": 489,
-  "slug": "boshang",
-  "name": "伯赏",
-  "traditional": "伯賞",
-  "pinyin": "Bóshǎng",
-  "isCompound": true
+  "id": "bjx-491-bo",
+  "order": 491,
+  "slug": "bo-491",
+  "name": "伯",
+  "traditional": "伯",
+  "pinyin": "Bó",
+  "isCompound": false
+ },
+ {
+  "id": "bjx-492-shang",
+  "order": 492,
+  "slug": "shang-492",
+  "name": "赏",
+  "traditional": "賞",
+  "pinyin": "Shǎng",
+  "isCompound": false
  },
  {
   "id": "bjx-490-nangong",
-  "order": 490,
+  "order": 493,
   "slug": "nangong",
   "name": "南宫",
   "traditional": "南宮",
@@ -4423,7 +4450,7 @@
  },
  {
   "id": "bjx-491-mo",
-  "order": 491,
+  "order": 494,
   "slug": "mo-491",
   "name": "墨",
   "traditional": "墨",
@@ -4432,7 +4459,7 @@
  },
  {
   "id": "bjx-492-ha",
-  "order": 492,
+  "order": 495,
   "slug": "ha",
   "name": "哈",
   "traditional": "哈",
@@ -4441,7 +4468,7 @@
  },
  {
   "id": "bjx-493-qiao",
-  "order": 493,
+  "order": 496,
   "slug": "qiao-493",
   "name": "谯",
   "traditional": "譙",
@@ -4450,7 +4477,7 @@
  },
  {
   "id": "bjx-494-da",
-  "order": 494,
+  "order": 497,
   "slug": "da",
   "name": "笪",
   "traditional": "笪",
@@ -4459,7 +4486,7 @@
  },
  {
   "id": "bjx-495-nian",
-  "order": 495,
+  "order": 498,
   "slug": "nian",
   "name": "年",
   "traditional": "年",
@@ -4468,7 +4495,7 @@
  },
  {
   "id": "bjx-496-ai",
-  "order": 496,
+  "order": 499,
   "slug": "ai-496",
   "name": "爱",
   "traditional": "愛",
@@ -4477,7 +4504,7 @@
  },
  {
   "id": "bjx-497-yang",
-  "order": 497,
+  "order": 500,
   "slug": "yang-497",
   "name": "阳",
   "traditional": "陽",
@@ -4486,7 +4513,7 @@
  },
  {
   "id": "bjx-498-tong",
-  "order": 498,
+  "order": 501,
   "slug": "tong-498",
   "name": "佟",
   "traditional": "佟",
@@ -4495,7 +4522,7 @@
  },
  {
   "id": "bjx-499-diwu",
-  "order": 499,
+  "order": 502,
   "slug": "diwu",
   "name": "第五",
   "traditional": "第五",
@@ -4504,7 +4531,7 @@
  },
  {
   "id": "bjx-500-yan",
-  "order": 500,
+  "order": 503,
   "slug": "yan-500",
   "name": "言",
   "traditional": "言",
@@ -4513,7 +4540,7 @@
  },
  {
   "id": "bjx-501-fu",
-  "order": 501,
+  "order": 504,
   "slug": "fu-501",
   "name": "福",
   "traditional": "福",
