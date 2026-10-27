@@ -1,9 +1,18 @@
-import { buildSurnameImport, normalizeSurnames, searchSurnames, type SurnameContent } from '../lib/surnames';
+import {
+  buildSurnameImport,
+  getSurnameByKey,
+  normalizeSurnames,
+  searchSurnames,
+  surnameFieldLabels,
+  surnameFieldText,
+  surnameNeedsSourceHint,
+  type SurnameContent,
+} from '../lib/surnames';
 import { getSection, saveSection } from '../lib/studio';
 
 // An optional glob keeps the studio buildable before the dataset is delivered.
 const modules = import.meta.glob('../data/surnames.json', { eager: true, import: 'default' });
-const surnames = normalizeSurnames(Object.values(modules)[0]);
+const surnames = normalizeSurnames(Object.values(modules)[0]).sort((a, b) => a.order - b.order);
 
 export function initializeSurnamePicker(
   bookId: string,
@@ -20,7 +29,12 @@ export function initializeSurnamePicker(
   const status = picker.querySelector<HTMLElement>('[data-surname-status]')!;
   const search = picker.querySelector<HTMLInputElement>('[data-surname-search]')!;
   const button = picker.querySelector<HTMLButtonElement>('[data-surname-import]')!;
-  let selected = -1;
+  const savedKey = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | null)?.value;
+  let selected = (
+    getSurnameByKey(surnames, savedKey('surnameId')) ?? getSurnameByKey(surnames, savedKey('surnameSlug'))
+  )?.id;
+  const label = (surname: (typeof surnames)[number]) =>
+    `${surname.name}${surname.traditional && surname.traditional !== surname.name ? `（${surname.traditional}）` : ''}`;
   const render = () => {
     const matches = searchSurnames(surnames, search.value);
     count.textContent = !surnames.length
@@ -29,48 +43,52 @@ export function initializeSurnamePicker(
         ? `找到 ${matches.length} 个姓氏`
         : '暂未找到这个姓氏，请换个拼法，或直接在下方填写。';
     search.disabled = !surnames.length;
-    grid.innerHTML = matches
+    const visible = search.value.trim() ? matches : matches.slice(0, 60);
+    if (!search.value.trim() && matches.length > visible.length)
+      count.textContent = `共 ${matches.length} 个姓氏，先显示前 ${visible.length} 个；输入搜索可查找全部姓氏。`;
+    grid.innerHTML = visible
       .map((surname) => {
-        const index = surnames.indexOf(surname);
-        return `<button type="button" class="studio-surname-chip" data-surname-index="${index}" aria-label="${escapeAttribute(`选择${surname.name}姓`)}" aria-pressed="${index === selected}">${escapeHtml(surname.name)}</button>`;
+        return `<button type="button" class="studio-surname-chip" data-surname-id="${escapeAttribute(surname.id)}" aria-label="${escapeAttribute(`选择${label(surname)}姓`)}" aria-pressed="${surname.id === selected}">${escapeHtml(label(surname))}</button>`;
       })
       .join('');
   };
   search.addEventListener('input', render);
-  grid.addEventListener('click', (event) => {
-    const target = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-surname-index]') : null;
-    if (!target) return;
-    selected = Number(target.dataset.surnameIndex);
-    const surname = surnames[selected];
-    const fields: [string, string][] = [
-      ['繁体', surname.traditional],
-      ['拼音', surname.pinyin],
-      ['常见拼法', surname.romanizations.join('、')],
-      ['郡望', surname.junwang.join('、')],
-      ['堂号', surname.tanghao.join('、')],
-      ['起源', surname.origin],
-      ['迁徙', surname.migration],
-      [
-        '字辈',
-        surname.generationPoems.map((entry) => `${entry.branch ? `${entry.branch}：` : ''}${entry.poem}`).join('\n'),
-      ],
-      ['方言群', surname.dialectGroups.join('、')],
-      ['宗亲会馆', surname.clanAssociations.join('、')],
-      ['资料来源', surname.sources.map((source) => `${source.title}${source.url ? `：${source.url}` : ''}`).join('\n')],
-    ];
-    preview.innerHTML = `<h3>${escapeHtml(surname.name)}姓资料</h3><dl>${fields
+  const showPreview = () => {
+    const surname = getSurnameByKey(surnames, selected);
+    if (!surname) return;
+    const fields = Object.entries(surnameFieldLabels).map(([field, label]) => [
+      label,
+      surnameFieldText(surname, field as keyof typeof surnameFieldLabels),
+    ]);
+    const hint = surnameNeedsSourceHint(surname);
+    preview.innerHTML = `<h3>${escapeHtml(label(surname))}姓资料</h3><dl>${fields
       .filter(([, value]) => value)
       .map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`)
-      .join('')}</dl>`;
+      .join('')}</dl>${hint ? `<p class="studio-note">${escapeHtml(hint)}</p>` : ''}`;
+    const sources = surname.sources.map((source) => `${source.title}${source.url ? `：${source.url}` : ''}`).join('\n');
+    if (sources) preview.innerHTML += `<p>${escapeHtml(sources)}</p>`;
     preview.hidden = false;
     actions.hidden = false;
+  };
+  grid.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-surname-id]') : null;
+    const surname = getSurnameByKey(surnames, target?.dataset.surnameId);
+    if (!surname) return;
+    selected = surname.id;
+    for (const [name, value] of [
+      ['surnameId', surname.id],
+      ['surnameSlug', surname.slug],
+    ]) {
+      const field = form.elements.namedItem(name);
+      if (field instanceof HTMLInputElement) field.value = value;
+    }
+    form.dispatchEvent(new Event('input', { bubbles: true }));
+    showPreview();
     status.textContent = '';
-    grid
-      .querySelectorAll<HTMLElement>('[data-surname-index]')
-      .forEach((chip) => chip.setAttribute('aria-pressed', String(Number(chip.dataset.surnameIndex) === selected)));
+    render();
   });
   button.addEventListener('click', async () => {
-    const surname = surnames[selected];
+    const surname = getSurnameByKey(surnames, selected);
     if (!surname || button.disabled) return;
     button.disabled = true;
     search.disabled = true;
@@ -107,4 +125,5 @@ export function initializeSurnamePicker(
     }
   });
   render();
+  showPreview();
 }

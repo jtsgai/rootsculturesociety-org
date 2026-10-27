@@ -87,6 +87,8 @@ const nextStep = stepIndex >= 0 && stepIndex < studioSteps.length - 1 ? studioSt
             <MediaPicker method={step.method} label="本章图片" hint="先上传与这一章有关的老照片、地点、物件或手稿。" />
             <form data-section-form data-structured-method={step.method}>
               <>
+                {step.method === 2 && <input type="hidden" name="surnameId" />}
+                {step.method === 2 && <input type="hidden" name="surnameSlug" />}
                 <div data-structured-fields />
                 <label class="studio-consent">
                   <input name="complete" type="checkbox" /> 这一章暂时完成

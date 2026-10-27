@@ -12,7 +12,7 @@ const hasSurnames = normalizeSurnames(Object.values(modules)[0]).length > 0;
       type="search"
       disabled={!hasSurnames}
       data-surname-search
-      placeholder="输入简繁体姓氏、拼音或英文拼法"
+      placeholder="输入简繁体姓氏、拼音、英文拼法或编号"
     /></label
   >
   <p class="studio-note" data-surname-count role="status">
@@ -24,7 +24,7 @@ const hasSurnames = normalizeSurnames(Object.values(modules)[0]).length > 0;
     <p class="studio-note">本章资料会填入下方表单，检查后点击“保存这一章”。已有文字会保留，资料以标记段落追加。</p>
     <label class="studio-consent"><input type="checkbox" data-surname-step="3" /> 同时保存迁徙资料到第 3 章</label>
     <label class="studio-consent"
-      ><input type="checkbox" data-surname-step="4" /> 同时保存堂号、郡望与字辈到第 4 章</label
+      ><input type="checkbox" data-surname-step="4" /> 同时保存堂号、方言群、会馆、郡望与字辈到第 4 章</label
     >
     <button type="button" class="button" data-surname-import>一键引入本姓资料</button>
   </div>

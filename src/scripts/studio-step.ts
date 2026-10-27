@@ -332,6 +332,8 @@ function structuredContent(form: HTMLFormElement) {
   if (method === 2)
     return {
       surname: stringOrNull(data.get('surname')) ?? '',
+      surnameId: stringOrNull(data.get('surnameId')) ?? '',
+      surnameSlug: stringOrNull(data.get('surnameSlug')) ?? '',
       ancestralPlace: stringOrNull(data.get('ancestralPlace')) ?? '',
       story: stringOrNull(data.get('story')) ?? '',
       sources: stringOrNull(data.get('sources')) ?? '',
@@ -437,6 +439,12 @@ async function fillSavedContent() {
   }
   if (type === 'notes' && form) {
     renderStructuredFields(method, content);
+    if (method === 2) {
+      for (const name of ['surnameId', 'surnameSlug']) {
+        const field = form.elements.namedItem(name);
+        if (field instanceof HTMLInputElement) field.value = typeof content[name] === 'string' ? content[name] : '';
+      }
+    }
     const notes = form.elements.namedItem('notes') as HTMLTextAreaElement | null;
     const imageNotes = form.elements.namedItem('imageNotes') as HTMLTextAreaElement | null;
     const complete = form.elements.namedItem('complete') as HTMLInputElement | null;
