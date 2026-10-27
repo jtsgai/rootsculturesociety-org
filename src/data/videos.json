@@ -1,0 +1,28 @@
+{
+  "speaker": {
+    "name": "陈老师",
+    "nameEn": "TODO: English name",
+    "bio": "TODO：讲者简介待陈老师或学会提供，请勿自行补写。",
+    "bioStatus": "todo"
+  },
+  "videos": [
+    {
+      "id": "talk-01",
+      "title": "TODO：第一讲标题",
+      "description": "TODO：第一讲简介（主题、录制日期与场合），待学会提供。",
+      "src": "",
+      "poster": "",
+      "youtubeId": "",
+      "status": "placeholder"
+    },
+    {
+      "id": "talk-02",
+      "title": "TODO：第二讲标题",
+      "description": "TODO：第二讲简介（主题、录制日期与场合），待学会提供。",
+      "src": "",
+      "poster": "",
+      "youtubeId": "",
+      "status": "placeholder"
+    }
+  ]
+}

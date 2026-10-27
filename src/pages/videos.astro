@@ -1,0 +1,32 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import VideoPlayer from '../components/media/VideoPlayer.astro';
+import '../assets/styles/heritage.css';
+import config from '../data/videos.json';
+
+const { speaker, videos } = config;
+const isTodo = (text: string) => text.startsWith('TODO');
+---
+<SiteLayout lang="zh" title="讲座视频" description="新加坡根缘文化学会讲座视频：寻根、修谱与相册家谱。" alternate={false}>
+  <section class="page-intro heritage-intro"><div class="eyebrow">TALKS / 讲座视频</div><h1>讲座视频</h1><p class="deck deck-zh"><span>听讲者细说，</span><span>从姓氏与迁徙走进家谱。</span></p></section>
+  <div class="page-body">
+    <div class="video-list">
+      {videos.map((video, index) => (
+        <article class="video-entry" id={video.id}>
+          <VideoPlayer title={video.title} src={video.src} poster={video.poster} youtubeId={video.youtubeId} />
+          <div class="video-copy">
+            <span class="eyebrow">第 {index + 1} 讲</span>
+            {isTodo(video.title) && <span class="todo-flag">TODO</span>}
+            <h2>{video.title}</h2>
+            <p>{video.description}</p>
+            <aside class="speaker-card" aria-label="讲者简介">
+              {speaker.bioStatus === 'todo' && <span class="todo-flag">TODO · 待补充</span>}
+              <h3>讲者：{speaker.name}</h3>
+              <p>{speaker.bio}</p>
+            </aside>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</SiteLayout>
